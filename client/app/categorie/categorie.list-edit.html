@@ -1,0 +1,32 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <span class="panel-title with-font-xlarge pull-left">
+            <div ng-show="vm.state == 'dsBrowse'">{{"LISTE_CATEGORIES"|translate}}</div>
+            <div ng-show="vm.state == 'dsInsert'">{{"AJOUTER_CATEGORIE"|translate}}</div>
+            <div ng-show="vm.state == 'dsEdit'">{{"EDITER_CATEGORIE"|translate}}</div>
+        </span>
+        <div class="pull-right">
+            <div ng-show="vm.state == 'dsBrowse'">
+                <button class="btn btn-primary"
+                        data-toggle="tooltip"
+                        ng-click="vm.setInsert()"
+                        uib-tooltip={{"HINT_AJOUTER_CATEGORIE"|translate}}>
+                    <span class="fa fa-plus"></span> {{"AJOUTER_CATEGORIE"|translate}}
+                </button>
+            </div>
+            <div ng-show="vm.state != 'dsBrowse'">
+                <button class="btn btn-default"
+                        data-toggle="tooltip"
+                        ng-click="vm.cancel()"
+                        uib-tooltip={{"ANNULER"|translate}}>
+                    <span class="fa fa-times"></span>
+                </button>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="panel-body">
+        <div ng-cloak ng-show="vm.state != 'dsBrowse'" ng-include src="'app/categorie/categorie.edit.html'"></div>
+        <div ng-cloak ng-show="vm.state == 'dsBrowse'" ng-include src="'app/categorie/categorie.list.html'"></div>
+    </div>
+</div>

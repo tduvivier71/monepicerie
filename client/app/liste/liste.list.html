@@ -1,0 +1,90 @@
+<ul ng-if="vm.isAuthenticated()">
+    <li><a href="/logout">Logout</a></li>
+</ul>
+
+<div class="col-md-12">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <span class="panel-title with-font-xlarge pull-left">
+                {{"LISTE"|translate}}
+            </span>
+            <div class="pull-right">
+                <div class="btn-group">
+                    <button class="btn btn-primary"
+                            data-toggle="tooltip"
+                            ng-click="vm.setInsert()"
+                            uib-tooltip={{"HINT_AJOUTER_LISTE"|translate}}>
+                        <span class="fa fa-plus"></span> {{"AJOUTER_LISTE"|translate}}
+                    </button>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="panel-body">
+            <div clas="row">
+                <search-item
+                    search-item="vm.searchItem">
+                </search-item>
+            </div>
+            <div clas="row">
+                <table class="table  table-borderless">
+                    <thead>
+                    <tr>
+                        <th class="col-md-1 col-sm-1">
+                            {{"#"|translate}}
+                        </th>
+                        <th class="col-md-4 col-sm-4">
+                            <a href="javascript:void(0)" style="text-decoration:none; color:black;"
+                               ng-click="vm.sorting.reverse = !vm.sorting.reverse">
+                                {{"DATE"|translate}}
+                                <span ng-show="!vm.sorting.reverse" class="fa fa-caret-down"></span>
+                                <span ng-show="vm.sorting.reverse" class="fa fa-caret-up"></span>
+                            </a>
+                        </th>
+                        <th class="col-md-5 col-sm-5">
+                            {{"EPICERIE"|translate}}
+                        </th>
+                        <th class="col-md-2 col-sm-2">
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr data-ng-repeat="item in (vm.items | filter: vm.searchItem).slice(((vm.pagination.currentPage-1)*vm.pagination.itemsPerPage),
+                            ((vm.pagination.currentPage)*vm.pagination.itemsPerPage)) | orderBy : vm.sorting.type:vm.sorting.reverse">
+                        <td class="col-md-1 col-sm-1">
+                            {{$index + 1 }}
+                        </td>
+                        <td class="col-md-4 col-sm-4">
+                            {{item.date | amDateFormat:'YYYY/MM/DD' }}
+                        </td>
+                        <td class="col-md-5 col-sm-5">
+                            {{item.epicerieId.epicerie}}
+                        </td>
+                        <td class="col-md-2 col-sm-2" style="text-align: right;">
+                            <button class="btn btn-primary btn-sm"
+                                    data-toggle="tooltip"
+                                    ng-click="vm.setEdit(item)"
+                                    uib-tooltip={{"HINT_EDITER_LISTE"|translate}}>
+                                <span class="fa fa-pencil fa-lg"></span>
+                            </button>
+                            <button class="btn btn-danger btn-sm"
+                                    data-toggle="tooltip"
+                                    ng-click="vm.remove(item)"
+                                    uib-tooltip={{"HINT_DETRUIRE_LISTE"|translate}}>
+                                <span class="fa fa-trash-o fa-lg"></span>
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <pagination
+                    view-by="vm.pagination.viewBy"
+                    total-items="vm.items.length"
+                    current-page="vm.pagination.currentPage"
+                    items-per-page="vm.pagination.itemsPerPage">
+                </pagination>
+            </div>
+        </div>
+    </div>
+</div>
+

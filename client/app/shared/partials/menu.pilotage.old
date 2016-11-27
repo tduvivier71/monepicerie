@@ -1,0 +1,7 @@
+<a href = "#" class = "list-group-item active">
+    Tables de références
+</a>
+<a href="/#categorie" class="list-group-item">Catégories</a>
+<a href="/#epicerie" class = "list-group-item">Épiceries</a>
+<a href="/#format" class = "list-group-item">Formats</a>
+<a href="/#unite" class = "list-group-item">Unités</a>

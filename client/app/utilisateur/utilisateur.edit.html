@@ -1,0 +1,126 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <span class="panel-title with-font-xlarge pull-left">
+            <div ng-show="vm.state == 'dsBrowse'">{{"LISTE_UNITES"|translate}}</div>
+            <div ng-show="vm.state == 'dsInsert'">{{"AJOUTER_UNITE"|translate}}</div>
+            <div ng-show="vm.state == 'dsEdit'">{{"EDITER_UNITE"|translate}}</div>
+        </span>
+    </div>
+    <div class="panel-body">
+
+        <form novalidate name="vm.form" role="form"
+              ng-model-options="{ updateOn: 'default', debounce: { 'default': 100, 'blur': 0 } }">
+
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <div class="form-group" ng-class="{'has-error': vm.form.$submitted && vm.form.prenom_input.$invalid}">
+                        <label for="prenom_input_id">
+                            {{"PRENOM"|translate}}<span style="color: red;" uib-tooltip={{"VALEUR_OBLIGATOIRE"|translate}}>*</span>
+                        </label>
+                        <input required
+                               autocomplete="off"
+                               class="form-control input"
+                               focus-on="prenom_focus"
+                               id="prenom_input_id"
+                               name="prenom_input"
+                               ng-model="vm.item.prenom"
+                               type="text"/>
+                        <validate-input form="vm.form" field="vm.form.prenom_input"></validate-input>
+                    </div>
+                </div>
+                <div class="col-md-6 form-group">
+                    <div class="form-group" ng-class="{'has-error': vm.form.$submitted && vm.form.nom_input.$invalid}">
+                        <label for="nom_input_id">
+                            {{"NOM"|translate}}<span style="color: red;" uib-tooltip={{"VALEUR_OBLIGATOIRE"|translate}}>*</span>
+                        </label>
+                        <input required
+                               autocomplete="off"
+                               class="form-control input"
+                               focus-on="nom_focus"
+                               id="nom_input_id"
+                               name="nom_input"
+                               ng-model="vm.item.nom"
+                               type="text"/>
+                        <validate-input form="vm.form" field="vm.form.nom_input"></validate-input>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <div class="form-group" ng-class="{'has-error': vm.form.$submitted && vm.form.courriel_input.$invalid}">
+                        <label for="courriel_input_id">
+                            {{"COURRIEL"|translate}}<span style="color: red;" uib-tooltip={{"VALEUR_OBLIGATOIRE"|translate}}>*</span>
+                        </label>
+                        <input required
+                               autocomplete="off"
+                               class="form-control input"
+                               focus-on="courriel_focus"
+                               id="courriel_input_id"
+                               name="courriel_input"
+                               ng-model="vm.item.courriel"
+                               type="text"/>
+                        <validate-input form="vm.form" field="vm.form.courriel_input"></validate-input>
+                    </div>
+                </div>
+                <div class="col-md-6 form-group">
+                    <div class="form-group" ng-class="{'has-error': vm.form.$submitted && vm.form.courrielAlt_input.$invalid}">
+                        <label for="courrielAlt_input_id">
+                            {{"COURRIELALT"|translate}}
+                        </label>
+                        <input autocomplete="off"
+                               class="form-control input"
+                               focus-on="courrielAlt_focus"
+                               id="courrielAlt_input_id"
+                               name="courrielAlt_input"
+                               ng-model="vm.item.courrielAlt"
+                               type="text"/>
+                        <validate-input form="vm.form" field="vm.form.courrielAlt_input"></validate-input>
+                    </div>
+                </div>
+
+                <div class="col-md-6 form-group">
+                    <input ng-model="vm.item.partagerInfoProduit"
+                           name="partagerInfoProduit_checkbox"
+                           type="checkbox"
+                           style="margin-top: 0px;"/>
+                    Partager les informations des produits anonymement
+                </div>
+
+                <div class="col-md-6 form-group">
+                    <a href="#">Modifier mot de passe</a>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <br>
+                <div class="col-md-4 pull-right" style="text-align: right">
+                    <div class="btn-group">
+                        <button class="btn btn-primary btn"
+                                data-toggle="tooltip"
+                                ng-click="vm.update()"
+                                ng-disabled="vm.form.$invalid">
+                            <span class="fa fa-check"></span>
+                            {{"ENREGISTRER"|translate}}
+                        </button>
+                    </div>
+                    <button class="btn btn-danger btn"
+                            data-toggle="tooltip"
+                            ng-click="vm.cancel()">
+                        <span class="fa fa-times"></span>
+                        {{"ANNULER"|translate}}
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+
+
+
+
+

@@ -1,0 +1,233 @@
+<div class="col-md-12">
+    <form novalidate name="vm.form" role="form"
+          ng-model-options="{ updateOn: 'default', debounce: { 'default': 100, 'blur': 0 } }">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <span class="panel-title with-font-xlarge pull-left">
+                    <div ng-show="vm.state == 'dsInsert'">{{"AJOUTER_LISTE"|translate}}</div>
+                    <div ng-show="vm.state == 'dsEdit'">{{"EDITER_LISTE"|translate}}</div>
+                </span>
+                <div class="pull-right">
+                    <button class="btn btn-link"
+                            data-toggle="tooltip"
+                            ng-click="vm.isCollapsed = !vm.isCollapsed"
+                            uib-tooltip={{"COLLAPSE"|translate}}>
+                            <span ng-show="!vm.isCollapsed" class="fa fa-chevron-up"></span>
+                            <span ng-show="vm.isCollapsed" class="fa fa-chevron-down"></span>
+                    </button>
+                    <button class="btn btn-default"
+                            data-toggle="tooltip"
+                            ng-click="vm.cancel()"
+                            uib-tooltip={{"ANNULER"|translate}}>
+                        <span class="fa fa-times"></span>
+                    </button>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div uib-collapse="vm.isCollapsed">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            <label for="epicerieId_input_id">
+                                {{"EPICERIE"|translate}}
+                            </label>
+                            <select data-kendo-combo-box
+                                    data-k-options="vm.selectOptionsEpicerie"
+                                    data-k-ng-model="vm.item.epicerieId._id"
+                                    focus-on="epicerie_focus"
+                                    id="epicerieId_input_id"
+                                    name="epicerieId_select"
+                                    style="width: 100%;">
+                            </select>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label for="date_input_id">
+                                {{"DATE"|translate}}
+                            </label>
+                            <input required
+                                   data-kendo-date-picker
+                                   data-k-options="vm.datePickerOptions"
+                                   data-k-ng-model="vm.item.date"
+                                   id="date_input_id"
+                                   style="width: 100%;"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <br>
+                        <div class="col-md-4 pull-right" style="text-align: right">
+                            <div class="btn-group">
+                                <button class="btn btn-primary btn"
+                                        data-toggle="tooltip"
+                                        ng-disabled="vm.form.$invalid "
+                                        ng-click="vm.save(vm.form, vm.item, false)">
+                                    <span class="fa fa-check"></span>
+                                    {{"ENREGISTRER"|translate}}
+                                </button>
+                                <button type="button"
+                                        class="btn btn-primary dropdown-toggle"
+                                        data-toggle="dropdown"
+                                        ng-disabled="vm.form.$invalid "
+                                        aria-haspopup="true"
+                                        aria-expanded="false">
+                                    <span class="caret"></span>
+                                    <span class="sr-only">Toggle Dropdown</span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a href="" ng-click="vm.form.$submitted = true; vm.save(vm.form, vm.item, true)">{{"AJOUTER_AUTRE_PRODUIT"|translate}}></a></li>
+                                </ul>
+                            </div>
+                            <button class="btn btn-danger btn"
+                                    data-toggle="tooltip"
+                                    ng-click="vm.cancel()">
+                                <span class="fa fa-times"></span>
+                                {{"ANNULER"|translate}}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div ng-show="vm.item._id !== undefined" class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-6 form-group">
+                        <div class="well" style="margin-bottom:0px;">Produits
+                            <div class="pull-right">
+                                <!-- Single button using append-to-body -->
+                                <div class="btn-group" uib-dropdown dropdown-append-to-body>
+                                    <button id="btn-append-to-body" type="button" class="btn btn-primary" uib-dropdown-toggle>
+                                        Toutes les catégories <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-body">
+                                        <li role="menuitem"><a href="#">Action</a></li>
+                                        <li role="menuitem"><a href="#">Another action</a></li>
+                                        <li role="menuitem"><a href="#">Something else here</a></li>
+                                        <li class="divider"></li>
+                                        <li role="menuitem"><a href="#">Separated link</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <div class="well" style="margin-bottom:0px;">
+                            Liste
+                            <div class="pull-right">
+                                <div class="btn-group">
+                                    <button class="btn btn-default"
+                                            data-toggle="tooltip"
+                                            ng-click="vm.setInsert()"
+                                            uib-tooltip={{"HINT_VIDER_LISTE"|translate}}>
+                                        <span class="fa fa-remove"></span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="pull-right">
+                                <div class="btn-group">
+                                    <button class="btn btn-primary"
+                                            data-toggle="tooltip"
+                                            ng-click="vm.setInsert()"
+                                            uib-tooltip={{"HINT_AJOUTER_PRODUIT"|translate}}>
+                                        <span class="fa fa-plus"></span> {{"PRODUIT"|translate}}
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 form-group">
+                        <div class="input-group input-group-md">
+                            <input autocomplete="off"
+                                   class="form-control"
+                                   focus-on="searchItem_focus"
+                                   id="searchItem_input_id"
+                                   name="searchItem_input"
+                                   ng-keyup="cancelEsc($event)"
+                                   ng-model="searchItem"
+                                   placeholder="Recherche..."
+                                   type="text">
+                            <div class="input-group-btn">
+                                <button class="btn btn-default"
+                                        title="Initialiser la recherche"
+                                        type="button"
+                                        ng-click="clearSearchItem()">
+                                    <span class="glyphicon glyphicon-remove"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <div class="input-group input-group-md">
+                            <input autocomplete="off"
+                                   class="form-control"
+                                   focus-on="searchItem_focus"
+                                   id="searchItem_input_id2"
+                                   name="searchItem_input"
+                                   ng-keyup="cancelEsc($event)"
+                                   ng-model="searchItem"
+                                   placeholder="Recherche..."
+                                   type="text">
+                            <div class="input-group-btn">
+                                <button class="btn btn-default"
+                                        title="Initialiser la recherche"
+                                        type="button"
+                                        ng-click="clearSearchItem()">
+                                    <span class="glyphicon glyphicon-remove"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 form-group">
+                        <div ui-sortable="vm.sortableProduitsOptions" class="apps-container screen"  ng-model="vm.produits" >
+                            <div class="app"
+                                 id="{{produit._id}}"
+                                 data-produit="{{produit.produit}}"
+                                 data-marque="{{ produit.marque }}"
+                                 data-categorie="{{ produit.categorieId.categorie }}"
+                                 data-conditionnenent="{{produit.quantite}} {{produit.formatId.format}} ({{produit.nombre}} {{produit.uniteId.abreviation}})"
+                                 data-note="{{ produit.note}}"
+                                 ng-repeat="produit in vm.produits">
+                                <b>{{ produit.produit }}</b>
+                                <span ng-show="produit.marque"> {{ produit.marque }} </span>
+                                <span class="alignright" ng-show="produit.description">
+                                    <i class="fa fa-commenting-o" uib-tooltip={{produit.description}} style="cursor: pointer;" aria-hidden="true"></i>
+                                </span>
+                                <br>
+                                <span style=" font-size: 0.8em;">
+                                {{ produit.categorieId.categorie }}
+                                <span ng-show="produit.formatId.format"> - {{produit.quantite}} {{produit.formatId.format}} ({{produit.nombre}} {{produit.uniteId.abreviation}}) </span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <div ui-sortable="vm.sortableItemsOptions" class="apps-container screen"  ng-model="vm.items" >
+                            <div class="app"
+                                 id="{{item._id}}"
+                                 ng-repeat="item in vm.item.listeDetail">
+                                 <b>{{ item.produit }}</b>
+                                 <span ng-show="item.marque"> {{ item.marque }} </span>
+                                 <span class="alignright">
+                                    <i class="fa fa-times" style="cursor: pointer;" aria-hidden="true" ng-click="vm.removeItem(vm.item, item)"></i>
+                                 </span>
+                                 <br>
+                                <span style=" font-size: 0.8em;">
+                                    {{ item.categorie }} {{ item.conditionnement }}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+

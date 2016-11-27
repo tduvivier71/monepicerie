@@ -1,0 +1,123 @@
+<form novalidate name="vm.form" role="form"
+      ng-model-options="{ updateOn: 'default', debounce: { 'default': 100, 'blur': 0 } }">
+    <div class="row">
+        <div class="col-md-3 form-group">
+            <div class="form-group" ng-class="{'has-error': vm.form.$submitted && vm.form.unite_input.$invalid}">
+                <label for="unite_input_id">
+                    {{"UNITE"|translate}}<span style="color: red;" uib-tooltip={{"VALEUR_OBLIGATOIRE"|translate}}>*</span>
+                </label>
+                <input required
+                       autocomplete="off"
+                       class="form-control input"
+                       focus-on="unite_focus"
+                       id="unite_input_id"
+                       name="unite_input"
+                       ng-model="vm.item.unite"
+                       type="text"/>
+                <validate-input form="vm.form" field="vm.form.unite_input"></validate-input>
+            </div>
+        </div>
+        <div class="col-md-2 form-group">
+            <div class="form-group" ng-class="{'has-error': vm.form.$submitted && vm.form.abbreviation_input.$invalid}">
+                <label for="unite_input_id">
+                    {{"ABR"|translate}}<span style="color: red;" uib-tooltip={{"VALEUR_OBLIGATOIRE"|translate}}>*</span>
+                </label>
+                <input required
+                       autocomplete="off"
+                       class="form-control input"
+                       id="abreviation_input_id"
+                       name="abbreviation_input"
+                       ng-model="vm.item.abreviation"
+                       type="text"/>
+                       <validate-input form="vm.form" field="vm.form.abreviation_input"></validate-input>
+            </div>
+        </div>
+        <div class="col-md-2 form-group">
+            <div class="form-group">
+                <label>
+                Opération
+                </label>
+                <span uib-dropdown on-toggle="toggled(open)">
+                    <a href id="simple-dropdown" uib-dropdown-toggle>
+                        {{vm.item.operation}}
+                    </a>
+                    <ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="simple-dropdown">
+                        <li> <a href ng-click="vm.changeOperation('aucune')">aucune</a> </li>
+                        <li> <a href ng-click="vm.changeOperation('division')">division</a> </li>
+                        <li> <a href ng-click="vm.changeOperation('multiplication')">multiplication</a> </li>
+                    </ul>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-2 form-group">
+            <label for="nombre_input_id">
+                {{"NOMBRE"|translate}}
+            </label>
+            <input autocomplete="off"
+                   data-kendo-numeric-text-box
+                   data-k-min="0"
+                   data-k-decimals="0"
+                   data-k-restrict-decimals="true"
+                   data-k-spinners="false"
+                   id="nombre_input_id"
+                   focus-on="nombre_focus"
+                   name="nombre_input"
+                   ng-model="vm.item.nombre"
+                   ng-disabled="vm.item.operation==='aucune'"
+                   style="width: 100%;"
+                   type="number"/>
+        </div>
+        <div class="col-md-3 form-group">
+            <label for="CoutParId_input_id">
+                {{"COUTPAR"|translate}}
+            </label>
+            <select data-kendo-combo-box
+                    data-k-options="vm.selectOptionsCoutParId"
+                    data-k-ng-model="vm.item.coutParId._id"
+                    id="CoutParId_input_id"
+                    name="coutParId_select"
+                    ng-disabled="vm.item.operation==='aucune'"
+                    style="width: 100%">
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <br>
+        <div class="col-md-4 pull-right" style="text-align: right">
+            <div class="btn-group">
+                <button class="btn btn-primary btn"
+                        data-toggle="tooltip"
+                        ng-click="vm.save(vm.form, vm.item, false)"
+                        ng-disabled="vm.form.$invalid">
+                    <span class="fa fa-check"></span>
+                    {{"ENREGISTRER"|translate}}
+                </button>
+                <button aria-haspopup="true"
+                        aria-expanded="false"
+                        class="btn btn-primary dropdown-toggle"
+                        data-toggle="dropdown"
+                        ng-disabled="vm.form.$invalid">
+                    <span class="caret"></span>
+                    <span class="sr-only">Toggle Dropdown</span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="" ng-click="vm.form.$submitted = true; vm.save(vm.form, vm.item, true)">{{"AJOUTER_AUTRE_PRODUIT"|translate}}</a></li>
+                </ul>
+            </div>
+            <button class="btn btn-danger btn"
+                    data-toggle="tooltip"
+                    ng-click="vm.cancel()">
+                <span class="fa fa-times"></span>
+                {{"ANNULER"|translate}}
+            </button>
+        </div>
+    </div>
+</form>
+
+
+
+
+
+
+
+

@@ -1,0 +1,32 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <span class="panel-title with-font-xlarge pull-left">
+            <div ng-show="vm.state == 'dsBrowse'">{{"LISTE_UNITES"|translate}}</div>
+            <div ng-show="vm.state == 'dsInsert'">{{"AJOUTER_UNITE"|translate}}</div>
+            <div ng-show="vm.state == 'dsEdit'">{{"EDITER_UNITE"|translate}}</div>
+        </span>
+        <div class="pull-right">
+            <div ng-show="vm.state == 'dsBrowse'">
+                <button class="btn btn-primary"
+                        data-toggle="tooltip"
+                        ng-click="vm.setInsert()"
+                        uib-tooltip={{"HINT_AJOUTER_UNITE"|translate}}>
+                    <span class="fa fa-plus"></span> {{"AJOUTER_UNITE"|translate}}
+                </button>
+            </div>
+            <div ng-show="vm.state != 'dsBrowse'">
+                <button class="btn btn-default"
+                        data-toggle="tooltip"
+                        ng-click="vm.cancel()"
+                        uib-tooltip={{"ANNULER"|translate}}>
+                    <span class="fa fa-times"></span>
+                </button>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="panel-body">
+        <div ngCloak ng-show="vm.state != 'dsBrowse'" ng-include src="'app/unite/unite.edit.html'"></div>
+        <div ngCloak ng-show="vm.state == 'dsBrowse'" ng-include src="'app/unite/unite.list.html'"></div>
+    </div>
+</div>

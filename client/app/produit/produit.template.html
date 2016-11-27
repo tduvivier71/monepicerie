@@ -1,0 +1,8 @@
+<div ng-show="vm.state == 'dsBrowse'">
+  <div class="col-md-3" ng-include="'app/produit/filtre.produit.html'"></div>
+  <div class="col-md-9" ng-include="'app/produit/produit.list-edit.html'" ng-cloak></div>
+</div>
+<div ng-show="vm.state != 'dsBrowse'">
+   <!-- <div class="col-md-3" ng-include="'app/produit/image.produit.html'" ng-cloak></div> -->
+    <div class="col-md-12" ng-include="'app/produit/produit.list-edit.html'" ng-cloak></div>
+</div>

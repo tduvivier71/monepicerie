@@ -1,0 +1,91 @@
+<div class="col-md-6 col-md-offset-3">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="panel-title">Inscription</div>
+            <div style="float:right; font-size: 85%; position: relative; top:-10px">
+                <a href="#">Déjà inscrit ?</a>
+            </div>
+        </div>
+        <div class="panel-body" style="padding-top: 25px;">
+            <form novalidate name="vm.form" class="form-horizontal" role="form">
+                <div class="form-group">
+                    <label for="courriel_input_id"
+                           class="col-md-3 control-label">
+                        Courriel<span style="color: red;" uib-tooltip={{"VALEUR_OBLIGATOIRE"|translate}}>*</span>
+                    </label>
+                    <div class="col-md-9">
+                        <input class="form-control"
+                               id="courriel_input_id"
+                               name="courriel"
+                               ng-model="vm.item.courriel"
+                               type="text"
+                               placeholder="Courriel">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="prenom_input_id"
+                           class="col-md-3 control-label">
+                        Prénom<span style="color: red;" uib-tooltip={{"VALEUR_OBLIGATOIRE"|translate}}>*</span>
+                    </label>
+                    <div class="col-md-9">
+                        <input type="text"
+                               id="prenom_input_id"
+                               class="form-control"
+                               name="prenom"
+                               ng-model="vm.item.prenom"
+                               placeholder="Prénom">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="nom_input_id"
+                           class="col-md-3 control-label">
+                        Nom<span style="color: red;" uib-tooltip={{"VALEUR_OBLIGATOIRE"|translate}}>*</span>
+                    </label>
+                    <div class="col-md-9">
+                        <input type="text"
+                               id="nom_input_id"
+                               class="form-control"
+                               name="nom"
+                               ng-model="vm.item.nom"
+                               placeholder="Nom">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="motdepasse_input_id"
+                           class="col-md-3 control-label">
+                        Mot de passe<span style="color: red;" uib-tooltip={{"VALEUR_OBLIGATOIRE"|translate}}>*</span>
+                    </label>
+                    <div class="col-md-9">
+                        <input type="password"
+                               id="motdepasse_input_id"
+                               class="form-control"
+                               name="motdepasse"
+                               ng-model="vm.item.motDePasse"
+                               placeholder="Mot de passe">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-3 col-md-9">
+                        <button id="btn-signup"
+                                type="button"
+                                ng-click="vm.signUp(vm.item)"
+                                class="btn btn-info">
+                                S'inscrire
+                        </button>
+                        <span style="margin-left:8px;">ou</span>
+                    </div>
+                </div>
+                <div style="border-top: 1px solid #999; padding-top:20px" class="form-group">
+                    <div class="col-md-offset-3 col-md-9">
+                        <a href="/#auth/facebook" class="btn btn-primary"><span class="fa fa-facebook"></span> S'inscrire avec Facebook</a>
+                    </div>
+                </div>
+
+                <div ng-repeat="item in vm.items">
+                    {{item.courriel}}
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>

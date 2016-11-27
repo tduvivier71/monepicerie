@@ -1,0 +1,318 @@
+<form novalidate name="vm.form" role="form"
+      ng-model-options="{ updateOn: 'default', debounce: { 'default': 100, 'blur': 0 } }">
+    <div class="row">
+        <div class="col-md-6 form-group">
+            <div class="form-group" ng-class="{'has-error': vm.form.$submitted && vm.form.produit_input.$invalid}">
+                <label for="produit_input_id">
+                    {{"PRODUIT"|translate}}<span style="color: red;" uib-tooltip={{"VALEUR_OBLIGATOIRE"|translate}}>*</span>
+                </label>
+                <input autocomplete="off"
+                       class="form-control input"
+                       focus-on="produit_focus"
+                       id="produit_input_id"
+                       name="produit_input"
+                       ng-model="vm.item.produit"
+                       required
+                       type="text"/>
+                       <validate-input form="vm.form" field="vm.form.produit_input"></validate-input>
+            </div>
+        </div>
+        <div class="col-md-6 form-group">
+            <label for="marque_input_id">
+                {{"MARQUE"|translate}}
+            </label>
+            <input data-kendo-auto-complete="vm.marqueWidget"
+                   data-k-options="vm.selectOptionsMarque"
+                   data-k-ng-model="vm.item.marque"
+                   id="marque_input_id"
+                   name="marque_input"
+                   style="width: 100%"
+                   type="text"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 form-group">
+            <div class="form-group" ng-class="{'has-error': vm.form.$submitted && vm.form.categorieId_input.$invalid}">
+                <label for="categorieId_select_id">
+                    {{"CATEGORIE"|translate}}<span style="color: red;" uib-tooltip={{"VALEUR_OBLIGATOIRE"|translate}}>*</span>
+                </label>
+                <select data-kendo-drop-down-list
+                        data-k-options="vm.selectOptionsCategorie"
+                        data-k-ng-model="vm.item.categorieId._id"
+                        focus-on="categorie_focus"
+                        id="categorieId_select_id"
+                        name="categorieId_select"
+                        style="width: 100%">
+                </select>
+                <validate-input form="vm.form" field="vm.form.categorieId_select"></validate-input>
+            </div>
+        </div>
+        <div class="col-md-6 form-group">
+            <label for="marque_input_id">
+                {{"DESCRIPTION"|translate}}
+            </label>
+            <input autocomplete="off"
+                   class="form-control input"
+                   id="description_input_id"
+                   name="description_input"
+                   ng-model="vm.item.description"
+                   type="text"/>
+        </div>
+    </div>
+
+   <!-- data-k-up-arrow-text={{"AUGMENTER"|translate}}
+    data-k-down-arrow-text={{"DIMINUER"|translate}}-->
+
+    <div class="row">
+        <div class="col-md-2 form-group">
+            <label for="quantite_input_id">
+                {{"QUANTITE"|translate}}
+            </label>
+            <input autocomplete="off"
+                   data-kendo-numeric-text-box
+                   data-k-min="0"
+                   id="quantite_input_id"
+                   name="quantite_input"
+                   ng-model="vm.item.quantite"
+                   style="width: 100%;"
+                   type="number"/>
+        </div>
+        <div class="col-md-4 form-group">
+            <label for="formatId_input_id">
+                {{"FORMAT"|translate}}
+            </label>
+            <select data-kendo-combo-box
+                    data-k-options="vm.selectOptionsFormat"
+                    data-k-ng-model="vm.item.formatId._id"
+                    id="formatId_input_id"
+                    name="formatId_select"
+                    style="width: 100%">
+            </select>
+        </div>
+        <div class="col-md-2 form-group">
+            <label for="nombre_input_id">
+                {{"NOMBRE"|translate}}
+            </label>
+            <input autocomplete="off"
+                   data-kendo-numeric-text-box
+                   data-k-min="0"
+                   id="nombre_input_id"
+                   name="nombre_input"
+                   ng-model="vm.item.nombre"
+                   style="width: 100%;"
+                   type="number"/>
+        </div>
+        <div class="col-md-4 form-group">
+            <label for="unite_input_id">
+                {{"UNITE"|translate}}
+            </label>
+            <select data-kendo-combo-box
+                    data-k-options="vm.selectOptionsUnite"
+                    data-k-ng-model="vm.item.uniteId._id"
+                    id="unite_input_id"
+                    name="uniteId_select"
+                    style="width: 100%">
+            </select>
+        </div>
+    </div>
+
+    <!-- Historique INSERT Only -->
+    <div class="row" ng-show="vm.state == 'dsInsert'">
+        <div class="col-md-4 form-group">
+            <label for="epicerieId_insert_input_id">
+                {{"EPICERIE"|translate}}
+            </label>
+            <select data-kendo-combo-box
+                    data-k-options="vm.selectOptionsEpicerie"
+                    data-k-ng-model="vm.insertHisto.epicerieId"
+                    id="epicerieId_insert_input_id"
+                    name="epicerieId_select"
+                    style="width: 100%;">
+            </select>
+        </div>
+        <div class="col-md-2 form-group">
+            <label for="prix_insert_input_id">
+                {{"PRIX"|translate}}
+            </label>
+            <input autocomplete="off"
+                   data-kendo-numeric-text-box
+                   data-k-min="0"
+                   id="prix_insert_input_id"
+                   name="prix_input"
+                   ng-model="vm.insertHisto.prix"
+                   style="width: 100%;"
+                   type="number"/>
+        </div>
+        <div class="col-md-1 form-group">
+            <label for="enPromotion_insert_checkbox_id">
+                   {{"ENPROMOTION"|translate}}
+            </label> <br>
+            <input id="enPromotion_insert_checkbox_id"
+                   ng-model="vm.insertHisto.enPromotion"
+                   type="checkbox"/>
+
+        </div>
+        <div class="col-md-3 form-group">
+            <label for="date_insert_input_id">
+                {{"DATE"|translate}}
+            </label>
+            <input data-kendo-date-picker
+                   data-k-options="vm.datePickerOptions"
+                   data-k-ng-model="vm.insertHisto.date"
+                   id="date_insert_input_id"
+                   style="width: 100%;"/>
+        </div>
+    </div>
+    <!-- FIN Historique INSERT only -->
+
+    <!-- Historique EDIT only -->
+    <div class="row" ng-show="vm.state == 'dsEdit'" style="margin: 15px;">
+        <table class="table table-borderless" id="tablewithouttop">
+            <thead>
+                <tr>
+                    <th class="col-md-3 col-sm-3">
+                        <a href="javascript:void(0)" style="text-decoration:none; color:black;"
+                           ng-click="vm.sorting.reverse = !vm.sorting.reverse">
+                            {{"EPICERIE"|translate}}
+                            <span ng-show="!vm.sorting.reverse" class="fa fa-caret-down"></span>
+                            <span ng-show="vm.sorting.reverse" class="fa fa-caret-up"></span>
+                        </a>
+                    </th>
+                    <th class="col-md-2 col-sm-2">
+                        {{"PRIX"|translate}}
+                    </th>
+                    <th class="col-md-1 col-sm-1">
+                        {{"ENPROMOTION"|translate}}
+                    </th>
+                    <th class="col-md-2 col-sm-2">
+                        {{"DATE"|translate}}
+                    </th>
+                    <th class="col-md-2 col-sm-2">
+                        {{"COUTPARUNITE"|translate}}
+                    </th>
+                    <th class="col-md-2 col-sm-2">
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                    <td class="col-md-3 col-sm-3">
+                        <select data-kendo-combo-box
+                                data-k-options="vm.selectOptionsEpicerie"
+                                data-k-ng-model="vm.insertHisto.epicerieId"
+                                id="epicerieId_select_edit_id"
+                                name="epicerieId_select_edit"
+                                style="width: 100%">
+                        </select>
+                    </td>
+                    <!--data-k-format="'c'"-->
+                    <td class="col-md-2 col-sm-2">
+                        <input autocomplete="off"
+                               data-kendo-numeric-text-box
+                               data-k-min="0"
+                               id="prix_input_id"
+                               name="prix_input"
+                               ng-model="vm.insertHisto.prix"
+                               type="number"
+                               style="width: 100%"/>
+                    </td>
+                    <td class="col-md-1 col-sm-1">
+                        <input id="enPromotion_checkbox_id"
+                               name="enPromotion_input"
+                               ng-model="vm.insertHisto.enPromotion"
+                               type="checkbox"
+                               style="margin-left: 40%; margin-top: 10px;"/>
+                    </td>
+                    <td class="col-md-2 col-sm-2">
+                        <input data-kendo-date-picker
+                               data-k-options="vm.datePickerOptions"
+                               data-k-ng-model="vm.insertHisto.date"
+                               id="date_input_id2"
+                               style="width: 100%"/>
+                    </td>
+                    <td class="col-md-2 col-sm-2">
+                    </td>
+                    <td class="col-md-2 col-sm-2" style="text-align: right;">
+                        <div style="text-align:left; top:25px; padding-right: 25px">
+                            <button class="btn btn-default btn"
+                                    data-toggle="tooltip"
+                                    ng-disabled="!vm.insertHisto.epicerieId"
+                                    ng-click="vm.createHisto()">
+                                Ajouter
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                <tr ng-show="vm.item.historiques.length > 0"
+                    ng-hide="histo.statut == 'D'"
+                    data-ng-repeat="histo in (vm.item.historiques).slice(((vm.pagination.currentPage-1)*vm.pagination.itemsPerPage),
+                    ((vm.pagination.currentPage)*vm.pagination.itemsPerPage))  | orderBy : vm.sorting.type:vm.sorting.reverse">
+                    <td class="col-md-3 col-sm-3">
+                        <span>{{histo.epicerie}}</span>
+                        <span>{{histo.epicerieId.epicerie}}</span>
+                    </td>
+                    <td class="col-md-2 col-sm-2">
+                        {{histo.prix | currency}}
+                    </td>
+                    <td class="col-md-1 col-sm-1">
+                        <input disabled="disabled"
+                               ng-model="histo.enPromotion"
+                               type="checkbox"
+                               style="margin-left: 40%; margin-top: 5px;"/>
+                    </td>
+                    <td class="col-md-2 col-sm-2">
+                        {{histo.date | amDateFormat:'YYYY/MM/DD' }}
+                    </td>
+                    <td class="col-md-2 col-sm-2">
+                        {{(histo.prix) | coutPar:vm.item.quantite:vm.item.nombre:vm.item.uniteId.operation:vm.item.uniteId.nombre:vm.item.uniteId.coutParId.abreviation}}</span>
+                    </td>
+                    <td class="col-md-2 col-sm-2" style="text-align: left;">
+                        <button class="btn btn-default btn-sm"
+                                data-toggle="tooltip"
+                                ng-click="vm.deleteHisto(histo)"
+                                uib-tooltip={{DETRUIRE_HISTORIQUE|translate}}>
+                            <span class="fa fa-trash-o fa-lg"></span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- FIN Historique edit only -->
+
+
+    <div class="row">
+        <br>
+        <div class="col-md-4 pull-right" style="text-align: right">
+            <div class="btn-group">
+                <button class="btn btn-primary btn"
+                        data-toggle="tooltip"
+                        ng-disabled="vm.form.$invalid"
+                        ng-click="vm.save(vm.form, vm.item, false)">
+                        <span class="fa fa-check"></span>
+                        {{"ENREGISTRER"|translate}}
+                </button>
+                <button type="button"
+                        class="btn btn-primary dropdown-toggle"
+                        data-toggle="dropdown"
+                        ng-disabled="vm.form.$invalid "
+                        aria-haspopup="true"
+                        aria-expanded="false">
+                    <span class="caret"></span>
+                    <span class="sr-only">Toggle Dropdown</span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="" ng-click="vm.form.$submitted = true; vm.save(vm.form, vm.item, true)">{{"AJOUTER_AUTRE_PRODUIT"|translate}}></a></li>
+                </ul>
+            </div>
+            <button class="btn btn-danger btn"
+                    data-toggle="tooltip"
+                    ng-click="vm.cancel()">
+                    <span class="fa fa-times"></span>
+                    {{"ANNULER"|translate}}
+            </button>
+        </div>
+    </div>
+
+</form>
+
+

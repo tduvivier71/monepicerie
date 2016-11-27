@@ -1,0 +1,49 @@
+<nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a href="/#accueil" class="navbar-brand">
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i> Mon épicerie
+            </a>
+            <button type="button" data-toggle="collapse" data-target="#navbar-main" class="navbar-toggle">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div id="navbar-main" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li ng-class="{active:isActive('#/liste')}"><a href="/#liste"><i class="fa fa-list" aria-hidden="true"></i> Ma liste</a></li>
+                <li ng-class="{active:isActive('#/produit')}"><a href="/#produit"><i class="fa fa-shopping-basket" aria-hidden="true"></i> Produits</a></li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li ng-class="{active:isActive('#/ilmanque')}"><a href="/#ilmanque"><i class="fa fa-sticky-note" aria-hidden="true"></i> Il manque !</a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false"><i class="fa fa-gears" aria-hidden="true"></i> Configuration
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/#categorie">Catégories</a></li>
+                        <li><a href="/#epicerie">Épiceries</a></li>
+                        <li><a href="/#format">Formats</a></li>
+                        <li><a href="/#unite">Unités</a></li>
+                    </ul>
+                </li>
+                <li ng-class="{active:isActive('#/info')}"><a href="/#info"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
+
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false"><i class="fa fa-user" aria-hidden="true"></i>
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/#utilisateur"><i class="fa fa-genderless" aria-hidden="true"></i> Utilisateur</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="/#signup"><i class="fa fa-square" aria-hidden="true"></i> Inscription</a></li>
+                        <li><a href="/#signin"><i class="fa fa-sign-in" aria-hidden="true"></i> Connection</a></li>
+                        <li><a href="/#signout"><i class="fa fa-sign-out" aria-hidden="true"></i> Déconnection</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
