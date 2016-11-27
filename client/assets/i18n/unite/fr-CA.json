@@ -1,0 +1,23 @@
+{
+  "ANNULER": "Annuler",
+  "UNITE":"Unité",
+  "UNITES":"Unités",
+  "ABR":"Abréviation",
+  "MULTIPLE":"Multiple",
+  "DIVISEUR":"Diviseur",
+  "COUTPAR":"Coût par",
+
+  "VALEUR_OBLIGATOIRE":"Valeur obligatoire",
+
+  "AJOUTER_UNITE":"Ajouter une unité",
+  "EDITER_UNITE":"Éditer une unité",
+  "LISTE_UNITES":"Liste des unités",
+
+  "HINT_AJOUTER_UNITE":"Ajouter une unité",
+  "HINT_EDITER_UNITE":"Éditer une unité existante",
+  "HINT_DETRUIRE_UNITE":"Détruire une unité",
+
+  "REFERENCEUNITE":"Référence de l'unité",
+
+  "OPERATION":"Opération"
+}

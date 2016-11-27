@@ -1,0 +1,10 @@
+{
+  "ANNULER": "Annuler",
+  "PRENOM":"Prénom",
+  "NOM":"Nom",
+  "COURRIEL":"Courriel",
+  "COURRIELALT":"Courriel alternatif",
+  "MOTDEPASSE":"Mot de passe",
+  "PARTAGERPRODUITS":"Partager la liste de produits ainsi que les prix anonymement.",
+  "VALEUR_OBLIGATOIRE":"Valeur obligatoire"
+}
