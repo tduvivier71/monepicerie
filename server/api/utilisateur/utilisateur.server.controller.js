@@ -56,23 +56,23 @@ exports.updateOne = function(req, res) {
  |--------------------------------------------------------------------------
  */
 
-module.exports.localLogin = function(req, res) {
-    Model.findOne({ courriel: req.body.courriel }, '+motDePasse', function(err, user) {
+module.exports.localLogin = function (req, res) {
+    Model.findOne({courriel: req.body.courriel}, function (err, user) {
         if (!user) {
-            return res.status(401).send({ message: 'Invalid email and/or password' });
+            return res.status(401).send({message: 'Invalid email'});
         }
-        user.comparePassword(req.body.motDePasse, function(err, isMatch) {
-            if (!isMatch) {
-                return res.status(401).send({ message: 'Invalid email and/or password' });
-            }
-            res.send({ token: createJWT(user) });
-        });
+
+        if (!user.validPassword(req.req.motDePasse)) {
+            return res.status(401).send({message: 'Invalid password'});
+        }
+
+        res.send({token: createJWT(user)});
     });
 };
 
 /*
  |--------------------------------------------------------------------------
- | Local signup
+ | Local signup (register)
  |--------------------------------------------------------------------------
  */
 
@@ -90,9 +90,10 @@ module.exports.localSignUp =  function(req, res) {
             provider: 'local',
             nom: req.body.nom,
             prenom: req.body.prenom,
-            courriel: req.body.courriel,
-            motDePasse: req.body.motDePasse
+            courriel: req.body.courriel
         });
+
+        user.setPassword(req.body.motDePasse);
 
         user.save(function(err, result) {
             if (err) {
