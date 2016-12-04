@@ -83,6 +83,7 @@
 		$translatePartialLoaderProvider.addPart('unite');
 		$translatePartialLoaderProvider.addPart('liste');
 		$translatePartialLoaderProvider.addPart('utilisateur');
+        $translatePartialLoaderProvider.addPart('sign');
 
 		$translateProvider.useLoader('$translatePartialLoader', {
 			urlTemplate: '/assets/i18n/{part}/{lang}.json'

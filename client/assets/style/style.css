@@ -1,4 +1,25 @@
+html{
+    /* This image will be displayed fullscreen */
+    background:url('back.JPG') no-repeat center center;
+
+    /* Ensure the html element always takes up the full height of the browser window */
+    min-height:100%;
+
+    /* The Magic */
+    background-size:cover;
+}
+
+body{
+    /* Workaround for some mobile browsers */
+    min-height:100%;
+}
+
+
+
+
 /* remove all corner */
+
+/*
 
 * {
     border-radius: 0 !important;
@@ -12,6 +33,10 @@
     -moz-box-sizing: content-box;
     box-sizing: content-box;
 }
+
+*/
+
+/*
 
 .form-control,
 .container,
@@ -87,8 +112,6 @@
     color: red;
 }
 
-
-/* Configuration de la hauteur */
 .navbar-nav > li > a, .navbar-brand {
     padding-top:10px !important;
     padding-bottom:0 !important;
@@ -96,6 +119,7 @@
 }
 .navbar {min-height:35px !important;}
 
+*/
 
 /**  Sortable */
 
@@ -126,6 +150,8 @@
 
 
 /***  Extra ***/
+
+/*
 
 body {
     font-family: Verdana, 'Trebuchet ms', Tahoma;
@@ -175,3 +201,9 @@ body {
 .alignright {
     float: right;
 }
+
+.bodycenter {
+    padding: 50px;
+}
+
+*/
