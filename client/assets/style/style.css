@@ -1,12 +1,18 @@
-html{
+/* sets base style for each page */
+html {
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.sign-bg {
     /* This image will be displayed fullscreen */
-    background:url('back.JPG') no-repeat center center;
+    background:url('../images/back01.jpg') no-repeat center center;
 
     /* Ensure the html element always takes up the full height of the browser window */
     min-height:100%;
 
-    /* The Magic */
-    background-size:cover;
 }
 
 body{
