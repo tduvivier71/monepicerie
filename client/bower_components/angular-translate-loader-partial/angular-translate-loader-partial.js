@@ -1,5 +1,5 @@
 /*!
- * angular-translate - v2.11.0 - 2016-03-20
+ * angular-translate - v2.13.0 - 2016-10-30
  * 
  * Copyright (c) 2016 The angular-translate team, Pascal Precht; Licensed MIT
  */
@@ -83,9 +83,9 @@ function $translatePartialLoader() {
         .then(function(result){
           self.tables[lang] = result.data;
           return result.data;
-        }, function() {
+        }, function(response) {
           if (errorHandler) {
-            return errorHandler(self.name, lang)
+            return errorHandler(self.name, lang, response)
               .then(function(data) {
                 self.tables[lang] = data;
                 return data;

@@ -26,6 +26,7 @@
         vm.error = '';          // string
 
 
+        vm.isSign = true;
         vm.authenticate =  authenticate;
         vm.signIn = signIn;
         vm.signInFb = signInFb;
