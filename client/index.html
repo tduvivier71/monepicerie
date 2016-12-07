@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang= "fr-ca" ng-app='app'>
+<html lang= "fr-ca">
   <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -13,21 +13,29 @@
     <link rel="stylesheet" href="assets/style/style.css">
   </head>
 
-  <body ng-style="{'background-image':'url(assets/images/back01.jpg)'}">
-
-    <toast></toast>
+  <body data-ng-app='app'    data-ng-class="{'sign-bg' : vm.isSign}">
 
     <!-- <a href="#" ng-click="changeLanguage('fr_ca')">{{'BUTTON_LANG_FR_CA' | translate}}</a> |
     <a href="#" ng-click="changeLanguage('fr_fr')">{{'BUTTON_LANG_FR_FR' | translate}}</a> -->
 
-    <navigation></navigation>
+   <navigation></navigation>
 
-    <<!--<div style="background-color: lightgray; height: 25px; margin-top: 45px;">
+  <toast></toast>
+
+
+
+    <!--<div style="background-color: lightgray; height: 25px; margin-top: 45px;">
     </div>-->
 
     <div style="margin-top: 65px;">  </div>
 
     <div class="container" ng-cloak style="margin-top:30px;">
+
+      <div data-ng-controller="AppController">
+
+      xxxx : {{vm.test}}
+
+      </div>
 
       <ng-view ></ng-view>
 
@@ -77,6 +85,9 @@
     <script src="/app/shared/factories/bearerAuthInterceptor/bearerAuthInterceptor.factory.js"></script>
     <script src="/app/shared/factories/focus/focus.factory.js"></script>
     <script src="/app/shared/factories/findUnique/findUnique.factory.js"></script>
+
+    <script src="/app/app/app.module.js"></script>
+    <script src="/app/app/app.client.module.js"></script>
 
     <script src="/app/accueil/accueil.client.module.js"></script>
     <script src="/app/accueil/accueil.client.routes.js"></script>

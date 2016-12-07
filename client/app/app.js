@@ -5,7 +5,7 @@
 	angular
 		.module('app', ['ngRoute', 'ngResource', 'ngMessages',  'ngSanitize', 'ngAnimate', 'ngToast', 'ui.sortable',
 			'ui.bootstrap', 'pascalprecht.translate', 'angularMoment', 'kendo.directives',
-			'app.accueil', 'app.categorie','app.epicerie','app.unite','app.format','app.produit', 'app.marque','app.liste',
+			'app.app' ,'app.accueil', 'app.categorie','app.epicerie','app.unite','app.format','app.produit', 'app.marque','app.liste',
 			'app.utilisateur','app.sign','satellizer']);
 
 	angular
@@ -89,9 +89,6 @@
 			urlTemplate: '/assets/i18n/{part}/{lang}.json'
 		});
 		$translateProvider.preferredLanguage('fr-CA');
-
-
-
 	}
 
 /*	function runapp($rootScope, $translate) {

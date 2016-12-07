@@ -26,11 +26,12 @@
         vm.error = '';          // string
 
 
-        vm.authenticate =  authenticate;
         vm.signIn = signIn;
         vm.signInFb = signInFb;
         vm.signOut = signOut;
         vm.signUp = signUp;
+
+        vm.test =  'testx';
 
         // ************************************************************************************************************/
         // Entry point function
@@ -161,6 +162,8 @@
         // ************************************************************************************************************/
 
         function _init() {
+
+
 
             if ($location.path() === '/signin') {
                 var token = authenticationService.getToken();
