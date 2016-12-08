@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang= "fr-ca">
+<html lang= "fr-ca" data-ng-app='app'>
   <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -13,7 +13,11 @@
     <link rel="stylesheet" href="assets/style/style.css">
   </head>
 
-  <body data-ng-app='app'    data-ng-class="{'sign-bg' : vm.isSign}">
+  <body data-ng-controller="mainCtrl"  data-ng-class="{'sign-bg' : !isAuthentified}">
+
+
+    wwwxxxx : {{}}
+
 
     <!-- <a href="#" ng-click="changeLanguage('fr_ca')">{{'BUTTON_LANG_FR_CA' | translate}}</a> |
     <a href="#" ng-click="changeLanguage('fr_fr')">{{'BUTTON_LANG_FR_FR' | translate}}</a> -->
@@ -31,11 +35,7 @@
 
     <div class="container" ng-cloak style="margin-top:30px;">
 
-      <div data-ng-controller="AppController">
 
-      xxxx : {{vm.test}}
-
-      </div>
 
       <ng-view ></ng-view>
 
@@ -45,7 +45,9 @@
 
     <base href="/">
 
-    <!-- <script src="./assets/style/bootstrap.min.js"></script> -->
+    <!-- <script src="./assets/style/bootstrap.min.js"></script>
+
+     data-ng-class="{'sign-bg' : vm.isSign}-->
 
     <script src="./bower_components/jquery/dist/jquery.min.js"></script>
     <script src="./bower_components/jquery-ui/jquery-ui.min.js"></script>
@@ -87,7 +89,7 @@
     <script src="/app/shared/factories/findUnique/findUnique.factory.js"></script>
 
     <script src="/app/app/app.module.js"></script>
-    <script src="/app/app/app.client.module.js"></script>
+    <script src="/app/app/app.client.controller.js"></script>
 
     <script src="/app/accueil/accueil.client.module.js"></script>
     <script src="/app/accueil/accueil.client.routes.js"></script>
@@ -136,6 +138,12 @@
   <!--  <script src="/app/marque/unite.client.routes.js"></script> -->
     <script src="/app/marque/marque.client.service.js"></script>
   <!--  <script src="/app/marque/unite.client.controller.js"></script> -->
+
+    <div data-ng-controller="mainCtrl">
+
+      xxxx : {{www}}
+
+    </div>
 
   </body>
 </html>

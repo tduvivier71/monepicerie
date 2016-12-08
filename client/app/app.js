@@ -11,6 +11,7 @@
 	angular
 		.module('app')
 		.config(config)
+        .controller('mainCtrl', mainCtrl)
 	    .value('language', 'fr-CA')
 		.run(function ($rootScope, $translate)
 		{
@@ -20,6 +21,13 @@
 				}
 			);
 		});
+
+    	mainCtrl.$inject = ['$scope', '$auth'];
+
+    	function mainCtrl ($scope, $auth) {
+            $scope.isAuthentified = $auth.isAuthenticated();
+		}
+
 
 /*	app.config(function(uiSelectConfig) {
 		uiSelectConfig.theme = 'bootstrap';
