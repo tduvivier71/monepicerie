@@ -11,10 +11,10 @@
         .controller('SignController', SignController);
 
     SignController.$inject = ['$q',
-        'toasterService', 'focus', 'authenticationService', '$location', '$auth'];
+        'toasterService', 'focus', 'authenticationService', '$location', '$auth','$rootScope'];
 
     function SignController($q,
-         toasterService, focus, authenticationService, $location, $auth) {
+         toasterService, focus, authenticationService, $location, $auth, $rootScope) {
 
         var vm = this;
 
@@ -26,12 +26,14 @@
         vm.error = '';          // string
 
 
+        $rootScope.isSign = true;
+
+        console.log('isSign ' + vm.isSign);
+        vm.authenticate =  authenticate;
         vm.signIn = signIn;
         vm.signInFb = signInFb;
         vm.signOut = signOut;
         vm.signUp = signUp;
-
-        vm.test =  'testx';
 
         // ************************************************************************************************************/
         // Entry point function
@@ -162,8 +164,6 @@
         // ************************************************************************************************************/
 
         function _init() {
-
-
 
             if ($location.path() === '/signin') {
                 var token = authenticationService.getToken();
