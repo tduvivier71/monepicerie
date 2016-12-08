@@ -25,13 +25,13 @@
         vm.state = '';          // string
         vm.error = '';          // string
 
-
+        vm.authenticate = authenticate;
         vm.signIn = signIn;
         vm.signInFb = signInFb;
         vm.signOut = signOut;
         vm.signUp = signUp;
 
-        vm.test =  'testx';
+        vm.test = 'x5454x';
 
         // ************************************************************************************************************/
         // Entry point function
