@@ -10,9 +10,15 @@
 
 	function config ($routeProvider) {
 		$routeProvider.
-
+/*			when('/', {
+				templateUrl: 'app/accueil/404.client.view.html',
+				controller: 'AccueilController',
+				controllerAs: 'vm'
+			}). */
 			when('/accueil', {
-				templateUrl: 'app/accueil/accueil.client.view.html'
+				templateUrl: 'app/accueil/accueil.client.view.html',
+            	controller: 'AccueilController',
+            	controllerAs: 'vm'
 			}).
 			otherwise({
 				redirectTo: '/'

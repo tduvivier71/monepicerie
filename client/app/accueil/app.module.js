@@ -3,6 +3,6 @@
     'use strict';
 
     angular.
-        module('app.app', []);
+        module('app.accueil', []);
 
 })();
