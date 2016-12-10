@@ -3,7 +3,7 @@
     'use strict';
 
     angular
-        .module('app.accueil', [])
+        .module('app.accueil')
         .controller('AccueilController', AccueilController);
 
     AccueilController.$inject = ['$auth'];

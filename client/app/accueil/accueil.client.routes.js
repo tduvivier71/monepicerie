@@ -10,11 +10,11 @@
 
 	function config ($routeProvider) {
 		$routeProvider.
-/*			when('/', {
+			when('/', {
 				templateUrl: 'app/accueil/404.client.view.html',
 				controller: 'AccueilController',
 				controllerAs: 'vm'
-			}). */
+			}).
 			when('/accueil', {
 				templateUrl: 'app/accueil/accueil.client.view.html',
             	controller: 'AccueilController',

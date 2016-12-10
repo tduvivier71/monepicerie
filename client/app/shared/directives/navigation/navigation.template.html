@@ -17,8 +17,7 @@
                 <li ng-class="{active:isActive('#/produit')}"><a href="/#produit"><i class="fa fa-shopping-basket" aria-hidden="true"></i> Produits</a></li>
             </ul>
 
-            <!--data-ng-show=isAuthentified-->
-            <ul class="nav navbar-nav navbar-right">
+            <ul data-ng-show=isAuthentified class="nav navbar-nav navbar-right">
                 <li ng-class="{active:isActive('#/ilmanque')}"><a href="/#ilmanque"><i class="fa fa-sticky-note" aria-hidden="true"></i> Il manque !</a></li>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"

@@ -96,9 +96,9 @@
 		 * runApp
 		 */
 
-        runApp.$inject = ['$rootScope', '$translate', '$location', '$auth'];
+        runApp.$inject = ['$rootScope', '$translate', '$location', '$auth','$route'];
 
-		function runApp($rootScope, $translate, $location, $auth) {
+		function runApp($rootScope, $translate, $location, $auth, $route) {
 
 			$rootScope.$on('$translatePartialLoaderStructureChanged', function ()
 				{
@@ -106,17 +106,15 @@
 				}
 			);
 
-            $location.path('/accueil');
+           // $location.path('/accueil');
 
-            if (!$auth.isAuthenticated()) {
-                console.log('DENY : Redirecting to Login');
+            if ($auth.isAuthenticated()) {
+                console.log('ALLOW');
+                $location.path('/accueil');
+            } else {
                 event.preventDefault();
                 $location.path('/signin');
             }
-            else {
-                console.log('ALLOW');
-            }
-
 		}
 
 
