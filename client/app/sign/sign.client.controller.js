@@ -31,7 +31,7 @@
         vm.signOut = signOut;
         vm.signUp = signUp;
 
-        vm.test = 'x5454x';
+        vm.isAuthentified = $auth.isAuthenticated();
 
         // ************************************************************************************************************/
         // Entry point function

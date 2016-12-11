@@ -106,6 +106,9 @@
 				}
 			);
 
+            $rootScope.$on('$locationChangeStart', function {
+            ;
+
            // $location.path('/accueil');
 
             if ($auth.isAuthenticated()) {
