@@ -11,10 +11,10 @@
         .controller('SignController', SignController);
 
     SignController.$inject = ['$q',
-        'toasterService', 'focus', 'authenticationService', '$location', '$auth'];
+        'toasterService', 'focus', 'authenticationService', '$location', '$auth', '$route','$window', '$timeout'];
 
     function SignController($q,
-         toasterService, focus, authenticationService, $location, $auth) {
+         toasterService, focus, authenticationService, $location, $auth, $route, $window, $timeout) {
 
         var vm = this;
 
@@ -50,8 +50,9 @@
         function authenticate(provider) {
             $auth.authenticate(provider).then(function(response) {
                   //  $auth.setToken(response.access_token);
-                    toasterService.success('X : ' + JSON.stringify(response));
-                    $location.path('/');
+                    toasterService.success('Connection réussie');
+                    $location.path('/accueil');
+                    $window.location.reload();
                 })
                 .catch(function(error) {
                     if (error.message) {
@@ -76,7 +77,8 @@
             $auth.login(credentials)
                 .then(function() {
                     toasterService.success('You have successfully signed in!');
-                    $location.path('/');
+                    $location.path('/accueil');
+                    $window.location.reload();
                 })
                 .catch(function(error) {
                     toasterService.error(error.data.message, error.status);
@@ -88,7 +90,10 @@
             $auth.logout()
                 .then(function() {
                     toasterService.info('You have been logged out');
-                    $location.path('/');
+                    $location.path('/signout');
+                   // $window.location.reload();
+                   // $location.path('/signin');
+
                 });
         }
 

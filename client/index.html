@@ -13,29 +13,17 @@
     <link rel="stylesheet" href="assets/style/style.css">
   </head>
 
-  <body data-ng-controller="mainCtrl"  data-ng-class="{'sign-bg' : !isAuthentified}">
+  <body data-ng-controller="indexCtrl"
+        data-ng-class="{'caddy-bg' : !isAuthentified}">
 
+    <data-navigation></data-navigation>
 
-    wwwxxxx : {{}}
+    <toast></toast>
 
+    <div style="margin-top: 120px;"></div>
 
-    <!-- <a href="#" ng-click="changeLanguage('fr_ca')">{{'BUTTON_LANG_FR_CA' | translate}}</a> |
-    <a href="#" ng-click="changeLanguage('fr_fr')">{{'BUTTON_LANG_FR_FR' | translate}}</a> -->
-
-   <navigation></navigation>
-
-  <toast></toast>
-
-
-
-    <!--<div style="background-color: lightgray; height: 25px; margin-top: 45px;">
-    </div>-->
-
-    <div style="margin-top: 65px;">  </div>
-
-    <div class="container" ng-cloak style="margin-top:30px;">
-
-
+    <div class="container"
+         data-ng-cloak>
 
       <ng-view ></ng-view>
 
@@ -44,10 +32,6 @@
     <page-footer></page-footer>
 
     <base href="/">
-
-    <!-- <script src="./assets/style/bootstrap.min.js"></script>
-
-     data-ng-class="{'sign-bg' : vm.isSign}-->
 
     <script src="./bower_components/jquery/dist/jquery.min.js"></script>
     <script src="./bower_components/jquery-ui/jquery-ui.min.js"></script>
@@ -88,11 +72,10 @@
     <script src="/app/shared/factories/focus/focus.factory.js"></script>
     <script src="/app/shared/factories/findUnique/findUnique.factory.js"></script>
 
-    <script src="/app/app/app.module.js"></script>
-    <script src="/app/app/app.client.controller.js"></script>
-
-    <script src="/app/accueil/accueil.client.module.js"></script>
+    <script src="/app/accueil/app.module.js"></script>
     <script src="/app/accueil/accueil.client.routes.js"></script>
+    <script src="/app/accueil/accueil.client.controller.js"></script>
+
 
     <script src="/app/sign/app.module.js"></script>
     <script src="/app/sign/sign.client.routes.js"></script>
@@ -138,12 +121,6 @@
   <!--  <script src="/app/marque/unite.client.routes.js"></script> -->
     <script src="/app/marque/marque.client.service.js"></script>
   <!--  <script src="/app/marque/unite.client.controller.js"></script> -->
-
-    <div data-ng-controller="mainCtrl">
-
-      xxxx : {{www}}
-
-    </div>
 
   </body>
 </html>
