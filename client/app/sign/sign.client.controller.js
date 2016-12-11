@@ -50,9 +50,9 @@
         function authenticate(provider) {
             $auth.authenticate(provider).then(function(response) {
                   //  $auth.setToken(response.access_token);
-                    toasterService.success('Connection réussie');
+                 //   toasterService.success('Connection réussie');
                     $location.path('/accueil');
-                    $window.location.reload();
+                 //   $window.location.reload();
                 })
                 .catch(function(error) {
                     if (error.message) {
@@ -76,7 +76,7 @@
 
             $auth.login(credentials)
                 .then(function() {
-                    toasterService.success('You have successfully signed in!');
+                 //   toasterService.success('You have successfully signed in!');
                     $location.path('/accueil');
                     $window.location.reload();
                 })
@@ -85,14 +85,21 @@
                 });
         }
 
+        /**
+         * Déconnexion
+         */
         function signOut() {
-            if (!$auth.isAuthenticated()) { return; }
+
+            if (!$auth.isAuthenticated()) {
+                return;
+            }
+
             $auth.logout()
                 .then(function() {
-                    toasterService.info('You have been logged out');
+                 //   toasterService.info('Déconnexion réussie');
                     $location.path('/signout');
-                   // $window.location.reload();
-                   // $location.path('/signin');
+                    //$window.location.reload();
+                    //$location.path('/signin');
 
                 });
         }

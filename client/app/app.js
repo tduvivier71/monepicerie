@@ -85,11 +85,12 @@
 		 * indexCtrl
 		 */
 
-		indexCtrl.$inject = ['$scope', '$auth'];
+		indexCtrl.$inject = ['$scope', '$auth', '$location'];
 
-		function indexCtrl ($scope, $auth) {
+		function indexCtrl ($scope, $auth, $location) {
 
 			$scope.isAuthentified = $auth.isAuthenticated();
+			$scope.currentPath = $location.path();
 		}
 
 		/**
@@ -100,16 +101,13 @@
 
 		function runApp($rootScope, $translate, $location, $auth, $route) {
 
-			$rootScope.$on('$translatePartialLoaderStructureChanged', function ()
+		    $rootScope.$on('$translatePartialLoaderStructureChanged', function ()
 				{
 					$translate.refresh();
 				}
 			);
 
-            $rootScope.$on('$locationChangeStart', function {
-            ;
-
-           // $location.path('/accueil');
+          // $location.path('/accueil');
 
             if ($auth.isAuthenticated()) {
                 console.log('ALLOW');
@@ -118,6 +116,19 @@
                 event.preventDefault();
                 $location.path('/signin');
             }
+
+            $rootScope.$on('$locationChangeStart', function (event, newUrl, oldUrl) {
+                    if (!$auth.isAuthenticated()) {
+                        console.log('Non autorisé');
+                        //event.preventDefault();
+                        $location.path('/signin');
+                    }
+                }
+            );
+
+//            $location.path('/accueil');
+
+
 		}
 
 

@@ -1,14 +1,21 @@
-/* sets base style for each page */
-
+/**
+    sets base style for each page
+**/
 html {
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
-
     min-height:100%;
-
 }
 
+body{
+    /* Workaround for some mobile browsers */
+    min-height:100%;
+}
+
+/**
+    backroung caddy when no authentification
+ **/
 .caddy-bg {
     /* This image will be displayed fullscreen */
     background:url('../images/back01.jpg') no-repeat center center;
@@ -18,29 +25,23 @@ html {
     background-size: cover;
 }
 
-body{
-    /* Workaround for some mobile browsers */
-    min-height:100%;
-}
-
-
-/* remove all corner */
-
-/*
-
+/**
+    remove all corner
+**/
 * {
     border-radius: 0 !important;
     -moz-border-radius: 0 !important;
 }
 
 
+
+/*
 *, :before, :after
 {
     -webkit-box-sizing: content-box;
     -moz-box-sizing: content-box;
     box-sizing: content-box;
 }
-
 */
 
 /*

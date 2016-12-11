@@ -10,17 +10,17 @@
 
 	function config ($routeProvider) {
 		$routeProvider
-			.when('/signin/', {
+			.when('/signin', {
 				templateUrl: 'app/sign/signIn.edit.html',
 				controller: 'SignController',
 				controllerAs: 'vm'
 			}).
-			when('/signup/', {
+			when('/signup', {
 				templateUrl: 'app/sign/signUp.edit.html',
 				controller: 'SignController',
 				controllerAs: 'vm'
 			}).
-			when('/signout/', {
+			when('/signout', {
 				templateUrl: 'app/sign/signOut.view.html',
 				controller: 'SignController',
 			    controllerAs: 'vm'
