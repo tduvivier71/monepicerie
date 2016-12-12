@@ -110,18 +110,22 @@
           // $location.path('/accueil');
 
             if ($auth.isAuthenticated()) {
-                console.log('ALLOW');
+                console.log('Autorisé');
                 $location.path('/accueil');
-            } else {
+            } /*else {
+                console.log('Non autorisé');
                 event.preventDefault();
                 $location.path('/signin');
-            }
+            }*/
 
             $rootScope.$on('$locationChangeStart', function (event, newUrl, oldUrl) {
+                    console.log('$locationChangeStart : ' + newUrl );
                     if (!$auth.isAuthenticated()) {
-                        console.log('Non autorisé');
+                        console.log('$locationChangeStart : Non autorisé');
                         //event.preventDefault();
                         $location.path('/signin');
+                    } else {
+                        console.log('$locationChangeStart : autorisé');
                     }
                 }
             );
