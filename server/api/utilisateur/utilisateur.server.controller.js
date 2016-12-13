@@ -62,7 +62,7 @@ module.exports.localLogin = function (req, res) {
             return res.status(401).send({message: 'Invalid email'});
         }
 
-        if (!user.validPassword(req.req.motDePasse)) {
+        if (!user.validPassword(req.body.motDePasse)) {
             return res.status(401).send({message: 'Invalid password'});
         }
 
