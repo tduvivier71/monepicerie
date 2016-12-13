@@ -78,7 +78,7 @@
                 .then(function() {
                  //   toasterService.success('You have successfully signed in!');
                     $location.path('/accueil');
-                    $window.location.reload();
+                  //  $window.location.reload();
                 })
                 .catch(function(error) {
                     toasterService.error(error.data.message, error.status);
@@ -152,7 +152,17 @@
                 motDePasse: _item.motDePasse
             };
 
-            authenticationService
+            $auth.signup(credentials)
+                .then(function(response) {
+                    $auth.setToken(response);
+                    $location.path('/accueil');
+                    toasterService.info('You have successfully created a new account and have been signed-in');
+                })
+                .catch(function(response) {
+                    toasterService.error(response.data.message);
+                });
+
+        /*    authenticationService
                 .register(credentials)
                 .error(function(error){
                     toasterService.error(error);
@@ -161,7 +171,7 @@
                 .then(function(result){
                     toasterService.info(result.data.prenom + ' '  + result.data.nom + ' est enregistré avec succès');
                     $location.path("/accueil");
-                });
+                }); */
 
         }
 

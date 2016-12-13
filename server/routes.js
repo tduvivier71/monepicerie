@@ -98,7 +98,7 @@ router.get('/api/liste', ensureAuthenticated, liste.find);
 //router.get('/api/utilisateur/:id', ensureAuthenticated, utilisateur.findOne);
 //router.get('/api/utilisateur', ensureAuthenticated, utilisateur.find);
 
-router.post('/auth/login', utilisateur.localLogin);
+router.post('/auth/signin', utilisateur.localLogin);
 router.post('/auth/signup', utilisateur.localSignUp);
 router.post('/auth/facebook/', utilisateur.facebookLogin);
 router.post('/auth/google/', utilisateur.googleLogin);

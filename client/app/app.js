@@ -31,7 +31,7 @@
 			$authProvider.withCredentials = false;
 			$authProvider.tokenRoot = null;
 			$authProvider.baseUrl = '/';
-			$authProvider.loginUrl = '/auth/login';
+			$authProvider.loginUrl = '/auth/signin';
 			$authProvider.signupUrl = '/auth/signup';
 			$authProvider.unlinkUrl = '/auth/unlink/';
 			$authProvider.tokenName = 'token';
@@ -112,6 +112,9 @@
             if ($auth.isAuthenticated()) {
                 console.log('Autorisé');
                 $location.path('/accueil');
+
+
+
             } /*else {
                 console.log('Non autorisé');
                 event.preventDefault();
@@ -123,7 +126,13 @@
                     if (!$auth.isAuthenticated()) {
                         console.log('$locationChangeStart : Non autorisé');
                         //event.preventDefault();
-                        $location.path('/signin');
+						var x = newUrl;
+						var n = x.search('signup');
+						if (n === -1) {
+                            $location.path('/signin');
+                        } else {
+                            $location.path('/signup');
+						}
                     } else {
                         console.log('$locationChangeStart : autorisé');
                     }
