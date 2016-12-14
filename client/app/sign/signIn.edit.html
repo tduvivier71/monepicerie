@@ -3,10 +3,10 @@
     <div class="col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 well" style="opacity: 0.95;">
         <legend>Connection</legend>
         <div style="float:right; position: relative; top:-10px; font-size: 85%;">
-            <a href="/#signup">Nouvelle inscription ?</a>
+            <a href="/#signup">{{"NOUVELLEINSCRIPTION"|translate}}</a>
         </div>
         <br>
-        <form id="vm.form" role="form">
+        <form novalidate class="form-horizontal" id="vm.form" name="vm.form" role="form">
             <div class="input-group" style="margin-bottom: 25px;">
                 <span class="input-group-addon">
                     <i class="glyphicon glyphicon-envelope"></i>
@@ -16,7 +16,8 @@
                        data-ng-model="vm.courriel"
                        id="login-username"
                        name="username"
-                       placeholder="adresse courriel"
+                       placeholder={{"ADRESSECOURRIEL"|translate}}
+                       required
                        type="text"
                        value="">
             </div>
@@ -30,7 +31,8 @@
                        class="form-control"
                        name="password"
                        data-ng-model="vm.motDePasse"
-                       placeholder="mot de passe">
+                       placeholder={{"MOTDEPASSE"|translate}}
+                       required>
             </div>
             <button class="btn btn-block btn-info"
                     data-ng-disabled="vm.form.$invalid "
@@ -38,20 +40,19 @@
                     type="button">
                     {{"SECONNECTER"|translate}}
             </button>
-            <div class="checkbox" style="font-size: 85%; top: -5px;">
+        <!--  <div class="checkbox" style="font-size: 90%; top: 5px;">
                 <label>
                     <input id="login-remember"
                            type="checkbox"
                            name="remember"
                            value="1">Se souvenir de moi
                 </label>
-            </div>
+            </div> -->
             <hr>
             <center><h5>ou</h5></center>
                 <div class="row">
                     <div class="col-md-6">
                         <button class="btn btn-block btn-primary" style="background: #3b5998;"
-                            data-ng-disabled="vm.form.$invalid "
                             data-ng-click="vm.authenticate('facebook')">
                             <span class="fa fa-facebook"></span>
                             Facebook
@@ -59,7 +60,6 @@
                     </div>
                     <div class="col-md-6">
                         <button class="btn btn-block btn-primary" style="background: #db4a39;"
-                                data-ng-disabled="vm.form.$invalid "
                                 data-ng-click="vm.authenticate('google')">
                             <span class="fa fa-google-plus"></span>
                             Google

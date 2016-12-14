@@ -3,10 +3,10 @@
     <div class="col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 well" style="opacity: 0.95;">
         <legend>Inscription</legend>
         <div style="float:right; position: relative; top:-10px; font-size: 85%;">
-            <a href="/#signin">Déjà inscrit ?</a>
+            <a href="/#signin">{{"DEJAINSCRIPT"|translate}}</a>
         </div>
         <br>
-        <form novalidate name="vm.form" class="form-horizontal" role="form">
+        <form novalidate class="form-horizontal" id="vm.form" name="vm.form"  role="form">
             <div class="form-group">
                 <label for="courriel_input_id"
                        class="col-md-3 control-label">
@@ -18,7 +18,7 @@
                            name="courriel"
                            ng-model="vm.item.courriel"
                            type="text"
-                           placeholder="Courriel">
+                           placeholder={{"ADRESSECOURRIEL"|translate}}>
                 </div>
             </div>
             <div class="form-group">
@@ -32,7 +32,7 @@
                            class="form-control"
                            name="prenom"
                            ng-model="vm.item.prenom"
-                           placeholder="Prénom">
+                           placeholder={{"VOTREPRENOM"|translate}}>
                 </div>
             </div>
             <div class="form-group">
@@ -46,7 +46,7 @@
                            class="form-control"
                            name="nom"
                            ng-model="vm.item.nom"
-                           placeholder="Nom">
+                           placeholder={{"VOTRENOM"|translate}}>
                 </div>
             </div>
             <div class="form-group">
@@ -60,23 +60,31 @@
                            class="form-control"
                            name="motdepasse"
                            ng-model="vm.item.motDePasse"
-                           placeholder="Mot de passe">
+                           placeholder={{"MOTDEPASSE"|translate}}>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="motdepasse2_input_id"
+                       class="col-md-3 control-label">
+                </label>
+                <div class="col-md-9">
+                    <input type="password"
+                           id="motdepasse2_input_id"
+                           class="form-control"
+                           name="motdepasse2"
+                           ng-model="vm.item.motDePasse2"
+                           placeholder={{"SAISIRANOUVEAUMOTDEPASSE"|translate}}>
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-md-offset-3 col-md-9">
                     <button id="btn-signup"
-                            type="button"
-                            ng-click="vm.signUp(vm.item)"
-                            class="btn btn-info">
-                            S'inscrire
+                            class="btn btn-info"
+                            data-ng-disabled="vm.form.$invalid"
+                            data-ng-click="vm.signUp(vm.item)"
+                            type="button">
+                            {{"SINSCRIRE"|translate}}
                     </button>
-                    <span style="margin-left:8px;">ou</span>
-                </div>
-            </div>
-            <div style="border-top: 1px solid #999; padding-top:20px" class="form-group">
-                <div class="col-md-offset-3 col-md-9">
-                    <a href="/#auth/facebook" class="btn btn-primary"><span class="fa fa-facebook"></span> S'inscrire avec Facebook</a>
                 </div>
             </div>
         </form>

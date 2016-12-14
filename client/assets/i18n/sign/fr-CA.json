@@ -4,5 +4,12 @@
   "MOTDEPASSE":"Mot de passe",
   "CONNECTION":"Connection",
   "SECONNECTER":"Se connecter",
-  "MOTDEPASSEOUBLIE":"Mot de passe oublié"
+  "MOTDEPASSEOUBLIE":"Mot de passe oublié",
+  "NOUVELLEINSCRIPTION":"Nouvelle inscription ?",
+  "ADRESSECOURRIEL":"Adresse courriel",
+  "DEJAINSCRIPT":"Déjà inscript ?",
+  "VOTREPRENOM":"Votre prénom",
+  "VOTRENOM":"Votre nom",
+  "SAISIRANOUVEAUMOTDEPASSE":"Saisir à nouveau votre mot de passe",
+  "SINSCRIRE":"S'inscrire"
 }
