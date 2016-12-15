@@ -1,4 +1,4 @@
-<!-- écran de connection -->
+<!-- écran de connection local, facebook ou google -->
 <div class="row">
     <div class="col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 well" style="opacity: 0.95;">
         <legend>Connection</legend>
@@ -7,39 +7,59 @@
         </div>
         <br>
         <form novalidate class="form-horizontal" id="vm.form" name="vm.form" role="form">
-            <div class="input-group" style="margin-bottom: 25px;">
-                <span class="input-group-addon">
-                    <i class="glyphicon glyphicon-envelope"></i>
-                </span>
-                <input autocomplete="on"
-                       class="form-control"
-                       data-ng-model="vm.courriel"
-                       id="login-username"
-                       name="username"
-                       placeholder={{"ADRESSECOURRIEL"|translate}}
-                       required
-                       type="text"
-                       value="">
+
+            <div>
+                <div class="input-group"
+                     style="margin-bottom: 25px;">
+                    <span class="input-group-addon">
+                        <i class="glyphicon glyphicon-envelope"></i>
+                    </span>
+                    <input autocomplete="on"
+                           class="form-control"
+                           data-ng-model="vm.courriel"
+                           id="courriel_input_id"
+                           name="courriel_input"
+                           placeholder={{"ADRESSECOURRIEL"|translate}}
+                           required
+                           type="text">
+
+                </div>
             </div>
-            <div class="input-group" style="margin-bottom: 25px">
-                <span class="input-group-addon">
-                    <i class="glyphicon glyphicon-lock"></i>
-                </span>
-                <input autocomplete="off"
-                       id="login-password"
-                       type="password"
-                       class="form-control"
-                       name="password"
-                       data-ng-model="vm.motDePasse"
-                       placeholder={{"MOTDEPASSE"|translate}}
-                       required>
+
+
+            <div>
+                <div class="input-group"
+                     style="margin-bottom: 25px">
+                    <span class="input-group-addon">
+                        <i class="glyphicon glyphicon-lock"></i>
+                    </span>
+                    <input autocomplete="off"
+                           id="motdepasse_input_id"
+                           type="password"
+                           class="form-control"
+                           name="motdepasse_input"
+                           data-ng-model="vm.motDePasse"
+                           placeholder={{"MOTDEPASSE"|translate}}
+                           required>
+                </div>
+                <validate-input
+                        form="vm.form"
+                        field="vm.form.motdepasse_input">
+                </validate-input>
             </div>
+
             <button class="btn btn-block btn-info"
+                    data-ng-click="vm.signIn('local')"
+                    type="button">
+                    {{"SECONNECTER"|translate}}
+            </button>
+
+        <!--    <button class="btn btn-block btn-info"
                     data-ng-disabled="vm.form.$invalid "
                     data-ng-click="vm.signIn()"
                     type="button">
                     {{"SECONNECTER"|translate}}
-            </button>
+            </button> -->
         <!--  <div class="checkbox" style="font-size: 90%; top: 5px;">
                 <label>
                     <input id="login-remember"
@@ -48,19 +68,20 @@
                            value="1">Se souvenir de moi
                 </label>
             </div> -->
+
             <hr>
             <center><h5>ou</h5></center>
                 <div class="row">
                     <div class="col-md-6">
                         <button class="btn btn-block btn-primary" style="background: #3b5998;"
-                            data-ng-click="vm.authenticate('facebook')">
+                            data-ng-click="vm.signIn('facebook')">
                             <span class="fa fa-facebook"></span>
                             Facebook
                         </button>
                     </div>
                     <div class="col-md-6">
                         <button class="btn btn-block btn-primary" style="background: #db4a39;"
-                                data-ng-click="vm.authenticate('google')">
+                                data-ng-click="vm.signIn('google')">
                             <span class="fa fa-google-plus"></span>
                             Google
                         </button>

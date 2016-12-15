@@ -52,18 +52,23 @@ exports.updateOne = function(req, res) {
 
 /*
  |--------------------------------------------------------------------------
- | Local login
+ | Local login (connection)
  |--------------------------------------------------------------------------
  */
 
 module.exports.localLogin = function (req, res) {
+
+    if (!req.body.courriel || !req.body.motDePasse) {
+        return res.status(404).json({ message : "Tous les champs sont requis"});
+    }
+
     Model.findOne({courriel: req.body.courriel}, function (err, user) {
         if (!user) {
-            return res.status(401).send({message: 'Invalid email'});
+            return res.status(401).send({message: 'Adresse de courril non trouvée'});
         }
 
         if (!user.validPassword(req.body.motDePasse)) {
-            return res.status(401).send({message: 'Invalid password'});
+            return res.status(401).send({message: 'Mot de passe invalide'});
         }
 
         res.send({token: createJWT(user)});
@@ -72,7 +77,7 @@ module.exports.localLogin = function (req, res) {
 
 /*
  |--------------------------------------------------------------------------
- | Local signup (register)
+ | Local signup (inscription)
  |--------------------------------------------------------------------------
  */
 
