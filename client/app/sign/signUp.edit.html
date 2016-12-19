@@ -1,88 +1,104 @@
 <!-- écran d'inscription -->
 <div class="row">
-    <div class="col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 well" style="opacity: 0.95;">
+    <div class="col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 well" style="opacity: 0.95">
         <legend>Inscription</legend>
         <div style="float:right; position: relative; top:-10px; font-size: 85%;">
             <a href="/#signin">{{"DEJAINSCRIPT"|translate}}</a>
         </div>
         <br>
-        <form novalidate class="form-horizontal" id="vm.form" name="vm.form"  role="form">
-            <div class="form-group">
+        <form novalidate id="vm.form" name="vm.form"  ng-submit="vm.signUp(vm.item)" role="form">
+
+            <div class="col-md-12 form-group">
                 <label for="courriel_input_id"
                        class="col-md-3 control-label">
                     Courriel<span style="color: red;" uib-tooltip={{"VALEUR_OBLIGATOIRE"|translate}}>*</span>
                 </label>
-                <div class="col-md-9">
-                    <input class="form-control"
+                <div class="col-md-9" ng-class="{'has-error': vm.form.$submitted && vm.form.courriel_input.$invalid}">
+                    <input required
+                           class="form-control"
                            id="courriel_input_id"
-                           name="courriel"
-                           ng-model="vm.item.courriel"
-                           type="text"
+                           name="courriel_input"
+                           data-ng-model="vm.item.courriel"
+                           type="email"
                            placeholder={{"ADRESSECOURRIEL"|translate}}>
+                     <validate-input form="vm.form" field="vm.form.courriel_input"></validate-input>
                 </div>
-            </div>
-            <div class="form-group">
+             </div>
+
+            <div class="col-md-12 form-group">
                 <label for="prenom_input_id"
                        class="col-md-3 control-label">
                     Prénom<span style="color: red;" uib-tooltip={{"VALEUR_OBLIGATOIRE"|translate}}>*</span>
                 </label>
-                <div class="col-md-9">
-                    <input type="text"
-                           id="prenom_input_id"
+                <div class="col-md-9" ng-class="{'has-error': vm.form.$submitted && vm.form.prenom_input.$invalid}">
+                    <input required
                            class="form-control"
-                           name="prenom"
-                           ng-model="vm.item.prenom"
-                           placeholder={{"VOTREPRENOM"|translate}}>
+                           data-ng-model="vm.item.prenom"
+                           id="prenom_input_id"
+                           name="prenom_input"
+                           placeholder={{"VOTREPRENOM"|translate}}
+                           type="text">
+                    <validate-input form="vm.form" field="vm.form.prenom_input"></validate-input>
                 </div>
             </div>
-            <div class="form-group">
+
+            <div class="col-md-12 form-group">
                 <label for="nom_input_id"
                        class="col-md-3 control-label">
                     Nom<span style="color: red;" uib-tooltip={{"VALEUR_OBLIGATOIRE"|translate}}>*</span>
                 </label>
-                <div class="col-md-9">
-                    <input type="text"
-                           id="nom_input_id"
+                <div class="col-md-9" ng-class="{'has-error': vm.form.$submitted && vm.form.nom_input.$invalid}">
+                    <input required
                            class="form-control"
-                           name="nom"
-                           ng-model="vm.item.nom"
-                           placeholder={{"VOTRENOM"|translate}}>
+                           data-ng-model="vm.item.nom"
+                           id="nom_input_id"
+                           name="nom_input"
+                           placeholder={{"VOTRENOM"|translate}}
+                           type="text">
+                     <validate-input form="vm.form" field="vm.form.nom_input"></validate-input>
                 </div>
             </div>
-            <div class="form-group">
+
+            <div class="col-md-12 form-group">
                 <label for="motdepasse_input_id"
                        class="col-md-3 control-label">
                     Mot de passe<span style="color: red;" uib-tooltip={{"VALEUR_OBLIGATOIRE"|translate}}>*</span>
                 </label>
-                <div class="col-md-9">
-                    <input type="password"
-                           id="motdepasse_input_id"
+                <div class="col-md-9" ng-class="{'has-error': vm.form.$submitted && vm.form.motdepasse_input.$invalid}">
+                    <input required
                            class="form-control"
-                           name="motdepasse"
-                           ng-model="vm.item.motDePasse"
-                           placeholder={{"MOTDEPASSE"|translate}}>
+                           data-ng-model="vm.item.motDePasse"
+                           data-ng-minlength ="5"
+                           id="motdepasse_input_id"
+                           name="motdepasse_input"
+                           placeholder={{"MOTDEPASSE"|translate}}
+                           type="password"                 >
+                    <validate-input form="vm.form" field="vm.form.motdepasse_input"></validate-input>
                 </div>
             </div>
-            <div class="form-group">
+
+            <div class="col-md-12 form-group">
                 <label for="motdepasse2_input_id"
                        class="col-md-3 control-label">
                 </label>
-                <div class="col-md-9">
-                    <input type="password"
-                           id="motdepasse2_input_id"
+                <div class="col-md-9" ng-class="{'has-error': vm.form.$submitted && vm.form.motdepasse2_input.$invalid}">
+                    <input required
                            class="form-control"
-                           name="motdepasse2"
-                           ng-model="vm.item.motDePasse2"
-                           placeholder={{"SAISIRANOUVEAUMOTDEPASSE"|translate}}>
+                           id="motdepasse2_input_id"
+                           data-ng-model="vm.item.motDePasse2"
+                           data-ng-minlength ="5"
+                           name="motdepasse2_input"
+                           placeholder={{"SAISIRANOUVEAUMOTDEPASSE"|translate}}
+                           type="password">
+                    <validate-input form="vm.form" field="vm.form.motdepasse2_input"></validate-input>
                 </div>
             </div>
-            <div class="form-group">
+
+            <div class="col-md-12 form-group">
                 <div class="col-md-offset-3 col-md-9">
                     <button id="btn-signup"
                             class="btn btn-info"
-                            data-ng-disabled="vm.form.$invalid"
-                            data-ng-click="vm.signUp(vm.item)"
-                            type="button">
+                            type="submit">
                             {{"SINSCRIRE"|translate}}
                     </button>
                 </div>

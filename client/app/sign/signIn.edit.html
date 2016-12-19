@@ -6,61 +6,51 @@
             <a href="/#signup">{{"NOUVELLEINSCRIPTION"|translate}}</a>
         </div>
         <br>
-        <form novalidate class="form-horizontal" id="vm.form" name="vm.form" role="form">
-
-            <div>
-                <div class="input-group"
-                     style="margin-bottom: 25px;">
-                    <span class="input-group-addon">
-                        <i class="glyphicon glyphicon-envelope"></i>
-                    </span>
-                    <input autocomplete="on"
-                           class="form-control"
-                           data-ng-model="vm.courriel"
-                           id="courriel_input_id"
-                           name="courriel_input"
-                           placeholder={{"ADRESSECOURRIEL"|translate}}
-                           required
-                           type="text">
-
+        <form ng-submit="vm.signIn('local')" novalidate class="form-horizontal" id="vm.form" name="vm.form" role="form">
+            <div style="padding-left: 15px; padding-right: 15px;">
+                <div class="form-group">
+                    <div class="input-group"
+                         ng-class="{'has-error': vm.form.$submitted && vm.form.courriel_input.$invalid}">
+                        <span class="input-group-addon">
+                            <i class="glyphicon glyphicon-envelope"></i>
+                        </span>
+                        <input autocomplete="on"
+                               class="form-control"
+                               data-ng-model="vm.courriel"
+                               id="courriel_input_id"
+                               name="courriel_input"
+                               placeholder={{"ADRESSECOURRIEL"|translate}}
+                               required
+                               type="email">
+                    </div>
+                    <validate-input form="vm.form" field="vm.form.courriel_input"></validate-input>
+                </div>
+                <div class="form-group">
+                    <div class="input-group"
+                        ng-class="{'has-error': vm.form.$submitted && vm.form.motdepasse_input.$invalid}">
+                        <span class="input-group-addon">
+                            <i class="glyphicon glyphicon-lock"></i>
+                        </span>
+                        <input autocomplete="off"
+                               id="motdepasse_input_id"
+                               type="password"
+                               class="form-control"
+                               name="motdepasse_input"
+                               data-ng-model="vm.motDePasse"
+                               data-ng-minlength ="1"
+                               placeholder={{"MOTDEPASSE"|translate}}
+                               required>
+                    </div>
+                    <validate-input form="vm.form" field="vm.form.motdepasse_input"></validate-input>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-block btn-info"
+                            type="submit">
+                            {{"SECONNECTER"|translate}}
+                    </button>
                 </div>
             </div>
-
-
-            <div>
-                <div class="input-group"
-                     style="margin-bottom: 25px">
-                    <span class="input-group-addon">
-                        <i class="glyphicon glyphicon-lock"></i>
-                    </span>
-                    <input autocomplete="off"
-                           id="motdepasse_input_id"
-                           type="password"
-                           class="form-control"
-                           name="motdepasse_input"
-                           data-ng-model="vm.motDePasse"
-                           placeholder={{"MOTDEPASSE"|translate}}
-                           required>
-                </div>
-                <validate-input
-                        form="vm.form"
-                        field="vm.form.motdepasse_input">
-                </validate-input>
-            </div>
-
-            <button class="btn btn-block btn-info"
-                    data-ng-click="vm.signIn('local')"
-                    type="button">
-                    {{"SECONNECTER"|translate}}
-            </button>
-
-        <!--    <button class="btn btn-block btn-info"
-                    data-ng-disabled="vm.form.$invalid "
-                    data-ng-click="vm.signIn()"
-                    type="button">
-                    {{"SECONNECTER"|translate}}
-            </button> -->
-        <!--  <div class="checkbox" style="font-size: 90%; top: 5px;">
+            <!--  <div class="checkbox" style="font-size: 90%; top: 5px;">
                 <label>
                     <input id="login-remember"
                            type="checkbox"
@@ -68,27 +58,25 @@
                            value="1">Se souvenir de moi
                 </label>
             </div> -->
-
             <hr>
             <center><h5>ou</h5></center>
-                <div class="row">
-                    <div class="col-md-6">
-                        <button class="btn btn-block btn-primary" style="background: #3b5998;"
-                            data-ng-click="vm.signIn('facebook')">
-                            <span class="fa fa-facebook"></span>
-                            Facebook
-                        </button>
-                    </div>
-                    <div class="col-md-6">
-                        <button class="btn btn-block btn-primary" style="background: #db4a39;"
-                                data-ng-click="vm.signIn('google')">
-                            <span class="fa fa-google-plus"></span>
-                            Google
-                        </button>
-                    </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <button class="btn btn-block btn-primary" style="background: #3b5998;"
+                        data-ng-click="vm.signIn('facebook')">
+                        <span class="fa fa-facebook"></span>
+                        Facebook
+                    </button>
                 </div>
-            </form>
-        </div>
+                <div class="col-md-6">
+                    <button class="btn btn-block btn-primary" style="background: #db4a39;"
+                            data-ng-click="vm.signIn('google')">
+                        <span class="fa fa-google-plus"></span>
+                        Google
+                    </button>
+                </div>
+            </div>
+        </form>
     </div>
 </div>
 

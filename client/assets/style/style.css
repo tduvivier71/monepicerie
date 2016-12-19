@@ -1,40 +1,3 @@
-/**
-    sets base style for each page
-**/
-html {
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    min-height:100%;
-}
-
-body{
-    /* Workaround for some mobile browsers */
-    min-height:100%;
-}
-
-/**
-    backroung caddy when no authentification
- **/
-.caddy-bg {
-    /* This image will be displayed fullscreen */
-    background:url('../images/back01.jpg') no-repeat center center;
-
-    /* Ensure the html element always takes up the full height of the browser window */
-    min-height:100%;
-    background-size: cover;
-}
-
-/**
-    remove all corner
-**/
-* {
-    border-radius: 0 !important;
-    -moz-border-radius: 0 !important;
-}
-
-
-
 /*
 *, :before, :after
 {
@@ -112,52 +75,6 @@ body{
 
 */
 
-.help-block {
-    font-size: 85%;
-}
-
-.error-block {
-    margin-top: 3px;
-    font-size: 85%;
-    color: red;
-}
-
-.navbar-nav > li > a, .navbar-brand {
-    padding-top:10px !important;
-    padding-bottom:0 !important;
-    height: 35px;
-}
-.navbar {min-height:35px !important;}
-
-
-
-/**  Sortable */
-
-.list {
-    list-style: none outside none;
-    margin: 10px 0 30px;
-}
-
-.apps-container {
-    border: 1px dashed #6e6566;
-    margin: 0px 0px 0 0;
-    padding: 5px;
-    min-width:200px;
-    min-height:50px;
-}
-
-.app {
-
-    padding: 5px 10px;
-    margin: 5px 0;
-    border: 1px solid #979797;
-    border-radius: 5px;
-    background-color: #f0e7e2;
-
-    font-size: 1.0em;
-    cursor: move;
-}
-
 
 /***  Extra ***/
 
@@ -217,3 +134,9 @@ body {
 }
 
 */
+
+/*
+form.ng-submitted .ng-invalid {
+    border-color: #ff4b3f;
+    border-width: 1px;
+} */

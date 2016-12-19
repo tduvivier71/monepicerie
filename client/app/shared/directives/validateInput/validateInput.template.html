@@ -1,15 +1,18 @@
-<!--<div ng-if=form.$submitted && field.$touched>-->
+<div ng-if=form.$submitted> <!-- && field.$touched>-->
         <div class="error-block" ng-messages=field.$error>
             <div ng-message='required'> Le champ est obligatoire. </div>
+            <div ng-message='email'> Adresse de courriel invalide.</div>
+
+
             <div ng-message='unique'> Cette valeur existe déjà.</div>
             <div ng-message='serverError'>Request Failed Due to Server Error!</div>
             <div ng-message='inProgress'> Please Wait! </div>
-            <div ng-message='minlength'> This field is too short!</div>
-            <div ng-message='maxlength'> This field is too long!</div>
-            <div ng-message='email'> Email is not valid!</div>
+            <div ng-message='minlength'> La valeur de ce champ est trop courte.</div>
+            <div ng-message='maxlength'> La valeur de This field is too long!</div>
+
         </div>
         <!-- <div class="error-block" ng-messages=field.$pending>
             <div ng-message='unique'> Validation en cours...</div>
         </div> -->
-<!--</div>>
+</div>
 

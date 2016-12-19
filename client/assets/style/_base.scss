@@ -1,0 +1,34 @@
+/**
+    sets base style for each page
+**/
+html {
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  min-height:100%;
+}
+
+body{
+  /* Workaround for some mobile browsers */
+  min-height:100%;
+}
+
+/**
+    backroung caddy when no authentification
+ **/
+.caddy-bg {
+  /* This image will be displayed fullscreen */
+  background:url('../images/back01.jpg') no-repeat center center;
+
+  /* Ensure the html element always takes up the full height of the browser window */
+  min-height:100%;
+  background-size: cover;
+}
+
+/**
+    remove all corner
+**/
+* {
+  border-radius: 0 !important;
+  -moz-border-radius: 0 !important;
+}

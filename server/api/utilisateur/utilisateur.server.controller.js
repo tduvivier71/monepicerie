@@ -64,7 +64,7 @@ module.exports.localLogin = function (req, res) {
 
     Model.findOne({courriel: req.body.courriel}, function (err, user) {
         if (!user) {
-            return res.status(401).send({message: 'Adresse de courril non trouvée'});
+            return res.status(401).send({message: 'Adresse de courriel non trouvée'});
         }
 
         if (!user.validPassword(req.body.motDePasse)) {
@@ -89,7 +89,7 @@ module.exports.localSignUp =  function(req, res) {
 
     Model.findOne({ courriel: req.body.courriel }, function(err, existingUser) {
         if (existingUser) {
-            return res.status(409).send({ message: 'Email is already taken' });
+            return res.status(409).send({ message: 'Cette adresse courriel est déjà utilisée' });
         }
         var user = new Model({
             provider: 'local',
