@@ -1,6 +1,9 @@
+@import "variables";
+
 /**
     sets base style for each page
 **/
+
 html {
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -9,9 +12,18 @@ html {
 }
 
 body{
-  /* Workaround for some mobile browsers */
-  min-height:100%;
+  font-family: "FontAwesome", Verdana, Helvetica, sans-serif;
+  min-height:100%; // Workaround for some mobile browsers
 }
+
+// remove all corner
+* {
+  -webkit-border-radius: 0 !important;
+  -moz-border-radius: 0 !important;
+  border-radius: 0 !important;
+}
+
+
 
 /**
     backroung caddy when no authentification
@@ -25,10 +37,3 @@ body{
   background-size: cover;
 }
 
-/**
-    remove all corner
-**/
-* {
-  border-radius: 0 !important;
-  -moz-border-radius: 0 !important;
-}

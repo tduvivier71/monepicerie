@@ -1,0 +1,18 @@
+// in your file
+
+@import "../vendors/_bootstrap";
+@import "../variables";
+
+.button-default {
+  background-color: #c6ff00;
+}
+
+.btn-facebook {
+  @extend .btn-primary;
+  background-color: $color-facebook;
+}
+
+.btn-google {
+  @extend .btn-primary;
+  background-color: $color-google;
+}
