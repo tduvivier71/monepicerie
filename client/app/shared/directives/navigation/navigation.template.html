@@ -1,26 +1,42 @@
-<nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+<nav data-ng-show="!isAuthentified" class="navbar navbar-custom-login  navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a href="/#accueil" class="navbar-brand">
-                <i class="fa fa-shopping-cart" aria-hidden="true"></i> Mon épicerie
+            <a href="/#signin" class="navbar-brand">
+                <i class="material-icons md-48">shopping_cart</i> Mon épicerie
             </a>
+        </div>
+    </div>
+</nav>
+
+<nav data-ng-show="isAuthentified" class="navbar navbar-custom navbar-fixed-top"  role="navigation">
+    <div class="container">
+        <div class="navbar-header">
             <button data-ng-show="isAuthentified" type="button" data-toggle="collapse" data-target="#navbar-main" class="navbar-toggle">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
+                <i class="material-icons md-light">menu</i>
             </button>
+
+            <!--    <button type="button" class="btn btn-warning btn-circle btn-lg" style="margin-top:15px;">
+                <img src="../../../../assets/images/ic_shopping_cart_white_24dp_1x.png" height="24" width="24"/>
+            </button> -->
+
+            <!-- <a href="/#accueil" class="navbar-brand">
+                <img src="../../../../assets/images/ic_shopping_cart_white_24dp_2x.png" height="48" width="48"/>
+            </a> -->
+
+            <a href="#" class="navbar-brand">
+                <i class="material-icons md-48">shopping_cart</i>
+            </a>
+
         </div>
         <div id="navbar-main" class="navbar-collapse collapse">
             <ul data-ng-show="isAuthentified" class="nav navbar-nav">
-                <li ng-class="{active:isActive('#/liste')}"><a href="/#liste"><i class="fa fa-list" aria-hidden="true"></i> Ma liste</a></li>
-                <li ng-class="{active:isActive('#/produit')}"><a href="/#produit"><i class="fa fa-shopping-basket" aria-hidden="true"></i> Produits</a></li>
-            </ul>
+                <li ng-class="{active:isActive('#/liste')}"><a href="/#liste"><i class="material-icons md-14">dashboard</i> MA LISTE</a></li>
+                <li ng-class="{active:isActive('#/produit')}"><a href="/#produit"><i class="material-icons md-14">shopping_basket</i> PRODUITS</a></li>
 
-            <ul data-ng-show="isAuthentified" class="nav navbar-nav navbar-right">
-                <li ng-class="{active:isActive('#/ilmanque')}"><a href="/#ilmanque"><i class="fa fa-sticky-note" aria-hidden="true"></i> Il manque !</a></li>
+                <li ng-class="{active:isActive('#/ilmanque')}"><a href="/#ilmanque"><i class="material-icons md-14">bookmark</i> IL MANQUE !</a></li>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false"><i class="fa fa-gears" aria-hidden="true"></i> Configuration
+                       aria-expanded="false"><i class="material-icons md-14">settings_applications</i> CONFIGURATION
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="/#categorie">Catégories</a></li>
@@ -29,18 +45,18 @@
                         <li><a href="/#unite">Unités</a></li>
                     </ul>
                 </li>
-                <li ng-class="{active:isActive('#/info')}"><a href="/#info"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
-
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false"><i class="fa fa-user" aria-hidden="true"></i>
+                       aria-expanded="false"><i class="material-icons md-14">person</i>
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="/#utilisateur"><i class="fa fa-genderless" aria-hidden="true"></i> Utilisateur</a></li>
+                        <li><a href="/#utilisateur"><i class="material-icons md-14">person</i> Utilisateur</a></li>
                         <li role="separator" class="divider"></li>
                         <li ng-show="!isAuthentified"><a href="/#signup"><i class="fa fa-square" aria-hidden="true"></i> Inscription</a></li>
                         <li ng-show="!isAuthentified"><a href="/#signin"><i class="fa fa-sign-in" aria-hidden="true"></i> Connection</a></li>
-                        <li ng-show="isAuthentified"><a href="/#signout"><i class="fa fa-sign-out" aria-hidden="true"></i> Déconnection</a></li>
+                        <li ng-show="isAuthentified"><a href="/#signout"><i class="material-icons md-14">exit_to_app</i></i> Déconnection</a></li>
                     </ul>
                 </li>
             </ul>

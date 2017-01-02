@@ -21,7 +21,9 @@
     "angular-moment": "^0.10.3",
     "kendo-ui": "2016.3.914+Official",
     "angular-ui-sortable": "^0.14.3",
-    "satellizer": "^0.15.5"
+    "satellizer": "^0.15.5",
+    "material-design-icons": "^3.0.1",
+    "roboto-fontface": "^0.6.0"
   },
   "devDependencies": {
     "angular-translate": "^2.11.0",
