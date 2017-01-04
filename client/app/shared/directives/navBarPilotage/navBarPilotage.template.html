@@ -1,0 +1,30 @@
+<nav class="navbar nav-custom-pilotage">
+    <div class="container-fluid">
+        <ul class="nav navbar-nav navbar-left">
+            <li><a ng-class="{active:isActive('#/categorie')}" href="/#categorie">Catégories</a></li>
+            <li><a ng-class="{active:isActive('#/epicerie')}" href="/#epicerie">Épiceries</a></li>
+            <li><a ng-class="{active:isActive('#/format')}" href="/#format">Formats</a></li>
+            <li><a ng-class="{active:isActive('#/unite')}" href="/#unite">Unités</a></li>
+        </ul>
+        <span class="navbar-form navbar-right">
+                <div ng-show="vm.state == 'dsBrowse'">
+                    <button class="btn btn-primary"
+                            data-toggle="tooltip"
+                            ng-click="vm.setInsert()"
+                            uib-tooltip={{"HINT_AJOUTER"|translate}}>
+                            <i class="material-icons md-14">add</i> {{"AJOUTER"|translate}}
+                    </button>
+                </div>
+                <div ng-show="vm.state != 'dsBrowse'">
+                    <button class="btn btn-primary"
+                            data-toggle="tooltip"
+                            ng-click="vm.cancel()"
+                            uib-tooltip={{"RETOUR_LISTE"|translate}}>
+                            <i class="material-icons md-14">view_list</i>
+                    </button>
+                </div>
+            </span>
+
+
+    </div>
+</nav>

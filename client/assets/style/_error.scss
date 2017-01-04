@@ -1,9 +1,14 @@
+@import "variables";
+
 .help-block {
   font-size: 85%;
 }
 
-.error-block {
-  margin-top: 3px;
-  font-size: 85%;
-  color: red;
+.form-control:focus{border-color: $accent-color;  box-shadow: none; -webkit-box-shadow: none;}
+.has-error .form-control:focus{border-color: $danger-color;  box-shadow: none; -webkit-box-shadow: none;}
+
+.error-message {
+  margin-top: 5px;
+  font-size: 70%;
+  color: $danger-color;
 }

@@ -1,13 +1,18 @@
-<div style="margin: 0px;">
+<!-- <div class="row">
+    <search-item
+        search-item="vm.searchItem">
+    </search-item>
+</div> -->
+<div class="row" style="margin: 3px;">
     <table class="table  table-borderless">
         <thead>
         <tr>
             <th class="col-md-10 col-sm-10">
                 <a href="javascript:void(0)" style="text-decoration:none; color:black;"
                    ng-click="vm.sorting.reverse = !vm.sorting.reverse">
-                    {{"CATEGORIE"|translate}}
-                    <span ng-show="!vm.sorting.reverse"><i class="material-icons md-16">arrow_drop_down</i></span>
-                    <span ng-show="vm.sorting.reverse"><i class="material-icons md-16">arrow_drop_up</i></span>
+                    {{"FORMAT"|translate}}
+                    <span ng-show="!vm.sorting.reverse" class="fa fa-caret-down"></span>
+                    <span ng-show="vm.sorting.reverse" class="fa fa-caret-up"></span>
                 </a>
             </th>
             <th class="col-md-2 col-sm-2">
@@ -18,19 +23,19 @@
         <tr data-ng-repeat="item in (vm.items | filter: vm.searchItem).slice(((vm.pagination.currentPage-1)*vm.pagination.itemsPerPage),
                         ((vm.pagination.currentPage)*vm.pagination.itemsPerPage))  | orderBy : vm.sorting.type:vm.sorting.reverse">
             <td class="col-md-10 col-sm-10">
-                {{item.categorie}}
+                {{item.format}}
             </td>
             <td class="col-md-2 col-sm-2" style="text-align: right;">
                 <button class="btn btn-primary btn-sm"
                         data-toggle="tooltip"
                         ng-click="vm.setEdit(item)"
-                        uib-tooltip={{"HINT_EDITER_CATEGORIE"|translate}}>
+                        uib-tooltip={{"HINT_EDITER_FORMAT"|translate}}>
                         <i class="material-icons md-16">edit</i>
                 </button>
                 <button class="btn btn-danger btn-sm"
                         data-toggle="tooltip"
                         ng-click="vm.remove(item)"
-                        uib-tooltip={{"HINT_DETRUIRE_CATEGORIE"|translate}}>
+                        uib-tooltip={{"HINT_DETRUIRE_FORMAT"|translate}}>
                         <i class="material-icons md-16">delete</i>
                 </button>
             </td>
@@ -39,7 +44,6 @@
     </table>
 
 </div>
-
 <pagination
         view-by="vm.pagination.viewBy"
         total-items="vm.items.length"

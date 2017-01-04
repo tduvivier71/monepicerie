@@ -1,7 +1,10 @@
 {
+  "AJOUTER": "Ajouter",
   "ANNULER": "Annuler",
   "CATEGORIE":"Catégorie",
   "CATEGORIES":"Catégories",
+
+  "RETOUR_LISTE":"Retour à la liste",
 
   "VALEUR_OBLIGATOIRE":"Valeur obligatoire",
 
@@ -9,6 +12,7 @@
   "EDITER_CATEGORIE":"Éditer une catégorie",
   "LISTE_CATEGORIES":"Liste des catégories",
 
+  "HINT_AJOUTER": "Ajouter",
   "HINT_AJOUTER_CATEGORIE":"Ajouter une catégorie",
   "HINT_EDITER_CATEGORIE":"Éditer une catégorie existante",
   "HINT_DETRUIRE_CATEGORIE":"Détruire une catégorie"

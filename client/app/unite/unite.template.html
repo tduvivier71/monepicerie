@@ -1,2 +1,9 @@
-<div class="col-md-3" ng-include="'app/shared/partials/menu.pilotage.html'"></div>
-<div class="col-md-9" ng-include="'app/unite/unite.list-edit.html'" ng-cloak></div>
+<div class="row">
+    <nav-bar-pilotage></nav-bar-pilotage>
+</div>
+<div class="row">
+    <div>
+        <div ng-cloak ng-show="vm.state != 'dsBrowse'" ng-include src="'app/unite/unite.edit.html'"></div>
+        <div ng-cloak ng-show="vm.state == 'dsBrowse'" ng-include src="'app/unite/unite.list.html'"></div>
+    </div>
+</div>
