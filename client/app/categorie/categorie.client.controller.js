@@ -15,7 +15,6 @@
         var vm = this;
 
         /* Variables */
-
         vm.item = {};           // Object
         vm.items = [];          // List of object
         vm.form = {};           // Object

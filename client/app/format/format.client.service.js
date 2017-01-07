@@ -10,10 +10,15 @@
 
     function formatService($resource) {
 
-        return $resource('api/format/:id', {id: '@_id'}, {update: {method: 'PUT'}});
-
-       // return $resource('api/format', {id: '@_id'}, {update: {method: 'PUT'}});
-
+        return $resource('api/format/:id',
+            {
+                id: '@_id'
+            }, {
+                update: {
+                    method: 'PUT'
+                }
+            }
+        );
     }
 
 })();

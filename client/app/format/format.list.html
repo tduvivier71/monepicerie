@@ -1,9 +1,4 @@
-<!-- <div class="row">
-    <search-item
-        search-item="vm.searchItem">
-    </search-item>
-</div> -->
-<div class="row" style="margin: 3px;">
+<div style="margin: 0px;">
     <table class="table  table-borderless">
         <thead>
         <tr>
@@ -11,8 +6,8 @@
                 <a href="javascript:void(0)" style="text-decoration:none; color:black;"
                    ng-click="vm.sorting.reverse = !vm.sorting.reverse">
                     {{"FORMAT"|translate}}
-                    <span ng-show="!vm.sorting.reverse" class="fa fa-caret-down"></span>
-                    <span ng-show="vm.sorting.reverse" class="fa fa-caret-up"></span>
+                    <span ng-show="!vm.sorting.reverse"><i class="material-icons md-16">arrow_drop_down</i></span>
+                    <span ng-show="vm.sorting.reverse"><i class="material-icons md-16">arrow_drop_up</i></span>
                 </a>
             </th>
             <th class="col-md-2 col-sm-2">

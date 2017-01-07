@@ -4,8 +4,10 @@
   font-size: 85%;
 }
 
-.form-control:focus{border-color: $accent-color;  box-shadow: none; -webkit-box-shadow: none;}
-.has-error .form-control:focus{border-color: $danger-color;  box-shadow: none; -webkit-box-shadow: none;}
+//.form-control:focus{border-color: $accent-color;  box-shadow: none; -webkit-box-shadow: none;}
+//.has-error .form-control:focus{border-color: $danger-color;  box-shadow: none; -webkit-box-shadow: none;}
+
+
 
 .error-message {
   margin-top: 5px;

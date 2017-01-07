@@ -253,7 +253,7 @@
             vm.selectedItem = angular.copy(_item);
             vm.item = _item;
             vm.state = 'dsEdit';
-            focus('produit_focus');
+            focus('categorie_focus');
 
             vm.insertHisto.epicerie = '';
             vm.insertHisto.epicerieId = '';
@@ -271,7 +271,7 @@
             _resetForm();
             _resetItem();
             vm.state = 'dsInsert';
-            focus('produit_focus');
+            focus('categorie_focus');
 
             vm.insertHisto.epicerie = '';
             vm.insertHisto.epicerieId = '';

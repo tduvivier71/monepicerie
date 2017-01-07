@@ -24,16 +24,14 @@
             <div class="btn-group">
                 <button class="btn btn-primary btn"
                         data-toggle="tooltip"
-                        ng-click="vm.save(vm.form, vm.item, false)"
-                        ng-disabled="vm.form.$invalid">
-                        <span class="fa fa-check"></span>
+                        ng-click="vm.save(vm.form, vm.item, false)">
+                        <i class="material-icons md-14">check</i>
                         {{"ENREGISTRER"|translate}}
                 </button>
                 <button aria-haspopup="true"
                         aria-expanded="false"
                         class="btn btn-primary dropdown-toggle"
-                        data-toggle="dropdown"
-                        ng-disabled="vm.form.$invalid">
+                        data-toggle="dropdown">
                         <span class="caret"></span>
                         <span class="sr-only">Toggle Dropdown</span>
                 </button>
@@ -44,7 +42,7 @@
             <button class="btn btn-danger btn"
                     data-toggle="tooltip"
                     ng-click="vm.cancel()">
-                    <span class="fa fa-times"></span>
+                    <i class="material-icons md-14">close</i>
                     {{"ANNULER"|translate}}
             </button>
         </div>

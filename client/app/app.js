@@ -111,7 +111,7 @@
 
             if ($auth.isAuthenticated()) {
                 console.log('Autorisé');
-                $location.path('/categorie'); // todo accueil
+                $location.path('/produit'); // todo accueil
 
 
 

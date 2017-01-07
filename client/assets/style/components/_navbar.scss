@@ -125,6 +125,9 @@ $colHover: $td-secondary-text-color; // hover selected text
 .nav-custom-pilotage {
   background: $bgHighlight; // #fff;
   border-color: $bgHighlight; //  #ccc;
+
+  color: $primary-color-text !important;
+
 //  box-shadow: 0 0 2px 0 $bgDefault; // #ccc;
 
   .navbar-nav {
@@ -134,7 +137,7 @@ $colHover: $td-secondary-text-color; // hover selected text
         color: $primary-color-text;
         height: 40px;
         &:hover, &:focus {
-          color: $primary-color-text;
+     //     color: $primary-color-text;
           background-color: $bgHighlight;
           border-style: solid;
           border-width: 0 0 2px 0;

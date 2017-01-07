@@ -14,7 +14,7 @@
                        name="unite_input"
                        ng-model="vm.item.unite"
                        type="text"/>
-                <validate-input form="vm.form" field="vm.form.unite_input"></validate-input>
+                       <validate-input form="vm.form" field="vm.form.unite_input"></validate-input>
             </div>
         </div>
         <div class="col-md-2 form-group">
@@ -87,18 +87,16 @@
             <div class="btn-group">
                 <button class="btn btn-primary btn"
                         data-toggle="tooltip"
-                        ng-click="vm.save(vm.form, vm.item, false)"
-                        ng-disabled="vm.form.$invalid">
-                    <span class="fa fa-check"></span>
-                    {{"ENREGISTRER"|translate}}
+                        ng-click="vm.save(vm.form, vm.item, false)">
+                        <i class="material-icons md-14">check</i>
+                        {{"ENREGISTRER"|translate}}
                 </button>
                 <button aria-haspopup="true"
                         aria-expanded="false"
                         class="btn btn-primary dropdown-toggle"
-                        data-toggle="dropdown"
-                        ng-disabled="vm.form.$invalid">
-                    <span class="caret"></span>
-                    <span class="sr-only">Toggle Dropdown</span>
+                        data-toggle="dropdown">
+                        <span class="caret"></span>
+                        <span class="sr-only">Toggle Dropdown</span>
                 </button>
                 <ul class="dropdown-menu">
                     <li><a href="" ng-click="vm.form.$submitted = true; vm.save(vm.form, vm.item, true)">{{"AJOUTER_AUTRE_PRODUIT"|translate}}</a></li>
@@ -107,8 +105,8 @@
             <button class="btn btn-danger btn"
                     data-toggle="tooltip"
                     ng-click="vm.cancel()">
-                <span class="fa fa-times"></span>
-                {{"ANNULER"|translate}}
+                    <i class="material-icons md-14">close</i>
+                    {{"ANNULER"|translate}}
             </button>
         </div>
     </div>

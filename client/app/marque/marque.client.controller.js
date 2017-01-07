@@ -3,14 +3,14 @@
     'use strict';
 
     angular
-        .module('app.epicerie')
-        .controller('EpicerieController', EpicerieController);
+        .module('app.marque')
+        .controller('MarqueController', MarqueController);
 
-    EpicerieController.$inject = ['$log',
-                                'epicerieService', 'toasterService', 'focus'];
+    MarqueController.$inject = ['$log',
+                                   'marqueService', 'toasterService','focus'];
 
-    function EpicerieController($log,
-                                epicerieService, toasterService, focus) {
+    function MarqueController($log,
+                                 marqueService, toasterService, focus) {
 
         var vm = this;
 
@@ -26,7 +26,7 @@
         vm.oneMore = false;      // boolean
 
         vm.sorting = {
-            type: 'epicerie',
+            type: 'marque',
             reverse: false
         };
 
@@ -58,7 +58,7 @@
 
         function remove(_item) {
             _item.$remove(function () {
-                toasterService.remove(_item.epicerie);
+                toasterService.remove(_item.marque);
                 for (var i in vm.items) {
                     if (vm.items[i] === _item) {
                         vm.items.splice(i, 1);
@@ -85,7 +85,7 @@
             vm.selectedItem = angular.copy(_item);
             vm.item = _item;
             vm.state = 'dsEdit';
-            focus('epicerie_focus');
+            focus('marque_focus');
         }
 
         function setInsert() {
@@ -93,7 +93,7 @@
             _resetForm();
             vm.item = undefined;
             vm.state = 'dsInsert';
-            focus('epicerie_focus');
+            focus('marque_focus');
         }
 
         // ************************************************************************************************************/
@@ -114,12 +114,12 @@
         function _create(_form, _item, _oneMore) {
             console.log('create');
             if (_form.$valid) {
-                var item = new epicerieService();
-                item.epicerie = _item.epicerie;
+                var item = new marqueService();
+                item.marque = _item.marque;
                 item.$save(
                     function () {
                         vm.items.push(item);
-                        toasterService.save(_item.epicerie);
+                        toasterService.save(_item.marque);
                         if (_oneMore) {
                             _resetForm();
                             setInsert();
@@ -130,24 +130,24 @@
                         vm.oneMore = false;
                     }, function (e) {
                         toasterService.error(e.data);
-                        focus('epicerie_focus');
+                        focus('marque_focus');
                     }
                 );
             } else {
-                focus('epicerie_focus');
+                focus('marque_focus');
             }
         }
 
         function _init() {
             focus('searchText');
-            vm.items = epicerieService.query();
+            vm.items = marqueService.query();
             _setBrowse();
         }
 
         function _update(_item) {
             _item.$update(
                 function () {
-                    toasterService.update(_item.epicerie);
+                    toasterService.update(_item.marque);
                     _setBrowse();
                 }, function (e) {
                     toasterService.error(e.data);
@@ -158,7 +158,7 @@
         function _setBrowse() {
             _resetForm();
             $log.info('_setBrowse');
-            vm.sorting.type = 'epicerie';
+            vm.sorting.type = 'marque';
             vm.state = 'dsBrowse';
             focus('searchItem_focus');
         }

@@ -2,6 +2,11 @@
     <nav-bar-pilotage></nav-bar-pilotage>
 </div>
 <div class="row">
+    <search-item
+        search-item="vm.searchItem">
+    </search-item>
+</div>
+<div class="row">
     <div>
         <div ng-cloak ng-show="vm.state != 'dsBrowse'" ng-include src="'app/format/format.edit.html'"></div>
         <div ng-cloak ng-show="vm.state == 'dsBrowse'" ng-include src="'app/format/format.list.html'"></div>

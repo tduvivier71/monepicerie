@@ -1,5 +1,21 @@
 // bootstrap-sass/assets/stylesheets/bootstrap/mixins/_buttons.scss
 
+@import "variables";
+
+@mixin height34{
+  height: 37px !important;
+}
+
+@mixin height ($height){
+  height: $height px !important;
+}
+
+@mixin state-focused {
+  border-color: $accent-color !important;
+  box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+}
+
 @mixin button-variant($color, $background) {
 
   //border-radius: 2px !important;

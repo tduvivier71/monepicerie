@@ -11,18 +11,15 @@
     function categorieService($resource) {
 
         return $resource('api/categorie/:id',
-            {id: '@_id'},
-            {update: {
-                method: 'PUT'}
+            {
+                id: '@_id'
+            },
+            {
+                update: {
+                    method: 'PUT'
+                }
             }
         );
-
-     /*   return $resource('api/categorie',
-            {id: '@_id'},
-            {update: {
-                method: 'PUT'}
-            }
-        ); */
 
     }
 

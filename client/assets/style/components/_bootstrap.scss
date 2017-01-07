@@ -1,0 +1,9 @@
+@import "../vendors/_bootstrap";
+@import "../variables";
+@import "../mixin";
+
+.form-control:focus {
+  border-color: $accent-color;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+}

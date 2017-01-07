@@ -1,59 +1,60 @@
 <div class="row">
-    <nav class="navbar navbar-findcond">
+    <nav class="navbar nav-custom-pilotage">
         <div class="container-fluid">
-            <p class="navbar-text">Produits</p>
+            <p class="navbar-text">{{"PRODUIT"|translate}}</p>
             <span class="navbar-form navbar-right">
-                <button type="button" class="btn btn-primary">Ajouter</button>
+                <div ng-show="vm.state == 'dsBrowse'">
+                    <button class="btn btn-primary"
+                            data-toggle="tooltip"
+                            ng-click="vm.setInsert()"
+                            uib-tooltip={{"HINT_AJOUTER"|translate}}>
+                            <i class="material-icons md-14">add</i> {{"AJOUTER"|translate}}
+                    </button>
+                </div>
+                <div ng-show="vm.state != 'dsBrowse'">
+                    <button class="btn btn-primary"
+                            data-toggle="tooltip"
+                            ng-click="vm.cancel()"
+                            uib-tooltip={{"RETOUR_LISTE"|translate}}>
+                            <i class="material-icons md-14">view_list</i>
+                    </button>
+                </div>
             </span>
-
-            <span class="navbar-form navbar-right">
-                <button type="submit" class="btn btn-default">Submit</button>
-            </span>
-
-
-            <ul class="nav navbar-nav navbar-left">
-                <li><a href="#"> Link </a></li>
-                <li><a href="#"> Link </a></li>
-                <li><a href="#"> Link </a></li>
-            </ul>
-
-            <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-fw fa-bell-o"></i> Bildirimler <span class="badge">0</span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="#"><i class="fa fa-fw fa-tag"></i> <span class="badge">Music</span> sayfası <span class="badge">Video</span> sayfasında etiketlendi</a></li>
-                        <li><a href="#"><i class="fa fa-fw fa-thumbs-o-up"></i> <span class="badge">Music</span> sayfasında iletiniz beğenildi</a></li>
-                        <li><a href="#"><i class="fa fa-fw fa-thumbs-o-up"></i> <span class="badge">Video</span> sayfasında iletiniz beğenildi</a></li>
-                        <li><a href="#"><i class="fa fa-fw fa-thumbs-o-up"></i> <span class="badge">Game</span> sayfasında iletiniz beğenildi</a></li>
-                    </ul>
-                </li>
-                <li class="active"><a href="#">Ana Sayfa <span class="sr-only">(current)</span></a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Admin <span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Geri bildirim</a></li>
-                        <li><a href="#">Yardım</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">Ayarlar</a></li>
-                        <li><a href="#exit">Çıkış yap</a></li>
-                    </ul>
-                </li>
-            </ul>
-
-
         </div>
     </nav>
 </div>
 
-<div class="row" ng-include="'app/produit/produit.list-edit.html'" ng-cloak></div>
-
-<!--
-<div ng-show="vm.state == 'dsBrowse'">
-  <div class="col-md-3" ng-include="'app/produit/filtre.produit.html'"></div>
-  <div class="col-md-9" ng-include="'app/produit/produit.list-edit.html'" ng-cloak></div>
+<div class="row" ng-show="vm.state == 'dsBrowse'" style="padding-top: 10px; padding-bottom: 25px;">
+    <div class="col-md-6" style="padding-left: 0;">
+        <div class="input-group">
+            <select
+                    data-kendo-multi-select
+                    data-k-options="vm.selectOptionsMultiCategories"
+                    data-k-ng-model="vm.selectedCategories"
+                    style="width: 100%;"
+                    id="categories_input_id">
+            </select>
+            <span class="input-group-btn">
+                <button type="button"
+                        class="btn btn-primary"
+                        data-ng-click="vm.filterCategorie()"
+                        style="margin-left:1px !important; padding-top:9px !important; padding-bottom:9px !important;"
+                        uib-tooltip={{"APPLIQUER_SELECTION"|translate}}>
+                        <i class="material-icons">check_circle</i>
+                </button>
+            </span>
+        </div>
+    </div>
+    <div class="col-md-6" style="padding-right: 0;">
+        <search-item
+                search-item="vm.searchItem">
+        </search-item>
+    </div>
 </div>
-<div ng-show="vm.state != 'dsBrowse'">
 
-    <div class="col-md-12" ng-include="'app/produit/produit.list-edit.html'" ng-cloak></div>
+<div class="row">
+    <div>
+        <div ng-cloak ng-show="vm.state != 'dsBrowse'" ng-include src="'app/produit/produit.edit.html'"></div>
+        <div ng-cloak ng-show="vm.state == 'dsBrowse'" ng-include src="'app/produit/produit.list.html'"></div>
+    </div>
 </div>
--->

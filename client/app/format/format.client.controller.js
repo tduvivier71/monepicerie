@@ -6,21 +6,22 @@
         .module('app.format')
         .controller('FormatController', FormatController);
 
-    FormatController.$inject = ['$log', '$filter','formatService', 'focus'];
+    FormatController.$inject = ['$log', 'formatService', 'toasterService', 'focus'];
 
-    function FormatController($log, $filter, formatService, focus) {
+    function FormatController($log, formatService, toasterService, focus) {
 
         var vm = this;
 
         /* Variables */
-        vm.form = {};           // Object
+        vm.item = {};           // Object
         vm.items = [];          // List of object
-        vm.insertItem = '';     // string
-        vm.editItem = '';       // string
+        vm.form = {};           // Object
+
         vm.searchItem = '';     // string
         vm.selectedItem = {};   // Object
         vm.state = '';          // string
         vm.error = '';          // string
+        vm.oneMore = false;      // boolean
 
         vm.sorting = {
             type: 'format',
@@ -28,20 +29,11 @@
         };
 
         /* Fonctions */
-        vm.create = create;
-        vm.update = update;
-        vm.updateByEnter = updateByEnter;
-        vm.remove = remove;   
-        vm.freezeOrderBy  = freezeOrderBy;
-
-        vm.setInsert = setInsert;
+        vm.cancel = cancel;
+        vm.remove = remove;
+        vm.save = save;
         vm.setEdit = setEdit;
-        vm.cancelInsert = cancelInsert;
-        vm.cancelInsertEsc = cancelInsertEsc;
-        vm.cancelEditEsc = cancelEditEsc;
-        vm.cancelEdit = cancelEdit;
-
-        vm.getTemplate = getTemplate;
+        vm.setInsert = setInsert;
 
         // ************************************************************************************************************/
         // Entry point function
@@ -53,164 +45,133 @@
         // Public function
         // ************************************************************************************************************/
 
-         function freezeOrderBy() {
-            vm.items = $filter('orderBy')(vm.items, 'format');
-           /* for (var i = 0; i < vm.items.length && i <= 9999; ++i) {
-                vm.items[i]['frozenOrderBy'] = ("000" + i).slice(-4);
-            } */
-            vm.sorting.type = 'frozenOrderBy';
-        }       
-
-        function setInsert() {
-            if (vm.selectedItem !== null) {
-                _revertSelectedItem();
-            }
-            _setInsert();
-        }
-
-        function setEdit(item) {
-            $log.info('setEdit');
-            if (vm.selectedItem !== null &&
-                item.format !== vm.selectedItem.format) {
-                _revertSelectedItem();
-            }
-            vm.selectedItem = angular.copy(item);
-            _setEdit();
-        }
-
-        function cancelInsert() {
-            _setBrowse();
-        }
-
-        function cancelInsertEsc(e) {
-            if (e.keyCode === 27) {
-                _setBrowse();
+        function cancel() {
+            console.log('cancel');
+            if (vm.state === 'dsInsert') {
+                _cancelInsert();
+            } else {
+                _cancelEdit();
             }
         }
 
-        function cancelEdit(item) {
-            if (item.format !== vm.selectedItem.format) {
-                item.format = angular.copy(vm.selectedItem.format);
-            }
-            _setBrowse();
-        }
-
-        function cancelEditEsc(e, item) {
-            if (e.keyCode === 27) {
-                cancelEdit(item);
-            }
-        }
-
-        function create() {
-            if (vm.insertItem !== '') {
-                var item = new formatService();
-                item.format = vm.insertItem;
-                item.$save(
-                    function () {
-                        vm.items.push(item);
-                        _setInsert();
-                    },
-                    function (e) {
-                        vm.error = e.data.message;
-                    }
-                );
-            }
-        }
-
-        function update(item) {
-            console.log('update ' + JSON.stringify(item));
-            item.$update(
-                function () {
-                    _setBrowse();
-                },
-                function (e) {
-                    vm.error = e.data.message;
-                }
-            );
-        }
-
-        function updateByEnter(e,item) {
-            if (e.keyCode === 13) {
-                update(item);
-            }
-        }
-
-        function getTemplate(item) {
-            if (vm.selectedItem !== null &&
-                vm.selectedItem._id === item._id) {
-                return 'edit';
-            }
-            else {
-                return 'display';
-            }
-        }
-
-        function remove(item) {
-            if (vm.selectedItem !== null &&
-                item.format !== vm.selectedItem.format) {
-                _revertSelectedItem();
-            }
-            item.$remove(function () {
+        function remove(_item) {
+            _item.$remove(function () {
+                toasterService.remove(_item.format);
                 for (var i in vm.items) {
-                    if (vm.items[i] === item) {
+                    if (vm.items[i] === _item) {
                         vm.items.splice(i, 1);
                     }
                 }
+            }, function (e) {
+                toasterService.error(e.data);
             });
             _setBrowse();
+        }
+
+        function save(_form, _item, _oneMore) {
+            console.log('save');
+            if (vm.state === 'dsInsert') {
+                _create(_form, _item, _oneMore);
+            } else {
+                _update(_item);
+            }
+        }
+
+        function setEdit(_item) {
+            console.log('setEdit');
+            _resetForm();
+            vm.selectedItem = angular.copy(_item);
+            vm.item = _item;
+            vm.state = 'dsEdit';
+            focus('format_focus');
+        }
+
+        function setInsert() {
+            console.log('setInsert');
+            _resetForm();
+            vm.item = undefined;
+            vm.state = 'dsInsert';
+            focus('format_focus');
         }
 
         // ************************************************************************************************************/
         // Private function
         // ************************************************************************************************************/
 
-        function _init() {
-            focus('searchText');
-            _find();
+        function _cancelEdit() {
+            console.log('cancelEdit');
+            _revertSelectedItem();
             _setBrowse();
         }
 
-        function _find() {
-            vm.items = formatService.query();
+        function _cancelInsert() {
+            console.log('_cancelInsert');
+            _setBrowse();
         }
 
-        function _resetError() {
-            vm.error = '';
+        function _create(_form, _item, _oneMore) {
+            console.log('create');
+            if (_form.$valid) {
+                var item = new formatService();
+                item.format = _item.format;
+                item.$save(
+                    function () {
+                        vm.items.push(item);
+                        toasterService.save(_item.format);
+                        if (_oneMore) {
+                            _resetForm();
+                            setInsert();
+                        }
+                        else {
+                            _setBrowse();
+                        }
+                        vm.oneMore = false;
+                    }, function (e) {
+                        toasterService.error(e.data);
+                        focus('format_focus');
+                    }
+                );
+            } else {
+                focus('format_focus');
+            }
+        }
+
+        function _init() {
+            focus('searchText');
+            vm.items = formatService.query();
+            _setBrowse();
+        }
+
+        function _update(_item) {
+            _item.$update(
+                function () {
+                    toasterService.update(_item.format);
+                    _setBrowse();
+                }, function (e) {
+                    toasterService.error(e.data);
+                }
+            );
         }
 
         function _setBrowse() {
+            _resetForm();
             $log.info('_setBrowse');
             vm.sorting.type = 'format';
             vm.state = 'dsBrowse';
-            vm.selectedItem = null;
-            vm.form.$dirty = false;
             focus('searchItem_focus');
-            _resetError();
         }
 
-        function _setInsert() {
-            vm.state = 'dsInsert';
-            vm.insertItem = '';
-            focus('insertItem_focus');
-            vm.form.$dirty = false;
-            _resetSearchItem();
-            _resetError();
-        }
-
-        function _setEdit() {
-            vm.state = 'dsEdit';
-            focus('editItem_focus');
-            _resetError();
-        }
-
-        function _resetSearchItem() {
-            vm.searchItem = '';
+        function _resetForm() {
+            if (vm.form.$dirty || vm.form.$submitted) {
+                vm.form.$setPristine();
+                vm.form.$setUntouched();
+            }
         }
 
         function _revertSelectedItem() {
             angular.forEach(vm.items, function (item, key) {
                 if (item._id === vm.selectedItem._id) {
-                    vm.items[key].format = vm.selectedItem.format;
+                    vm.items[key] = vm.selectedItem;
                 }
             });
             vm.selectedItem = null;

@@ -14,9 +14,11 @@
             {
                 id: '@_id'
             }, {
-                update: {method: 'PUT'
+                update: {
+                    method: 'PUT'
+                }
             }
-        });
+        );
 
     }
 

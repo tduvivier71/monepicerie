@@ -2,19 +2,19 @@
       ng-model-options="{ updateOn: 'default', debounce: { 'default': 100, 'blur': 0 } }">
     <div class="row">
         <div class="col-md-12 form-group">
-            <div class="form-group" ng-class="{'has-error': vm.form.$submitted && vm.form.format_input.$invalid}">
-                <label for="format_input_id">
-                    {{"FORMAT"|translate}}<span style="color: red;" uib-tooltip={{"VALEUR_OBLIGATOIRE"|translate}}>*</span>
+            <div class="form-group" ng-class="{'has-error': vm.form.$submitted && vm.form.marque_input.$invalid}">
+                <label for="marque_input_id">
+                    {{"MARQUE"|translate}}<span style="color: red;" uib-tooltip={{"VALEUR_OBLIGATOIRE"|translate}}>*</span>
                 </label>
                 <input required
                        autocomplete="off"
                        class="form-control input"
-                       focus-on="format_focus"
-                       id="format_input_id"
-                       name="format_input"
-                       ng-model="vm.item.format"
+                       focus-on="marque_focus"
+                       id="marque_input_id"
+                       name="marque_input"
+                       ng-model="vm.item.marque"
                        type="text"/>
-                       <validate-input form="vm.form" field="vm.form.format_input"></validate-input>
+                       <validate-input form="vm.form" field="vm.form.marque_input"></validate-input>
             </div>
         </div>
     </div>
