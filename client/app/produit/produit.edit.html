@@ -221,7 +221,15 @@
                    type="number"/>
         </div>
 
-        <div class="col-md-1 form-group">
+        <div class="col-md-3 form-group">
+            <label>  
+            </label>
+
+            <toggle ng-model="vm.insertHisto.enPromotion" ng-change="changed()" on="En spécial" off="Prix régulier"></toggle>
+
+        </div>
+
+     <!--   <div class="col-md-1 form-group">
             <label for="enPromotion_insert_checkbox_id">
                 {{"ENPROMOTION"|translate}}
             </label> <br>
@@ -229,7 +237,7 @@
                    ng-model="vm.insertHisto.enPromotion"
                    type="checkbox"/>
 
-        </div>
+        </div> -->
 
         <div class="col-md-4 form-group">
             <label for="epicerieId_insert_input_id">
@@ -384,7 +392,6 @@
             <div class="btn-group">
                 <button class="btn btn-primary btn"
                         data-toggle="tooltip"
-                        ng-disabled="vm.form.$invalid"
                         ng-click="vm.save(vm.form, vm.item, false)">
                         <span class="fa fa-check"></span>
                         {{"ENREGISTRER"|translate}}
@@ -392,7 +399,6 @@
                 <button type="button"
                         class="btn btn-primary dropdown-toggle"
                         data-toggle="dropdown"
-                        ng-disabled="vm.form.$invalid "
                         aria-haspopup="true"
                         aria-expanded="false">
                     <span class="caret"></span>
