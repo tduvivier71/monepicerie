@@ -1,0 +1,22 @@
+@import "../variables";
+
+.table thead > tr > th { border-bottom: solid $td-primary-color-dark 2px !important}
+
+//.table-borderless tbody tr td,
+//.table-borderless tbody tr th,
+//.table-borderless thead tr th,
+//.table-borderless thead tr td,
+.borderless tfoot tr th,
+.borderless tfoot tr td {
+  border: none;
+}
+
+/*
+table {
+  border-collapse:separate;
+}
+
+thead tr th{
+  border-bottom: 2px solid #1976D2 !important;
+  border-collapse:separate;
+}*/

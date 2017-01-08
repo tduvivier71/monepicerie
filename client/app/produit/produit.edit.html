@@ -28,6 +28,15 @@
 
         }
 
+        .toggle.btn {
+            min-width: 59px;
+            min-height: 38px;
+        }
+
+
+
+
+
     </style>
 
 
@@ -195,121 +204,112 @@
 </div> <!--id="wrapper"-->
 
 
-    <div class="panel panel-default" style="border:0">
-
-        <div class="panel-heading" style="border-bottom: 2px solid #1976D2; background-color:  white"><b>Prix</b>
-
-        </div>
-
-        <div class="panel-body" style="border: 0">
-
 
     <!-- Historique INSERT Only -->
-    <div class="row" ng-show="vm.state == 'dsInsert'">
+    <!--
+ <div class="panel panel-default" style="border:0">
 
-        <div class="col-md-2 form-group">
-            <label for="prix_insert_input_id">
-                {{"PRIX"|translate}}
-            </label>
-            <input autocomplete="off"
-                   data-kendo-numeric-text-box
-                   data-k-min="0"
-                   id="prix_insert_input_id"
-                   name="prix_input"
-                   ng-model="vm.insertHisto.prix"
-                   style="width: 100%;"
-                   type="number"/>
-        </div>
+     <div class="panel-heading" style="border-bottom: 2px solid #1976D2; background-color:  white"><b>Prix</b>
 
-        <div class="col-md-3 form-group">
-            <label>  
-            </label>
+     </div>
 
-            <toggle ng-model="vm.insertHisto.enPromotion" ng-change="changed()" on="En spécial" off="Prix régulier"></toggle>
+     <div class="panel-body" style="border: 0">
 
-        </div>
+<div class="row" ng-show="vm.state == 'dsInsert'">
 
-     <!--   <div class="col-md-1 form-group">
-            <label for="enPromotion_insert_checkbox_id">
-                {{"ENPROMOTION"|translate}}
-            </label> <br>
-            <input id="enPromotion_insert_checkbox_id"
-                   ng-model="vm.insertHisto.enPromotion"
-                   type="checkbox"/>
+     <div class="col-md-2 form-group">
+         <label for="prix_insert_input_id">
+             {{"PRIX"|translate}}
+         </label>
+         <input autocomplete="off"
+                data-kendo-numeric-text-box
+                data-k-min="0"
+                id="prix_insert_input_id"
+                name="prix_input"
+                ng-model="vm.insertHisto.prix"
+                style="width: 100%;"
+                type="number"/>
+     </div>
 
-        </div> -->
+     <div class="col-md-1 form-group">
+         <label for="enPromotion_toogle_id">
+             {{"PROMOTION"|translate}}
+         </label>
+         <toggle id="enPromotion_toogle_id"
+                 ng-model="vm.insertHisto.enPromotion"
+                 ng-change="changed()" on="Oui" off="Non">
+         </toggle>
+     </div>
 
-        <div class="col-md-4 form-group">
-            <label for="epicerieId_insert_input_id">
-                {{"EPICERIE"|translate}}
-            </label>
-            <select data-kendo-combo-box
-                    data-k-options="vm.selectOptionsEpicerie"
-                    data-k-ng-model="vm.insertHisto.epicerieId"
-                    id="epicerieId_insert_input_id"
-                    name="epicerieId_select"
-                    style="width: 100%;">
-            </select>
-        </div>
+     <div class="col-md-3 form-group">
+         <label for="epicerieId_insert_input_id">
+             {{"EPICERIE"|translate}}
+         </label>
+         <select data-kendo-combo-box
+                 data-k-options="vm.selectOptionsEpicerie"
+                 data-k-ng-model="vm.insertHisto.epicerieId"
+                 id="epicerieId_insert_input_id"
+                 name="epicerieId_select"
+                 style="width: 100%;">
+         </select>
+     </div>
 
-        <div class="col-md-2 form-group">
-            <label for="date_insert_input_id">
-                {{"DATE"|translate}}
-            </label>
-            <input data-kendo-date-picker
-                   data-k-options="vm.datePickerOptions"
-                   data-k-ng-model="vm.insertHisto.date"
-                   id="date_insert_input_id"
-                   style="width: 100%;"/>
-        </div>
+     <div class="col-md-2 form-group">
+         <label for="date_insert_input_id">
+             {{"DATE"|translate}}
+         </label>
+         <input data-kendo-date-picker
+                data-k-options="vm.datePickerOptions"
+                data-k-ng-model="vm.insertHisto.date"
+                id="date_insert_input_id"
+                style="width: 100%;"/>
+     </div>
 
-    </div>
-        </div>
-    </div>
+     <div class="col-md-2 form-group">
+         <button class="btn btn-primary" style="margin-top:27px;"
+                 data-toggle="tooltip"
+                 ng-click="vm.createHisto()">
+             Ajouter
+         </button>
+     </div>
+     </div>
+     </div>
+ </div>
+ -->
     <!-- FIN Historique INSERT only -->
 
 
-
-
     <!-- Historique EDIT only -->
-    <div class="row" ng-show="vm.state == 'dsEdit'" style="margin: 15px;">
-        <table class="table table-borderless" id="tablewithouttop">
+    <div class="row" style="margin: 0px;">
+        <table class="table">
+
             <thead>
                 <tr>
-                    <th class="col-md-3 col-sm-3">
+                    <th class="col-md-2 col-sm-2">
                         <a href="javascript:void(0)" style="text-decoration:none; color:black;"
                            ng-click="vm.sorting.reverse = !vm.sorting.reverse">
-                            {{"EPICERIE"|translate}}
-                            <span ng-show="!vm.sorting.reverse" class="fa fa-caret-down"></span>
-                            <span ng-show="vm.sorting.reverse" class="fa fa-caret-up"></span>
+                            {{"PRIX"|translate}}
+                            <span ng-show="!vm.sorting.reverse"><i class="material-icons md-16">arrow_drop_down</i></span>
+                            <span ng-show="vm.sorting.reverse"><i class="material-icons md-16">arrow_drop_up</i></span>
                         </a>
                     </th>
-                    <th class="col-md-2 col-sm-2">
-                        {{"PRIX"|translate}}
-                    </th>
-                    <th class="col-md-1 col-sm-1">
-                        {{"ENPROMOTION"|translate}}
+                    <th class="col-md-3 col-sm-3">
+                        {{"EPICERIE"|translate}}
                     </th>
                     <th class="col-md-2 col-sm-2">
                         {{"DATE"|translate}}
                     </th>
                     <th class="col-md-2 col-sm-2">
-                        {{"COUTPARUNITE"|translate}}
                     </th>
                     <th class="col-md-2 col-sm-2">
                     </th>
+                    <th class="col-md-1 col-sm-2">
+                    </th>
                 </tr>
             </thead>
+
+
             <tbody>
-                    <td class="col-md-3 col-sm-3">
-                        <select data-kendo-combo-box
-                                data-k-options="vm.selectOptionsEpicerie"
-                                data-k-ng-model="vm.insertHisto.epicerieId"
-                                id="epicerieId_select_edit_id"
-                                name="epicerieId_select_edit"
-                                style="width: 100%">
-                        </select>
-                    </td>
                     <!--data-k-format="'c'"-->
                     <td class="col-md-2 col-sm-2">
                         <input autocomplete="off"
@@ -321,12 +321,14 @@
                                type="number"
                                style="width: 100%"/>
                     </td>
-                    <td class="col-md-1 col-sm-1">
-                        <input id="enPromotion_checkbox_id"
-                               name="enPromotion_input"
-                               ng-model="vm.insertHisto.enPromotion"
-                               type="checkbox"
-                               style="margin-left: 40%; margin-top: 10px;"/>
+                    <td class="col-md-3 col-sm-3">
+                        <select data-kendo-combo-box
+                                data-k-options="vm.selectOptionsEpicerie"
+                                data-k-ng-model="vm.insertHisto.epicerieId"
+                                id="epicerieId_select_edit_id"
+                                name="epicerieId_select_edit"
+                                style="width: 100%">
+                        </select>
                     </td>
                     <td class="col-md-2 col-sm-2">
                         <input data-kendo-date-picker
@@ -336,6 +338,10 @@
                                style="width: 100%"/>
                     </td>
                     <td class="col-md-2 col-sm-2">
+                        <toggle id="enPromotion_toogle_id"
+                                ng-model="vm.insertHisto.enPromotion"
+                                ng-change="changed()" on="En promotion" off="Prix régulier">
+                        </toggle>
                     </td>
                     <td class="col-md-2 col-sm-2" style="text-align: right;">
                         <div style="text-align:left; top:25px; padding-right: 25px">
@@ -347,36 +353,36 @@
                             </button>
                         </div>
                     </td>
+                    <td class="col-md-1 col-sm-1">
+                    </td>
                 </tr>
                 <tr ng-show="vm.item.historiques.length > 0"
                     ng-hide="histo.statut == 'D'"
                     data-ng-repeat="histo in (vm.item.historiques).slice(((vm.pagination.currentPage-1)*vm.pagination.itemsPerPage),
                     ((vm.pagination.currentPage)*vm.pagination.itemsPerPage))  | orderBy : vm.sorting.type:vm.sorting.reverse">
+                    <td class="col-md-2 col-sm-2">
+                        {{histo.prix | currency}}
+                    </td>
                     <td class="col-md-3 col-sm-3">
                         <span>{{histo.epicerie}}</span>
                         <span>{{histo.epicerieId.epicerie}}</span>
                     </td>
                     <td class="col-md-2 col-sm-2">
-                        {{histo.prix | currency}}
-                    </td>
-                    <td class="col-md-1 col-sm-1">
-                        <input disabled="disabled"
-                               ng-model="histo.enPromotion"
-                               type="checkbox"
-                               style="margin-left: 40%; margin-top: 5px;"/>
-                    </td>
-                    <td class="col-md-2 col-sm-2">
                         {{histo.date | amDateFormat:'YYYY/MM/DD' }}
                     </td>
                     <td class="col-md-2 col-sm-2">
+                        {{histo.enPromotion}}
+                    </td>
+
+                    <td class="col-md-2 col-sm-2">
                         {{(histo.prix) | coutPar:vm.item.quantite:vm.item.nombre:vm.item.uniteId.operation:vm.item.uniteId.nombre:vm.item.uniteId.coutParId.abreviation}}</span>
                     </td>
-                    <td class="col-md-2 col-sm-2" style="text-align: left;">
-                        <button class="btn btn-default btn-sm"
+                    <td class="col-md-1 col-sm-1" style="text-align: left;">
+                        <button class="btn btn-danger btn-sm"
                                 data-toggle="tooltip"
                                 ng-click="vm.deleteHisto(histo)"
                                 uib-tooltip={{DETRUIRE_HISTORIQUE|translate}}>
-                            <span class="fa fa-trash-o fa-lg"></span>
+                                <i class="material-icons md-16">delete</i>
                         </button>
                     </td>
                 </tr>
@@ -384,7 +390,6 @@
         </table>
     </div>
     <!-- FIN Historique edit only -->
-
 
     <div class="row">
         <br>
