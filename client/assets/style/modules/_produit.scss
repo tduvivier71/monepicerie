@@ -1,0 +1,22 @@
+#wrapper{
+  width:100%;
+  display:block;
+  height: 270px;
+}
+
+#mainContent{
+  width:65%;
+  height:auto;
+  background:white;
+  display:block;
+  float:left;
+}
+
+#sideBar{
+  width:35%;
+  height:auto;
+  background:white;
+  display:block;
+  float:right;
+  padding-left: 20px;
+}

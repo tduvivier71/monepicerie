@@ -1,4 +1,18 @@
-@mixin panel-variant($border, $heading-text-color, $heading-bg-color, $heading-border) {
+// No border on panel
+// Only a border-bottom
+.panel.noborder {
+  border: none;
+  box-shadow: none;
+
+  & > .panel-heading {
+ //   box-shadow: none;
+    background-color:  white;
+    border-bottom: 2px solid #1976D2;
+  }
+
+}
+
+/*@mixin panel-variant($border, $heading-text-color, $heading-bg-color, $heading-border) {
   border-color: $border;
 
   & > .panel-heading {
@@ -23,4 +37,8 @@
 
 .panelrow {
   @include panel-variant(#d01919, #1cf21c, #000000, #bad017);
-}
+} */
+
+
+
+
