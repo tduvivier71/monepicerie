@@ -255,11 +255,11 @@
             vm.state = 'dsEdit';
             focus('categorie_focus');
 
-            vm.insertHisto.epicerie = '';
+       /*     vm.insertHisto.epicerie = '';
             vm.insertHisto.epicerieId = '';
             vm.insertHisto.prix = 0;
             vm.insertHisto.date = new Date();
-            vm.insertHisto.enPromotion = false;
+            vm.insertHisto.enPromotion = false; */
 
         }
 
@@ -273,35 +273,44 @@
             vm.state = 'dsInsert';
             focus('categorie_focus');
 
-            vm.insertHisto.epicerie = '';
+       /*     vm.insertHisto.epicerie = '';
             vm.insertHisto.epicerieId = '';
             vm.insertHisto.prix = 0;
             vm.insertHisto.date = new Date();
-            vm.insertHisto.enPromotion = false;
+            vm.insertHisto.enPromotion = false; */
         }
 
         /**
          * Create Histo
          * */
         function createHisto() {
-            if (vm.insertHisto.date === null) {
-                vm.insertHisto.date = moment();
-            }
-            else {
-                vm.insertHisto.date = moment(vm.insertHisto.date);
+
+            if (vm.insertHisto.prix &&  vm.insertHisto.epicerieId) {
+
+                if (vm.insertHisto.date === null) {
+                    vm.insertHisto.date = moment();
+                }
+                else {
+                    vm.insertHisto.date = moment(vm.insertHisto.date);
+                }
+
+                vm.item.historiques.push(
+                    {
+                        epicerieId: vm.insertHisto.epicerieId,
+                        epicerie: vm.insertHisto.epicerie,
+                        date: vm.insertHisto.date,
+                        prix: vm.insertHisto.prix,
+                        enPromotion: vm.insertHisto.enPromotion,
+                        statut: 'I'
+                    }
+                );
+
+            //    vm.insertHisto = {};  // ! TO DO
+            //    vm.form.$submitted = false;
+            //    vm.form.$setUntouched();
+
             }
 
-            vm.item.historiques.push(
-                {
-                    epicerieId: vm.insertHisto.epicerieId,
-                    epicerie: vm.insertHisto.epicerie,
-                    date: vm.insertHisto.date,
-                    prix: vm.insertHisto.prix,
-                    enPromotion: vm.insertHisto.enPromotion,
-                    statut: 'I'
-                }
-            );
-            vm.insertHisto = {};  // ! TO DO
         }
 
         function deleteHisto(histo, $index) {

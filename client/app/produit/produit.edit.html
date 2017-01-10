@@ -206,7 +206,7 @@
                  data-k-options="vm.selectOptionsEpicerie"
                  data-k-ng-model="vm.insertHisto.epicerieId"
                  id="epicerieId_insert_input_id"
-                 name="epicerieId_select"
+                 name="epicerieId_select2"
                  style="width: 100%;">
          </select>
      </div>
@@ -283,22 +283,21 @@
                         <select required
                                 data-kendo-combo-box
                                 data-k-options="vm.selectOptionsEpicerie"
+                                data-k-ng-model="vm.insertHisto.epicerieId"
                                 ng-model="vm.insertHisto.epicerieId"
                                 id="epicerieId_select_edit_id"
                                 name="epicerieId_select"
                                 style="width: 100%">
-                                <validate-input form="vm.form" field="vm.form.epicerieId_select"></validate-input>
                         </select>
+                        <validate-input form="vm.form" field="vm.form.epicerieId_select"></validate-input>
                     </td>
                     <td class="col-md-2 col-sm-2">
-                        <input required
-                               data-kendo-date-picker
+                        <input data-kendo-date-picker
                                data-k-options="vm.datePickerOptions"
                                ng-model="vm.insertHisto.date"
                                id="date_input_id2"
                                name="date_input"
                                style="width: 100%"/>
-                               <validate-input form="vm.form" field="vm.form.date_input"></validate-input>
                     </td>
                     <td class="col-md-2 col-sm-2">
                         <toggle id="enPromotion_toogle_id"
