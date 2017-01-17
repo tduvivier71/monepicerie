@@ -1,3 +1,9 @@
+<div static-include="app/epicerie/epicerie.edit.html"></div>
+
+<!--<div ng-show="vm.state = 'dsBrowse'">
+<ui-gmap-google-map class="angular-google-map-container" center="map.center"  zoom="map.zoom"></ui-gmap-google-map>
+</div> -->
+
 <div class="row">
     <nav-bar-pilotage></nav-bar-pilotage>
 </div>
@@ -8,8 +14,11 @@
 </div>
 <div class="row">
     <div>
-        <div ng-cloak ng-show="vm.state != 'dsBrowse'" ng-include src="'app/epicerie/epicerie.edit.html'"></div>
-        <div ng-cloak ng-show="vm.state == 'dsBrowse'" ng-include src="'app/epicerie/epicerie.list.html'"></div>
+        <div ng-show="vm.state != 'dsBrowse'">
+            <div static-include="app/epicerie/epicerie.edit.html"></div>
+        </div>
+        <div ng-show="vm.state == 'dsBrowse'" ng-include src="'app/epicerie/epicerie.list.html'"></div>
     </div>
 </div>
+
 

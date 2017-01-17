@@ -6,7 +6,7 @@
 		.module('app', ['ngRoute', 'ngResource', 'ngMessages',  'ngSanitize', 'ngAnimate', 'ngToast', 'ui.sortable',
 			'ui.bootstrap', 'pascalprecht.translate', 'angularMoment', 'kendo.directives',
 			'app.accueil', 'app.categorie','app.epicerie','app.unite','app.format','app.produit', 'app.marque','app.liste',
-			'app.utilisateur','app.sign','satellizer', 'ui.toggle']);
+			'app.utilisateur','app.sign','satellizer', 'ui.toggle','uiGmapgoogle-maps']); //ngmap
 
 	angular
 		.module('app')
@@ -20,10 +20,10 @@
 		 */
 
 		config.$inject = ['$locationProvider','$translateProvider','$translatePartialLoaderProvider','ngToastProvider',
-			'$authProvider'];
+			'$authProvider','uiGmapGoogleMapApiProvider'];
 
 		function config($locationProvider,$translateProvider,$translatePartialLoaderProvider, ngToastProvider,
-			$authProvider) {
+			$authProvider, uiGmapGoogleMapApiProvider) {
 
 			moment().locale('fr_ca');
 
@@ -79,6 +79,13 @@
 				urlTemplate: '/assets/i18n/{part}/{lang}.json'
 			});
 			$translateProvider.preferredLanguage('fr-CA');
+
+            uiGmapGoogleMapApiProvider.configure({
+                key: "AIzaSyABE67zQOFZrbXJIow-5-kLVD4FpWf52KQ", //Clé pour utiliser l'API
+                v: '3.21', //Par défaut la version la plus récente disponible
+                libraries: 'places, geometry,visualization' //Librairies supplémentaires
+            });
+
 		}
 
 		/**

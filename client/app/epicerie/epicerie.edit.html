@@ -1,23 +1,34 @@
-<form novalidate name="vm.form" role="form"
-      ng-model-options="{ updateOn: 'default', debounce: { 'default': 100, 'blur': 0 } }">
+<form novalidate name="vm.form" role="form">
+   <!--   ng-model-options="{ updateOn: 'default', debounce: { 'default': 100, 'blur': 0 } }"> -->
     <div class="row">
         <div class="col-md-12 form-group">
             <div class="form-group" ng-class="{'has-error': vm.form.$submitted && vm.form.epicerie_input.$invalid}">
                 <label for="epicerie_input_id">
                     {{"EPICERIE"|translate}}<span style="color: red;" uib-tooltip={{"VALEUR_OBLIGATOIRE"|translate}}>*</span>
                 </label>
+
+                <select ng-model="vm.types">
+                    <option value="['geocode']">Geodode</option>
+                    <option value="['establishment']">Establishment</option>
+                    <option value="['address']">Address</option>
+                </select><br/>
+
+
                 <input required
+                       places-auto-complete
                        autocomplete="off"
                        class="form-control input"
-                       focus-on="epicerie_focus"
+                       types="{{types}}"
                        id="epicerie_input_id"
                        name="epicerie_input"
-                       ng-model="vm.item.epicerie"
-                       type="text"/>
+                       ng-model="vm.address"/>
                        <validate-input form="vm.form" field="vm.form.epicerie_input"></validate-input>
             </div>
         </div>
     </div>
+
+    <ui-gmap-google-map class="angular-google-map-container" center="map.center"  zoom="map.zoom"></ui-gmap-google-map>
+
     <div class="row">
         <br>
         <div class="col-md-4 pull-right" style="text-align: right">

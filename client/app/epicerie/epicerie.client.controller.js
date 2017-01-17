@@ -6,10 +6,10 @@
         .module('app.epicerie')
         .controller('EpicerieController', EpicerieController);
 
-    EpicerieController.$inject = ['$log',
+    EpicerieController.$inject = ['$log', 'uiGmapGoogleMapApi', '$scope',
                                 'epicerieService', 'toasterService', 'focus'];
 
-    function EpicerieController($log,
+    function EpicerieController($log, uiGmapGoogleMapApi, $scope,
                                 epicerieService, toasterService, focus) {
 
         var vm = this;
@@ -36,6 +36,10 @@
         vm.save = save;
         vm.setEdit = setEdit;
         vm.setInsert = setInsert;
+      //  vm.placeChanged = placeChanged;
+
+
+
 
         // ************************************************************************************************************/
         // Entry point function
@@ -99,6 +103,42 @@
         // ************************************************************************************************************/
         // Private function
         // ************************************************************************************************************/
+
+        vm.types = "['establishment']";
+        vm.center = [0,0];
+      // vm.googleMapsUrl="libraries=placeses,visualization,drawing,geometry,places&key=AIzaSyABE67zQOFZrbXJIow-5-kLVD4FpWf52KQ";
+
+  /*      vm.placeChanged = function() {
+            vm.place = this.getPlace();
+            console.log('** location ** : ', vm.place.geometry.location);
+            vm.map.setCenter(vm.place.geometry.location);
+        };
+
+        NgMap.getMap().then(function(map) {
+            vm.map = map;
+        }); */
+
+        /*function placeChanged () {
+            vm.types = "['establishment']";
+            vm.place = vm.this.getPlace();
+            console.log('** location **', vm.place.geometry.location);
+            vm.map.setCenter(vm.place.geometry.location);
+        }
+        NgMap.getMap().then(function(map) {
+            vm.map = map;
+        });*/
+
+        var areaLat = 44.2126995,
+            areaLng = -100.2471641,
+            areaZoom = 3;
+
+
+        $scope.map = {
+            center: { latitude: 39.8282, longitude: -98.5795 },
+            zoom: 10
+        };
+        $scope.options = { scrollwheel: false };
+
 
         function _cancelEdit() {
             console.log('cancelEdit');
