@@ -12,12 +12,16 @@
             search-item="vm.searchItem">
     </search-item>
 </div>
+
 <div class="row">
-    <div>
-        <div ng-show="vm.state != 'dsBrowse'">
+    {{vm.state}}
+    <div ng-switch="vm.state">
+        <div ng-switch-when="dsBrowse">
+            <div static-include="app/epicerie/epicerie.list.html"></div>
+        </div>
+        <div ng-switch-when="dsInsert">
             <div static-include="app/epicerie/epicerie.edit.html"></div>
         </div>
-        <div ng-show="vm.state == 'dsBrowse'" ng-include src="'app/epicerie/epicerie.list.html'"></div>
     </div>
 </div>
 
