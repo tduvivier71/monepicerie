@@ -6,10 +6,10 @@
         .module('app.epicerie')
         .controller('EpicerieController', EpicerieController);
 
-    EpicerieController.$inject = ['$log', 'uiGmapGoogleMapApi', '$scope',
+    EpicerieController.$inject = ['$log', 'uiGmapGoogleMapApi', '$scope', 'NgMap',
                                 'epicerieService', 'toasterService', 'focus'];
 
-    function EpicerieController($log, uiGmapGoogleMapApi, $scope,
+    function EpicerieController($log, uiGmapGoogleMapApi, $scope, NgMap,
                                 epicerieService, toasterService, focus) {
 
         var vm = this;
@@ -108,15 +108,16 @@
         vm.center = [0,0];
       // vm.googleMapsUrl="libraries=placeses,visualization,drawing,geometry,places&key=AIzaSyABE67zQOFZrbXJIow-5-kLVD4FpWf52KQ";
 
-  /*      vm.placeChanged = function() {
+        vm.placeChanged = function() {
             vm.place = this.getPlace();
             console.log('** location ** : ', vm.place.geometry.location);
             vm.map.setCenter(vm.place.geometry.location);
+
         };
 
         NgMap.getMap().then(function(map) {
             vm.map = map;
-        }); */
+        });
 
         /*function placeChanged () {
             vm.types = "['establishment']";

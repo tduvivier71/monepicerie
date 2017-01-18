@@ -21,13 +21,34 @@
                        types="{{types}}"
                        id="epicerie_input_id"
                        name="epicerie_input"
-                       ng-model="vm.address"/>
+                       ng-model="vm.address"
+                       on-place-changed="vm.placeChanged()"/>
                        <validate-input form="vm.form" field="vm.form.epicerie_input"></validate-input>
             </div>
         </div>
     </div>
 
-    <ui-gmap-google-map class="angular-google-map-container" center="map.center"  zoom="map.zoom"></ui-gmap-google-map>
+<!--    <ui-gmap-google-map class="angular-google-map-container" center="map.center"  zoom="map.zoom"></ui-gmap-google-map> -->
+
+    <div ng-show="vm.place">
+        Address = {{vm.place.formatted_address}} <br/>
+        Location: {{vm.place.geometry.location}}<br/>
+        {{vm.place.geometry.location.lat()}}
+        {{vm.place.geometry.location.lng()}}
+    </div>
+
+    address : {{vm.address}}
+
+    <ng-map
+            zoom="17"
+            center="[45.508,-73.554]"
+            pan-control="true"
+            map-type-control="true"
+            map-type-control-options="{style:'DROPDOWN_MENU'}"
+            zoom-control="true"
+            zoom-control-options="{style:'SMALL'}">
+            <marker position="{{vm.place.geometry.location.lat()}},{{vm.place.geometry.location.lng}}"></marker>
+    </ng-map>
 
     <div class="row">
         <br>
