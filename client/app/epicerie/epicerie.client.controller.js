@@ -9,7 +9,7 @@
     EpicerieController.$inject = ['$log', 'uiGmapGoogleMapApi', '$scope', 'NgMap',
                                 'epicerieService', 'toasterService', 'focus'];
 
-    function EpicerieController($log, uiGmapGoogleMapApi, $scope, NgMap,
+    function EpicerieController($log, GoogleMapApi, $scope, NgMap,
                                 epicerieService, toasterService, focus) {
 
         var vm = this;
@@ -38,7 +38,61 @@
         vm.setInsert = setInsert;
       //  vm.placeChanged = placeChanged;
 
+        angular.extend($scope, {
+            map: {center:
+                {
+                    latitude: 40.1451,
+                    longitude: -99.6680
+                },
+                zoom: 4
+            },
+            searchbox: {
+                template:'searchbox.tpl.html',
+                events:{
+                    places_changed: function (searchBox) {
 
+
+
+                        var place = searchBox.getPlaces();
+                        if (!place || place == 'undefined' || place.length == 0) {
+                            console.log('no place data :(');
+                            return;
+                        }
+
+                        // refresh the map
+                        $scope.map = {
+                            center:{
+                                latitude:place[0].geometry.location.lat(),
+                                longitude:place[0].geometry.location.lng()
+                            },
+                            zoom:16
+                        };
+
+                        // refresh the marker
+                        /*     $scope.marker = {
+                            id:0,
+                            options:{ draggable:false },
+                            coords:{
+                                latitude:place[0].geometry.location.lat(),
+                                longitude:place[0].geometry.location.lng()
+                            }
+                        };  */
+
+
+
+
+
+                    }
+                }
+            },
+            options: {
+                scrollwheel: false
+            }
+        });
+
+        GoogleMapApi.then(function(maps) {
+            maps.visualRefresh = true;
+        });
 
 
         // ************************************************************************************************************/

@@ -25,11 +25,15 @@
     "material-design-icons": "^3.0.1",
     "roboto-fontface": "^0.6.0",
     "angular-bootstrap-toggle": "^0.1.2",
-    "angular-google-map": "*",
-    "angular-simple-logger": "^0.1.7"
+    "angular-simple-logger": "^0.1.7",
+    "ngmap": "^1.17.8"
   },
   "devDependencies": {
     "angular-translate": "^2.11.0",
     "angular-translate-loader-partial": "^2.11.0"
+  },
+  "resolutions": {
+    "angular": "1.4.14",
+    "moment": ">=2.8.0 <2.11.0"
   }
 }

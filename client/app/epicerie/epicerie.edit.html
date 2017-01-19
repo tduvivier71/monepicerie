@@ -27,9 +27,44 @@
             </div>
         </div>
     </div>
+    <div id="searchBoxParent"></div>
 
-<!--    <ui-gmap-google-map class="angular-google-map-container" center="map.center"  zoom="map.zoom"></ui-gmap-google-map> -->
+    <script id="searchbox.tpl.html" type="text/ng-template">
+        <input type="text" placeholder="coucou" style="width: 200px;">
+    </script>
 
+    <div>
+        <ui-gmap-google-map
+                center="map.center"
+                zoom="map.zoom"
+                dragging="map.dragging"
+                bounds="map.bounds"
+                events="map.events"
+                options="map.options"
+                pan="true"
+                control="map.control"
+        >
+            <!--to add as a map control -->
+            <ui-gmap-search-box options="searchbox.options" template="searchbox.template"
+                                events="searchbox.events" position="searchbox.position"></ui-gmap-search-box>
+
+            <!--to add to a parent div-->
+            <!--<ui-gmap-search-box options="searchbox.options" template="searchbox.template" events="searchbox.events" parentdiv="searchbox.parentdiv"></ui-gmap-search-box>-->
+
+
+
+
+
+        </ui-gmap-google-map>
+    </div>
+
+
+ <!--   <ui-gmap-google-map class="angular-google-map-container" center="map.center"  zoom="map.zoom">
+        <ui-gmap-search-box template="searchbox.template" events="searchbox.events" position="BOTTOM_RIGHT"></ui-gmap-search-box>
+    </ui-gmap-google-map> -->
+
+
+<!--
     <div ng-show="vm.place">
         Address = {{vm.place.formatted_address}} <br/>
         Location: {{vm.place.geometry.location}}<br/>
@@ -41,14 +76,12 @@
 
     <ng-map
             zoom="17"
-            center="[45.508,-73.554]"
             pan-control="true"
             map-type-control="true"
             map-type-control-options="{style:'DROPDOWN_MENU'}"
             zoom-control="true"
             zoom-control-options="{style:'SMALL'}">
-            <marker position="{{vm.place.geometry.location.lat()}},{{vm.place.geometry.location.lng}}"></marker>
-    </ng-map>
+    </ng-map> -->
 
     <div class="row">
         <br>
