@@ -1,12 +1,3 @@
-<!--<div static-include="app/epicerie/epicerie.edit.html"></div>-->
-
-<!--<div ng-show="vm.state = 'dsBrowse'">
-<ui-gmap-google-map class="angular-google-map-container" center="map.center"  zoom="map.zoom"></ui-gmap-google-map>
-</div> -->
-
-
-
-
 <div class="row">
     <nav-bar-pilotage></nav-bar-pilotage>
 </div>
@@ -17,13 +8,12 @@
 </div>
 
 <div class="row">
-    {{vm.state}}
     <div ng-switch="vm.state">
+        <div ng-switch-when="dsInsert" ng-switch-when-separator="|">
+            <div static-include="app/epicerie/epicerie.edit.html"></div>
+        </div>
         <div ng-switch-when="dsBrowse">
             <div static-include="app/epicerie/epicerie.list.html"></div>
-        </div>
-        <div ng-switch-when="dsInsert">
-            <div static-include="app/epicerie/epicerie.edit.html"></div>
         </div>
     </div>
 </div>

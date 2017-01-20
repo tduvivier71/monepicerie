@@ -48,13 +48,12 @@
             },
             searchbox: {
                 template:'searchbox.tpl.html',
+                parentdiv: 'searchBoxParent',
                 events:{
                     places_changed: function (searchBox) {
 
-
-
                         var place = searchBox.getPlaces();
-                        if (!place || place == 'undefined' || place.length == 0) {
+                        if (!place || place === 'undefined' || place.length === 0) {
                             console.log('no place data :(');
                             return;
                         }
@@ -77,10 +76,6 @@
                                 longitude:place[0].geometry.location.lng()
                             }
                         };  */
-
-
-
-
 
                     }
                 }
@@ -234,6 +229,7 @@
         }
 
         function _init() {
+            vm.item.epicerie = '';
             focus('searchText');
             vm.items = epicerieService.query();
             _setBrowse();

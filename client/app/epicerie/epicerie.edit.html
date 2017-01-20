@@ -6,82 +6,44 @@
                 <label for="epicerie_input_id">
                     {{"EPICERIE"|translate}}<span style="color: red;" uib-tooltip={{"VALEUR_OBLIGATOIRE"|translate}}>*</span>
                 </label>
-
-                <select ng-model="vm.types">
-                    <option value="['geocode']">Geodode</option>
-                    <option value="['establishment']">Establishment</option>
-                    <option value="['address']">Address</option>
-                </select><br/>
-
-
-                <input required
-                       places-auto-complete
-                       autocomplete="off"
-                       class="form-control input"
-                       types="{{types}}"
-                       id="epicerie_input_id"
-                       name="epicerie_input"
-                       ng-model="vm.address"
-                       on-place-changed="vm.placeChanged()"/>
-                       <validate-input form="vm.form" field="vm.form.epicerie_input"></validate-input>
+                <div id="searchBoxParent">
+                </div>
             </div>
         </div>
     </div>
-    <div id="searchBoxParent"></div>
 
     <script id="searchbox.tpl.html" type="text/ng-template">
-        <input type="text" placeholder="coucou" style="width: 200px;">
+        <input required
+               autocomplete="off"
+               class="form-control input"
+               id="epicerie_input_id"
+               name="epicerie_input"
+               placeholder="Saisisez un lieu"
+               ng-model="vm.item.epicerie"
+               type="text"  >
+        <validate-input form="vm.form" field="vm.form.epicerie_input"></validate-input>
     </script>
 
     <div>
         <ui-gmap-google-map
-                center="map.center"
-                zoom="map.zoom"
-                dragging="map.dragging"
-                bounds="map.bounds"
-                events="map.events"
-                options="map.options"
-                pan="true"
-                control="map.control"
-        >
-            <!--to add as a map control -->
-            <ui-gmap-search-box options="searchbox.options" template="searchbox.template"
-                                events="searchbox.events" position="searchbox.position"></ui-gmap-search-box>
+            center="map.center"
+            zoom="map.zoom"
+            dragging="map.dragging"
+            bounds="map.bounds"
+            events="map.events"
+            options="map.options"
+            pan="true"
+            control="map.control">
 
-            <!--to add to a parent div-->
-            <!--<ui-gmap-search-box options="searchbox.options" template="searchbox.template" events="searchbox.events" parentdiv="searchbox.parentdiv"></ui-gmap-search-box>-->
+            <ui-gmap-search-box
+                    options="searchbox.options"
+                    template="searchbox.template"
+                    events="searchbox.events"
+                    parentdiv="searchbox.parentdiv">
 
-
-
-
-
+            </ui-gmap-search-box>
         </ui-gmap-google-map>
     </div>
-
-
- <!--   <ui-gmap-google-map class="angular-google-map-container" center="map.center"  zoom="map.zoom">
-        <ui-gmap-search-box template="searchbox.template" events="searchbox.events" position="BOTTOM_RIGHT"></ui-gmap-search-box>
-    </ui-gmap-google-map> -->
-
-
-<!--
-    <div ng-show="vm.place">
-        Address = {{vm.place.formatted_address}} <br/>
-        Location: {{vm.place.geometry.location}}<br/>
-        {{vm.place.geometry.location.lat()}}
-        {{vm.place.geometry.location.lng()}}
-    </div>
-
-    address : {{vm.address}}
-
-    <ng-map
-            zoom="17"
-            pan-control="true"
-            map-type-control="true"
-            map-type-control-options="{style:'DROPDOWN_MENU'}"
-            zoom-control="true"
-            zoom-control-options="{style:'SMALL'}">
-    </ng-map> -->
 
     <div class="row">
         <br>
@@ -113,11 +75,3 @@
         </div>
     </div>
 </form>
-
-
-
-
-
-
-
-
