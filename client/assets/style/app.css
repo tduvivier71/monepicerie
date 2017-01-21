@@ -11806,7 +11806,17 @@ input.k-textbox {
     background-color: #2196F3; }
   .k-multiselect .k-multiselect-wrap {
     min-height: 37px !important; }
+    .k-multiselect .k-multiselect-wrap > .k-input {
+      margin-top: 5px; }
 
+/*
+.k-multiselect-wrap>.k-input {
+  margin-top: 5px;
+}
+
+.k-multiselect-wrap>.k-input:focus {
+  color: #000;
+}*/
 .k-state-focused {
   border-color: #448AFF !important;
   box-shadow: none !important;

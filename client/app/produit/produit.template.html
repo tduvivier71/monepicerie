@@ -40,7 +40,7 @@
                         data-ng-click="vm.filterCategorie()"
                         style="margin-left:1px !important; padding-top:9px !important; padding-bottom:9px !important;"
                         uib-tooltip={{"APPLIQUER_SELECTION"|translate}}>
-                        <i class="material-icons">check_circle</i>
+                        <i class="material-icons">close</i>
                 </button>
             </span>
         </div>
@@ -54,7 +54,7 @@
 
 <div class="row">
     <div>
-        <div ng-cloak ng-show="vm.state != 'dsBrowse'" ng-include src="'app/produit/produit.edit.html'"></div>
-        <div ng-cloak ng-show="vm.state == 'dsBrowse'" ng-include src="'app/produit/produit.list.html'"></div>
+        <div ng-cloak ng-show="vm.state != 'dsBrowse'" static-include="app/produit/produit.edit.html"></div>
+        <div ng-cloak ng-show="vm.state == 'dsBrowse'" static-include="app/produit/produit.list.html"></div>
     </div>
 </div>

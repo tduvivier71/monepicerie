@@ -205,11 +205,11 @@
             console.log('create');
             if (_form.$valid) {
                 var item = new epicerieService();
-                item.epicerie = _item.epicerie;
+                item.epicerie = document.getElementById('epicerie_input_id').value;  // _item.epicerie;
                 item.$save(
                     function () {
                         vm.items.push(item);
-                        toasterService.save(_item.epicerie);
+                        toasterService.save(item.epicerie);
                         if (_oneMore) {
                             _resetForm();
                             setInsert();

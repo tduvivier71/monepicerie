@@ -94,9 +94,13 @@
             valuePrimitive: true,
             autoBind: false,
             delay: 50,
+            clearButton: false,
             noDataTemplate: 'Aucune correspondance...',
             suggest: true,
-            dataSource: vm.categories
+            dataSource: vm.categories,
+            change: function () {
+                vm.filterCategorie();
+            }
         };
 
         vm.selectOptionsMarque = {

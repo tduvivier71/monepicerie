@@ -30,9 +30,23 @@ input.k-textbox {
 
   .k-multiselect-wrap {
     min-height: 37px !important;
+
+    & > .k-input {
+      margin-top: 5px;
+    }
+
   }
 
 }
+
+/*
+.k-multiselect-wrap>.k-input {
+  margin-top: 5px;
+}
+
+.k-multiselect-wrap>.k-input:focus {
+  color: #000;
+}*/
 
 .k-state-focused {
   @include state-focused;
