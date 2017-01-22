@@ -20,3 +20,32 @@
   float:right;
   padding-left: 20px;
 }
+
+
+.paddingleft-992 {
+  padding-left: 0;
+}
+
+.paddingright-992 {
+  padding-right: 0;
+}
+
+/* Small Devices, Tablets */
+@media only screen  and (min-width : 0) and (max-width : 991px) {
+
+  .paddingleft-992 {
+    padding-right: 0;
+  }
+
+  .paddingright-992 {
+    padding-top: 15px;
+    padding-left: 0;
+  }
+
+}
+
+/* Small Devices, Tablets */
+@media only screen and (min-width : 992px) {
+
+}
+
