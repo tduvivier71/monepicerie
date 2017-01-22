@@ -1,10 +1,11 @@
 <div class="row">
     <nav class="navbar nav-custom-pilotage">
-        <div class="container-fluid">
+        <div class="container">
             <p class="navbar-text">{{"PRODUIT"|translate}}</p>
             <span class="navbar-form navbar-right">
                 <div ng-show="vm.state == 'dsBrowse'">
-                    <button class="btn btn-primary"
+                    <button class="btn btn-primary navbar-btn"
+                            type="button"
                             data-toggle="tooltip"
                             ng-click="vm.setInsert()"
                             uib-tooltip={{"HINT_AJOUTER"|translate}}>
@@ -12,7 +13,7 @@
                     </button>
                 </div>
                 <div ng-show="vm.state != 'dsBrowse'">
-                    <button class="btn btn-primary"
+                    <button class="btn btn-primary navbar-btn"
                             data-toggle="tooltip"
                             ng-click="vm.cancel()"
                             uib-tooltip={{"RETOUR_LISTE"|translate}}>
@@ -32,12 +33,13 @@
                     data-k-options="vm.selectOptionsMultiCategories"
                     data-k-ng-model="vm.selectedCategories"
                     style="width: 100%;"
+                    name="categories_input"
                     id="categories_input_id">
             </select>
             <span class="input-group-btn">
                 <button type="button"
                         class="btn btn-primary"
-                        data-ng-click="vm.filterCategorie()"
+                        data-ng-click="vm.clearCategorie()"
                         style="margin-left:1px !important; padding-top:9px !important; padding-bottom:9px !important;"
                         uib-tooltip={{"APPLIQUER_SELECTION"|translate}}>
                         <i class="material-icons">close</i>

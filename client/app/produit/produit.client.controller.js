@@ -62,6 +62,7 @@
 
         vm.filterCategorie = filterCategorie;
         vm.getCategories = getCategories;
+        vm.clearCategorie = clearCategorie;
 
 
 
@@ -265,6 +266,11 @@
             vm.insertHisto.date = new Date();
             vm.insertHisto.enPromotion = false; */
 
+        }
+
+        function clearCategorie() {
+            var multiSelect = $('#categorie_input').data("kendoMultiSelect");
+            multiSelect.value([]);
         }
 
         /**
