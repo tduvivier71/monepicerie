@@ -1,27 +1,25 @@
-<div class="row">
-    <nav class="navbar nav-custom-pilotage">
-        <div class="container-fluid">
-            <p class="navbar-text">{{"PRODUIT"|translate}}</p>
-            <span class="navbar-form navbar-right">
-                <div ng-show="vm.state == 'dsBrowse'">
-                    <button class="btn btn-primary"
-                            data-toggle="tooltip"
-                            ng-click="vm.setInsert()"
-                            uib-tooltip={{"HINT_AJOUTER"|translate}}>
-                            <i class="material-icons md-14">add</i> {{"AJOUTER"|translate}}
-                    </button>
-                </div>
-                <div ng-show="vm.state != 'dsBrowse'">
-                    <button class="btn btn-primary"
-                            data-toggle="tooltip"
-                            ng-click="vm.cancel()"
-                            uib-tooltip={{"RETOUR_LISTE"|translate}}>
-                            <i class="material-icons md-14">view_list</i>
-                    </button>
-                </div>
-            </span>
-        </div>
-    </nav>
+<div class="row subnav">
+    <div class="col-md-6 col-sm-6 col-xs-6 padding1">
+        <p class="title">{{"PRODUIT"|translate}}</p>
+    </div>
+    <div class="col-md-6 col-sm-6 col-xs-6 text-right padding2" >
+            <div ng-show="vm.state == 'dsBrowse'">
+                <button class="btn btn-primary"
+                        data-toggle="tooltip"
+                        ng-click="vm.setInsert()"
+                        uib-tooltip={{"HINT_AJOUTER"|translate}}>
+                        <i class="material-icons md-14">add</i> {{"AJOUTER"|translate}}
+                </button>
+            </div>
+            <div ng-show="vm.state != 'dsBrowse'">
+                <button class="btn btn-primary"
+                        data-toggle="tooltip"
+                        ng-click="vm.cancel()"
+                        uib-tooltip={{"RETOUR_LISTE"|translate}}>
+                        <i class="material-icons md-14">view_list</i>
+                </button>
+            </div>
+    </div>
 </div>
 
 <div class="row" ng-show="vm.state == 'dsBrowse'" style="padding-top: 10px; padding-bottom: 25px;">
