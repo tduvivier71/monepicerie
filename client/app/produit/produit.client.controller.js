@@ -268,10 +268,7 @@
 
         }
 
-        function clearCategorie() {
-            var multiSelect = $('#categorie_input').data("kendoMultiSelect");
-            multiSelect.value([]);
-        }
+
 
         /**
          * Set insert State
@@ -334,6 +331,11 @@
         function getCategories() {
             console.log('getCategories');
             return categorieService.query();
+        }
+
+        function clearCategorie() {
+            vm.selectedCategories.length = 0;
+            filterCategorie();
         }
 
         function filterCategorie() {

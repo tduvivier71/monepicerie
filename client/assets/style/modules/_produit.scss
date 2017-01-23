@@ -1,3 +1,5 @@
+@import "../variables";
+
 #wrapper{
   width:100%;
   display:block;
@@ -19,6 +21,25 @@
   display:block;
   float:right;
   padding-left: 20px;
+}
+
+.subnav {
+  padding: 5px;
+  background-color: $primary-color;
+  min-height: 50px;
+}
+
+.padding1 {
+  padding-top: 10px;
+}
+
+.padding2 {
+  padding-top: 5px;
+}
+
+.title {
+  color: $primary-color-text;
+ // margin-top: 10px;
 }
 
 
