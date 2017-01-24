@@ -1,0 +1,28 @@
+@import "../variables";
+
+.tooltip .tooltip-inner {
+  color: $primary-color-text;
+  background-color: $primary-color-dark;
+  border-radius: 5px;
+}
+
+.tooltip.top .tooltip-arrow {
+  border-top-color: $primary-color-dark!important;
+}
+.tooltip.bottom .tooltip-arrow {
+  border-bottom-color: $primary-color-dark!important;
+}
+.tooltip.left .tooltip-arrow {
+  border-left-color: $primary-color-dark!important;
+}
+
+.k-group {
+  display: inline-block;
+  text-align: center;
+  width: 150px;
+  white-space: nowrap;
+  border-width: 1px;
+  border-style: solid;
+  padding: 2em;
+  margin: 10px auto;
+}
