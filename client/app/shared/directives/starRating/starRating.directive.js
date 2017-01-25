@@ -12,7 +12,7 @@
             template:
             '<ul class="star-rating" ng-class="{readonly: readonly}">' +
             '  <li ng-repeat="star in stars" class="star" ng-class="{filled: star.filled}" ng-click="toggle($index)">' +
-            '  <i class="material-icons md-36">star_border</i>' + // or &#9733
+            '  <i class="material-icons md-36">star</i>' + // or &#9733
             '  </li>' +
             '</ul>',
             scope: {

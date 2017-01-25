@@ -55,6 +55,11 @@
         // Public function
         // ************************************************************************************************************/
 
+        vm.rateFunction = function(rating) {
+            console.log('Rating selected: ' + rating);
+        };
+
+
         function cancel() {
             console.log('cancel');
             if (vm.state === 'dsInsert') {

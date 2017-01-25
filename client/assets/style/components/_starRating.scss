@@ -14,8 +14,9 @@
     display: inline-block;
     cursor: pointer;
 
+
     &.filled {
-      color: #fd0;
+      color: red; // #fd0;
     }
   }
 
