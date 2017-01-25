@@ -1,22 +1,22 @@
 <form novalidate name="vm.form" role="form"
       ng-model-options="{ updateOn: 'default', debounce: { 'default': 100, 'blur': 0 } }">
     <div class="row">
-        <div class="col-md-2 form-group">
-            <div class="form-group"  >
+        <div class="col-md-1 form-group">
+            <div class="form-group" style="border:0;">
                 <label for="favori_input_id">
-                    {{"FAVORI"|translate}}<span style="color: red;" uib-tooltip={{"VALEUR_OBLIGATOIRE"|translate}}>*</span>
+                    {{"FAVORI"|translate}}
                 </label>
-                <span uib-rating
-                       class="form-control input"
-                       max="1"
+                <star-rating
+                    id="favori_input_id"
+                    class="form-control"
+                    style="border:0; box-shadow: none;"
+                    max="1"
+                    ng-model="vm.rating2">
+                </star-rating>
 
-                       id="favori_input_id"
-                       name="favori_rating"
-                       ng-model="vm.item.favori">
-                </span>
             </div>
         </div>
-        <div class="col-md-10 form-group">
+        <div class="col-md-11 form-group">
             <div class="form-group" ng-class="{'has-error': vm.form.$submitted && vm.form.categorie_input.$invalid}">
                 <label for="categorie_input_id">
                     {{"CATEGORIE"|translate}}<span style="color: red;" uib-tooltip={{"VALEUR_OBLIGATOIRE"|translate}}>*</span>

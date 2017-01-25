@@ -14,6 +14,14 @@
 
         var vm = this;
 
+        vm.rate = 1;
+        vm.max = 1;
+
+      //  vm.item.favori = 1;
+
+        vm.rating2 = 1;
+        vm.max = 1;
+
         /* Variables */
         vm.item = {};           // Object
         vm.items = [];          // List of object
