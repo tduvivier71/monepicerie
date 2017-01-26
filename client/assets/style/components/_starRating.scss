@@ -1,26 +1,49 @@
+/*
 .star-rating {
   position:absolute;
-  top:20px;
+  top:22px;
   margin: 0;
   padding: 0;
   display: inline-block;
 
   .star {
+    color: #666;
     padding: 1px;
-    color: #ddd;
     font-size: 20px;
     text-shadow: .05em .05em #aaa;
     list-style-type: none;
     display: inline-block;
     cursor: pointer;
 
+    &.clear {
+      color: red; // #fd0;
+    }
 
     &.filled {
-      color: red; // #fd0;
+      color: green; // #fd0;
     }
   }
 
   &.readonly .star.filled {
     color: #666;
   }
+}
+*/
+
+stat {
+color: #666;
+padding: 1px;
+font-size: 20px;
+text-shadow: .05em .05em #aaa;
+list-style-type: none;
+display: inline-block;
+cursor: pointer;
+
+&.clear {
+  color: red; // #fd0;
+}
+
+&.filled {
+  color: green; // #fd0;
+}
 }

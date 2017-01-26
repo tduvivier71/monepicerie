@@ -6,15 +6,7 @@
                 <label for="favori_input_id">
                     {{"FAVORI"|translate}}
                 </label>
-                <star-rating
-                    id="favori_input_id"
-                    on-rating-select="vm.rateFunction(rating)"
-                    class="form-control"
-                    style="border:0; box-shadow: none;"
-                    max="1"
-                    ng-model="vm.rating2">
-                </star-rating>
-
+                <i class="material-icons md-36 star" ng-click="vm.rateIt()" ng-class="'vm.rate' ? 'star.clear' : 'star.filled'">star</i>
             </div>
         </div>
         <div class="col-md-11 col-sm-11 col-xs-11 form-group">

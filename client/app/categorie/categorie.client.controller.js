@@ -14,7 +14,7 @@
 
         var vm = this;
 
-        vm.rate = 1;
+        vm.rate = false;
         vm.max = 1;
 
       //  vm.item.favori = 1;
@@ -44,6 +44,7 @@
         vm.save = save;
         vm.setEdit = setEdit;
         vm.setInsert = setInsert;
+        vm.rateIt = rateIt;
 
         // ************************************************************************************************************/
         // Entry point function
@@ -55,9 +56,9 @@
         // Public function
         // ************************************************************************************************************/
 
-        vm.rateFunction = function(rating) {
-            console.log('Rating selected: ' + rating);
-        };
+        function rateIt() {
+            vm.rate = !vm.rate;
+        }
 
 
         function cancel() {
