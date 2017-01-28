@@ -26,7 +26,9 @@ exports.findUnique = function(req, res) {
 };
 
 exports.createOne = function(req, res) {
-	Model.findOne( { categorie : req.body.categorie }, function(err, data) {
+    helpers.createOne(req, res, Model);
+
+/*	Model.findOne( { categorie : req.body.categorie }, function(err, data) {
 		if (err) {return res.status(400).json(err);}
 		if (!data) {
 			Model.create(req.body, function(err, data) {
@@ -36,7 +38,7 @@ exports.createOne = function(req, res) {
 		} else {
 			res.status(409).json('La catégorie "' + req.body.categorie + '" existe déjà.');
 		}
-	});
+	}); */
 };
 
 exports.deleteOne = function(req, res) {

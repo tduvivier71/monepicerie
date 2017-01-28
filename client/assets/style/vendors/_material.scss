@@ -44,16 +44,34 @@
   &.md-20 { font-size: 20px; }
   &.md-22 { font-size: 22px; }
   &.md-24 { font-size: 24px; }
+  &.md-32 { font-size: 32px; }
   &.md-36 { font-size: 36px; }
   &.md-48 { font-size: 48px; }
+
 
   /* Rules for using icons as black on a light background. */
   &.md-dark { color: rgba(0, 0, 0, 0.54); }
   &.md-dark.md-inactive { color: rgba(0, 0, 0, 0.26); }
 
   /* Rules for using icons as white on a dark background. */
-  &.md-light { color: rgba(255, 255, 255, 1); }
+  &.md-light { color: rgb(234, 227, 229); }
   &.md-light.md-inactive { color: rgba(255, 255, 255, 0.3); }
+
+  &.md-white {
+    color: rgba(255, 255, 255, 1);
+  }
+
+  &.md-yellow {
+    color: rgba(241, 192, 18, 0.89);
+  }
+
+ /* &:hover {
+    color: rgba(241, 192, 18, 0.89);
+  } */
+
+  &.cursor {
+    cursor: pointer;
+  }
 
 }
 

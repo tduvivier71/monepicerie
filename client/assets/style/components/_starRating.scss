@@ -30,20 +30,15 @@
 }
 */
 
-stat {
-color: #666;
-padding: 1px;
-font-size: 20px;
-text-shadow: .05em .05em #aaa;
-list-style-type: none;
-display: inline-block;
-cursor: pointer;
+starx {
+  cursor: pointer;
+}
 
-&.clear {
+filled {
+  color: green; // #fd0;
+}
+
+clear {
   color: red; // #fd0;
 }
 
-&.filled {
-  color: green; // #fd0;
-}
-}

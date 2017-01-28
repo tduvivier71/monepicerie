@@ -13,7 +13,7 @@ var CategorieSchema = new Schema({
 		unique: true,
 		required: 'La catégorie est obligatoire.'
 	},
-	favori : Number,
+	favori : Boolean,
 	//,
 	//creation:{
 	//	creationdt: {
