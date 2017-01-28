@@ -9,6 +9,7 @@ exports.find = function(req, res) {
 		 .sort('categorie')
 		 .exec(function(err, data) {
 			if (err) {return res.status(400).json(err);}
+             console.log('categorie find : ' + JSON.stringify(data));
 			res.status(200).json(data);
 		});
 };
@@ -62,6 +63,7 @@ exports.updateOne = function(req, res) {
 					if (err) {return res.status(400).json(err);}
 					if (!data) {return res.status(404).json();}
 					data.categorie = req.body.categorie; // A MODIFIER
+                    data.favori = req.body.favori; // A MODIFIER
 					data.save(function (err, data) {
 						res.status(200).json(data);
 					});

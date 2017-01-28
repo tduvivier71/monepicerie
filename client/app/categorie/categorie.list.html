@@ -21,7 +21,6 @@
         <tr data-ng-repeat="item in (vm.items | filter: vm.searchItem).slice(((vm.pagination.currentPage-1)*vm.pagination.itemsPerPage),
                         ((vm.pagination.currentPage)*vm.pagination.itemsPerPage))  | orderBy : vm.sorting.type:vm.sorting.reverse">
             <td class="col-md-1 col-sm-1 col-xs-1">
-                {{item.favori}}
                 <i class="material-icons md-32 md-white"
                    ng-model="item.favori"
                    ng-class="item.favori ? 'md-yellow' : 'md-white'">star</i>

@@ -115,6 +115,7 @@
             if (_form.$valid) {
                 var item = new categorieService();
                 item.categorie = _item.categorie;
+                item.favori = _item.favori;
                 item.$save(
                     function () {
                         vm.items.push(item);
