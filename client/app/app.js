@@ -55,6 +55,7 @@
 			});
 
 			ngToastProvider.configure({
+                additionalClasses: 'my-animation',
 				animation: 'fade',
 				combineDuplications: true,
 				dismissButton: true,

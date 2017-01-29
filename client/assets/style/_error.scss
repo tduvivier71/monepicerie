@@ -8,9 +8,37 @@
 //.has-error .form-control:focus{border-color: $danger-color;  box-shadow: none; -webkit-box-shadow: none;}
 
 
-
 .error-message {
   margin-top: 5px;
   font-size: 70%;
   color: $danger-color;
 }
+
+.has-error .help-block,
+.has-error .control-label,
+.has-error .radio,
+.has-error .checkbox,
+.has-error .radio-inline,
+.has-error .checkbox-inline, .has-error.radio label, .has-error.checkbox label, .has-error.radio-inline label, .has-error.checkbox-inline label {
+  color: $danger-color;
+}
+
+.has-error .form-control {
+  border-color: $danger-color;
+  -webkit-box-shadow: none;
+  box-shadow: none
+}
+
+.has-error .form-control:focus {
+  border-color: $danger-color;
+  -webkit-box-shadow: none;
+  box-shadow: none
+}
+
+.has-error .input-group-addon {
+  color: $danger-color;
+  border-color: $danger-color;
+  background-color: #f2dede; }
+
+.has-error .form-control-feedback {
+  color: $danger-color; }

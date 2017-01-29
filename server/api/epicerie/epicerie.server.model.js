@@ -12,6 +12,10 @@ var EpicerieSchema = new Schema({
 		required: 'Le nom est obligatoire.'
 	},
 
+    favori : {
+    	type: Boolean,
+	default: false
+	},
 	creation:{
 		creationdt: {
 			type: Date,

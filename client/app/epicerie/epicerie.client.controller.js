@@ -1,3 +1,6 @@
+// TODO : Corriger validate-input qui ne se fait pas sur epicerie_id
+// TODO : Google Map est sur $scope et non VM.  À corriger
+
 (function () {
 
     'use strict';
@@ -23,7 +26,6 @@
         vm.selectedItem = {};   // Object
         vm.state = '';          // string
         vm.error = '';          // string
-        vm.oneMore = false;      // boolean
 
         vm.sorting = {
             type: 'epicerie',
@@ -36,13 +38,12 @@
         vm.save = save;
         vm.setEdit = setEdit;
         vm.setInsert = setInsert;
-      //  vm.placeChanged = placeChanged;
 
         angular.extend($scope, {
             map: {center:
                 {
-                    latitude: 40.1451,
-                    longitude: -99.6680
+                    latitude: 45.5699091,
+                    longitude: -73.5721709
                 },
                 zoom: 4
             },
@@ -85,10 +86,15 @@
             }
         });
 
+        $scope.map = { // Montréal
+            center: { latitude: 45.5699091, longitude: -73.5721709 },
+            zoom: 10
+        };
+        $scope.options = { scrollwheel: false };
+
         GoogleMapApi.then(function(maps) {
             maps.visualRefresh = true;
         });
-
 
         // ************************************************************************************************************/
         // Entry point function
@@ -153,43 +159,6 @@
         // Private function
         // ************************************************************************************************************/
 
-        vm.types = "['establishment']";
-        vm.center = [0,0];
-      // vm.googleMapsUrl="libraries=placeses,visualization,drawing,geometry,places&key=AIzaSyABE67zQOFZrbXJIow-5-kLVD4FpWf52KQ";
-
-        vm.placeChanged = function() {
-            vm.place = this.getPlace();
-            console.log('** location ** : ', vm.place.geometry.location);
-            vm.map.setCenter(vm.place.geometry.location);
-
-        };
-
-        NgMap.getMap().then(function(map) {
-            vm.map = map;
-        });
-
-        /*function placeChanged () {
-            vm.types = "['establishment']";
-            vm.place = vm.this.getPlace();
-            console.log('** location **', vm.place.geometry.location);
-            vm.map.setCenter(vm.place.geometry.location);
-        }
-        NgMap.getMap().then(function(map) {
-            vm.map = map;
-        });*/
-
-        var areaLat = 44.2126995,
-            areaLng = -100.2471641,
-            areaZoom = 3;
-
-
-        $scope.map = {
-            center: { latitude: 39.8282, longitude: -98.5795 },
-            zoom: 10
-        };
-        $scope.options = { scrollwheel: false };
-
-
         function _cancelEdit() {
             console.log('cancelEdit');
             _revertSelectedItem();
@@ -201,23 +170,17 @@
             _setBrowse();
         }
 
-        function _create(_form, _item, _oneMore) {
+        function _create(_form, _item) {
             console.log('create');
             if (_form.$valid) {
                 var item = new epicerieService();
                 item.epicerie = document.getElementById('epicerie_input_id').value;  // _item.epicerie;
+                item.favori = _item.favori;
                 item.$save(
                     function () {
                         vm.items.push(item);
                         toasterService.save(item.epicerie);
-                        if (_oneMore) {
-                            _resetForm();
-                            setInsert();
-                        }
-                        else {
-                            _setBrowse();
-                        }
-                        vm.oneMore = false;
+                        _setBrowse();
                     }, function (e) {
                         toasterService.error(e.data);
                         focus('epicerie_focus');
@@ -230,6 +193,7 @@
 
         function _init() {
             vm.item.epicerie = '';
+            vm.item.favori = false;
             focus('searchText');
             vm.items = epicerieService.query();
             _setBrowse();

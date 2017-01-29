@@ -1,7 +1,18 @@
 <form novalidate name="vm.form" role="form">
    <!--   ng-model-options="{ updateOn: 'default', debounce: { 'default': 100, 'blur': 0 } }"> -->
     <div class="row">
-        <div class="col-md-12 form-group">
+        <div class="col-md-1 col-sm-1 col-xs-2">
+            <div class="form-group">
+                <label>
+                    {{"FAVORI"|translate}}
+                </label>
+                <i class="material-icons md-36 md-light cursor"
+                   ng-model="vm.item.favori"
+                   ng-click="vm.item.favori=!vm.item.favori"
+                   ng-class="vm.item.favori ? 'md-yellow' : 'md-light'">star</i>
+            </div>
+        </div>
+        <div class="col-md-11 col-sm-11 col-xs-10">
             <div class="form-group" ng-class="{'has-error': vm.form.$submitted && vm.form.epicerie_input.$invalid}">
                 <label for="epicerie_input_id">
                     {{"EPICERIE"|translate}}<span style="color: red;" uib-tooltip={{"VALEUR_OBLIGATOIRE"|translate}}>*</span>
@@ -16,12 +27,13 @@
         <input required
                autocomplete="off"
                class="form-control input"
+               focus-on="epicerie_focus"
                id="epicerie_input_id"
                name="epicerie_input"
                placeholder="Saisisez un lieu"
                ng-model="vm.item.epicerie"
                type="text"  >
-        <validate-input form="vm.form" field="vm.form.epicerie_input"></validate-input>
+               <validate-input form="vm.form" field="vm.form.epicerie_input"></validate-input>
     </script>
 
     <div>
@@ -47,24 +59,14 @@
 
     <div class="row">
         <br>
-        <div class="col-md-4 pull-right" style="text-align: right">
+        <div class="col-md-12 col-sm-12 col-xs-12 pull-right" style="text-align: right">
             <div class="btn-group">
                 <button class="btn btn-primary btn"
                         data-toggle="tooltip"
-                        ng-click="vm.save(vm.form, vm.item, false)">
+                        ng-click="vm.save(vm.form, vm.item)">
                         <i class="material-icons md-14">check</i>
                         {{"ENREGISTRER"|translate}}
                 </button>
-                <button aria-haspopup="true"
-                        aria-expanded="false"
-                        class="btn btn-primary dropdown-toggle"
-                        data-toggle="dropdown">
-                        <span class="caret"></span>
-                        <span class="sr-only">Toggle Dropdown</span>
-                </button>
-                <ul class="dropdown-menu">
-                    <li><a href="" ng-click="vm.form.$submitted = true; vm.save(vm.form, vm.item, true)">{{"AJOUTER_AUTRE_PRODUIT"|translate}}</a></li>
-                </ul>
             </div>
             <button class="btn btn-danger btn"
                     data-toggle="tooltip"

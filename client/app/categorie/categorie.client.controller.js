@@ -110,7 +110,7 @@
             _setBrowse();
         }
 
-        function _create(_form, _item, _oneMore) {
+        function _create(_form, _item) {
             console.log('create');
             if (_form.$valid) {
                 var item = new categorieService();
@@ -120,14 +120,7 @@
                     function () {
                         vm.items.push(item);
                         toasterService.save(_item.categorie);
-                        if (_oneMore) {
-                            _resetForm();
-                            setInsert();
-                        }
-                        else {
-                            _setBrowse();
-                        }
-                        vm.oneMore = false;
+                        _setBrowse();
                     }, function (e) {
                         toasterService.error(e.data);
                         focus('categorie_focus');
