@@ -1,7 +1,7 @@
 <form novalidate name="vm.form" role="form"
       ng-model-options="{ updateOn: 'default', debounce: { 'default': 100, 'blur': 0 } }">
     <div class="row">
-        <div class="col-md-3 form-group">
+        <div class="col-md-3">
             <div class="form-group" ng-class="{'has-error': vm.form.$submitted && vm.form.unite_input.$invalid}">
                 <label for="unite_input_id">
                     {{"UNITE"|translate}}<span style="color: red;" uib-tooltip={{"VALEUR_OBLIGATOIRE"|translate}}>*</span>
@@ -17,7 +17,7 @@
                        <validate-input form="vm.form" field="vm.form.unite_input"></validate-input>
             </div>
         </div>
-        <div class="col-md-2 form-group">
+        <div class="col-md-2">
             <div class="form-group" ng-class="{'has-error': vm.form.$submitted && vm.form.abbreviation_input.$invalid}">
                 <label for="unite_input_id">
                     {{"ABR"|translate}}<span style="color: red;" uib-tooltip={{"VALEUR_OBLIGATOIRE"|translate}}>*</span>
@@ -32,7 +32,7 @@
                        <validate-input form="vm.form" field="vm.form.abreviation_input"></validate-input>
             </div>
         </div>
-        <div class="col-md-2 form-group">
+        <div class="col-md-2 form-group" style="background-color: #00abf2">
             <div class="form-group">
                 <label>
                 Opération
@@ -49,7 +49,7 @@
                 </span>
             </div>
         </div>
-        <div class="col-md-2 form-group">
+        <div class="col-md-2 form-group" style="background-color: #00abf2;">
             <label for="nombre_input_id">
                 {{"NOMBRE"|translate}}
             </label>

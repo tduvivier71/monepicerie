@@ -27,8 +27,8 @@ module.exports = function() {
 		console.log('Moogonse connection error : ' +  err);
 	});
 
-	db.connection.on('disconnected',function() {
-		console.log('Moogonse disconnected...');
+	db.connection.on('disconnected',function(err) {
+		console.log('Erreur fatale - Moogonse disconnected...');
 	});
 
 	// CAPTURE APP TERMINATION / RESTART EVENTS

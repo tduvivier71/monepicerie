@@ -2,7 +2,7 @@
 
 // Set the 'development' environment configuration object
 module.exports = {
-	db: 'mongodb://localhost/monepicerie',
+	db: 'mongodb://127.0.0.1/monepicerie',
     sessionSecret: 'developmentSessionSecret',
     TOKEN_SECRET: 'thisIsSecret',
 	FACEBOOK: {

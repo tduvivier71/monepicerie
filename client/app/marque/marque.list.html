@@ -2,7 +2,7 @@
     <table class="table  table-borderless">
         <thead>
         <tr>
-            <th class="col-md-10 col-sm-10">
+            <th class="col-md-10 col-sm-10 col-xs-10">
                 <a href="javascript:void(0)" style="text-decoration:none; color:black;"
                    ng-click="vm.sorting.reverse = !vm.sorting.reverse">
                     {{"MARQUE"|translate}}
@@ -10,17 +10,17 @@
                     <span ng-show="vm.sorting.reverse"><i class="material-icons md-16">arrow_drop_up</i></span>
                 </a>
             </th>
-            <th class="col-md-2 col-sm-2">
+            <th class="col-md-2 col-sm-2 col-xs-2">
             </th>
         </tr>
         </thead>
         <tbody>
         <tr data-ng-repeat="item in (vm.items | filter: vm.searchItem).slice(((vm.pagination.currentPage-1)*vm.pagination.itemsPerPage),
                         ((vm.pagination.currentPage)*vm.pagination.itemsPerPage))  | orderBy : vm.sorting.type:vm.sorting.reverse">
-            <td class="col-md-10 col-sm-10">
+            <td class="col-md-10 col-sm-10 col-xs-10">
                 {{item.marque}}
             </td>
-            <td class="col-md-2 col-sm-2" style="text-align: right;">
+            <td class="col-md-2 col-sm-2 col-xs-2" style="text-align: right;">
                 <button class="btn btn-primary btn-sm"
                         data-toggle="tooltip"
                         ng-click="vm.setEdit(item)"

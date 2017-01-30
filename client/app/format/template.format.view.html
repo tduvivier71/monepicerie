@@ -1,7 +1,7 @@
 <div class="row">
     <nav-bar-pilotage></nav-bar-pilotage>
 </div>
-<div class="row">
+<div class="row" ng-show="vm.state == 'dsBrowse'" >
     <search-item
         search-item="vm.searchItem">
     </search-item>

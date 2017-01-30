@@ -1,7 +1,7 @@
-<form novalidate name="vm.form" role="form"
-      ng-model-options="{ updateOn: 'default', debounce: { 'default': 100, 'blur': 0 } }">
+<form novalidate name="vm.form" role="form">
+  <!--    ng-model-options="{ updateOn: 'default', debounce: { 'default': 100, 'blur': 0 } }">-->
     <div class="row">
-        <div class="col-md-12 form-group">
+        <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="form-group" ng-class="{'has-error': vm.form.$submitted && vm.form.marque_input.$invalid}">
                 <label for="marque_input_id">
                     {{"MARQUE"|translate}}<span style="color: red;" uib-tooltip={{"VALEUR_OBLIGATOIRE"|translate}}>*</span>
@@ -20,25 +20,14 @@
     </div>
     <div class="row">
         <br>
-        <div class="col-md-4 pull-right" style="text-align: right">
-            <div class="btn-group">
+        <div class="col-md-12 col-sm-12 col-xs-12 pull-right" style="text-align: right">
+
                 <button class="btn btn-primary btn"
                         data-toggle="tooltip"
-                        ng-click="vm.save(vm.form, vm.item, false)">
+                        ng-click="vm.save(vm.form, vm.item)">
                         <i class="material-icons md-14">check</i>
                         {{"ENREGISTRER"|translate}}
                 </button>
-                <button aria-haspopup="true"
-                        aria-expanded="false"
-                        class="btn btn-primary dropdown-toggle"
-                        data-toggle="dropdown">
-                        <span class="caret"></span>
-                        <span class="sr-only">Toggle Dropdown</span>
-                </button>
-                <ul class="dropdown-menu">
-                    <li><a href="" ng-click="vm.form.$submitted = true; vm.save(vm.form, vm.item, true)">{{"AJOUTER_AUTRE_PRODUIT"|translate}}</a></li>
-                </ul>
-            </div>
             <button class="btn btn-danger btn"
                     data-toggle="tooltip"
                     ng-click="vm.cancel()">
