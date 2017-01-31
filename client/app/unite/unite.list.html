@@ -2,7 +2,7 @@
     <table class="table  table-borderless">
         <thead>
         <tr>
-            <th class="col-md-5 col-sm-5">
+            <th class="col-md-2 col-sm-2 col-xs-2">
                 <a href="javascript:void(0)" style="text-decoration:none; color:black;"
                    ng-click="vm.sorting.reverse = !vm.sorting.reverse">
                     {{"UNITE"|translate}}
@@ -10,7 +10,11 @@
                     <span ng-show="vm.sorting.reverse"><i class="material-icons md-16">arrow_drop_up</i></span>
                 </a>
             </th>
-            <th class="col-md-5 col-sm-5">
+            <th class="col-md-1 col-sm-1">
+                {{"ABR"|translate}}
+            </th>
+
+            <th class="col-md-4 col-sm-4">
                 {{"COUTPAR"|translate}}
             </th>
             <th class="col-md-2 col-sm-2">
@@ -20,8 +24,11 @@
         <tbody>
         <tr data-ng-repeat="item in (vm.items | filter: vm.searchItem).slice(((vm.pagination.currentPage-1)*vm.pagination.itemsPerPage),
                         ((vm.pagination.currentPage)*vm.pagination.itemsPerPage))  | orderBy : vm.sorting.type:vm.sorting.reverse">
-            <td class="col-md-4 col-sm-4">
+            <th class="col-md-2 col-sm-2 col-xs-2">
                 {{item.unite}}
+            </td>
+            <td class="col-md-1 col-sm-1">
+                {{item.abreviation}}
             </td>
             <td class="col-md-4 col-sm-4">
                 {{item.coutParId.unite}}
