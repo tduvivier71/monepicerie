@@ -1,13 +1,14 @@
 {
   "ANNULER": "Annuler",
   "UNITE":"Unité",
+  "UNEUNITE":"Une unité",
   "UNITES":"Unités",
   "ABR":"Abréviation",
   "MULTIPLE":"Multiple",
   "DIVISEUR":"Diviseur",
   "COUTPAR":"Coût par",
   "PAR":"par",
-  "EGALE":"Égale",
+  "EGALE":"Équivaut à un",
 
   "VALEUR_OBLIGATOIRE":"Valeur obligatoire",
 

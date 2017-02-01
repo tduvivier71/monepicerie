@@ -17754,6 +17754,24 @@ $td-divider-color:        #BDBDBD;
     .navbar-custom .navbar-toggle .icon-bar {
       background-color: red; }
 
+.nav-custom-pilotage {
+  background: #2196F3;
+  border-color: #2196F3;
+  color: #FFFFFF !important; }
+  .nav-custom-pilotage .navbar-nav > li > a {
+    color: #FFFFFF;
+    height: 40px; }
+    .nav-custom-pilotage .navbar-nav > li > a:hover, .nav-custom-pilotage .navbar-nav > li > a:focus {
+      background-color: #2196F3;
+      border-style: solid;
+      border-width: 0 0 2px 0;
+      border-color: #FFFFFF; }
+  .nav-custom-pilotage .navbar-nav .active > a,
+  .nav-custom-pilotage .navbar-nav .active > a:hover,
+  .nav-custom-pilotage .navbar-nav .active > a:focus {
+    color: red !important;
+    background-color: blueviolet !important; }
+
 @media (max-width: 767px) {
   .navbar-default
   .navbar-nav
@@ -17772,10 +17790,6 @@ $td-divider-color:        #BDBDBD;
 .dropdown-menu a:hover {
   background-color: blue; }
 
-.nav-custom-pilotage {
-  background: #2196F3;
-  border-color: #2196F3;
-  color: #FFFFFF !important;
   /* a {
     color: $primary-color-text;
     &:hover, &:focus {
@@ -17790,21 +17804,7 @@ $td-divider-color:        #BDBDBD;
   ul.navbar-nav a:active { background: #fff; }
   ul.navbar-nav a:hover { border-color: #f14444; }
 
-  */ }
-  .nav-custom-pilotage .navbar-nav > li > a {
-    color: #FFFFFF;
-    height: 40px; }
-    .nav-custom-pilotage .navbar-nav > li > a:hover, .nav-custom-pilotage .navbar-nav > li > a:focus {
-      background-color: #2196F3;
-      border-style: solid;
-      border-width: 0 0 2px 0;
-      border-color: #FFFFFF; }
-  .nav-custom-pilotage .navbar-nav .active > a,
-  .nav-custom-pilotage .navbar-nav .active > a:hover,
-  .nav-custom-pilotage .navbar-nav .active > a:focus {
-    color: red !important;
-    background-color: blueviolet; }
-
+  */
 /* nav.nav-custom-pilotage a { color: #f14444; }
 nav.nav-custom-pilotage ul.navbar-nav a { color: #f14444; border-style: solid; border-width: 0 0 2px 0; border-color: #fff; }
 nav.nav-custom-pilotage ul.navbar-nav a:hover,

@@ -62,7 +62,8 @@ $colHover: $td-secondary-text-color; // hover selected text
       > a:hover,
       > a:focus {
         color: $colDefault;
-        background-color: $bgHighlight; }
+        background-color: $bgHighlight;
+        }
     }
 
     .open {
@@ -105,6 +106,39 @@ $colHover: $td-secondary-text-color; // hover selected text
 }
 
 
+.nav-custom-pilotage {
+  background: $bgHighlight;
+  border-color: $bgHighlight;
+  color: $primary-color-text !important;
+  .navbar-nav {
+
+    > li {
+      > a {
+        color: $primary-color-text;
+        height: 40px;
+        &:hover, &:focus {
+          background-color: $bgHighlight;
+          border-style: solid;
+          border-width: 0 0 2px 0;
+          border-color: $primary-color-text;
+        }
+      }
+    }
+
+    .active {
+      > a,
+      > a:hover,
+      > a:focus {
+        color: red !important;
+        background-color: blueviolet !important;
+      }
+    }
+
+  }
+
+}
+
+
 @media (max-width: 767px) {
 
   .navbar-default
@@ -122,41 +156,7 @@ $colHover: $td-secondary-text-color; // hover selected text
 
 .dropdown-menu a:hover {background-color: blue}
 
-.nav-custom-pilotage {
-  background: $bgHighlight; // #fff;
-  border-color: $bgHighlight; //  #ccc;
 
-  color: $primary-color-text !important;
-
-//  box-shadow: 0 0 2px 0 $bgDefault; // #ccc;
-
-  .navbar-nav {
-
-    > li {
-      > a {
-        color: $primary-color-text;
-        height: 40px;
-        &:hover, &:focus {
-     //     color: $primary-color-text;
-          background-color: $bgHighlight;
-          border-style: solid;
-          border-width: 0 0 2px 0;
-          border-color: $primary-color-text;
-        }
-      }
-    }
-
-    .active {
-      > a,
-      > a:hover,
-      > a:focus {
-        color: red !important;
-        background-color: blueviolet; }
-    }
-
-
-
-  }
 
   /* a {
     color: $primary-color-text;
@@ -174,7 +174,7 @@ $colHover: $td-secondary-text-color; // hover selected text
 
   */
 
-}
+
 
 
 /* nav.nav-custom-pilotage a { color: #f14444; }

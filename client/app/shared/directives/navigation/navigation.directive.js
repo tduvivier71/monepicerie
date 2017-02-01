@@ -6,21 +6,19 @@
     .module('app')
     .directive('navigation', navigation);
 
-     navigation.$inject = ['$auth'];
+  navigation.$inject = ['$auth'];
 
   function navigation ($auth) {
     return {
       restrict: 'EA',
       templateUrl: 'app/shared/directives/navigation/navigation.template.html',
       link: function($scope) {
-      //    $scope.isAuthentified = $auth.isAuthenticated();
           $scope.$watch( function () { return $auth.isAuthenticated();}, function(newVal){
-              console.log( "changed, new val: ", newVal );
+
               $scope.isAuthentified = newVal;
            });
       },
       controller: function($scope, $location) {
-
         $scope.isActive = function (path) {
           var currentPath = $location.path().split('/')[1];
           if (currentPath.indexOf('?') !== -1) {

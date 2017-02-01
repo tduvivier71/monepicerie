@@ -10,13 +10,22 @@
                     <span ng-show="vm.sorting.reverse"><i class="material-icons md-16">arrow_drop_up</i></span>
                 </a>
             </th>
-            <th class="col-md-1 col-sm-1">
+            <th class="col-md-2 col-sm-2">
                 {{"ABR"|translate}}
             </th>
 
-            <th class="col-md-4 col-sm-4">
-                {{"COUTPAR"|translate}}
+            <th class="col-md-2 col-sm-2">
+                {{"OPERATION"|translate}}
             </th>
+
+            <th class="col-md-2 col-sm-2">
+                {{"NOMBRE"|translate}}
+            </th>
+
+            <th class="col-md-2 col-sm-2">
+                {{"EGALE"|translate}}
+            </th>
+
             <th class="col-md-2 col-sm-2">
             </th>
         </tr>
@@ -27,12 +36,22 @@
             <th class="col-md-2 col-sm-2 col-xs-2">
                 {{item.unite}}
             </td>
-            <td class="col-md-1 col-sm-1">
+            <td class="col-md-2 col-sm-2">
                 {{item.abreviation}}
             </td>
-            <td class="col-md-4 col-sm-4">
+            <th class="col-md-2 col-sm-2 col-xs-2">
+                {{item.coutParId.operation}}
+            </td>
+            <th class="col-md-2 col-sm-2 col-xs-2">
+                {{item.coutParId.nombre}}
+            </td>
+            <th class="col-md-2 col-sm-2 col-xs-2">
                 {{item.coutParId.unite}}
             </td>
+
+
+
+
             <td class="col-md-2 col-sm-2" style="text-align: right;">
                 <button class="btn btn-primary btn-sm"
                         data-toggle="tooltip"
