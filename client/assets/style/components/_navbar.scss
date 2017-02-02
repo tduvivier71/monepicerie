@@ -106,10 +106,16 @@ $colHover: $td-secondary-text-color; // hover selected text
 }
 
 
+
+
+
 .nav-custom-pilotage {
   background: $bgHighlight;
   border-color: $bgHighlight;
   color: $primary-color-text !important;
+
+
+
   .navbar-nav {
 
     > li {
@@ -135,6 +141,8 @@ $colHover: $td-secondary-text-color; // hover selected text
         border-color: $primary-color-text;
       }
     }
+
+
 
   }
 
