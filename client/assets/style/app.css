@@ -17769,8 +17769,10 @@ $td-divider-color:        #BDBDBD;
   .nav-custom-pilotage .navbar-nav .active > a,
   .nav-custom-pilotage .navbar-nav .active > a:hover,
   .nav-custom-pilotage .navbar-nav .active > a:focus {
-    color: red !important;
-    background-color: blueviolet !important; }
+    background-color: #2196F3;
+    border-style: solid;
+    border-width: 0 0 3px 0;
+    border-color: #FFFFFF; }
 
 @media (max-width: 767px) {
   .navbar-default

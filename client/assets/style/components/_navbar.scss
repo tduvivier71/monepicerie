@@ -129,8 +129,10 @@ $colHover: $td-secondary-text-color; // hover selected text
       > a,
       > a:hover,
       > a:focus {
-        color: red !important;
-        background-color: blueviolet !important;
+        background-color: $bgHighlight;
+        border-style: solid;
+        border-width: 0 0 2px 0;
+        border-color: $primary-color-text;
       }
     }
 
