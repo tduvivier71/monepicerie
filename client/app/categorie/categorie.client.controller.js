@@ -69,10 +69,14 @@
             _setBrowse();
         }
 
-        function save(_form, _item, _oneMore) {
-            console.log('save');
+        function save(_form, _item) {
+            if (!_form.$valid) {
+                focus('categorie_focus');
+                return;
+            }
+
             if (vm.state === 'dsInsert') {
-                _create(_form, _item, _oneMore);
+                _create(_item);
             } else {
                 _update(_item);
             }
@@ -110,25 +114,21 @@
             _setBrowse();
         }
 
-        function _create(_form, _item) {
+        function _create(_item) {
             console.log('create');
-            if (_form.$valid) {
-                var item = new categorieService();
-                item.categorie = _item.categorie;
-                item.favori = _item.favori;
-                item.$save(
-                    function () {
-                        vm.items.push(item);
-                        toasterService.save(_item.categorie);
-                        _setBrowse();
-                    }, function (e) {
-                        toasterService.error(e.data);
-                        focus('categorie_focus');
-                    }
-                );
-            } else {
-                focus('categorie_focus');
-            }
+            var item = new categorieService();
+            item.categorie = _item.categorie;
+            item.favori = _item.favori;
+            item.$save(
+                function () {
+                    vm.items.push(item);
+                    toasterService.save(_item.categorie);
+                    _setBrowse();
+                }, function (e) {
+                    toasterService.error(e.data);
+                    focus('categorie_focus');
+                }
+            );
         }
 
         function _init() {
@@ -144,6 +144,7 @@
                     _setBrowse();
                 }, function (e) {
                     toasterService.error(e.data);
+                    focus('categorie_focus');
                 }
             );
         }
