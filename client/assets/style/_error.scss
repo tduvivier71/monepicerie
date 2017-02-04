@@ -30,7 +30,7 @@
 }
 
 .has-error .form-control:focus {
-  border-color: $danger-color;
+  border-color: $danger-color !important;
   -webkit-box-shadow: none;
   box-shadow: none
 }

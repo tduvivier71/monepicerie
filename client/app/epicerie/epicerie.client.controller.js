@@ -9,10 +9,10 @@
         .module('app.epicerie')
         .controller('EpicerieController', EpicerieController);
 
-    EpicerieController.$inject = ['$log', 'uiGmapGoogleMapApi', '$scope', 'NgMap',
+    EpicerieController.$inject = ['$log', 'uiGmapGoogleMapApi', '$scope',
                                 'epicerieService', 'toasterService', 'focus'];
 
-    function EpicerieController($log, GoogleMapApi, $scope, NgMap,
+    function EpicerieController($log, GoogleMapApi, $scope,
                                 epicerieService, toasterService, focus) {
 
         var vm = this;
@@ -39,58 +39,46 @@
         vm.setEdit = setEdit;
         vm.setInsert = setInsert;
 
-        angular.extend($scope, {
-            map: {center:
-                {
-                    latitude: 45.5699091,
-                    longitude: -73.5721709
-                },
-                zoom: 4
+        vm.title = 'Another Title';
+
+      /*  $scope.$watch('searchModel.searchTerm', function(current, original) {
+            $log.info('searchModel.searchTerm' + original);
+            $log.info('searchModel.searchTerm ' + current);
+        }); */
+
+        vm.map = {
+            center: {  // Montréal
+                latitude: 45.5699091,
+                longitude: -73.5721709
             },
-            searchbox: {
-                template:'searchbox.tpl.html',
-                parentdiv: 'searchBoxParent',
-                events:{
-                    places_changed: function (searchBox) {
-
-                        var place = searchBox.getPlaces();
-                        if (!place || place === 'undefined' || place.length === 0) {
-                            console.log('no place data :(');
-                            return;
-                        }
-
-                        // refresh the map
-                        $scope.map = {
-                            center:{
-                                latitude:place[0].geometry.location.lat(),
-                                longitude:place[0].geometry.location.lng()
-                            },
-                            zoom:16
-                        };
-
-                        // refresh the marker
-                        /*     $scope.marker = {
-                            id:0,
-                            options:{ draggable:false },
-                            coords:{
-                                latitude:place[0].geometry.location.lat(),
-                                longitude:place[0].geometry.location.lng()
-                            }
-                        };  */
-
-                    }
-                }
-            },
+            zoom: 10,
             options: {
                 scrollwheel: false
             }
-        });
-
-        $scope.map = { // Montréal
-            center: { latitude: 45.5699091, longitude: -73.5721709 },
-            zoom: 10
         };
-        $scope.options = { scrollwheel: false };
+
+        vm.searchbox = {
+            template : 'searchbox.tpl.html',
+            parentdiv : 'searchBoxParent',
+            events : {
+                places_changed: function (searchBox) {
+
+                    var place = searchBox.getPlaces();
+                    if (!place || place === 'undefined' || place.length === 0) {
+                        return;
+                    }
+
+                    // refresh the map
+                    vm.map = {
+                        center:{
+                            latitude:place[0].geometry.location.lat(),
+                            longitude:place[0].geometry.location.lng()
+                        },
+                        zoom:16
+                    };
+                }
+            }
+        };
 
         GoogleMapApi.then(function(maps) {
             maps.visualRefresh = true;
@@ -129,10 +117,14 @@
             _setBrowse();
         }
 
-        function save(_form, _item, _oneMore) {
-            console.log('save');
+        function save(_form, _item) {
+            if (!_form.$valid) {
+                focus('epicerie_focus');
+                return;
+            }
+
             if (vm.state === 'dsInsert') {
-                _create(_form, _item, _oneMore);
+                _create(_item);
             } else {
                 _update(_item);
             }
@@ -170,30 +162,28 @@
             _setBrowse();
         }
 
-        function _create(_form, _item) {
-            console.log('create');
-            if (_form.$valid) {
-                var item = new epicerieService();
-                item.epicerie = document.getElementById('epicerie_input_id').value;  // _item.epicerie;
-                item.favori = _item.favori;
-                item.$save(
-                    function () {
-                        vm.items.push(item);
-                        toasterService.save(item.epicerie);
-                        _setBrowse();
-                    }, function (e) {
-                        toasterService.error(e.data);
-                        focus('epicerie_focus');
-                    }
-                );
-            } else {
-                focus('epicerie_focus');
-            }
+        function _create(_item) {
+            var item = new epicerieService();
+            item.epicerie = vm.title;
+         //   item.epicerie = document.getElementById('epicerie_input_id').value;  // _item.epicerie;
+         //   item.favori = _item.favori;
+            item.$save(
+                function () {
+                    vm.items.push(item);
+                    toasterService.save(item.epicerie);
+                    _setBrowse();
+                }, function (e) {
+                    toasterService.error(e.data);
+                    focus('epicerie_focus');
+                }
+            );
         }
 
         function _init() {
-            vm.item.epicerie = '';
-            vm.item.favori = false;
+            vm.item = {
+                epicerie : '',
+                favori : false
+            };
             focus('searchText');
             vm.items = epicerieService.query();
             _setBrowse();

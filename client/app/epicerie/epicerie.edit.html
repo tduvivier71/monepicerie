@@ -19,11 +19,14 @@
                 </label>
                 <div id="searchBoxParent">
                 </div>
+                **** {{vm.title}} ****
+                ***** {{vm.searchModel.searchTerm}}
+                <input ng-model="vm.title" />
             </div>
         </div>
     </div>
 
-    <script id="searchbox.tpl.html" type="text/ng-template">
+<!--    <script id="searchbox.tpl.html" type="text/ng-template">
         <input required
                autocomplete="off"
                class="form-control input"
@@ -31,49 +34,31 @@
                id="epicerie_input_id"
                name="epicerie_input"
                placeholder="Saisisez un lieu"
-               ng-model="vm.item.epicerie"
-               type="text"  >
+               ng-model="searchModel.searchTerm"
+               type="text">
                <validate-input form="vm.form" field="vm.form.epicerie_input"></validate-input>
-    </script>
+    </script> -->
 
     <div>
         <ui-gmap-google-map
-            center="map.center"
-            zoom="map.zoom"
-            dragging="map.dragging"
-            bounds="map.bounds"
-            events="map.events"
-            options="map.options"
-            pan="true"
-            control="map.control">
+            center="vm.map.center"
+            zoom="vm.map.zoom"
+            options="vm.map.options"
+            pan="true">
 
             <ui-gmap-search-box
-                    options="searchbox.options"
-                    template="searchbox.template"
-                    events="searchbox.events"
-                    parentdiv="searchbox.parentdiv">
-
+                    options="vm.searchbox.options"
+                    template="vm.searchbox.template"
+                    events="vm.searchbox.events"
+                    parentdiv="vm.searchbox.parentdiv">
             </ui-gmap-search-box>
+
         </ui-gmap-google-map>
     </div>
 
     <div class="row">
-        <br>
-        <div class="col-md-12 col-sm-12 col-xs-12 pull-right" style="text-align: right">
-            <div class="btn-group">
-                <button class="btn btn-primary btn"
-                        data-toggle="tooltip"
-                        ng-click="vm.save(vm.form, vm.item)">
-                        <i class="material-icons md-14">check</i>
-                        {{"ENREGISTRER"|translate}}
-                </button>
-            </div>
-            <button class="btn btn-danger btn"
-                    data-toggle="tooltip"
-                    ng-click="vm.cancel()">
-                    <i class="material-icons md-14">close</i>
-                    {{"ANNULER"|translate}}
-            </button>
-        </div>
+        <ng-include
+                src="'app/shared/partials/bottom-save-cancel.html'">
+        </ng-include>
     </div>
 </form>

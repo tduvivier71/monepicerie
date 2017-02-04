@@ -1,3 +1,7 @@
+// https://plnkr.co/edit/Iv4jfzLocrB8fkUFvYuA?p=preview
+// https://github.com/angular-ui/angular-google-maps/blob/master/example/search-box-ngmodel.html
+// https://github.com/angular-ui/angular-google-maps/blob/master/example/assets/scripts/controllers/search-box-ngmodel.js
+
 (function () {
 
 	'use strict';
@@ -105,9 +109,9 @@
 		 * runApp
 		 */
 
-        runApp.$inject = ['$rootScope', '$translate', '$location', '$auth','$route'];
+        runApp.$inject = ['$rootScope', '$translate', '$location', '$auth','$route', '$templateCache'];
 
-		function runApp($rootScope, $translate, $location, $auth, $route) {
+		function runApp($rootScope, $translate, $location, $auth, $route, $templateCache) {
 
 		    $rootScope.$on('$translatePartialLoaderStructureChanged', function ()
 				{
@@ -115,7 +119,12 @@
 				}
 			);
 
-          // $location.path('/accueil');
+
+            $templateCache.put('searchbox.tpl.html',
+				'<input required ng-model="vm.title" id="pac-input" class="form-control input" type="text" placeholder="Saisisez un lieu" ></input>');
+
+
+            // $location.path('/accueil');
 
             if ($auth.isAuthenticated()) {
                 console.log('Autorisé');

@@ -7,6 +7,7 @@
                     {{"FAVORI"|translate}}
                 </label>
                 <i class="material-icons md-36 md-light cursor"
+                   style="margin-left: 5px;"
                    ng-model="vm.item.favori"
                    ng-click="vm.item.favori=!vm.item.favori"
                    ng-class="vm.item.favori ? 'md-yellow' : 'md-light'">star</i>
@@ -30,21 +31,9 @@
         </div>
     </div>
     <div class="row">
-        <br>
-        <div class="col-md-12 col-sm-12 col-xs-12 pull-right" style="text-align: right">
-            <button class="btn btn-primary btn"
-                    data-toggle="tooltip"
-                    ng-click="vm.save(vm.form, vm.item)">
-                    <i class="material-icons md-14">check</i>
-                    {{"ENREGISTRER"|translate}}
-            </button>
-            <button class="btn btn-danger btn"
-                    data-toggle="tooltip"
-                    ng-click="vm.cancel()">
-                    <i class="material-icons md-14">close</i>
-                    {{"ANNULER"|translate}}
-            </button>
-        </div>
+        <ng-include
+                src="'app/shared/partials/bottom-save-cancel.html'">
+        </ng-include>
     </div>
 </form>
 

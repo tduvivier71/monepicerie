@@ -355,34 +355,9 @@
     <br>
 
     <div class="row">
-        <br>
-        <div class="col-md-4 pull-right" style="text-align: right">
-            <div class="btn-group">
-                <button class="btn btn-primary btn"
-                        data-toggle="tooltip"
-                        ng-click="vm.save(vm.form, vm.item, false)">
-                        <span class="fa fa-check"></span>
-                        {{"ENREGISTRER"|translate}}
-                </button>
-                <button type="button"
-                        class="btn btn-primary dropdown-toggle"
-                        data-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false">
-                    <span class="caret"></span>
-                    <span class="sr-only">Toggle Dropdown</span>
-                </button>
-                <ul class="dropdown-menu">
-                    <li><a href="" ng-click="vm.form.$submitted = true; vm.save(vm.form, vm.item, true)">{{"AJOUTER_AUTRE_PRODUIT"|translate}}></a></li>
-                </ul>
-            </div>
-            <button class="btn btn-danger btn"
-                    data-toggle="tooltip"
-                    ng-click="vm.cancel()">
-                    <span class="fa fa-times"></span>
-                    {{"ANNULER"|translate}}
-            </button>
-        </div>
+        <ng-include
+                src="'app/shared/partials/bottom-save-cancel.html'">
+        </ng-include>
     </div>
 
 </form>

@@ -6,9 +6,11 @@
         .module('app.format')
         .controller('FormatController', FormatController);
 
-    FormatController.$inject = ['$log', 'formatService', 'toasterService', 'focus'];
+    FormatController.$inject = ['$log',
+                                'formatService', 'toasterService', 'focus'];
 
-    function FormatController($log, formatService, toasterService, focus) {
+    function FormatController($log,
+                              formatService, toasterService, focus) {
 
         var vm = this;
 
@@ -68,10 +70,14 @@
             _setBrowse();
         }
 
-        function save(_form, _item, _oneMore) {
-            console.log('save');
+        function save(_form, _item) {
+            if (!_form.$valid) {
+                focus('format_focus');
+                return;
+            }
+
             if (vm.state === 'dsInsert') {
-                _create(_form, _item, _oneMore);
+                _create(_item);
             } else {
                 _update(_item);
             }
@@ -109,31 +115,20 @@
             _setBrowse();
         }
 
-        function _create(_form, _item, _oneMore) {
+        function _create(_item) {
             console.log('create');
-            if (_form.$valid) {
-                var item = new formatService();
-                item.format = _item.format;
-                item.$save(
-                    function () {
-                        vm.items.push(item);
-                        toasterService.save(_item.format);
-                        if (_oneMore) {
-                            _resetForm();
-                            setInsert();
-                        }
-                        else {
-                            _setBrowse();
-                        }
-                        vm.oneMore = false;
-                    }, function (e) {
-                        toasterService.error(e.data);
-                        focus('format_focus');
-                    }
-                );
-            } else {
-                focus('format_focus');
-            }
+            var item = new formatService();
+            item.format = _item.format;
+            item.$save(
+                function () {
+                    vm.items.push(item);
+                    toasterService.save(_item.format);
+                    _setBrowse();
+                }, function (e) {
+                    toasterService.error(e.data);
+                    focus('format_focus');
+                }
+            );
         }
 
         function _init() {
@@ -149,6 +144,7 @@
                     _setBrowse();
                 }, function (e) {
                     toasterService.error(e.data);
+                    focus('format_focus');
                 }
             );
         }

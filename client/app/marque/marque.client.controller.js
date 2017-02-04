@@ -71,9 +71,13 @@
         }
 
         function save(_form, _item, _oneMore) {
-            console.log('save');
+            if (!_form.$valid) {
+                focus('marque_focus');
+                return;
+            }
+
             if (vm.state === 'dsInsert') {
-                _create(_form, _item, _oneMore);
+                _create(_item);
             } else {
                 _update(_item);
             }
@@ -111,31 +115,20 @@
             _setBrowse();
         }
 
-        function _create(_form, _item, _oneMore) {
+        function _create(_item) {
             console.log('create');
-            if (_form.$valid) {
-                var item = new marqueService();
-                item.marque = _item.marque;
-                item.$save(
-                    function () {
-                        vm.items.push(item);
-                        toasterService.save(_item.marque);
-                        if (_oneMore) {
-                            _resetForm();
-                            setInsert();
-                        }
-                        else {
-                            _setBrowse();
-                        }
-                        vm.oneMore = false;
-                    }, function (e) {
-                        toasterService.error(e.data);
-                        focus('marque_focus');
-                    }
-                );
-            } else {
-                focus('marque_focus');
-            }
+            var item = new marqueService();
+            item.marque = _item.marque;
+            item.$save(
+                function () {
+                    vm.items.push(item);
+                    toasterService.save(_item.marque);
+                    _setBrowse();
+                }, function (e) {
+                    toasterService.error(e.data);
+                    focus('marque_focus');
+                }
+            );
         }
 
         function _init() {
