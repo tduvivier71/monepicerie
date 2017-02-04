@@ -85,11 +85,11 @@
 			});
 			$translateProvider.preferredLanguage('fr-CA');
 
-            uiGmapGoogleMapApiProvider.configure({
+       /*     uiGmapGoogleMapApiProvider.configure({
                 key: "AIzaSyABE67zQOFZrbXJIow-5-kLVD4FpWf52KQ", //Clé pour utiliser l'API
                 v: '3.21', //Par défaut la version la plus récente disponible
                 libraries: 'places, geometry,visualization' //Librairies supplémentaires
-            });
+            }); */
 
 		}
 

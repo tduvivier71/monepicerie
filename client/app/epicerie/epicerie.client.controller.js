@@ -9,10 +9,10 @@
         .module('app.epicerie')
         .controller('EpicerieController', EpicerieController);
 
-    EpicerieController.$inject = ['$log', 'uiGmapGoogleMapApi', '$scope',
+    EpicerieController.$inject = ['$log', 'uiGmapGoogleMapApi', '$scope', 'NgMap',
                                 'epicerieService', 'toasterService', 'focus'];
 
-    function EpicerieController($log, GoogleMapApi, $scope,
+    function EpicerieController($log, GoogleMapApi, $scope, NgMap,
                                 epicerieService, toasterService, focus) {
 
         var vm = this;
@@ -41,12 +41,28 @@
 
         vm.title = 'Another Title';
 
+
+        vm.placeChanged = function() {
+            vm.place = this.getPlace();
+            console.log('location', vm.place.geometry.location);
+            vm.map.setCenter(vm.place.geometry.location);
+        };
+
+        NgMap.getMap().then(function(map) {
+            vm.map = map;
+        });
+
+
+
+
+
+
       /*  $scope.$watch('searchModel.searchTerm', function(current, original) {
             $log.info('searchModel.searchTerm' + original);
             $log.info('searchModel.searchTerm ' + current);
         }); */
 
-        vm.map = {
+     /*   vm.map = {
             center: {  // Montréal
                 latitude: 45.5699091,
                 longitude: -73.5721709
@@ -82,7 +98,7 @@
 
         GoogleMapApi.then(function(maps) {
             maps.visualRefresh = true;
-        });
+        }); */
 
         // ************************************************************************************************************/
         // Entry point function

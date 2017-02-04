@@ -18,10 +18,10 @@
                     {{"EPICERIE"|translate}}<span style="color: red;" uib-tooltip={{"VALEUR_OBLIGATOIRE"|translate}}>*</span>
                 </label>
                 <div id="searchBoxParent">
+                    <input places-auto-complete size=80
+                           ng-model="vm.address"
+                           on-place-changed="vm.placeChanged()" />
                 </div>
-                **** {{vm.title}} ****
-                ***** {{vm.searchModel.searchTerm}}
-                <input ng-model="vm.title" />
             </div>
         </div>
     </div>
@@ -39,7 +39,9 @@
                <validate-input form="vm.form" field="vm.form.epicerie_input"></validate-input>
     </script> -->
 
-    <div>
+    <ng-map></ng-map>
+
+   <!-- <div>
         <ui-gmap-google-map
             center="vm.map.center"
             zoom="vm.map.zoom"
@@ -54,7 +56,7 @@
             </ui-gmap-search-box>
 
         </ui-gmap-google-map>
-    </div>
+    </div> -->
 
     <div class="row">
         <ng-include
