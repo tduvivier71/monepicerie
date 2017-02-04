@@ -17,11 +17,17 @@
                 <label for="epicerie_input_id">
                     {{"EPICERIE"|translate}}<span style="color: red;" uib-tooltip={{"VALEUR_OBLIGATOIRE"|translate}}>*</span>
                 </label>
-                <div id="searchBoxParent">
-                    <input places-auto-complete size=80
-                           ng-model="vm.address"
-                           on-place-changed="vm.placeChanged()" />
-                </div>
+                <input required
+                       places-auto-complete
+                       autocomplete="off"
+                       class="form-control input"
+                       focus-on="epicerie_focus"
+                       id="epicerie_input_id"
+                       name="epicerie_input"
+                       placeholder="Saisisez un lieu"
+                       on-place-changed="vm.placeChanged()
+                       type="text">
+                <validate-input form="vm.form" field="vm.form.epicerie_input"></validate-input>
             </div>
         </div>
     </div>

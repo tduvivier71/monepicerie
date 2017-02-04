@@ -39,7 +39,7 @@
         vm.setEdit = setEdit;
         vm.setInsert = setInsert;
 
-        vm.title = 'Another Title';
+
 
 
         vm.placeChanged = function() {
