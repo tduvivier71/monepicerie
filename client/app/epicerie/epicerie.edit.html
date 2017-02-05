@@ -24,10 +24,11 @@
                        focus-on="epicerie_focus"
                        id="epicerie_input_id"
                        name="epicerie_input"
+                       ng-model="vm.address"
                        placeholder="Saisisez un lieu"
                        on-place-changed="vm.placeChanged()
                        type="text">
-                <validate-input form="vm.form" field="vm.form.epicerie_input"></validate-input>
+                       <validate-input form="vm.form" field="vm.form.epicerie_input"></validate-input>
             </div>
         </div>
     </div>
@@ -45,7 +46,7 @@
                <validate-input form="vm.form" field="vm.form.epicerie_input"></validate-input>
     </script> -->
 
-    <ng-map></ng-map>
+    <ng-map zoom="12"></ng-map>
 
    <!-- <div>
         <ui-gmap-google-map

@@ -39,9 +39,7 @@
         vm.setEdit = setEdit;
         vm.setInsert = setInsert;
 
-
-
-
+        vm.types = "['establishment']";
         vm.placeChanged = function() {
             vm.place = this.getPlace();
             console.log('location', vm.place.geometry.location);
@@ -49,13 +47,10 @@
         };
 
         NgMap.getMap().then(function(map) {
+
             vm.map = map;
+            map.setZoom(16);
         });
-
-
-
-
-
 
       /*  $scope.$watch('searchModel.searchTerm', function(current, original) {
             $log.info('searchModel.searchTerm' + original);
@@ -180,7 +175,7 @@
 
         function _create(_item) {
             var item = new epicerieService();
-            item.epicerie = vm.title;
+            item.epicerie = vm.address;
          //   item.epicerie = document.getElementById('epicerie_input_id').value;  // _item.epicerie;
          //   item.favori = _item.favori;
             item.$save(
@@ -225,7 +220,8 @@
         }
 
         function _resetForm() {
-            if (vm.form.$dirty || vm.form.$submitted) {
+            if (vm.form && vm.form.$dirty) // || vm.form.$submitted)
+                {
                 vm.form.$setPristine();
                 vm.form.$setUntouched();
             }
