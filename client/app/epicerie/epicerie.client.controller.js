@@ -42,12 +42,16 @@
 
         vm.placeChanged = function() {
             vm.place = this.getPlace();
+            if (!vm.place.geometry) {
+                window.alert("Autocomplete's returned place contains no geometry");
+                return;
+            }
+
             console.log('location', vm.place.geometry.location);
             $timeout(function() {
                 vm.map.setCenter(vm.place.geometry.location);
-            }, 3000);
-
-
+                vm.map.setZoom(17);
+            }, 500);
         };
 
         NgMap.getMap().then(function(map) {
@@ -169,7 +173,7 @@
         }
 
         function _create(_item) {
-            if (vm.place && vm.place.geometry.location) {
+            if (vm.place.geometry) {
                 var item = new epicerieService();
                 item.epicerie = _item.epicerie;
                 item.favori = _item.favori;
