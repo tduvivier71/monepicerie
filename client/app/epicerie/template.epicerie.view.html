@@ -8,11 +8,11 @@
 </div>
 
 <div class="row">
-    <div ng-switch="vm.state">
-        <div ng-switch-when="dsInsert" ng-switch-when-separator="|">
+    <div ng-switch on=" (vm.state=='dsInsert') || (vm.state=='dsEdit')" >
+        <div ng-switch-when=true>
             <div static-include="app/epicerie/epicerie.edit.html"></div>
         </div>
-        <div ng-switch-when="dsBrowse">
+        <div ng-switch-when=false>
             <div static-include="app/epicerie/epicerie.list.html"></div>
         </div>
     </div>
