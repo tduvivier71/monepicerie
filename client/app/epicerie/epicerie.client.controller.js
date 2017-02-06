@@ -9,10 +9,10 @@
         .module('app.epicerie')
         .controller('EpicerieController', EpicerieController);
 
-    EpicerieController.$inject = ['$log', 'uiGmapGoogleMapApi', '$scope', 'NgMap',
+    EpicerieController.$inject = ['$log', 'uiGmapGoogleMapApi', '$scope', 'NgMap', '$timeout',
                                 'epicerieService', 'toasterService', 'focus'];
 
-    function EpicerieController($log, GoogleMapApi, $scope, NgMap,
+    function EpicerieController($log, GoogleMapApi, $scope, NgMap, $timeout,
                                 epicerieService, toasterService, focus) {
 
         var vm = this;
@@ -40,21 +40,19 @@
         vm.setInsert = setInsert;
 
 
-
-
         vm.placeChanged = function() {
             vm.place = this.getPlace();
             console.log('location', vm.place.geometry.location);
-            vm.map.setCenter(vm.place.geometry.location);
+            $timeout(function() {
+                vm.map.setCenter(vm.place.geometry.location);
+            }, 3000);
+
+
         };
 
         NgMap.getMap().then(function(map) {
             vm.map = map;
         });
-
-
-
-
 
 
       /*  $scope.$watch('searchModel.searchTerm', function(current, original) {
@@ -135,7 +133,7 @@
 
         function save(_form, _item) {
             if (!_form.$valid) {
-                focus('epicerie_focus');
+                vm.epicerie_input_focus = true;
                 return;
             }
 
@@ -147,20 +145,14 @@
         }
 
         function setEdit(_item) {
-            console.log('setEdit');
-            _resetForm();
             vm.selectedItem = angular.copy(_item);
-            vm.item = _item;
-            vm.state = 'dsEdit';
-            focus('epicerie_focus');
+            _resetForm('dsEdit');
+            vm.epicerie_input_focus = true;
         }
 
         function setInsert() {
-            console.log('setInsert');
-            _resetForm();
-            vm.item = undefined;
-            vm.state = 'dsInsert';
-            focus('epicerie_focus');
+            _resetForm('dsInsert');
+            vm.epicerie_input_focus = true;
         }
 
         // ************************************************************************************************************/
@@ -168,38 +160,33 @@
         // ************************************************************************************************************/
 
         function _cancelEdit() {
-            console.log('cancelEdit');
             _revertSelectedItem();
             _setBrowse();
         }
 
         function _cancelInsert() {
-            console.log('_cancelInsert');
             _setBrowse();
         }
 
         function _create(_item) {
-            var item = new epicerieService();
-            item.epicerie = vm.title;
-         //   item.epicerie = document.getElementById('epicerie_input_id').value;  // _item.epicerie;
-         //   item.favori = _item.favori;
-            item.$save(
-                function () {
-                    vm.items.push(item);
-                    toasterService.save(item.epicerie);
-                    _setBrowse();
-                }, function (e) {
-                    toasterService.error(e.data);
-                    focus('epicerie_focus');
-                }
-            );
+            if (vm.place && vm.place.geometry.location) {
+                var item = new epicerieService();
+                item.epicerie = _item.epicerie;
+                item.favori = _item.favori;
+                item.$save(
+                    function () {
+                        vm.items.push(item);
+                        toasterService.save(item.epicerie);
+                        _setBrowse();
+                    }, function (e) {
+                        toasterService.error(e.data);
+                        vm.epicerie_input_focus = true;
+                    }
+                );
+            }
         }
 
         function _init() {
-            vm.item = {
-                epicerie : '',
-                favori : false
-            };
             focus('searchText');
             vm.items = epicerieService.query();
             _setBrowse();
@@ -217,15 +204,19 @@
         }
 
         function _setBrowse() {
-            _resetForm();
-            $log.info('_setBrowse');
+            _resetForm('dsBrowse');
             vm.sorting.type = 'epicerie';
-            vm.state = 'dsBrowse';
             focus('searchItem_focus');
         }
 
-        function _resetForm() {
-            if (vm.form.$dirty || vm.form.$submitted) {
+        function _resetForm(state) {
+            vm.place = undefined;
+            vm.item.epicerie = '';
+            vm.item.favori = false;
+
+            vm.state = state;
+
+            if (vm.form && vm.form.$dirty && vm.form.$submitted) {
                 vm.form.$setPristine();
                 vm.form.$setUntouched();
             }
