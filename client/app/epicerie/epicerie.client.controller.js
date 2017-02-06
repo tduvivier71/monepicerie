@@ -150,12 +150,15 @@
 
         function setEdit(_item) {
             vm.selectedItem = angular.copy(_item);
+            vm.item = _item;
             _resetForm('dsEdit');
             vm.epicerie_input_focus = true;
         }
 
         function setInsert() {
             _resetForm('dsInsert');
+            vm.item.epicerie = '';
+            vm.item.favori = false;
             vm.epicerie_input_focus = true;
         }
 
@@ -214,9 +217,11 @@
         }
 
         function _resetForm(state) {
-            vm.place = undefined;
-            vm.item.epicerie = '';
-            vm.item.favori = false;
+            if (vm.place) {
+                vm.place = {};
+              //  vm.place.geometry.location = [];
+            };
+
 
             vm.state = state;
 
