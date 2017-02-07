@@ -51,8 +51,11 @@
 
             console.log('location', vm.place.geometry.location);
             $timeout(function() {
+                vm.latitude = vm.place.geometry.location.lat();
+                vm.longitude = vm.place.geometry.location.lng();
+
               //  if (vm.map.setCenter) {
-                    vm.map.setCenter(vm.place.geometry.location);
+              //      vm.map.setCenter(vm.place.geometry.location);
                 vm.map.setZoom(17);
              //   }
             }, 500);
