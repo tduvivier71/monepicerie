@@ -14,8 +14,24 @@ var EpicerieSchema = new Schema({
 
     favori : {
     	type: Boolean,
-	default: false
+	    default: false
 	},
+
+	latitude : {
+        type: Number,
+        default: 0
+    },
+
+	longitude : {
+        type: Number,
+        default: 0
+    },
+
+	location : {
+		lat: Number,
+		lng: Number
+	},
+
 	creation:{
 		creationdt: {
 			type: Date,

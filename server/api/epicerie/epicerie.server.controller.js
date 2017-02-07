@@ -33,6 +33,8 @@ exports.updateOne = function(req, res) {
 			if (!data) {return res.status(404).json();}
 				data.epicerie = req.body.epicerie; // !! A MODIFIER !!
                 data.favori = req.body.favori; // A MODIFIER
+                data.latitude = req.body.latitude; // A MODIFIER
+                data.longitude = req.body.longitude; // A MODIFIER
 				data.save(function(err,data){
 					res.status(200).json(data);
 				});
