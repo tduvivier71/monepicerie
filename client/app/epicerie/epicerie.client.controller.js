@@ -39,6 +39,8 @@
         vm.setEdit = setEdit;
         vm.setInsert = setInsert;
 
+        vm.latitude = 45.5699091;
+        vm.longitude = -73.5721709;
 
         vm.placeChanged = function() {
             vm.place = this.getPlace();
@@ -49,58 +51,16 @@
 
             console.log('location', vm.place.geometry.location);
             $timeout(function() {
-                vm.map.setCenter(vm.place.geometry.location);
+              //  if (vm.map.setCenter) {
+                    vm.map.setCenter(vm.place.geometry.location);
                 vm.map.setZoom(17);
+             //   }
             }, 500);
         };
 
         NgMap.getMap().then(function(map) {
             vm.map = map;
         });
-
-
-      /*  $scope.$watch('searchModel.searchTerm', function(current, original) {
-            $log.info('searchModel.searchTerm' + original);
-            $log.info('searchModel.searchTerm ' + current);
-        }); */
-
-     /*   vm.map = {
-            center: {  // Montréal
-                latitude: 45.5699091,
-                longitude: -73.5721709
-            },
-            zoom: 10,
-            options: {
-                scrollwheel: false
-            }
-        };
-
-        vm.searchbox = {
-            template : 'searchbox.tpl.html',
-            parentdiv : 'searchBoxParent',
-            events : {
-                places_changed: function (searchBox) {
-
-                    var place = searchBox.getPlaces();
-                    if (!place || place === 'undefined' || place.length === 0) {
-                        return;
-                    }
-
-                    // refresh the map
-                    vm.map = {
-                        center:{
-                            latitude:place[0].geometry.location.lat(),
-                            longitude:place[0].geometry.location.lng()
-                        },
-                        zoom:16
-                    };
-                }
-            }
-        };
-
-        GoogleMapApi.then(function(maps) {
-            maps.visualRefresh = true;
-        }); */
 
         // ************************************************************************************************************/
         // Entry point function
@@ -113,7 +73,6 @@
         // ************************************************************************************************************/
 
         function cancel() {
-            console.log('cancel');
             if (vm.state === 'dsInsert') {
                 _cancelInsert();
             } else {
@@ -149,13 +108,22 @@
         }
 
         function setEdit(_item) {
-            vm.selectedItem = angular.copy(_item);
             _resetForm('dsEdit');
-            vm.epicerie_input_focus = true;
+            vm.selectedItem = angular.copy(_item);
+            vm.item = _item;
+            vm.latitude = _item.location.lat;
+            vm.longitude = _item.location.lng;
+           // vm.map.setZoom(17);
+           // vm.epicerie_input_focus = true;
+            $("epicerie_input").focusin(function () {
+                alert('Ok');
+            });
         }
 
         function setInsert() {
             _resetForm('dsInsert');
+            vm.item.epicerie = '';
+            vm.item.favori = false;
             vm.epicerie_input_focus = true;
         }
 
@@ -177,6 +145,14 @@
                 var item = new epicerieService();
                 item.epicerie = _item.epicerie;
                 item.favori = _item.favori;
+                item.latitude = vm.place.geometry.location.lat();
+                item.longitude = vm.place.geometry.location.lng();
+
+                item.location = {
+                    lat: vm.place.geometry.location.lat(),
+                    lng: vm.place.geometry.location.lng()
+                };
+
                 item.$save(
                     function () {
                         vm.items.push(item);
@@ -209,15 +185,12 @@
 
         function _setBrowse() {
             _resetForm('dsBrowse');
+            vm.place = {};
             vm.sorting.type = 'epicerie';
             focus('searchItem_focus');
         }
 
         function _resetForm(state) {
-            vm.place = undefined;
-            vm.item.epicerie = '';
-            vm.item.favori = false;
-
             vm.state = state;
 
             if (vm.form && vm.form.$dirty && vm.form.$submitted) {
