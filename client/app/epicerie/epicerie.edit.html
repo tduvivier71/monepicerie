@@ -28,7 +28,7 @@
                        ng-model="vm.item.epicerie"
                        on-place-changed="vm.placeChanged(vm.item.epicerie)"
                        type="text"/>
-                       <i ng-show="vm.latitude && vm.longitude" class="form-control-feedback material-icons md-18 md-success">check_circle</i>
+                       <i ng-show="vm.place.geometry" class="form-control-feedback material-icons md-18 md-success">check_circle</i>
                 <validate-input form="vm.form" field="vm.form.epicerie_input"></validate-input>
             </div>
         </div>

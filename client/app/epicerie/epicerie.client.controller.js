@@ -114,6 +114,9 @@
             _resetForm('dsEdit');
             vm.selectedItem = angular.copy(_item);
             vm.item = _item;
+            vm.place.geometry = {
+                lat : _item.location.lat
+            };
             vm.latitude = _item.location.lat;
             vm.longitude = _item.location.lng;
            // vm.map.setZoom(17);
