@@ -1,6 +1,3 @@
-// TODO : Corriger validate-input qui ne se fait pas sur epicerie_id
-// TODO : Google Map est sur $scope et non VM.  À corriger
-
 (function () {
 
     'use strict';
@@ -9,10 +6,10 @@
         .module('app.epicerie')
         .controller('EpicerieController', EpicerieController);
 
-    EpicerieController.$inject = ['$log', 'uiGmapGoogleMapApi', '$scope', 'NgMap', '$timeout',
-                                'epicerieService', 'toasterService', 'focus'];
+    EpicerieController.$inject = ['NgMap', '$timeout',
+                                  'epicerieService', 'toasterService', 'focus'];
 
-    function EpicerieController($log, GoogleMapApi, $scope, NgMap, $timeout,
+    function EpicerieController(NgMap, $timeout,
                                 epicerieService, toasterService, focus) {
 
         var vm = this;
@@ -38,32 +35,11 @@
         vm.save = save;
         vm.setEdit = setEdit;
         vm.setInsert = setInsert;
+        vm.placeChanged = placeChanged;
 
+        // Montréal
         vm.latitude = 45.5699091;
         vm.longitude = -73.5721709;
-
-        vm.placeChanged = function() {
-            vm.place = this.getPlace();
-            if (!vm.place.geometry) {
-                window.alert("Autocomplete's returned place contains no geometry");
-                return;
-            }
-
-            console.log('location', vm.place.geometry.location);
-            $timeout(function() {
-                vm.latitude = vm.place.geometry.location.lat();
-                vm.longitude = vm.place.geometry.location.lng();
-
-              //  if (vm.map.setCenter) {
-              //      vm.map.setCenter(vm.place.geometry.location);
-                vm.map.setZoom(17);
-             //   }
-            }, 500);
-        };
-
-        NgMap.getMap().then(function(map) {
-            vm.map = map;
-        });
 
         // ************************************************************************************************************/
         // Entry point function
@@ -71,9 +47,26 @@
 
         _init();
 
+        NgMap.getMap().then(function(map) {
+            vm.map = map;
+        });
+
         // ************************************************************************************************************/
         // Public function
         // ************************************************************************************************************/
+
+        function placeChanged()  {
+            vm.place = this.getPlace();
+            if (!vm.place.geometry) {
+                window.alert("Autocomplete's returned place contains no geometry");
+                return;
+            }
+
+            $timeout(function() {
+                vm.map.setCenter(vm.place.geometry.location);
+                vm.map.setZoom(17);
+            }, 500);
+        }
 
         function cancel() {
             if (vm.state === 'dsInsert') {
@@ -114,16 +107,9 @@
             _resetForm('dsEdit');
             vm.selectedItem = angular.copy(_item);
             vm.item = _item;
-            vm.place.geometry = {
-                lat : _item.location.lat
-            };
             vm.latitude = _item.location.lat;
             vm.longitude = _item.location.lng;
-           // vm.map.setZoom(17);
-           // vm.epicerie_input_focus = true;
-            $("epicerie_input").focusin(function () {
-                alert('Ok');
-            });
+            vm.epicerie_input_focus = true;
         }
 
         function setInsert() {
@@ -151,9 +137,6 @@
                 var item = new epicerieService();
                 item.epicerie = _item.epicerie;
                 item.favori = _item.favori;
-                item.latitude = vm.place.geometry.location.lat();
-                item.longitude = vm.place.geometry.location.lng();
-
                 item.location = {
                     lat: vm.place.geometry.location.lat(),
                     lng: vm.place.geometry.location.lng()
@@ -198,7 +181,6 @@
 
         function _resetForm(state) {
             vm.state = state;
-
             if (vm.form && vm.form.$dirty && vm.form.$submitted) {
                 vm.form.$setPristine();
                 vm.form.$setUntouched();
