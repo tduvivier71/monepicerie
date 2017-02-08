@@ -1,5 +1,6 @@
 @import "../variables";
 
+/*
 .tooltip .tooltip-inner {
   color: $primary-color-text;
   background-color: $primary-color-dark;
@@ -15,15 +16,52 @@
 .tooltip.left .tooltip-arrow {
   border-left-color: $primary-color-dark!important;
 }
+*/
 
-/*
-.k-group {
+
+/* Tooltip container */
+.tooltp {
+  position: relative;
   display: inline-block;
+  border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+}
+
+/* Tooltip text */
+.tooltp .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
   text-align: center;
-  width: 150px;
-  white-space: nowrap;
-  border-width: 1px;
+  padding: 5px 0;
+  border-radius: 6px;
+
+  /* Position the tooltip text */
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+
+  /* Fade in tooltip */
+  opacity: 0;
+  transition: opacity 1s;
+}
+
+/* Tooltip arrow */
+.tooltp .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
   border-style: solid;
-  padding: 2em;
-  margin: 10px auto;
-}*/
+  border-color: #555 transparent transparent transparent;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltp:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}

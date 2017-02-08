@@ -95,7 +95,7 @@ $td-divider-color:        #BDBDBD;
   .material-icons.md-yellow {
     color: rgba(241, 192, 18, 0.89); }
   .material-icons.md-success {
-    color: #4CAF50; }
+    color: #4CAF50 !important; }
   .material-icons.cursor {
     cursor: pointer; }
 
@@ -24034,31 +24034,65 @@ $td-secondary-text-color: #757575;
 $td-divider-color:        #BDBDBD;
 
 */
+/*
 .tooltip .tooltip-inner {
-  color: #FFFFFF;
-  background-color: #1976D2;
-  border-radius: 5px; }
+  color: $primary-color-text;
+  background-color: $primary-color-dark;
+  border-radius: 5px;
+}
 
 .tooltip.top .tooltip-arrow {
-  border-top-color: #1976D2 !important; }
-
+  border-top-color: $primary-color-dark!important;
+}
 .tooltip.bottom .tooltip-arrow {
-  border-bottom-color: #1976D2 !important; }
-
+  border-bottom-color: $primary-color-dark!important;
+}
 .tooltip.left .tooltip-arrow {
-  border-left-color: #1976D2 !important; }
-
-/*
-.k-group {
+  border-left-color: $primary-color-dark!important;
+}
+*/
+/* Tooltip container */
+.tooltp {
+  position: relative;
   display: inline-block;
+  border-bottom: 1px dotted black;
+  /* If you want dots under the hoverable text */ }
+
+/* Tooltip text */
+.tooltp .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
   text-align: center;
-  width: 150px;
-  white-space: nowrap;
-  border-width: 1px;
+  padding: 5px 0;
+  border-radius: 6px;
+  /* Position the tooltip text */
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+  /* Fade in tooltip */
+  opacity: 0;
+  transition: opacity 1s; }
+
+/* Tooltip arrow */
+.tooltp .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
   border-style: solid;
-  padding: 2em;
-  margin: 10px auto;
-}*/
+  border-color: #555 transparent transparent transparent; }
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltp:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1; }
+
 /*
 .star-rating {
   position:absolute;

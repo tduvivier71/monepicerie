@@ -1,4 +1,5 @@
 <div style="margin: 0px;">
+
     <table class="table  table-borderless">
         <thead>
         <tr>
@@ -36,10 +37,11 @@
                         uib-tooltip={{"HINT_EDITER_CATEGORIE"|translate}}>
                         <i class="material-icons md-16">edit</i>
                 </button>
-                <button class="btn btn-danger btn-sm"
+                <button class="btn btn-danger btn-sm tooltp"
                         data-toggle="tooltip"
                         ng-click="vm.remove(item)"
-                        uib-tooltip={{"HINT_DETRUIRE_CATEGORIE"|translate}}>
+                        >
+                         <span class="tooltiptext">{{"HINT_DETRUIRE_CATEGORIE"|translate}}</span>
                         <i class="material-icons md-16">delete</i>
                 </button>
             </td>
@@ -56,3 +58,6 @@
 </pagination>
 
 
+<div class="tooltp">Hover over me
+
+</div>
