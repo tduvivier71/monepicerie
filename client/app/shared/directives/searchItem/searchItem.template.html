@@ -3,7 +3,7 @@
 <div class="input-group">
     <input autocomplete="off"
            class="k-textbox"menu shopping_cart
-           focus-on="searchItem_focus"
+           focus-on="searchItem_input_focus"
            id="searchItem_input_id"
            name="searchItem_input"
            ng-keyup="cancelEsc($event)"
@@ -16,7 +16,7 @@
                  class="btn btn-primary"
                  style="margin-left:0px !important; padding-top:9px !important; padding-bottom:9px !important;"
                  ng-click="clearSearch()"
-                 uib-tooltip={{"APPLIQUER_RECHERCHE"|translate}}>
+                 uib-tooltip-html="tips">
                  <i class="material-icons">close</i>
          </button>
     </span>

@@ -1,31 +1,38 @@
-<div style="margin: 0px;">
-
-    <table class="table  table-borderless">
+<div style="margin: 0;">
+    <table class="table table-borderless">
         <thead>
         <tr>
             <th class="col-md-1 col-sm-1 col-xs-1">
                 {{"FAVORI"|translate}}
             </th>
             <th class="col-md-9 col-sm-9 col-xs-9">
-                <a href="javascript:void(0)" style="text-decoration:none; color:black;"
+                <a href="javascript:void(0)"
+                   style="text-decoration:none; color:black;"
+                   uib-tooltip={{"HINT_TRIER_CATEGORIE"|translate}}
                    ng-click="vm.sorting.reverse = !vm.sorting.reverse">
-                    {{"CATEGORIE"|translate}}
-                    <span ng-show="!vm.sorting.reverse"><i class="material-icons md-16">arrow_drop_down</i></span>
-                    <span ng-show="vm.sorting.reverse"><i class="material-icons md-16">arrow_drop_up</i></span>
+                   {{"CATEGORIE"|translate}}
+                   <span ng-show="!vm.sorting.reverse">
+                       <i class="material-icons md-16">arrow_drop_down</i>
+                   </span>
+                   <span ng-show="vm.sorting.reverse">
+                       <i class="material-icons md-16">arrow_drop_up</i>
+                   </span>
                 </a>
             </th>
             <th class="col-md-2 col-sm-2 col-xs-2">
+                <!--Empty-->
             </th>
         </tr>
         </thead>
         <tbody>
         <tr data-ng-repeat="item in (vm.items | filter: vm.searchItem).slice(((vm.pagination.currentPage-1)*vm.pagination.itemsPerPage),
-                        ((vm.pagination.currentPage)*vm.pagination.itemsPerPage))  | orderBy : vm.sorting.type:vm.sorting.reverse">
+        ((vm.pagination.currentPage)*vm.pagination.itemsPerPage))  | orderBy : vm.sorting.type:vm.sorting.reverse">
             <td class="col-md-1 col-sm-1 col-xs-1">
                 <i class="material-icons md-24 md-white"
-                   style="padding-bottom: 0px;"
+                   style="padding-bottom: 0;"
                    data-ng-model="item.favori"
-                   ng-class="item.favori ? 'md-yellow' : 'md-white'">star</i>
+                   data-ng-class="item.favori ? 'md-yellow' : 'md-white'">star
+                </i>
             </td>
             <td class="col-md-9 col-sm-9 col-xs-9">
                 {{item.categorie}}
@@ -37,11 +44,10 @@
                         uib-tooltip={{"HINT_EDITER_CATEGORIE"|translate}}>
                         <i class="material-icons md-16">edit</i>
                 </button>
-                <button class="btn btn-danger btn-sm tooltp"
+                <button class="btn btn-danger btn-sm"
                         data-toggle="tooltip"
                         ng-click="vm.remove(item)"
-                        >
-                         <span class="tooltiptext">{{"HINT_DETRUIRE_CATEGORIE"|translate}}</span>
+                        uib-tooltip={{"HINT_DETRUIRE_CATEGORIE"|translate}}>
                         <i class="material-icons md-16">delete</i>
                 </button>
             </td>
@@ -56,8 +62,3 @@
         current-page="vm.pagination.currentPage"
         items-per-page="vm.pagination.itemsPerPage">
 </pagination>
-
-
-<div class="tooltp">Hover over me
-
-</div>

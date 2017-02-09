@@ -6,9 +6,9 @@
     .module('app')
     .directive('searchItem', searchItem);
 
-  searchItem.$inject = ['focus'];
+  searchItem.$inject = ['focus', '$sce'];
 
-  function searchItem (focus) {
+  function searchItem (focus, $sce) {
     return {
       restrict: 'E',
       scope: {
@@ -16,6 +16,8 @@
       },
       templateUrl: 'app/shared/directives/searchItem/searchItem.template.html',
       link: function(scope){
+
+        scope.tips = $sce.trustAsHtml('Réinitialiser </br> la recherche');
 
         scope.cancelEsc = function cancelEsc(e) {
           if (e.keyCode === 27) {

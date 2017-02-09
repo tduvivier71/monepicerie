@@ -18,10 +18,10 @@
         };
     }
 
-    ProduitController.$inject = ['$scope','$log', '$filter', '$location', '$http', '$q',
+    ProduitController.$inject = ['$scope','$log', '$filter', '$location', '$http', '$q', '$sce',
         'toasterService', 'produitService', 'categorieService', 'focus', 'uniteService', 'formatService', 'epicerieService','marqueService'];
 
-    function ProduitController($scope, $log, $filter, $location, $http, $q,
+    function ProduitController($scope, $log, $filter, $location, $http, $q, $sce,
                                toasterService, produitService, categorieService, focus, uniteService, formatService, epicerieService, marqueService) {
 
         var vm = this;
@@ -63,6 +63,8 @@
         vm.filterCategorie = filterCategorie;
         vm.getCategories = getCategories;
         vm.clearCategorie = clearCategorie;
+
+        vm.tips = $sce.trustAsHtml('Réinitialiser </br> la sélection');
 
 
 

@@ -15,7 +15,15 @@
         var vm = this;
 
         /* Variables */
-        vm.item = {};           // Object
+        vm.item = {
+            categorie: '',
+            favori: false,
+            reset: function () {
+                this.categorie = '';
+                this.favori = false;
+            }
+        };
+
         vm.items = [];          // List of object
         vm.form = {};           // Object
 
@@ -47,7 +55,6 @@
         // ************************************************************************************************************/
 
         function cancel() {
-            console.log('cancel');
             if (vm.state === 'dsInsert') {
                 _cancelInsert();
             } else {
@@ -71,7 +78,7 @@
 
         function save(_form, _item) {
             if (!_form.$valid) {
-                focus('categorie_focus');
+                focus('categorie_input_focus');
                 return;
             }
 
@@ -83,20 +90,16 @@
         }
 
         function setEdit(_item) {
-            console.log('setEdit');
-            _resetForm();
+            focus('categorie_input_focus');
+            _resetForm('dsEdit');
             vm.selectedItem = angular.copy(_item);
             vm.item = _item;
-            vm.state = 'dsEdit';
-            focus('categorie_focus');
         }
 
         function setInsert() {
-            console.log('setInsert');
-            _resetForm();
+            focus('categorie_input_focus');
+            _resetForm('dsInsert');
             vm.item = undefined;
-            vm.state = 'dsInsert';
-            focus('categorie_focus');
         }
 
         // ************************************************************************************************************/
@@ -104,18 +107,15 @@
         // ************************************************************************************************************/
 
         function _cancelEdit() {
-            console.log('cancelEdit');
             _revertSelectedItem();
             _setBrowse();
         }
 
         function _cancelInsert() {
-            console.log('_cancelInsert');
             _setBrowse();
         }
 
         function _create(_item) {
-            console.log('create');
             var item = new categorieService();
             item.categorie = _item.categorie;
             item.favori = _item.favori;
@@ -126,13 +126,13 @@
                     _setBrowse();
                 }, function (e) {
                     toasterService.error(e.data);
-                    focus('categorie_focus');
+                    focus('categorie_input_focus');
                 }
             );
         }
 
         function _init() {
-            focus('searchText');
+            vm.item.reset();
             vm.items = categorieService.query();
             _setBrowse();
         }
@@ -144,20 +144,20 @@
                     _setBrowse();
                 }, function (e) {
                     toasterService.error(e.data);
-                    focus('categorie_focus');
+                    focus('categorie_input_focus');
                 }
             );
         }
 
         function _setBrowse() {
-            _resetForm();
-            $log.info('_setBrowse');
+            focus('searchItem_input_focus');
             vm.sorting.type = 'categorie';
-            vm.state = 'dsBrowse';
-            focus('searchItem_focus');
+            _resetForm('dsBrowse');
+
         }
 
-        function _resetForm() {
+        function _resetForm(state) {
+            vm.state = state;
             if (vm.form.$dirty || vm.form.$submitted) {
                 vm.form.$setPristine();
                 vm.form.$setUntouched();

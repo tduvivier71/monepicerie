@@ -3,7 +3,7 @@
   "ANNULER": "Annuler",
   "CATEGORIE":"Catégorie",
   "CATEGORIES":"Catégories",
-  "FAVORI":"Favori",
+  "FAVORI": "Favori",
 
   "RETOUR_LISTE":"Retour à la liste",
 
@@ -15,6 +15,7 @@
 
   "HINT_AJOUTER": "Ajouter",
   "HINT_AJOUTER_CATEGORIE":"Ajouter une catégorie",
-  "HINT_EDITER_CATEGORIE":"Éditer une catégorie existante",
-  "HINT_DETRUIRE_CATEGORIE":"Détruire une catégorie"
+  "HINT_EDITER_CATEGORIE":"Éditer une catégorie",
+  "HINT_DETRUIRE_CATEGORIE":"Détruire une catégorie",
+  "HINT_TRIER_CATEGORIE":"Trier par catégorie"
 }

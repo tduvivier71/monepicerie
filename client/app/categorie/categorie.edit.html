@@ -21,7 +21,7 @@
                 <input required
                        autocomplete="off"
                        class="form-control input"
-                       focus-on="categorie_focus"
+                       focus-on="categorie_input_focus"
                        id="categorie_input_id"
                        name="categorie_input"
                        ng-model="vm.item.categorie"
@@ -31,9 +31,7 @@
         </div>
     </div>
     <div class="row">
-        <ng-include
-                src="'app/shared/partials/bottom-save-cancel.html'">
-        </ng-include>
+        <div static-include="app/shared/partials/bottom-save-cancel.html"></div>
     </div>
 </form>
 
