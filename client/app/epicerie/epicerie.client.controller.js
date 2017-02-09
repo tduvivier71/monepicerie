@@ -92,7 +92,7 @@
 
         function save(_form, _item) {
             if (!_form.$valid) {
-                vm.epicerie_input_focus = true;
+              //  vm.epicerie_input_focus = true;
                 return;
             }
 
@@ -109,7 +109,7 @@
             vm.item = _item;
             vm.latitude = _item.location.lat;
             vm.longitude = _item.location.lng;
-            vm.epicerie_input_focus = true;
+          //  vm.epicerie_input_focus = true;
         }
 
         function setInsert() {
@@ -117,7 +117,7 @@
             focus('epicerie_input_focus');
             vm.item.epicerie = '';
             vm.item.favori = false;
-            vm.epicerie_input_focus = true;
+         //   vm.epicerie_input_focus = true;
         }
 
         // ************************************************************************************************************/

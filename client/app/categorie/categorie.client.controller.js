@@ -99,7 +99,7 @@
         function setInsert() {
             focus('categorie_input_focus');
             _resetForm('dsInsert');
-            vm.item = undefined;
+            vm.item.reset();
         }
 
         // ************************************************************************************************************/
@@ -132,7 +132,6 @@
         }
 
         function _init() {
-            focus('searchItem_input_focus');
             vm.item.reset();
             vm.items = categorieService.query();
             _setBrowse();
