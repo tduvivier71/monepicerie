@@ -114,6 +114,7 @@
 
         function setInsert() {
             _resetForm('dsInsert');
+            focus('epicerie_input_focus');
             vm.item.epicerie = '';
             vm.item.favori = false;
             vm.epicerie_input_focus = true;

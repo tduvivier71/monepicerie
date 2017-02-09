@@ -132,6 +132,7 @@
         }
 
         function _init() {
+            focus('searchItem_input_focus');
             vm.item.reset();
             vm.items = categorieService.query();
             _setBrowse();

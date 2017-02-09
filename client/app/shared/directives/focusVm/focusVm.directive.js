@@ -8,7 +8,19 @@
 
     focusVm.$inject = ['$timeout', '$parse'];
 
+
     function focusVm($timeout, $parse) {
+        return {
+            restrict: 'AC',
+            link: function(_scope, _element) {
+                $timeout(function(){
+                    _element[0].focus();
+                }, 0);
+            }
+        };
+    }
+
+    /*  function focusVm($timeout, $parse) {
 
         return {
             //scope: true,   // optionally create a child scope
@@ -30,6 +42,6 @@
                 });
             }
         };
-    }
+    } */
 
 })();

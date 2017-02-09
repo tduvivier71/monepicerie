@@ -10,13 +10,14 @@
            ng-model="searchItem"
            placeholder="Recherche..."
            type="text"
-           style="height: 39px !important;" >
+           style="height: 39px !important;"
+           focus-vm>
     <span class="input-group-btn">
          <button type="button"
                  class="btn btn-primary"
                  style="margin-left:0px !important; padding-top:9px !important; padding-bottom:9px !important;"
                  ng-click="clearSearch()"
-                 uib-tooltip-html="tips">
+                 uib-tooltip={{"APPLIQUER_RECHERCHE"|translate}}>
                  <i class="material-icons">close</i>
          </button>
     </span>
