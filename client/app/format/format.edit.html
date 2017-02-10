@@ -2,17 +2,18 @@
   <!--    ng-model-options="{ updateOn: 'default', debounce: { 'default': 100, 'blur': 0 } }">  -->
     <div class="row">
         <div class="col-md-12 col-sm-12-col-xs-12">
-            <div class="form-group" ng-class="{'has-error': vm.form.$submitted && vm.form.format_input.$invalid}">
+            <div class="form-group" data-ng-class="{'has-error': vm.form.$submitted && vm.form.format_input.$invalid}">
                 <label for="format_input_id">
-                    {{"FORMAT"|translate}}<span style="color: red;" uib-tooltip={{"VALEUR_OBLIGATOIRE"|translate}}>*</span>
+                    {{"FORMAT"|translate}}<span style="color: red;" data-uib-tooltip={{"VALEUR_OBLIGATOIRE"|translate}}>*</span>
                 </label>
-                <input required
+                <input auto-focus
+                       required
                        autocomplete="off"
                        class="form-control input"
-                       focus-on="format_focus"
+                       focus-on="format_input_focus"
                        id="format_input_id"
                        name="format_input"
-                       ng-model="vm.item.format"
+                       data-ng-model="vm.item.format"
                        type="text"/>
                        <validate-input form="vm.form" field="vm.form.format_input"></validate-input>
             </div>
