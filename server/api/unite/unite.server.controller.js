@@ -49,7 +49,6 @@ exports.deleteOne = function(req, res) {
 exports.updateOne = function(req, res) {
 	// console.log(' exports.updateOne  ' + JSON.stringify(req.body.categorie));
 	Model.findOne({_id: req.params.id})
-        .populate('coutParId')
 		.exec(function(err, data) {
 			if (err) {return res.status(400).json(err);}
 			if (!data) {return res.status(404).json();}
@@ -58,9 +57,23 @@ exports.updateOne = function(req, res) {
 			    data.operation = req.body.operation; // A MODIFIER
 				data.nombre = req.body.nombre; // A MODIFIER
                 data.coutParId = req.body.coutParId; // A MODIFIER
-				data.save(function(err,data){
-					res.status(200).json(data);
+
+
+				data.save(function(err, data){
+                    if (err) {console.log('Erreur ' + err);}
+
+                    Model.findOne( { _id: data.id })
+                        .populate('coutParId')
+                        .exec(function(err, data) {
+                            if (err) {console.log('Erreur ' + err);}
+                            res.status(200).json(data);
+                            console.log('Unite updateOne : ' + data);
+                        });
+
+
 				});
+
+
 		});
 
 };
