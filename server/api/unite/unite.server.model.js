@@ -14,6 +14,7 @@ var UniteSchema = new Schema({
 	},
 	abreviation: {
 		type: String,
+        default: '',
 		required: "L'abréviation de l'unité est obligatoire."
 	},
 	operation: {
@@ -21,7 +22,8 @@ var UniteSchema = new Schema({
 		default: 'division',
 	},
 	nombre: {
-		type: Number
+		type: Number,
+        default: 0,
 	},
 	coutParId:{
 		type: Schema.Types.ObjectId,

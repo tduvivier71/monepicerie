@@ -13,12 +13,33 @@
 
         var vm = this;
 
-        /* Variables */
+        /**
+         * typedef {Object}
+         * @property  {string} unite
+         * @property  {string} abreviation
+         * @property  {string} operation
+         * @property  {number} nombre
+         * @property  {string} coutParId
+         * @function reset
+         */
+        vm.item = {
+            unite: '',
+            abreviation: '',
+            operation: '',
+            nombre: 0,
+            coutParId: '',
+            reset: function () {
+                this.unite = '';
+                this.abreviation = '';
+                this.operation = 'Divisé par';
+                this.nombre = 0;
+                this.coutParId = '';
+            }
+        };
 
-        vm.item = {};           // Object
+        /* Variables */
         vm.items = [];          // List of object
         vm.form = {};           // Object
-
 
         vm.coutPar = '';
 
@@ -26,7 +47,6 @@
         vm.selectedItem = {};   // Object
         vm.state = '';          // string
         vm.error = '';          // string
-        vm.oneMore = false;      // boolean
 
         vm.sorting = {
             type: 'unite',
@@ -86,12 +106,7 @@
 
         function changeOperation(_operation) {
             vm.item.operation = _operation;
-            if (_operation === 'aucune') {
-                vm.item.nombre = null;
-                vm.item.conversionId = null;
-            } else {
-                focus('nombre_focus');
-            }
+            focus('nombre_input_focus');
         }
 
         function remove(_item) {
@@ -108,30 +123,30 @@
             _setBrowse();
         }
 
-        function save(_form, _item, _oneMore) {
-            console.log('save');
+        function save(_form, _item) {
+            if (!_form.$valid) {
+                focus('unite_input_focus');
+                return;
+            }
+
             if (vm.state === 'dsInsert') {
-                _create(_form, _item, _oneMore);
+                _create(_item);
             } else {
                 _update(_item);
             }
         }
 
         function setEdit(_item) {
-            console.log('setEdit');
-            _resetForm();
+            focus('unite_input_focus');
+            _resetForm('dsEdit');
             vm.selectedItem = angular.copy(_item);
             vm.item = _item;
-            vm.state = 'dsEdit';
-            focus('unite_focus');
         }
 
         function setInsert() {
-            console.log('setInsert');
-            _resetItem();
-            _resetForm();
-            vm.state = 'dsInsert';
-            focus('unite_focus');
+            focus('unite_input_focus');
+            _resetForm('dsInsert');
+            vm.item.reset();
         }
 
         // ************************************************************************************************************/
@@ -139,66 +154,44 @@
         // ************************************************************************************************************/
 
         function _cancelEdit() {
-            console.log('cancelEdit');
             _revertSelectedItem();
             _setBrowse();
         }
 
         function _cancelInsert() {
-            console.log('_cancelInsert');
             _setBrowse();
         }
 
-        function _create(_form, _item, _oneMore) {
-            console.log('create');
-            if (_form.$valid) {
-                var item = new uniteService();
-                item.unite = _item.unite;
-                item.abreviation = _item.abreviation;
-                item.operation = _item.operation;
-                item.nombre = _item.nombre;
-                item.coutParId = _item.coutParId;
-                item.$save(
-                    function () {
-                        vm.items.push(item);
-                        toasterService.save(_item.unite);
-                        if (_oneMore) {
-                            _resetForm();
-                            setInsert();
-                        }
-                        else {
-                            _setBrowse();
-                        }
-                        vm.oneMore = false;
-                    }, function (e) {
-                        toasterService.error(e.data);
-                        focus('unite_focus');
-                    }
-                );
-            } else {
-                focus('unite_focus');
-            }
+        function _create(_item) {
+            var item = new uniteService();
+            item.unite = _item.unite;
+            item.abreviation = _item.abreviation;
+            item.operation = _item.operation;
+            item.nombre = _item.nombre;
+            item.coutParId = _item.coutParId === "" ? _item.coutParId = undefined : _item.coutParId;
+            item.$save(
+                function () {
+                    vm.items.push(item);
+                    toasterService.save(_item.unite);
+                    _setBrowse();
+                }, function (e) {
+                    toasterService.error(e.data);
+                    focus('unite_input_focus');
+                }
+            );
         }
 
         function _init() {
-            focus('searchText');
+            vm.item.reset();
             vm.items = uniteService.query();
             _setBrowse();
-            _resetItem();
         }
 
         function _update(_item) {
             _item.$update(
-                function (result) {
-                    /*angular.forEach(vm.items, function (item, key) {
-                        if (item._id === _item._id && vm.item.coutParId) {
-                            vm.item.coutParId.unite = vm.coutPar;
-                            vm.items[key] = vm.item.coutParId.unite;
-                        }
-                    });*/
-                    toasterService.update(result.unite);
-                    // _setBrowse();
-                    _init();
+                function () {
+                    toasterService.update(_item.unite);
+                    _setBrowse();
                 }, function (e) {
                     toasterService.error(e.data);
                 }
@@ -206,28 +199,17 @@
         }
 
         function _setBrowse() {
-            _resetForm();
-            $log.info('_setBrowse');
+            focus('searchItem_input_focus');
             vm.sorting.type = 'unite';
-            vm.state = 'dsBrowse';
-            focus('searchItem_focus');
+            _resetForm('dsBrowse');
         }
 
-        function _resetForm() {
+        function _resetForm(state) {
+            vm.state = state;
             if (vm.form.$dirty || vm.form.$submitted) {
                 vm.form.$setPristine();
                 vm.form.$setUntouched();
             }
-        }
-
-        function _resetItem() {
-            vm.item = {
-                unite : null,
-                abreviation : null,
-                operation: 'aucune',
-                nombre : null,
-                coutParId : null
-            };
         }
 
         function _revertSelectedItem() {

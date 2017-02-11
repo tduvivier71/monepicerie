@@ -14,7 +14,12 @@
 
         var vm = this;
 
-        /* Variables */
+        /**
+         * typedef {Object}
+         * @property  {string} categorie
+         * @property  {boolean} favori
+         * @function reset
+         */
         vm.item = {
             categorie: '',
             favori: false,
@@ -24,6 +29,7 @@
             }
         };
 
+        /* Variables */
         vm.items = [];          // List of object
         vm.form = {};           // Object
 

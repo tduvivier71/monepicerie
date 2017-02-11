@@ -14,15 +14,21 @@
 
         var vm = this;
 
-        /* Variables */
+        /**
+         * typedef {Object}
+         * @property  {string} format
+         * @function reset
+         */
         vm.item = {
             format: '',
             reset: function () {
-                this.categorie = '';
+                this.format = '';
             }
         };
 
-        vm.item = {};           // Object
+
+
+        /* Variables */
         vm.items = [];          // List of object
         vm.form = {};           // Object
 
@@ -30,7 +36,7 @@
         vm.selectedItem = {};   // Object
         vm.state = '';          // string
         vm.error = '';          // string
-        vm.oneMore = false;      // boolean
+
 
         vm.sorting = {
             type: 'format',
@@ -154,7 +160,7 @@
             _resetForm('dsBrowse');
         }
 
-        function _resetForm() {
+        function _resetForm(state) {
             vm.state = state;
             if (vm.form.$dirty || vm.form.$submitted) {
                 vm.form.$setPristine();

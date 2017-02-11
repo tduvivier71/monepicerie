@@ -6,10 +6,11 @@
                 <label for="marque_input_id">
                     {{"MARQUE"|translate}}<span style="color: red;" uib-tooltip={{"VALEUR_OBLIGATOIRE"|translate}}>*</span>
                 </label>
-                <input required
+                <input auto-focus
+                       required
                        autocomplete="off"
                        class="form-control input"
-                       focus-on="marque_focus"
+                       focus-on="marque_input_focus"
                        id="marque_input_id"
                        name="marque_input"
                        ng-model="vm.item.marque"
@@ -19,9 +20,7 @@
         </div>
     </div>
     <div class="row">
-        <ng-include
-                src="'app/shared/partials/bottom-save-cancel.html'">
-        </ng-include>
+        <div static-include="app/shared/partials/bottom-save-cancel.html"></div>
     </div>
 </form>
 

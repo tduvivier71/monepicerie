@@ -14,8 +14,20 @@
 
         var vm = this;
 
+
+        /**
+         * typedef {Object}
+         * @property  {string} marque
+         * @function reset
+         */
+        vm.item = {
+            marque: '',
+            reset: function () {
+                this.marque = '';
+            }
+        };
+
         /* Variables */
-        vm.item = {};           // Object
         vm.items = [];          // List of object
         vm.form = {};           // Object
 
@@ -23,7 +35,6 @@
         vm.selectedItem = {};   // Object
         vm.state = '';          // string
         vm.error = '';          // string
-        vm.oneMore = false;      // boolean
 
         vm.sorting = {
             type: 'marque',
@@ -48,7 +59,6 @@
         // ************************************************************************************************************/
 
         function cancel() {
-            console.log('cancel');
             if (vm.state === 'dsInsert') {
                 _cancelInsert();
             } else {
@@ -72,7 +82,7 @@
 
         function save(_form, _item, _oneMore) {
             if (!_form.$valid) {
-                focus('marque_focus');
+                focus('marque_input_focus');
                 return;
             }
 
@@ -84,20 +94,16 @@
         }
 
         function setEdit(_item) {
-            console.log('setEdit');
-            _resetForm();
+            focus('marque_input_focus');
+            _resetForm('dsEdit');
             vm.selectedItem = angular.copy(_item);
             vm.item = _item;
-            vm.state = 'dsEdit';
-            focus('marque_focus');
         }
 
         function setInsert() {
-            console.log('setInsert');
-            _resetForm();
-            vm.item = undefined;
-            vm.state = 'dsInsert';
-            focus('marque_focus');
+            focus('marque_input_focus');
+            _resetForm('dsInsert');
+            vm.item.reset();
         }
 
         // ************************************************************************************************************/
@@ -105,13 +111,11 @@
         // ************************************************************************************************************/
 
         function _cancelEdit() {
-            console.log('cancelEdit');
             _revertSelectedItem();
             _setBrowse();
         }
 
         function _cancelInsert() {
-            console.log('_cancelInsert');
             _setBrowse();
         }
 
@@ -126,13 +130,13 @@
                     _setBrowse();
                 }, function (e) {
                     toasterService.error(e.data);
-                    focus('marque_focus');
+                    focus('marque_input_focus');
                 }
             );
         }
 
         function _init() {
-            focus('searchText');
+            vm.item.reset();
             vm.items = marqueService.query();
             _setBrowse();
         }
@@ -149,14 +153,13 @@
         }
 
         function _setBrowse() {
-            _resetForm();
-            $log.info('_setBrowse');
+            focus('searchItem_input_focus');
             vm.sorting.type = 'marque';
-            vm.state = 'dsBrowse';
-            focus('searchItem_focus');
+            _resetForm('dsBrowse');
         }
 
-        function _resetForm() {
+        function _resetForm(state) {
+            vm.state = state;
             if (vm.form.$dirty || vm.form.$submitted) {
                 vm.form.$setPristine();
                 vm.form.$setUntouched();
