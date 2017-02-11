@@ -125,7 +125,14 @@
 
         function save(_form, _item) {
             if (!_form.$valid) {
-                focus('unite_input_focus');
+
+                if (_item.unite) {
+                    focus('abreviation_input_focus');
+                }
+                else {
+                    focus('unite_input_focus');
+                }
+
                 return;
             }
 
