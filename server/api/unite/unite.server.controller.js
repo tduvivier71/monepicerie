@@ -48,8 +48,9 @@ exports.deleteOne = function(req, res) {
 
 exports.updateOne = function(req, res) {
 	// console.log(' exports.updateOne  ' + JSON.stringify(req.body.categorie));
-	Model.findOne({_id: req.params.id},
-		function(err, data) {
+	Model.findOne({_id: req.params.id})
+        .populate('coutParId')
+		.exec(function(err, data) {
 			if (err) {return res.status(400).json(err);}
 			if (!data) {return res.status(404).json();}
 				data.unite = req.body.unite; // A MODIFIER
@@ -60,8 +61,8 @@ exports.updateOne = function(req, res) {
 				data.save(function(err,data){
 					res.status(200).json(data);
 				});
-		}
-	);
+		});
+
 };
 
 
