@@ -1,13 +1,8 @@
 {
-  "AJOUTER": "Ajouter",
-  "ANNULER": "Annuler",
+
   "CATEGORIE":"Catégorie",
   "CATEGORIES":"Catégories",
   "FAVORI": "Favori",
-
-  "RETOUR_LISTE":"Retour à la liste",
-
-  "VALEUR_OBLIGATOIRE":"Valeur obligatoire",
 
   "AJOUTER_CATEGORIE":"Ajouter une catégorie",
   "EDITER_CATEGORIE":"Éditer une catégorie",

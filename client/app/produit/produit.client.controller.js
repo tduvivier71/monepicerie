@@ -24,13 +24,52 @@
     function ProduitController($scope, $log, $filter, $location, $http, $q, $sce,
                                toasterService, produitService, categorieService, focus, uniteService, formatService, epicerieService, marqueService) {
 
-        var vm = this;
+        var vm = this
+
+        vm.itemHistorique = {
+            epicerieId: '',
+            date: '',
+            prix: 0,
+            enPromotion: false,
+            reset : function() {
+                this.epicerieId = '';
+                this.marque = '';
+                this.prix = 0;
+                this.enPromotion = false;
+            }
+        };
+
+        vm.item = {
+            produit: '',
+            marque: '',
+            formatId: '',
+            description: '',
+            categorieId: '',
+            quantite: 0,
+            nombre: 0,
+            prix: 0,
+            uniteId: '',
+            historiques: [vm.itemHistorique],
+            reset : function() {
+                this.produit = '';
+                this.marque = '';
+                this.formatId = '';
+                this.description = '';
+                this.categorieId = '';
+                this.quantite =  0;
+                this.nombre = 0;
+                this.prix = 0;
+                this.uniteId = '';
+                this.historiques = [];
+            }
+        };
+
 
         vm.statutD = 'D';
 
         /* Variables */
         vm.form = {};           // Object
-        vm.item = {};           // Object
+
         vm.items = [];          // List of object
         vm.searchItem = '';     // string
         vm.selectedItem = {};   // Object

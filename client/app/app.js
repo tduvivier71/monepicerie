@@ -75,6 +75,7 @@
 			$translatePartialLoaderProvider.addPart('accueil');
 			$translatePartialLoaderProvider.addPart('categorie');
 			$translatePartialLoaderProvider.addPart('produit');
+            $translatePartialLoaderProvider.addPart('defaut');
 			$translatePartialLoaderProvider.addPart('unite');
 			$translatePartialLoaderProvider.addPart('liste');
 			$translatePartialLoaderProvider.addPart('utilisateur');
