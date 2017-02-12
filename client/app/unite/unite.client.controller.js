@@ -125,7 +125,14 @@
 
         function save(_form, _item) {
             if (!_form.$valid) {
-                focus('unite_input_focus');
+
+                if (_item.unite) {
+                    focus('abreviation_input_focus');
+                }
+                else {
+                    focus('unite_input_focus');
+                }
+
                 return;
             }
 
@@ -189,8 +196,8 @@
 
         function _update(_item) {
             _item.$update(
-                function () {
-                    angular.forEach(vm.items, function (item, key) {
+                function (result) {
+              /*      angular.forEach(vm.items, function (item, key) {
                         if (item._id === _item._id) {
 
                             if (vm.item.coutParId && vm.item.coutParId.coutPar) {
@@ -198,11 +205,11 @@
                             }
 
                         }
-                    });
+                    });*/
                     toasterService.update(_item.unite);
                     _setBrowse();
-                }, function (e) {
-                    toasterService.error(e.data);
+                }, function (error) {
+                    toasterService.error(error.data);
                 }
             );
         }

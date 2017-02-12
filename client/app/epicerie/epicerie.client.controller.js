@@ -14,8 +14,22 @@
 
         var vm = this;
 
+        /**
+         * typedef {Object}
+         * @property  {string} epicerie
+         * @property  {boolean} favori
+         * @function reset
+         */
+        vm.item = {
+            epicerie: '',
+            favori: false,
+            reset: function () {
+                this.epicerie = '';
+                this.favori = false;
+            }
+        };
+
         /* Variables */
-        vm.item = {};           // Object
         vm.items = [];          // List of object
         vm.form = {};           // Object
 
@@ -65,7 +79,7 @@
             $timeout(function() {
                 vm.map.setCenter(vm.place.geometry.location);
                 vm.map.setZoom(17);
-            }, 500);
+            }, 1000);
         }
 
         function cancel() {
@@ -92,7 +106,7 @@
 
         function save(_form, _item) {
             if (!_form.$valid) {
-              //  vm.epicerie_input_focus = true;
+                focus('epicerie_input_focus');
                 return;
             }
 
@@ -104,20 +118,18 @@
         }
 
         function setEdit(_item) {
+            // focus('epicerie_input_focus');
             _resetForm('dsEdit');
             vm.selectedItem = angular.copy(_item);
             vm.item = _item;
             vm.latitude = _item.location.lat;
             vm.longitude = _item.location.lng;
-          //  vm.epicerie_input_focus = true;
         }
 
         function setInsert() {
+            // focus('epicerie_input_focus');
             _resetForm('dsInsert');
-            focus('epicerie_input_focus');
-            vm.item.epicerie = '';
-            vm.item.favori = false;
-         //   vm.epicerie_input_focus = true;
+            vm.item.reset();
         }
 
         // ************************************************************************************************************/
@@ -150,14 +162,14 @@
                         _setBrowse();
                     }, function (e) {
                         toasterService.error(e.data);
-                        vm.epicerie_input_focus = true;
+                        focus('epicerie_input_focus');
                     }
                 );
             }
         }
 
         function _init() {
-            focus('searchText');
+            vm.item.reset();
             vm.items = epicerieService.query();
             _setBrowse();
         }
@@ -169,15 +181,16 @@
                     _setBrowse();
                 }, function (e) {
                     toasterService.error(e.data);
+                    focus('epicerie_input_focus');
                 }
             );
         }
 
         function _setBrowse() {
+            focus('searchItem_input_focus');
             _resetForm('dsBrowse');
-            vm.place = {};
             vm.sorting.type = 'epicerie';
-            focus('searchItem_focus');
+            vm.place = {}; // CHANGER !!!
         }
 
         function _resetForm(state) {
