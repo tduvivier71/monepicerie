@@ -1,4 +1,8 @@
 {
+
+  "MALISTE": "Ma liste",
+  "CONFIGURATION": "Configuration",
+
   "ANNULER": "Annuler",
   "LISTE":"Liste",
   "LISTES":"Liste",
@@ -6,3 +10,4 @@
 
   "VALEUR_OBLIGATOIRE":"Valeur obligatoire",
 }
+
