@@ -63,6 +63,9 @@
         vm.filterCategorie = filterCategorie;
         vm.getCategories = getCategories;
         vm.clearCategorie = clearCategorie;
+        vm.collapse = collapse;
+
+        vm.isCollapsed = true;
 
         vm.tips = $sce.trustAsHtml('Réinitialiser </br> la sélection');
 
@@ -227,6 +230,13 @@
             }
         }
 
+        function collapse() {
+            vm.isCollapsed = !vm.isCollapsed;
+            if (!vm.isCollapsed) {
+                focus("description_textArea_focus");
+            }
+        }
+
         function remove(_item) {
             console.log('remove');
             _item.$remove(function () {
@@ -276,11 +286,14 @@
          * Set insert State
          */
         function setInsert() {
+            vm.isCollapsed = true;
+            focus('produit_input_focus');
+
             console.log('setInsert');
             _resetForm();
             _resetItem();
             vm.state = 'dsInsert';
-            focus('categorie_focus');
+
 
        /*     vm.insertHisto.epicerie = '';
             vm.insertHisto.epicerieId = '';

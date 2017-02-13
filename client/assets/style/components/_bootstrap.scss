@@ -2,9 +2,11 @@
 @import "../variables";
 @import "../mixin";
 
+/*
 .form-control:focus {
   @include state-focused;
-}
+}*/
+
 
 .alert-success {
   color: #FFFFFF  !important;

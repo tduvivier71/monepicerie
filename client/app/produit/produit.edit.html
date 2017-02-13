@@ -1,273 +1,183 @@
 <form novalidate name="vm.form" role="form"></form>
     <!--  ng-model-options="{ updateOn: 'default', debounce: { 'default': 100, 'blur': 0 } }"> -->
 
-    <div id="wrapper">
+    <div class="row" style="padding-top: 15px;">
 
-        <div id="mainContent">
-
-            <div class="panel panel-default noborder">
-
-                <div class="panel-heading"><b> {{"FICHE_PRODUIT"|translate}}</b>
-                </div>
-
-                <div class="panel-body">
-
-                    <div class="row">
-
-                        <div class="col-md-6 form-group">
-                            <div class="form-group" ng-class="{'has-error': vm.form.$submitted && vm.form.categorieId_input.$invalid}">
-                                <label for="categorieId_select_id">
-                                    {{"CATEGORIE"|translate}}<span style="color: red;" uib-tooltip={{"VALEUR_OBLIGATOIRE"|translate}}>*</span>
-                                </label>
-                                <select required
-                                        data-kendo-combo-box
-                                        data-k-options="vm.selectOptionsCategorie"
-                                        data-ng-model="vm.item.categorieId._id"
-                                        data-k-ng-model="vm.item.categorieId._id"
-                                        focus-on="categorie_focus"
-                                        id="categorieId_select_id"
-                                        name="categorieId_select"
-                                        style="width: 100%">
-                                </select>
-                                <validate-input form="vm.form" field="vm.form.categorieId_select"></validate-input>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6 form-group">
-                            <div class="form-group" ng-class="{'has-error': vm.form.$submitted && vm.form.produit_input.$invalid}">
-                                <label for="produit_input_id">
-                                    {{"PRODUIT"|translate}}<span style="color: red;" uib-tooltip={{"VALEUR_OBLIGATOIRE"|translate}}>*</span>
-                                </label>
-                                <input required
-                                       autocomplete="off"
-                                       class="k-textbox"
-                                       data-ng-model="vm.item.produit"
-                                       id="produit_input_id"
-                                       name="produit_input"
-                                       style="width: 100%;"
-                                       type="text"/>
-                                <validate-input form="vm.form" field="vm.form.produit_input"></validate-input>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="row">
-
-                        <div class="col-md-6 form-group">
-                            <label for="marque_input_id">
-                                {{"MARQUE"|translate}}
-                            </label>
-                            <select required
-                                    data-kendo-combo-box="vm.marqueWidget"
-                                    data-k-options="vm.selectOptionsMarque"
-                                    data-k-ng-model="vm.item.marque"
-                                    id="marque_input_id"
-                                    name="marque_input"
-                                    style="width: 100%">
-                            </select>
-                        </div>
-
-                        <div class="col-md-6 form-group">
-                            <label for="description_input_id">
-                                {{"DESCRIPTION"|translate}}
-                            </label>
-                            <input  autocomplete="off"
-                                    class="k-textbox"
-                                    data-ng-model="vm.item.description"
-                                    id="description_input_id"
-                                    name="description_input"
-                                    style="width: 100%;"
-                                    type="text"/>
-                        </div>
-
-                    </div> <!-- end row -->
-
-                </div>
-            </div>
-        </div> <!-- end maincontent -->
-
-        <div id="sideBar">
-
-            <div class="panel panel-default" >
-
-                <div class="panel-heading" style="color: white; background-color: #1976D2"><b>Conditionnement</b>
-                    <i class="material-icons md-18">help_outline</i>
-                </div>
-
-                <div class="panel-body" style="font-weight: normal; color: white; background-color: #2196F3">
-
-                    <div class="row" style="margin-bottom: 10px;">
-
-                        <div class="col-md-4 form-group">
-                            <label for="quantite_input_id">
-                                {{"QUANTITE"|translate}}
-                            </label>
-                            <input autocomplete="off"
-                                   data-kendo-numeric-text-box
-                                   data-k-min="0"
-                                   id="quantite_input_id"
-                                   name="quantite_input"
-                                   ng-model="vm.item.quantite"
-                                   style="width: 100%;"
-                                   type="number"/>
-                        </div>
-                        <div class="col-md-8 form-group">
-                            <label for="formatId_input_id">
-                                {{"FORMAT"|translate}}
-                            </label>
-                            <select data-kendo-combo-box
-                                    data-k-options="vm.selectOptionsFormat"
-                                    data-k-ng-model="vm.item.formatId._id"
-                                    id="formatId_input_id"
-                                    name="formatId_select"
-                                    style="width: 100%">
-                            </select>
-                        </div>
-
-                    </div>
-
-                    <div class="row">
-
-                        <div class="col-md-4 form-group">
-                            <label for="nombre_input_id">
-                                {{"NOMBRE"|translate}}
-                            </label>
-                            <input autocomplete="off"
-                                   data-kendo-numeric-text-box
-                                   data-k-min="0"
-                                   id="nombre_input_id"
-                                   name="nombre_input"
-                                   ng-model="vm.item.nombre"
-                                   style="width: 100%;"
-                                   type="number"/>
-                        </div>
-                        <div class="col-md-8 form-group">
-                            <label for="unite_input_id">
-                                {{"UNITE"|translate}}
-                            </label>
-                            <select data-kendo-combo-box
-                                    data-k-options="vm.selectOptionsUnite"
-                                    data-k-ng-model="vm.item.uniteId._id"
-                                    id="unite_input_id"
-                                    name="uniteId_select"
-                                    style="width: 100%">
-                            </select>
-                        </div>
-
-                    </div>
-                </div>
+        <div class="col-md-4 form-group">
+            <div class="form-group" ng-class="{'has-error': vm.form.$submitted && vm.form.produit_input.$invalid}">
+                <label for="produit_input_id">
+                    {{"PRODUIT"|translate}}<span style="color: red;" uib-tooltip={{"VALEUR_OBLIGATOIRE"|translate}}>*</span>
+                </label>
+                <input auto-focus
+                       required
+                       autocomplete="off"
+                       class="k-textbox"
+                       data-ng-model="vm.item.produit"
+                       focus-on="produit_input_focus"
+                       id="produit_input_id"
+                       name="produit_input"
+                       style="width: 100%;"
+                       type="text"/>
+                       <validate-input form="vm.form" field="vm.form.produit_input"></validate-input>
             </div>
         </div>
-     </div> <!--id="wrapper"-->
+
+        <div class="col-md-4 form-group">
+            <label for="marque_input_id">
+                {{"MARQUE"|translate}}
+            </label>
+            <select required
+                    data-kendo-combo-box="vm.marqueWidget"
+                    data-k-options="vm.selectOptionsMarque"
+                    data-k-ng-model="vm.item.marque"
+                    id="marque_input_id"
+                    name="marque_input"
+                    style="width: 100%">
+            </select>
+        </div>
+
+        <div class="col-md-3 form-group">
+            <div class="form-group" ng-class="{'has-error': vm.form.$submitted && vm.form.categorieId_input.$invalid}">
+                <label for="categorieId_select_id">
+                    {{"CATEGORIE"|translate}}<span style="color: red;" uib-tooltip={{"VALEUR_OBLIGATOIRE"|translate}}>*</span>
+                </label>
+                <select required
+                        data-kendo-combo-box
+                        data-k-options="vm.selectOptionsCategorie"
+                        data-ng-model="vm.item.categorieId._id"
+                        data-k-ng-model="vm.item.categorieId._id"
+                        id="categorieId_select_id"
+                        name="categorieId_select"
+                        style="width: 100%">
+                </select>
+                <validate-input form="vm.form" field="vm.form.categorieId_select"></validate-input>
+            </div>
+        </div>
+
+        <div class="col-md-1 col-sm-1 col-xs-1" style="height: 66px; padding-top:27px">
+
+            <button class="btn"
+                    style="height: 37px;"
+                    data-toggle="tooltip"
+                    ng-click="vm.collapse()"
+                    uib-tooltip={{"DESCRIPTION_SUPP"|translate}}>
+                    <i ng-show="vm.isCollapsed" class="material-icons">keyboard_arrow_down</i>
+                    <i ng-show="!vm.isCollapsed" class="material-icons">keyboard_arrow_up</i>
+            </button>
+
+        </div>
+
+    </div>
 
 
-    <!-- Historique INSERT Only -->
-    <!--
- <div class="panel panel-default" style="border:0">
+    <div class="row" uib-collapse="vm.isCollapsed">
 
-     <div class="panel-heading" style="border-bottom: 2px solid #1976D2; background-color:  white"><b>Prix</b>
+        <div class="col-md-12 form-group">
+            <label for="description_input_id">
+                {{"DESCRIPTION"|translate}}
+            </label>
+            <textarea autocomplete="off"
+                      class="k-textbox"
+                      data-ng-model="vm.item.description"
+                      id="description_input_id"
+                      focus-on="description_textArea_focus"
+                      name="description_input"
+                      style="width: 100%; min-height: 75px"
+                      type="text"/>
+        </div>
 
-     </div>
-
-     <div class="panel-body" style="border: 0">
-
-<div class="row" ng-show="vm.state == 'dsInsert'">
-
-     <div class="col-md-2 form-group">
-         <label for="prix_insert_input_id">
-             {{"PRIX"|translate}}
-         </label>
-         <input autocomplete="off"
-                data-kendo-numeric-text-box
-                data-k-min="0"
-                id="prix_insert_input_id"
-                name="prix_input"
-                ng-model="vm.insertHisto.prix"
-                style="width: 100%;"
-                type="number"/>
-     </div>
-
-     <div class="col-md-1 form-group">
-         <label for="enPromotion_toogle_id">
-             {{"PROMOTION"|translate}}
-         </label>
-         <toggle id="enPromotion_toogle_id"
-                 ng-model="vm.insertHisto.enPromotion"
-                 ng-change="changed()" on="Oui" off="Non">
-         </toggle>
-     </div>
-
-     <div class="col-md-3 form-group">
-         <label for="epicerieId_insert_input_id">
-             {{"EPICERIE"|translate}}
-         </label>
-         <select data-kendo-combo-box
-                 data-k-options="vm.selectOptionsEpicerie"
-                 data-k-ng-model="vm.insertHisto.epicerieId"
-                 id="epicerieId_insert_input_id"
-                 name="epicerieId_select2"
-                 style="width: 100%;">
-         </select>
-     </div>
-
-     <div class="col-md-2 form-group">
-         <label for="date_insert_input_id">
-             {{"DATE"|translate}}
-         </label>
-         <input data-kendo-date-picker
-                data-k-options="vm.datePickerOptions"
-                data-k-ng-model="vm.insertHisto.date"
-                id="date_insert_input_id"
-                style="width: 100%;"/>
-     </div>
-
-     <div class="col-md-2 form-group">
-         <button class="btn btn-primary" style="margin-top:27px;"
-                 data-toggle="tooltip"
-                 ng-click="vm.createHisto()">
-             Ajouter
-         </button>
-     </div>
-     </div>
-     </div>
- </div>
- -->
-    <!-- FIN Historique INSERT only -->
+    </div>
 
 
-    <!-- Historique EDIT only -->
-    <div class="row" style="margin: 0px;">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th class="col-md-2 col-sm-2">
-                        <a href="javascript:void(0)" style="text-decoration:none; color:black;"
-                           ng-click="vm.sorting.reverse = !vm.sorting.reverse">
-                            {{"PRIX"|translate}}
-                            <span ng-show="!vm.sorting.reverse"><i class="material-icons md-16">arrow_drop_down</i></span>
-                            <span ng-show="vm.sorting.reverse"><i class="material-icons md-16">arrow_drop_up</i></span>
-                        </a>
-                    </th>
-                    <th class="col-md-3 col-sm-3">
-                        {{"EPICERIE"|translate}}
-                    </th>
-                    <th class="col-md-2 col-sm-2">
-                        {{"DATE"|translate}}
-                    </th>
-                    <th class="col-md-2 col-sm-2">
-                    </th>
-                    <th class="col-md-2 col-sm-2">
-                    </th>
-                    <th class="col-md-1 col-sm-2">
-                    </th>
-                </tr>
-            </thead>
+    <div class="panel panel-default noborder" style="padding-left: 15px; padding-right: 15px; padding-bottom: 0">
 
-            <tbody>
-                 <tr>
-                    <!--data-k-format="'c'"-->
-                    <td class="col-md-2 col-sm-2">
+        <div class="panel-heading"><b> {{"COUTPAR"|translate}}</b>
+            <i class="material-icons md-18">help_outline</i>
+        </div>
+
+        <div class="panel-body" style="padding-bottom: 0">
+
+            <div class="row">
+
+                <div class="col-md-2 form-group">
+                    <label for="quantite_input_id">
+                        {{"QUANTITE"|translate}}
+                    </label>
+                    <input autocomplete="off"
+                           data-kendo-numeric-text-box
+                           data-k-min="0"
+                           id="quantite_input_id"
+                           name="quantite_input"
+                           ng-model="vm.item.quantite"
+                           style="width: 100%;"
+                           type="number"/>
+                </div>
+
+                <div class="col-md-4 form-group">
+                    <label for="formatId_input_id">
+                        {{"FORMAT"|translate}}
+                    </label>
+                    <select data-kendo-combo-box
+                            data-k-options="vm.selectOptionsFormat"
+                            data-k-ng-model="vm.item.formatId._id"
+                            id="formatId_input_id"
+                            name="formatId_select"
+                            style="width: 100%">
+                    </select>
+                </div>
+
+                <div class="col-md-2 form-group">
+                    <label for="nombre_input_id">
+                        {{"NOMBRE"|translate}}
+                    </label>
+                    <input autocomplete="off"
+                           data-kendo-numeric-text-box
+                           data-k-min="0"
+                           id="nombre_input_id"
+                           name="nombre_input"
+                           ng-model="vm.item.nombre"
+                           style="width: 100%;"
+                           type="number"/>
+                </div>
+                <div class="col-md-4 form-group">
+                    <label for="unite_input_id">
+                        {{"UNITE"|translate}}
+                    </label>
+                    <select data-kendo-combo-box
+                            data-k-options="vm.selectOptionsUnite"
+                            data-k-ng-model="vm.item.uniteId._id"
+                            id="unite_input_id"
+                            name="uniteId_select"
+                            style="width: 100%">
+                    </select>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="panel panel-default noborder" style="padding-left: 15px; padding-right: 15px; padding-top: 0">
+
+        <div class="panel-heading"><b> {{"HISTORIQUEDEPRIX"|translate}}</b>
+            <i class="material-icons md-18">help_outline</i>
+        </div>
+
+        <div class="panel-body" style="padding-bottom: 0">
+
+            <div class="row">
+
+                <div class="col-md-2 col-sm-2 col-xs-2">
+                    <div class="form-group">
+                        <label for="prix_input_id">
+                            <a href="javascript:void(0)" style="text-decoration:none; color:black;"
+                               ng-click="vm.sorting.reverse = !vm.sorting.reverse">
+                                {{"PRIX"|translate}}
+                                <span ng-show="!vm.sorting.reverse"><i class="material-icons md-16">arrow_drop_down</i></span>
+                                <span ng-show="vm.sorting.reverse"><i class="material-icons md-16">arrow_drop_up</i></span>
+                            </a>
+                        </label>
                         <input required
                                autocomplete="off"
                                data-kendo-numeric-text-box
@@ -277,9 +187,15 @@
                                ng-model="vm.insertHisto.prix"
                                type="number"
                                style="width: 100%"/>
-                               <validate-input form="vm.form" field="vm.form.prix_input"></validate-input>
-                    </td>
-                    <td class="col-md-3 col-sm-3">
+                        <validate-input form="vm.form" field="vm.form.prix_input"></validate-input>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-sm-4 col-xs-4">
+                    <div class="form-group">
+                        <label for="epicerieId_select_edit_id">
+                            {{"EPICERIE"|translate}}
+                        </label>
                         <select required
                                 data-kendo-combo-box
                                 data-k-options="vm.selectOptionsEpicerie"
@@ -290,33 +206,80 @@
                                 style="width: 100%">
                         </select>
                         <validate-input form="vm.form" field="vm.form.epicerieId_select"></validate-input>
-                    </td>
-                    <td class="col-md-2 col-sm-2">
+                    </div>
+                </div>
+
+                <div class="col-md-2 col-sm-2 col-xs-2">
+                    <div class="form-group">
+                        <label for="epicerieId_select_edit_id">
+                            {{"DATE"|translate}}
+                        </label>
                         <input data-kendo-date-picker
                                data-k-options="vm.datePickerOptions"
                                ng-model="vm.insertHisto.date"
                                id="date_input_id2"
                                name="date_input"
                                style="width: 100%"/>
+                    </div>
+                </div>
+
+                <div class="col-md-2 col-sm-2 col-xs-2" style="height: 66px; padding-top:27px">
+
+                        <toggle id="enPromotion_toogle_id"
+                                style="height: 37px"
+                                onstyle="btn-success"
+                                ng-model="vm.insertHisto.enPromotion"
+                                ng-change="changed()" on="En promotion  " off="Prix régulier  ">
+                        </toggle>
+
+                </div>
+
+                <div class="col-md-1 col-sm-1 col-xs-1" style="height: 66px; padding-top:27px">
+
+                        <button class="btn btn-primary"
+                                style="height: 37px;"
+                                data-toggle="tooltip"
+                                ng-click="vm.createHisto()">
+                            Ajouter
+                        </button>
+
+                </div>
+
+
+
+
+
+            </div>
+        </div>
+
+
+        <table class="table">
+
+
+            <tbody>
+                 <tr >
+                    <!--data-k-format="'c'"-->
+                    <td class="col-md-2 col-sm-2">
+
+                    </td>
+                    <td class="col-md-3 col-sm-3">
+
                     </td>
                     <td class="col-md-2 col-sm-2">
-                        <toggle id="enPromotion_toogle_id"
-                                ng-model="vm.insertHisto.enPromotion"
-                                ng-change="changed()" on="En promotion" off="Prix régulier">
-                        </toggle>
+
+                    </td>
+                    <td class="col-md-2 col-sm-2">
+
                     </td>
                     <td class="col-md-2 col-sm-2">
                         <div style="text-align:left; top:25px; padding-right: 30px">
-                            <button class="btn btn-primary"
-                                    data-toggle="tooltip"
-                                    ng-click="vm.createHisto()">
-                                Ajouter
-                            </button>
+
                         </div>
                     </td>
                     <td class="col-md-1 col-sm-1">
                     </td>
                 </tr>
+
                 <tr ng-show="vm.item.historiques.length > 0"
                     ng-hide="histo.statut == 'D'"
                     data-ng-repeat="histo in (vm.item.historiques).slice(((vm.pagination.currentPage-1)*vm.pagination.itemsPerPage),

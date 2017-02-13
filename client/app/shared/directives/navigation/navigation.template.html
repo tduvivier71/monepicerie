@@ -22,17 +22,17 @@
         </div>
         <div id="navbar-main" class="navbar-collapse collapse">
             <ul data-ng-show="isAuthentified" class="nav navbar-nav">
-                <li ng-class="{active:isActive('#/liste')}"><a href="/#liste"><i class="material-icons md-14">dashboard</i> MA LISTE</a></li>
-                <li ng-class="{active:isActive('#/produit')}"><a href="/#produit"><i class="material-icons md-14">shopping_basket</i> PRODUITS</a></li>
+                <li ng-class="{active:isActive('#/liste')}"><a href="/#liste"><i class="material-icons md-14">dashboard</i> {{"MALISTE_UPPER"|translate}} </a></li>
+                <li ng-class="{active:isActive('#/produit')}"><a href="/#produit"><i class="material-icons md-14">shopping_basket</i> {{"PRODUITS_UPPER"|translate}}  </a></li>
 
-                <li ng-class="{active:isActive('#/ilmanque')}"><a href="/#ilmanque"><i class="material-icons md-14">bookmark</i> IL MANQUE !</a></li>
+              <!--  <li ng-class="{active:isActive('#/ilmanque')}"><a href="/#ilmanque"><i class="material-icons md-14">bookmark</i> {{"ILMANQUE"|translate}} </a></li> -->
 
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false"><i class="material-icons md-14">settings_applications</i> CONFIGURATION
+                       aria-expanded="false"><i class="material-icons md-14">settings_applications</i> {{"CONFIGURATION_UPPER"|translate}}
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="/#categorie">Catégories</a></li>

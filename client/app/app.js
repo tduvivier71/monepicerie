@@ -72,8 +72,12 @@
 				//	,	requireBase: false
 			});
 
-			$translatePartialLoaderProvider.addPart('accueil');
+            $translatePartialLoaderProvider.addPart('accueil');
+            $translatePartialLoaderProvider.addPart('defaut');
 			$translatePartialLoaderProvider.addPart('categorie');
+            $translatePartialLoaderProvider.addPart('format');
+            $translatePartialLoaderProvider.addPart('epicerie');
+            $translatePartialLoaderProvider.addPart('marque');
 			$translatePartialLoaderProvider.addPart('produit');
 			$translatePartialLoaderProvider.addPart('unite');
 			$translatePartialLoaderProvider.addPart('liste');
