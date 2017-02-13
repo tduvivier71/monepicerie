@@ -1,7 +1,4 @@
 {
-  "ANNULER": "Annuler",
-  "ENREGISTRER": "Enregistrer",
-  "APPLIQUER":"Appliquer",
   "CATEGORIES":"Catégories",
   "FILTRES":"Filtres",
   "PRODUIT":"Produit",
@@ -29,13 +26,12 @@
   "SELECTIONNER_EPICERIE": "Sélectionner un épicerie...",
   "SELECTIONNER_UNITE":"Choisir une unité...",
   "SELECTIONNER_FORMAT": "Sélectionner un format...",
-  "AUCUN_ELEMENT_NE_CORRESPOND":" Aucun élément correspondant dans la liste...",
-  "VALEUR_OBLIGATOIRE":"Valeur obligatoire",
+
   "DETRUIRE_HISTORIQUE":"Détruire un historique",
   "AJOUTER_AUTRE_PRODUIT": "et ajouter un autre produit.",
   "CONDITIONNEMENT":"Conditionnenent",
 
-  "APPLIQUER_SELECTION":"Appliquer la sélection",
+
 
   "AJOUTER_PRODUIT":"Ajouter un produit",
   "EDITER_PRODUIT":"Éditer un produit",

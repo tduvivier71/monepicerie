@@ -79,6 +79,7 @@
             $translatePartialLoaderProvider.addPart('epicerie');
             $translatePartialLoaderProvider.addPart('marque');
 			$translatePartialLoaderProvider.addPart('produit');
+            $translatePartialLoaderProvider.addPart('defaut');
 			$translatePartialLoaderProvider.addPart('unite');
 			$translatePartialLoaderProvider.addPart('liste');
 			$translatePartialLoaderProvider.addPart('utilisateur');

@@ -1,5 +1,5 @@
 {
-  "ANNULER": "Annuler",
+
   "UNITE":"Unité",
   "UNEUNITE":"Une unité",
   "UNITES":"Unités",
@@ -10,14 +10,12 @@
   "PAR":"par",
   "EGALE":"Équivaut à un",
 
-  "VALEUR_OBLIGATOIRE":"Valeur obligatoire",
-
   "AJOUTER_UNITE":"Ajouter une unité",
   "EDITER_UNITE":"Éditer une unité",
   "LISTE_UNITES":"Liste des unités",
 
   "HINT_AJOUTER_UNITE":"Ajouter une unité",
-  "HINT_EDITER_UNITE":"Éditer une unité existante",
+  "HINT_EDITER_UNITE":"Éditer une unité",
   "HINT_DETRUIRE_UNITE":"Détruire une unité",
 
   "REFERENCEUNITE":"Référence de l'unité",
