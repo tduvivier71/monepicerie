@@ -1,4 +1,4 @@
-<form novalidate name="vm.form" role="form"></form>
+<form novalidate name="vm.form" role="form">
     <!--  ng-model-options="{ updateOn: 'default', debounce: { 'default': 100, 'blur': 0 } }"> -->
 
     <div class="row" style="padding-top: 15px;">
@@ -9,9 +9,9 @@
                     {{"PRODUIT"|translate}}<span style="color: red;" uib-tooltip={{"VALEUR_OBLIGATOIRE"|translate}}>*</span>
                 </label>
                 <input auto-focus
-                       required
                        autocomplete="off"
-                       class="k-textbox"
+                       required
+                       class="form-control input k-textbox"
                        data-ng-model="vm.item.produit"
                        focus-on="produit_input_focus"
                        id="produit_input_id"
@@ -37,11 +37,12 @@
         </div>
 
         <div class="col-md-3 form-group">
-            <div class="form-group" ng-class="{'has-error': vm.form.$submitted && vm.form.categorieId_input.$invalid}">
+            <div class="form-group" ng-class="{'has-error': vm.form.$submitted && vm.form.categorieId_select.$invalid}">
                 <label for="categorieId_select_id">
                     {{"CATEGORIE"|translate}}<span style="color: red;" uib-tooltip={{"VALEUR_OBLIGATOIRE"|translate}}>*</span>
                 </label>
                 <select required
+                        class="combo-control"
                         data-kendo-combo-box
                         data-k-options="vm.selectOptionsCategorie"
                         data-ng-model="vm.item.categorieId._id"
@@ -83,11 +84,9 @@
                       focus-on="description_textArea_focus"
                       name="description_input"
                       style="width: 100%; min-height: 75px"
-                      type="text"/>
+                      type="text"></textarea>
         </div>
-
     </div>
-
 
     <div class="panel panel-default noborder" style="padding-left: 15px; padding-right: 15px; padding-bottom: 0">
 
@@ -245,42 +244,14 @@
 
                 </div>
 
-
-
-
-
             </div>
         </div>
 
+    </div>
 
-        <table class="table">
 
 
-            <tbody>
-                 <tr >
-                    <!--data-k-format="'c'"-->
-                    <td class="col-md-2 col-sm-2">
-
-                    </td>
-                    <td class="col-md-3 col-sm-3">
-
-                    </td>
-                    <td class="col-md-2 col-sm-2">
-
-                    </td>
-                    <td class="col-md-2 col-sm-2">
-
-                    </td>
-                    <td class="col-md-2 col-sm-2">
-                        <div style="text-align:left; top:25px; padding-right: 30px">
-
-                        </div>
-                    </td>
-                    <td class="col-md-1 col-sm-1">
-                    </td>
-                </tr>
-
-                <tr ng-show="vm.item.historiques.length > 0"
+<!--           <tr ng-show="vm.item.historiques.length > 0"
                     ng-hide="histo.statut == 'D'"
                     data-ng-repeat="histo in (vm.item.historiques).slice(((vm.pagination.currentPage-1)*vm.pagination.itemsPerPage),
                     ((vm.pagination.currentPage)*vm.pagination.itemsPerPage))  | orderBy : vm.sorting.type:vm.sorting.reverse">
@@ -309,18 +280,14 @@
                                 <i class="material-icons md-16">delete</i>
                         </button>
                     </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <!-- FIN Historique edit only -->
+
+                    -->
+
 
     <br>
 
     <div class="row">
-        <ng-include
-                src="'app/shared/partials/bottom-save-cancel.html'">
-        </ng-include>
+        <div static-include="app/shared/partials/bottom-save-cancel.html"></div>
     </div>
 
 </form>

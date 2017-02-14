@@ -21,11 +21,12 @@
                 <input auto-focus
                        autocomplete="off"
                        required
-                       class="form-control input"
+                       class="form-control input k-textbox"
+                       data-ng-model="vm.item.categorie"
                        focus-on="categorie_input_focus"
                        id="categorie_input_id"
                        name="categorie_input"
-                       ng-model="vm.item.categorie"
+                       style="width: 100%;"
                        type="text"/>
                        <validate-input form="vm.form" field="vm.form.categorie_input"></validate-input>
             </div>

@@ -24304,6 +24304,11 @@ $td-divider-color:        #BDBDBD;
 .has-error .form-control-feedback {
   color: #d32f2f; }
 
+.has-error .k-combobox {
+  border: #d32f2f;
+  -webkit-box-shadow: none;
+  box-shadow: none; }
+
 /**  Sortable */
 .list {
   list-style: none outside none;

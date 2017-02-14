@@ -25,7 +25,12 @@
 </div>
 
 <div class="row" ng-show="vm.state == 'dsBrowse'" style="padding-top: 10px; padding-bottom: 25px;">
-    <div class="col-md-6 paddingleft-992">
+    <div class="col-md-6 paddinleft-992">
+        <search-item
+                search-item="vm.searchItem">
+        </search-item>
+    </div>
+    <div class="col-md-6 paddingright-992">
         <div class="input-group">
             <select
                     data-kendo-multi-select
@@ -44,11 +49,6 @@
                 </button>
             </span>
         </div>
-    </div>
-    <div class="col-md-6 paddingright-992">
-        <search-item
-                search-item="vm.searchItem">
-        </search-item>
     </div>
 </div>
 

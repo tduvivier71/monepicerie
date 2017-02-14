@@ -26,6 +26,12 @@
 
         var vm = this
 
+        /**
+         * typedef {Object}
+         * @property
+         * @property
+         * @function reset
+         */
         vm.itemHistorique = {
             epicerieId: '',
             date: '',
@@ -261,7 +267,6 @@
          * Cancel edit/insert
          */
         function cancel() {
-            console.log('cancel');
             if (vm.state === 'dsInsert') {
                 _cancelInsert();
             } else {
@@ -277,7 +282,6 @@
         }
 
         function remove(_item) {
-            console.log('remove');
             _item.$remove(function () {
                 toasterService.remove(_item.produit);
                 for (var i in vm.items) {
@@ -291,10 +295,14 @@
             _setBrowse();
         }
 
-        function save(_form, _item, _oneMore) {
-            console.log('save');
+        function save(_form, _item) {
+            if (!_form.$valid) {
+                focus('produit_input_focus');
+                return;
+            }
+
             if (vm.state === 'dsInsert') {
-                _create(_form, _item, _oneMore);
+                _create(_item);
             } else {
                 _update(_item);
             }
@@ -304,22 +312,11 @@
          * Set edit state
          */
         function setEdit(_item) {
-            console.log('setEdit');
-            _resetForm();
+            focus('produit_input_focus');
+            _resetForm('dsEdit');
             vm.selectedItem = angular.copy(_item);
             vm.item = _item;
-            vm.state = 'dsEdit';
-            focus('categorie_focus');
-
-       /*     vm.insertHisto.epicerie = '';
-            vm.insertHisto.epicerieId = '';
-            vm.insertHisto.prix = 0;
-            vm.insertHisto.date = new Date();
-            vm.insertHisto.enPromotion = false; */
-
         }
-
-
 
         /**
          * Set insert State
@@ -327,18 +324,8 @@
         function setInsert() {
             vm.isCollapsed = true;
             focus('produit_input_focus');
-
-            console.log('setInsert');
-            _resetForm();
-            _resetItem();
-            vm.state = 'dsInsert';
-
-
-       /*     vm.insertHisto.epicerie = '';
-            vm.insertHisto.epicerieId = '';
-            vm.insertHisto.prix = 0;
-            vm.insertHisto.date = new Date();
-            vm.insertHisto.enPromotion = false; */
+            _resetForm('dsInsert');
+            vm.item.reset();
         }
 
         /**
@@ -424,77 +411,63 @@
         }
 
         function _cancelEdit() {
-            console.log('cancelEdit');
             _revertSelectedItem();
             _setBrowse();
         }
 
         function _cancelInsert() {
-            console.log('_cancelInsert');
             _setBrowse();
         }
 
-        function _create(_form, _item, _oneMore) {
-            console.log('create');
-            if (_form.$valid) {
-                var item = new produitService();
-                item.produit = _item.produit;
-                item.marque = _item.marque;
-                item.categorieId = _item.categorieId;
-                item.formatId = _item.formatId === "" ? _item.formatId = undefined : _item.formatId;
-                item.uniteId = _item.uniteId === "" ? _item.uniteId = undefined : _item.uniteId;
-                item.quantite = _item.quantite;
-                item.nombre = _item.nombre;
-                item.description = _item.description;
-                item.enPromotion = _item.enPromotion;
-                item.historiques = [];
+        function _create(_item) {
+            var item = new produitService();
+            item.produit = _item.produit;
+            item.marque = _item.marque;
+            item.categorieId = _item.categorieId;
+            item.formatId = _item.formatId === "" ? _item.formatId = undefined : _item.formatId;
+            item.uniteId = _item.uniteId === "" ? _item.uniteId = undefined : _item.uniteId;
+            item.quantite = _item.quantite;
+            item.nombre = _item.nombre;
+            item.description = _item.description;
+            item.enPromotion = _item.enPromotion;
+            item.historiques = [];
 
-                if (vm.insertHisto.epicerieId) {
-                    item.historiques.push(
-                        {
-                            epicerieId: vm.insertHisto.epicerieId,
-                            epicerie: vm.insertHisto.epicerie,
-                            date: vm.insertHisto.date || new Date.now(),
-                            prix: vm.insertHisto.prix || 0,
-                            enPromotion: vm.insertHisto.enPromotion || false,
-                            statut: 'I'
-                        }
-                    );
-                }
-
-                item.$save(
-                    function () {
-                        vm.items.push(item);
-                        toasterService.save(item.produit);
-                        if (_oneMore) {
-                            _resetForm();
-                            setInsert();
-                        }
-                        else {
-                            _setBrowse();
-                        }
-                        vm.oneMore = false;
-                    },
-                    function (e) {
-                        toasterService.error(e.data);
-                        focus('produit_focus');
+            if (vm.insertHisto.epicerieId) {
+                item.historiques.push(
+                    {
+                        epicerieId: vm.insertHisto.epicerieId,
+                        epicerie: vm.insertHisto.epicerie,
+                        date: vm.insertHisto.date || new Date.now(),
+                        prix: vm.insertHisto.prix || 0,
+                        enPromotion: vm.insertHisto.enPromotion || false,
+                        statut: 'I'
                     }
                 );
-            } else {
-                focus('produit_focus');
             }
+
+            item.$save(
+                function () {
+                    vm.items.push(item);
+                    toasterService.save(item.produit);
+                    _setBrowse();
+                },
+                function (e) {
+                    toasterService.error(e.data);
+                    focus('produit_input_focus');
+                }
+            );
+
         }
 
         function _init() {
-            focus('searchText');
-            _setBrowse();
-            _resetItem();
+            vm.item.reset();
             vm.items = produitService.query();
             vm.categories = categorieService.query();
             vm.unites = uniteService.query();
             vm.formats = formatService.query();
             vm.epiceries = epicerieService.query();
             vm.marques = marqueService.query();
+            _setBrowse();
             vm.loadTags = function () {
                 var deferred = $q.defer();
                 deferred.resolve(vm.categories);
@@ -525,30 +498,12 @@
             );
         }
 
-        function _resetItem() {
-            //vm.item = {};
-            vm.item = {
-                produit: "",
-                categorieId: "",
-                marque: "",
-                formatId: "",
-                quantite: "",
-                nombre: "",
-                uniteId: "",
-                description: "",
-                historiques: []
-            };
-        }
-
-        function _resetForm() {
+        function _resetForm(state) {
+            vm.state = state;
             if (vm.form.$dirty || vm.form.$submitted) {
                 vm.form.$setPristine();
                 vm.form.$setUntouched();
             }
-        }
-
-        function _resetSearchItem() {
-            vm.searchItem = '';
         }
 
         function _revertSelectedItem() {

@@ -42,3 +42,10 @@
 
 .has-error .form-control-feedback {
   color: $danger-color; }
+
+.has-error .k-combobox  {
+  border: $danger-color;
+ // border-color: $danger-color;
+  -webkit-box-shadow: none;
+  box-shadow: none
+}
