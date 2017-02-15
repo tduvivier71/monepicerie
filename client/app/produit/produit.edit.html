@@ -37,11 +37,12 @@
         </div>
 
         <div class="col-md-3 form-group">
-            <div class="form-group" ng-class="{'has-error': vm.form.$submitted && vm.form.categorieId_select.$invalid}">
+            <div class="form-group" >
                 <label for="categorieId_select_id">
                     {{"CATEGORIE"|translate}}<span style="color: red;" uib-tooltip={{"VALEUR_OBLIGATOIRE"|translate}}>*</span>
                 </label>
                 <select required
+                        ng-class="{'has-error': vm.form.$submitted && vm.form.categorieId_select.$invalid}"
                         class="combo-control"
                         data-kendo-combo-box
                         data-k-options="vm.selectOptionsCategorie"
@@ -183,6 +184,7 @@
                                data-k-min="0"
                                id="prix_input_id"
                                name="prix_input"
+                               ng-class="{'has-error': vm.form.$submitted && vm.form.categorieId_select.$invalid}"
                                ng-model="vm.insertHisto.prix"
                                type="number"
                                style="width: 100%"/>
@@ -199,9 +201,10 @@
                                 data-kendo-combo-box
                                 data-k-options="vm.selectOptionsEpicerie"
                                 data-k-ng-model="vm.insertHisto.epicerieId"
-                                ng-model="vm.insertHisto.epicerieId"
                                 id="epicerieId_select_edit_id"
                                 name="epicerieId_select"
+                                ng-class="{'has-error': vm.form.$submitted && vm.form.categorieId_select.$invalid}"
+                                ng-model="vm.insertHisto.epicerieId"
                                 style="width: 100%">
                         </select>
                         <validate-input form="vm.form" field="vm.form.epicerieId_select"></validate-input>
@@ -223,29 +226,27 @@
                 </div>
 
                 <div class="col-md-2 col-sm-2 col-xs-2" style="height: 66px; padding-top:27px">
-
-                        <toggle id="enPromotion_toogle_id"
-                                style="height: 37px"
-                                onstyle="btn-success"
-                                ng-model="vm.insertHisto.enPromotion"
-                                ng-change="changed()" on="En promotion  " off="Prix régulier  ">
-                        </toggle>
-
+                    <toggle id="enPromotion_toogle_id"
+                            style="height: 37px"
+                            onstyle="btn-success"
+                            ng-model="vm.insertHisto.enPromotion"
+                            ng-change="changed()" on="En promotion  " off="Prix régulier  ">
+                    </toggle>
                 </div>
 
                 <div class="col-md-1 col-sm-1 col-xs-1" style="height: 66px; padding-top:27px">
-
-                        <button class="btn btn-primary"
-                                style="height: 37px;"
-                                data-toggle="tooltip"
-                                ng-click="vm.createHisto()">
-                            Ajouter
-                        </button>
-
+                    <button class="btn btn-primary"
+                            style="height: 37px;"
+                            data-toggle="tooltip"
+                            ng-click="vm.createHisto()">
+                        Ajouter
+                    </button>
                 </div>
 
             </div>
         </div>
+
+
 
     </div>
 
