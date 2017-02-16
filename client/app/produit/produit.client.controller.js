@@ -298,10 +298,10 @@
         }
 
         function save(_form, _item) {
-            // if (!_form.$valid) {
-            //     focus('produit_input_focus');
-            //     return;
-            // }
+            if (!_form.$valid) {
+                 focus('produit_input_focus');
+                 return;
+            }
 
             if (vm.state === 'dsInsert') {
                 _create(_item);
