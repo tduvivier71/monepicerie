@@ -24304,18 +24304,31 @@ $td-divider-color:        #BDBDBD;
 .has-error .form-control-feedback {
   color: #d32f2f; }
 
-.has-error .k-dropdown-wrap {
-  border-width: 1px;
-  border-color: #d32f2f;
-  box-shadow: none;
-  -webkit-box-shadow: none; }
-
+.has-error .k-dropdown-wrap,
 .has-error .k-numeric-wrap {
   border-width: 1px;
   border-color: #d32f2f;
   box-shadow: none;
   -webkit-box-shadow: none; }
 
+/*
+
+.has-error .k-dropdown-wrap {
+  border-width: 1px;
+  border-color: $danger-color;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+}
+
+
+.has-error .k-numeric-wrap {
+  border-width: 1px;
+  border-color: $danger-color;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+}
+
+*/
 /**  Sortable */
 .list {
   list-style: none outside none;

@@ -43,6 +43,23 @@
 .has-error .form-control-feedback {
   color: $danger-color; }
 
+
+.has-error {
+
+  & .k-dropdown-wrap,
+    .k-numeric-wrap  {
+    border-width: 1px;
+    border-color: $danger-color;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+  }
+
+}
+
+
+
+/*
+
 .has-error .k-dropdown-wrap {
   border-width: 1px;
   border-color: $danger-color;
@@ -50,9 +67,12 @@
   -webkit-box-shadow: none;
 }
 
+
 .has-error .k-numeric-wrap {
   border-width: 1px;
   border-color: $danger-color;
   box-shadow: none;
   -webkit-box-shadow: none;
 }
+
+*/

@@ -14,7 +14,8 @@
                 x = price / (nb * qtt);
                 x = x / nombre;
             }
-            return x.toFixed(7) + '/' + abr;
+            return x + '/' + abr;
+           // return x.toFixed(7) + '/' + abr;
         };
     }
 
@@ -32,7 +33,7 @@
          * @property
          * @function reset
          */
-        vm.itemHistorique = {
+        vm.insertHisto = {
             epicerieId: '',
             date: '',
             prix: 0,
@@ -44,6 +45,7 @@
                 this.enPromotion = false;
             }
         };
+
 
         vm.item = {
             produit: '',
@@ -72,6 +74,7 @@
 
 
         vm.statutD = 'D';
+        vm.addHisto = false;
 
         /* Variables */
         vm.form = {};           // Object
@@ -81,7 +84,6 @@
         vm.selectedItem = {};   // Object
         vm.state = '';          // string
         vm.error = '';          // string
-        vm.insertHisto = {};    // object;
 
         vm.categories = [];     // List of object
         vm.selectedCategories = [];
@@ -296,10 +298,10 @@
         }
 
         function save(_form, _item) {
-            if (!_form.$valid) {
-                focus('produit_input_focus');
-                return;
-            }
+            // if (!_form.$valid) {
+            //     focus('produit_input_focus');
+            //     return;
+            // }
 
             if (vm.state === 'dsInsert') {
                 _create(_item);
@@ -326,12 +328,15 @@
             focus('produit_input_focus');
             _resetForm('dsInsert');
             vm.item.reset();
+            vm.insertHisto.reset();
         }
 
         /**
          * Create Histo
          * */
         function createHisto() {
+
+            vm.addHisto = true;
 
             if (vm.insertHisto.prix &&  vm.insertHisto.epicerieId) {
 
@@ -352,25 +357,19 @@
                         statut: 'I'
                     }
                 );
-
-            //    vm.insertHisto = {};  // ! TO DO
-            //    vm.form.$submitted = false;
-            //    vm.form.$setUntouched();
-
             }
-
         }
 
         function deleteHisto(histo, $index) {
             //   if (histo.statut = 'I') {
             //       vm.item.historiques.splice($index,1)
             //   } else
+            vm.addHisto = false;
             histo.statut = 'D';
             console.log('histo : ' + JSON.stringify(histo));
         }
 
         function getCategories() {
-            console.log('getCategories');
             return categorieService.query();
         }
 
@@ -420,6 +419,7 @@
         }
 
         function _create(_item) {
+            vm.addHisto = false;
             var item = new produitService();
             item.produit = _item.produit;
             item.marque = _item.marque;
@@ -437,7 +437,7 @@
                     {
                         epicerieId: vm.insertHisto.epicerieId,
                         epicerie: vm.insertHisto.epicerie,
-                        date: vm.insertHisto.date || new Date.now(),
+                        date: vm.insertHisto.date ||  moment(),
                         prix: vm.insertHisto.prix || 0,
                         enPromotion: vm.insertHisto.enPromotion || false,
                         statut: 'I'
@@ -461,6 +461,7 @@
 
         function _init() {
             vm.item.reset();
+            vm.insertHisto.reset();
             vm.items = produitService.query();
             vm.categories = categorieService.query();
             vm.unites = uniteService.query();
@@ -516,13 +517,10 @@
         }
 
         function _setBrowse() {
-            console.log('_setBrowse');
-            vm.enLot = false;
+            focus('searchItem_input_focus');
             vm.sorting.type = 'produit';
+            _resetForm('dsBrowse');
             vm.state = 'dsBrowse';
-            vm.selectedItem = null;
-            vm.form.$dirty = false;
-            focus('searchItem_focus');
         }
     }
 

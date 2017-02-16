@@ -155,13 +155,6 @@
             );
         }
 
-        function _setBrowse() {
-            focus('searchItem_input_focus');
-            vm.sorting.type = 'categorie';
-            _resetForm('dsBrowse');
-
-        }
-
         function _resetForm(state) {
             vm.state = state;
             if (vm.form.$dirty || vm.form.$submitted) {
@@ -177,6 +170,12 @@
                 }
             });
             vm.selectedItem = null;
+        }
+
+        function _setBrowse() {
+            focus('searchItem_input_focus');
+            vm.sorting.type = 'categorie';
+            _resetForm('dsBrowse');
         }
     }
 
