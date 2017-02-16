@@ -298,7 +298,7 @@
         }
 
         function save(_form, _item) {
-            vm.addHisto = false;
+        //    vm.addHisto = false;
 
             if (!_form.$valid) {
                  focus('produit_input_focus');

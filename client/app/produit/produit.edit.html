@@ -179,12 +179,20 @@
                         <input
                                autocomplete="off"
                                data-kendo-numeric-text-box
-                               data-k-min="0"
+                               data-k-min="0.01"
                                id="prix_input_id"
                                name="prix_input"
+                               ng-class="{'has-error': vm.addHisto && vm.form.prix_input.$invalid}"
                                ng-model="vm.insertHisto.prix"
+                               ng-required="vm.addHisto && !vm.insertHisto.prix"
                                type="number"
                                style="width: 100%"/>
+                                <div class="error-message">
+                                    <ng-messages for="vm.form.prix_input.$error">
+                                        <ng-message when="required"> Une valeur est requise. </ng-message>
+                                        <ng-message when="min">La valeur de ce champ est trop petite. </ng-message>
+                                    </ng-messages>
+                                </div>
                       <!-- required -->
                       <!--  ng-class="{'has-error': vm.addHisto && vm.form.prix_input.$invalid}" -->
                       <!--  <validate-input form="vm.form" field="vm.form.prix_input"></validate-input> -->
