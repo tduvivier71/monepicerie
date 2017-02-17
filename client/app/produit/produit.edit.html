@@ -13,7 +13,7 @@
                        autocomplete="off"
                        required
                        class="form-control input k-textbox"
-                       data-ng-model="vm.item.produit"
+                       ng-model="vm.item.produit"
                        focus-on="produit_input_focus"
                        id="produit_input_id"
                        name="produit_input"
@@ -30,7 +30,7 @@
             <select required
                     data-kendo-combo-box="vm.marqueWidget"
                     data-k-options="vm.selectOptionsMarque"
-                    data-k-ng-model="vm.item.marque"
+                    ng-model="vm.item.marque"
                     id="marque_input_id"
                     name="marque_input"
                     style="width: 100%">
@@ -47,8 +47,8 @@
                         class="combo-control"
                         data-kendo-combo-box
                         data-k-options="vm.selectOptionsCategorie"
-                        data-ng-model="vm.item.categorieId._id"
-                        data-k-ng-model="vm.item.categorieId._id"
+                        ng-model="vm.item.categorieId._id"
+                        k-ng-model="vm.item.categorieId._id"
                         id="categorieId_select_id"
                         name="categorieId_select"
                         style="width: 100%">
@@ -117,7 +117,7 @@
                     </label>
                     <select data-kendo-combo-box
                             data-k-options="vm.selectOptionsFormat"
-                            data-k-ng-model="vm.item.formatId._id"
+                            k-ng-model="vm.item.formatId._id"
                             id="formatId_input_id"
                             name="formatId_select"
                             style="width: 100%">
@@ -143,7 +143,8 @@
                     </label>
                     <select data-kendo-combo-box
                             data-k-options="vm.selectOptionsUnite"
-                            data-k-ng-model="vm.item.uniteId._id"
+                            ng-model="vm.item.uniteId._id"
+                            k-ng-model="vm.item.uniteId._id"
                             id="unite_input_id"
                             name="uniteId_select"
                             style="width: 100%">
@@ -179,7 +180,7 @@
                         <input
                                autocomplete="off"
                                data-kendo-numeric-text-box
-                               data-k-min="0.01"
+                               data-k-min="0.00"
                                id="prix_input_id"
                                name="prix_input"
                                ng-class="{'has-error': vm.addHisto && vm.form.prix_input.$invalid}"
@@ -190,12 +191,8 @@
                                 <div class="error-message">
                                     <ng-messages for="vm.form.prix_input.$error">
                                         <ng-message when="required"> Une valeur est requise. </ng-message>
-                                        <ng-message when="min">La valeur de ce champ est trop petite. </ng-message>
                                     </ng-messages>
                                 </div>
-                      <!-- required -->
-                      <!--  ng-class="{'has-error': vm.addHisto && vm.form.prix_input.$invalid}" -->
-                      <!--  <validate-input form="vm.form" field="vm.form.prix_input"></validate-input> -->
                     </div>
                 </div>
 
@@ -216,17 +213,9 @@
                         </select>
                         <div class="error-message">
                             <ng-messages for="vm.form.epicerieId_select.$error">
-                                <ng-message when="required"> Une valeur est requise. </ng-message>
-                                <ng-message when="minlength">La valeur de ce champ est trop courte. </ng-message>
-                                <ng-message when="unique">Cette valeur existe déjà. </ng-message>
+                                <ng-message when="required">Une valeur est requise.</ng-message>
                             </ng-messages>
                         </div>
-
-
-
-                      <!-- required -->
-                      <!--  ng-class="{'has-error':  vm.addHisto && vm.form.epicerieId_select.$invalid}" -->
-                      <!--  <validate-input form="vm.form" field="vm.form.epicerieId_select"></validate-input> -->
                     </div>
                 </div>
 
@@ -266,6 +255,10 @@
             </div>
         </div>
 
+        <pre> {{vm.item.uniteId._id.operation}}</pre>
+        {{vm.item.uniteId.operation}}
+
+
         <div data-ng-show="vm.item.historiques.length > 0">
             <div data-ng-hide="histo.statut == 'D'"
                  data-ng-repeat="histo in (vm.item.historiques).slice(((vm.pagination.currentPage-1)*vm.pagination.itemsPerPage),
@@ -284,7 +277,7 @@
                         {{histo.enPromotion ? "En promotion" : "Prix régulier"}}
                     </div>
                     <div class="col-md-1 col-sm-1 col-xs-1" style="padding-top: 5px">
-                        {{(histo.prix) | coutPar:vm.item.quantite:vm.item.nombre:vm.item.uniteId.operation:vm.item.uniteId.nombre:vm.item.uniteId.coutParId.abreviation}}</span>
+                        {{(histo.prix) | coutPar:vm.item.quantite:vm.item.nombre:vm.item.uniteId._id.operation:vm.item.uniteId._id.nombre:vm.item.uniteId._id.coutParId.abreviation}}</span>
                     </div>
                     <div class="col-md-1 col-sm-1 col-xs-1" style="text-align: right;">
                         <button class="btn btn-danger btn-sm"

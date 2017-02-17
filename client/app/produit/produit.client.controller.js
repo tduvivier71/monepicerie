@@ -9,13 +9,28 @@
 
     function coupPar() {
         return function(price, qtt, nb, operation, nombre, abr) {
-            var x = null;
-            if (!isNaN(price) && !isNaN(qtt)  && !isNaN(nb) && !isNaN(nombre) && operation!=='' && qtt > 0 && nb > 0 && nombre > 0)  {
+
+            var x = 0;
+
+            if (isNaN(price) || isNaN(qtt) || isNaN(nb) || isNaN(nombre) || operation==='') {
+                return x;
+            }
+
+            if  (qtt <= 0 || nb <= 0 || nombre <= 0) {
+                return x;
+            }
+
+            if (operation==='Divisé par') {
                 x = price / (nb * qtt);
                 x = x / nombre;
             }
-            return x + '/' + abr;
-           // return x.toFixed(7) + '/' + abr;
+
+            if (operation==='Multiplié par') {
+                x = price / (nb * qtt);
+                x = x * nombre;
+            }
+
+            return x.toFixed(7) + '/' + abr;
         };
     }
 
@@ -220,8 +235,8 @@
             dataTextField: "unite",
             dataValueField: "_id",
             filter:"contains",
-            valuePrimitive: true,
-            autoBind: false,
+            valuePrimitive: false, //!Important
+            autoBind: false, //!Important
             dataSource: vm.unites,
             clearButton: true,
             delay: 50,
@@ -298,7 +313,11 @@
         }
 
         function save(_form, _item) {
-        //    vm.addHisto = false;
+            if (vm.addHisto) {
+                vm.addHisto = false;
+                vm.form.prix_input.$setValidity("required",true);
+                vm.form.epicerieId_select.$setValidity("required",true);
+            }
 
             if (!_form.$valid) {
                  focus('produit_input_focus');
