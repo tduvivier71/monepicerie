@@ -27,8 +27,7 @@
             <label for="marque_input_id">
                 {{"MARQUE"|translate}}
             </label>
-            <select required
-                    data-kendo-combo-box="vm.marqueWidget"
+            <select data-kendo-combo-box="vm.marqueWidget"
                     data-k-options="vm.selectOptionsMarque"
                     ng-model="vm.item.marque"
                     id="marque_input_id"
@@ -48,7 +47,6 @@
                         data-kendo-combo-box
                         data-k-options="vm.selectOptionsCategorie"
                         ng-model="vm.item.categorieId._id"
-                        k-ng-model="vm.item.categorieId._id"
                         id="categorieId_select_id"
                         name="categorieId_select"
                         style="width: 100%">
@@ -156,7 +154,6 @@
 
     </div>
 
-
     <div class="panel panel-default noborder" style="padding-left: 15px; padding-right: 15px; padding-top: 10px">
 
         <div class="panel-heading"><b> {{"HISTORIQUEDEPRIX"|translate}}</b>
@@ -254,10 +251,6 @@
 
             </div>
         </div>
-
-        <pre> {{vm.item.uniteId._id.operation}}</pre>
-        {{vm.item.uniteId.operation}}
-
 
         <div data-ng-show="vm.item.historiques.length > 0">
             <div data-ng-hide="histo.statut == 'D'"
