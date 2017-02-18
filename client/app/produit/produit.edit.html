@@ -115,7 +115,7 @@
                     </label>
                     <select data-kendo-combo-box
                             data-k-options="vm.selectOptionsFormat"
-                            k-ng-model="vm.item.formatId._id"
+                            ng-model="vm.item.formatId._id"
                             id="formatId_input_id"
                             name="formatId_select"
                             style="width: 100%">
@@ -141,8 +141,8 @@
                     </label>
                     <select data-kendo-combo-box
                             data-k-options="vm.selectOptionsUnite"
-                            ng-model="vm.item.uniteId._id"
-                            k-ng-model="vm.item.uniteId._id"
+                            data-k-ng-model="vm.item.uniteId._id"
+                            data-k-value-primitive="false"
                             id="unite_input_id"
                             name="uniteId_select"
                             style="width: 100%">
@@ -251,6 +251,8 @@
 
             </div>
         </div>
+
+        <pre>    {{vm.item.uniteId}} </pre>
 
         <div data-ng-show="vm.item.historiques.length > 0">
             <div data-ng-hide="histo.statut == 'D'"

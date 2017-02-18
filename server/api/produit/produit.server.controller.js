@@ -87,7 +87,7 @@ exports.findAll = function(req, res) {
 
 exports.createOne = function(req, res) {
 
-	var categorie;
+var categorie;
 
 	 CategorieModel.findOne(req.body.categorieId)
 	 .exec(function (err, result) {
@@ -103,7 +103,7 @@ exports.createOne = function(req, res) {
 		formatId: req.body.formatId,
 		quantite: req.body.quantite, // A MODIFIER
 		nombre: req.body.nombre, // A MODIFIER
-	 	uniteId: req.body.uniteId // A MODIFIER
+	 	uniteId: req.body.uniteId // A MODIDIFIER
 	});
 
 	for (var i=0; i< req.body.historiques.length; ++i) {

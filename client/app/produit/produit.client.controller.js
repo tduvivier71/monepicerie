@@ -235,7 +235,7 @@
             dataTextField: "unite",
             dataValueField: "_id",
             filter:"contains",
-            valuePrimitive: false, //!Important
+          //  valuePrimitive: false, //!Important
             autoBind: false, //!Important
             dataSource: vm.unites,
             clearButton: true,
@@ -446,7 +446,7 @@
             item.marque = _item.marque;
             item.categorieId = _item.categorieId;
             item.formatId = _item.formatId === "" ? _item.formatId = undefined : _item.formatId;
-            item.uniteId = _item.uniteId === "" ? _item.uniteId = undefined : _item.uniteId;
+            item.uniteId = _item.uniteId === "" ? _item.uniteId = undefined : _item.uniteId._id; // Important : _item.uniteId._id
             item.quantite = _item.quantite;
             item.nombre = _item.nombre;
             item.description = _item.description;
