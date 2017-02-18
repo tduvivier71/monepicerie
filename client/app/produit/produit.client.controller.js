@@ -189,7 +189,7 @@
             dataTextField: "categorie",
             dataValueField: "_id",
             filter:"contains",
-            valuePrimitive: true,
+          //  valuePrimitive: true,
             autoBind: false,
             dataSource: vm.categories,
             clearButton: false,

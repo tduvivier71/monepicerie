@@ -42,11 +42,12 @@
                     {{"CATEGORIE"|translate}}<span style="color: red;" uib-tooltip={{"VALEUR_OBLIGATOIRE"|translate}}>*</span>
                 </label>
                 <select required
-                        ng-class="{'has-error': vm.form.$submitted && vm.form.categorieId_select.$invalid}"
                         class="combo-control"
                         data-kendo-combo-box
                         data-k-options="vm.selectOptionsCategorie"
-                        ng-model="vm.item.categorieId._id"
+                        data-ng-model="vm.item.categorieId._id"
+                        data-k-value-primitive="true"
+                        ng-class="{'has-error': vm.form.$submitted && vm.form.categorieId_select.$invalid}"
                         id="categorieId_select_id"
                         name="categorieId_select"
                         style="width: 100%">
@@ -139,6 +140,7 @@
                     <label for="unite_input_id">
                         {{"UNITE"|translate}}
                     </label>
+                    <!-- Must be k-value and primitive=false -->
                     <select data-kendo-combo-box
                             data-k-options="vm.selectOptionsUnite"
                             data-k-ng-model="vm.item.uniteId._id"
