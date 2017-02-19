@@ -62,6 +62,9 @@
         };
 
 
+
+    //    historiques: [vm.itemHistorique],
+
         vm.item = {
             produit: '',
             marque: '',
@@ -72,7 +75,7 @@
             nombre: 0,
             prix: 0,
             uniteId: '',
-            historiques: [vm.itemHistorique],
+            historiques: [],
             reset : function() {
                 this.produit = '';
                 this.marque = '';
@@ -86,6 +89,8 @@
                 this.historiques = [];
             }
         };
+
+        //       this.historiques = [];
 
 
         vm.statutD = 'D';
@@ -174,14 +179,17 @@
         vm.selectOptionsMarque = {
             placeholder: "Sélectionnez une marque...",
             dataTextField: "marque",
+            dataValueField: "marque",
             filter:"contains",
             dataSource: vm.marques,
             valuePrimitive: true,
+            autoBind: false, // obligatoire
             clearButton: true,
             ignoreCase: true,
-            autoBind: true,
             delay: 50,
-            noDataTemplate: vm.no_template
+            noDataTemplate: vm.no_template,
+            suggest: true,
+            highlightFirst: true
         };
 
         vm.selectOptionsCategorie = {
@@ -190,7 +198,7 @@
             dataValueField: "_id",
             filter:"contains",
             valuePrimitive: true,
-            autoBind: false,
+            autoBind: false, // obligatoire
             dataSource: vm.categories,
             clearButton: false,
             delay: 50,
@@ -235,7 +243,7 @@
             dataTextField: "unite",
             dataValueField: "_id",
             filter:"contains",
-          //  valuePrimitive: false, //!Important
+            valuePrimitive: true,
             autoBind: false, //!Important
             dataSource: vm.unites,
             clearButton: true,
@@ -345,11 +353,11 @@
          * Set insert State
          */
         function setInsert() {
+            vm.item.reset();
             vm.isCollapsed = true;
             focus('produit_input_focus');
             _resetForm('dsInsert');
-            vm.item.reset();
-            vm.insertHisto.reset();
+           // vm.insertHisto.reset();
         }
 
         /**

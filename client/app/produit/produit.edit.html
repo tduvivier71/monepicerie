@@ -23,18 +23,23 @@
             </div>
         </div>
 
+        {{vm.form.produit_input.$invalid}}
+
         <div class="col-md-4 form-group">
             <label for="marque_input_id">
                 {{"MARQUE"|translate}}
             </label>
-            <select data-kendo-combo-box="vm.marqueWidget"
+            <select data-kendo-combo-box
                     data-k-options="vm.selectOptionsMarque"
-                    ng-model="vm.item.marque"
+                    data-k-ng-model="vm.item.marque"
                     id="marque_input_id"
                     name="marque_input"
                     style="width: 100%">
             </select>
         </div>
+
+        <!-- data-k-ng-model est requis pour obtenir le détail de catégorie pour les calculs -->
+        <!-- data-ng-model est requis pour l'attribut required-->
 
         <div class="col-md-3 form-group">
             <div class="form-group" >
@@ -45,6 +50,7 @@
                         data-kendo-combo-box
                         data-k-options="vm.selectOptionsCategorie"
                         data-k-ng-model="vm.item.categorieId._id"
+                        data-ng-model="vm.item.categorieId._id"
                         ng-class="{'has-error': vm.form.$submitted && vm.form.categorieId_select.$invalid}"
                         id="categorieId_select_id"
                         name="categorieId_select"
@@ -52,7 +58,12 @@
                 </select>
                 <validate-input form="vm.form" field="vm.form.categorieId_select"></validate-input>
             </div>
+
         </div>
+
+        {{vm.item.categorieId}}
+
+        {{vm.form.categorieId_select.$invalid }}
 
         <div class="col-md-1 col-sm-1 col-xs-1" style="height: 66px; padding-top:27px">
             <button class="btn"
@@ -114,7 +125,7 @@
                     </label>
                     <select data-kendo-combo-box
                             data-k-options="vm.selectOptionsFormat"
-                            ng-model="vm.item.formatId._id"
+                            data-k-ng-model="vm.item.formatId._id"
                             id="formatId_input_id"
                             name="formatId_select"
                             style="width: 100%">
@@ -142,7 +153,6 @@
                     <select data-kendo-combo-box
                             data-k-options="vm.selectOptionsUnite"
                             data-k-ng-model="vm.item.uniteId._id"
-                            data-k-value-primitive="false"
                             id="unite_input_id"
                             name="uniteId_select"
                             style="width: 100%">
@@ -251,8 +261,6 @@
 
             </div>
         </div>
-
-        <pre>    {{vm.item.categorieId}} </pre>
 
         <div data-ng-show="vm.item.historiques.length > 0">
             <div data-ng-hide="histo.statut == 'D'"
