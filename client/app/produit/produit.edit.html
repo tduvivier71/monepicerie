@@ -42,11 +42,9 @@
                     {{"CATEGORIE"|translate}}<span style="color: red;" uib-tooltip={{"VALEUR_OBLIGATOIRE"|translate}}>*</span>
                 </label>
                 <select required
-                        class="combo-control"
                         data-kendo-combo-box
                         data-k-options="vm.selectOptionsCategorie"
-                        data-ng-model="vm.item.categorieId._id"
-                        data-k-value-primitive="true"
+                        data-k-ng-model="vm.item.categorieId._id"
                         ng-class="{'has-error': vm.form.$submitted && vm.form.categorieId_select.$invalid}"
                         id="categorieId_select_id"
                         name="categorieId_select"
@@ -254,7 +252,7 @@
             </div>
         </div>
 
-        <pre>    {{vm.item.uniteId}} </pre>
+        <pre>    {{vm.item.categorieId}} </pre>
 
         <div data-ng-show="vm.item.historiques.length > 0">
             <div data-ng-hide="histo.statut == 'D'"
