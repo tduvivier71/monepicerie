@@ -23,8 +23,6 @@
             </div>
         </div>
 
-        {{vm.form.produit_input.$invalid}}
-
         <div class="col-md-4 form-group">
             <label for="marque_input_id">
                 {{"MARQUE"|translate}}
@@ -49,8 +47,8 @@
                 <select required
                         data-kendo-combo-box
                         data-k-options="vm.selectOptionsCategorie"
-                        data-k-ng-model="vm.item.categorieId._id"
-                        data-ng-model="vm.item.categorieId._id"
+                        data-k-ng-model="vm.item.categorieId"
+                        data-ng-model="vm.item.categorieId"
                         ng-class="{'has-error': vm.form.$submitted && vm.form.categorieId_select.$invalid}"
                         id="categorieId_select_id"
                         name="categorieId_select"
@@ -60,10 +58,6 @@
             </div>
 
         </div>
-
-        {{vm.item.categorieId}}
-
-        {{vm.form.categorieId_select.$invalid }}
 
         <div class="col-md-1 col-sm-1 col-xs-1" style="height: 66px; padding-top:27px">
             <button class="btn"
@@ -125,7 +119,7 @@
                     </label>
                     <select data-kendo-combo-box
                             data-k-options="vm.selectOptionsFormat"
-                            data-k-ng-model="vm.item.formatId._id"
+                            data-k-ng-model="vm.item.formatId"
                             id="formatId_input_id"
                             name="formatId_select"
                             style="width: 100%">
@@ -152,13 +146,12 @@
                     <!-- Must be k-value and primitive=false -->
                     <select data-kendo-combo-box
                             data-k-options="vm.selectOptionsUnite"
-                            data-k-ng-model="vm.item.uniteId._id"
+                            data-k-ng-model="vm.item.uniteId"
                             id="unite_input_id"
                             name="uniteId_select"
                             style="width: 100%">
                     </select>
                 </div>
-
             </div>
         </div>
 
@@ -211,9 +204,9 @@
                         <select data-kendo-combo-box
                                 data-k-options="vm.selectOptionsEpicerie"
                                 data-k-ng-model="vm.insertHisto.epicerieId"
+                                data-ng-model="vm.insertHisto.epicerieId"
                                 id="epicerieId_select_edit_id"
                                 name="epicerieId_select"
-                                ng-model="vm.insertHisto.epicerieId"
                                 ng-required="vm.addHisto && !vm.insertHisto.epicerieId"
                                 ng-class="{'has-error':  vm.addHisto && vm.form.epicerieId_select.$invalid}"
                                 style="width: 100%">
@@ -262,6 +255,8 @@
             </div>
         </div>
 
+        {{histo[0]}}
+
         <div data-ng-show="vm.item.historiques.length > 0">
             <div data-ng-hide="histo.statut == 'D'"
                  data-ng-repeat="histo in (vm.item.historiques).slice(((vm.pagination.currentPage-1)*vm.pagination.itemsPerPage),
@@ -271,7 +266,7 @@
                         {{histo.prix | currency}}
                     </div>
                     <div class="col-md-4 col-sm-4 col-xs-4" style="padding-left: 30px; padding-top: 5px">
-                        {{histo.epicerie}}
+                        {{histo.epicerieId.epicerie}}
                     </div>
                     <div class="col-md-2 col-sm-2 col-xs-2" style="padding-left: 20px; padding-top: 5px">
                         {{histo.date | amDateFormat:'YYYY/MM/DD' }}
@@ -280,7 +275,7 @@
                         {{histo.enPromotion ? "En promotion" : "Prix régulier"}}
                     </div>
                     <div class="col-md-1 col-sm-1 col-xs-1" style="padding-top: 5px">
-                        {{(histo.prix) | coutPar:vm.item.quantite:vm.item.nombre:vm.item.uniteId._id.operation:vm.item.uniteId._id.nombre:vm.item.uniteId._id.coutParId.abreviation}}</span>
+                        {{(histo.prix) | coutPar:vm.item.quantite:vm.item.nombre:vm.item.uniteId.operation:vm.item.uniteId.nombre:vm.item.uniteId.coutParId.abreviation}}</span>
                     </div>
                     <div class="col-md-1 col-sm-1 col-xs-1" style="text-align: right;">
                         <button class="btn btn-danger btn-sm"
@@ -296,6 +291,11 @@
     </div>
 
     <br>
+
+    <pre> {{vm.item}}</pre>
+
+    <pre> {{vm.item.uniteId}}</pre>
+
 
     <div class="row">
         <div static-include="app/shared/partials/bottom-save-cancel.html"></div>

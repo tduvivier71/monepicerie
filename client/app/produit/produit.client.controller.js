@@ -1,3 +1,9 @@
+/*
+* Si valeur primitive = true mettre _id à la fin du k-ng-model
+* Sinon ne pas le mettre
+*
+* */
+
 (function () {
 
     'use strict';
@@ -160,11 +166,12 @@
         vm.no_template  = vm.no_template1 + "<button " + vm.no_template2 + ">Ajouter</button>";
 
 
+        /** MULTI CATÉGORIE !!!! **/
         vm.selectOptionsMultiCategories = {
             placeholder: "Sélection de catégorie(s)...",
             dataTextField: "categorie",
             dataValueField: "_id",
-            valuePrimitive: true,
+            valuePrimitive: true, // true obligatoire
             autoBind: false,
             delay: 50,
             clearButton: false,
@@ -182,8 +189,8 @@
             dataValueField: "marque",
             filter:"contains",
             dataSource: vm.marques,
-            valuePrimitive: true,
-            autoBind: false, // obligatoire
+            valuePrimitive: true, //  true obligatoire, n'est pas un objet
+            autoBind: false, //
             clearButton: true,
             ignoreCase: true,
             delay: 50,
@@ -197,7 +204,7 @@
             dataTextField: "categorie",
             dataValueField: "_id",
             filter:"contains",
-            valuePrimitive: true,
+            valuePrimitive: false, // false obligatoire car c est un objet
             autoBind: false, // obligatoire
             dataSource: vm.categories,
             clearButton: false,
@@ -220,7 +227,7 @@
             dataTextField: "format",
             dataValueField: "_id",
             filter:"contains",
-            valuePrimitive: true,
+            valuePrimitive: false, // false obligatoire car c est un objet
             autoBind: false,
             dataSource: vm.formats,
             clearButton: true,
@@ -243,7 +250,7 @@
             dataTextField: "unite",
             dataValueField: "_id",
             filter:"contains",
-            valuePrimitive: true,
+            valuePrimitive: false, // false obligatoire car c est un objet
             autoBind: false, //!Important
             dataSource: vm.unites,
             clearButton: true,
@@ -266,7 +273,7 @@
             dataTextField: "epicerie",
             dataValueField: "_id",
             filter:"contains",
-            valuePrimitive: true,
+            valuePrimitive: false,
             autoBind: false,
             dataSource: vm.epiceries,
             clearButton: true,
@@ -369,7 +376,7 @@
 
             if (vm.insertHisto.prix &&  vm.insertHisto.epicerieId) {
 
-                if (vm.insertHisto.date === null) {
+                if (vm.insertHisto.date === "") {
                     vm.insertHisto.date = moment();
                 }
                 else {
@@ -452,7 +459,7 @@
             var item = new produitService();
             item.produit = _item.produit;
             item.marque = _item.marque;
-            item.categorieId = _item.categorieId;
+            item.categorieId = _item.categorieId._id;
             item.formatId = _item.formatId === "" ? _item.formatId = undefined : _item.formatId;
             item.uniteId = _item.uniteId === "" ? _item.uniteId = undefined : _item.uniteId._id; // Important : _item.uniteId._id
             item.quantite = _item.quantite;
