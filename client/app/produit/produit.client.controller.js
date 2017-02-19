@@ -18,20 +18,25 @@
 
             var x = 0;
 
-            if (isNaN(price) || isNaN(qtt) || isNaN(nb) || isNaN(nombre) || operation==='') {
+            if (isNaN(price) || isNaN(qtt) || isNaN(nb) || operation==='' || qtt <= 0 || nb <= 0) {
                 return x;
             }
 
-            if  (qtt <= 0 || nb <= 0 || nombre <= 0) {
+            if (operation==='aucune') {
+                x = price / (nb * qtt);
+                return x.toFixed(7)  + '/' + abr;
+            }
+
+            if (isNaN(nombre) || nombre <= 0) {
                 return x;
             }
 
-            if (operation==='Divisé par') {
+            if (operation==='division') {
                 x = price / (nb * qtt);
                 x = x / nombre;
             }
 
-            if (operation==='Multiplié par') {
+            if (operation==='multiplication') {
                 x = price / (nb * qtt);
                 x = x * nombre;
             }

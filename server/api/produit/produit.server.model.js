@@ -60,6 +60,10 @@ var ProduitSchema = new Schema({
 		type: Number,
 		default: '0'
 	},
+    epicerie:{
+        type: String,
+        default: ''
+    },
 	uniteId:{
 		type: Schema.Types.ObjectId,
 		ref: 'Unite'

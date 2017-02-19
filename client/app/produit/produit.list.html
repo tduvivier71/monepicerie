@@ -39,16 +39,16 @@
                 {{item.categorieId.categorie}}
             </td>
             <td class="col-md-2 col-sm-2 col-xs-2">
-                {{item.epicerieId.epicerie}}
+                {{item.epicerie}}
             </td>
             <td class="col-md-2 col-sm-2 col-xs-2">
-                {{item.quantite}} {{item.formatId.format}} ({{item.nombre}} {{item.uniteId.unite}})
+                {{item.quantite}} {{item.formatId.format}} ({{item.nombre}} {{item.uniteId.abreviation}})
             </td>
             <td class="col-md-1 col-sm-1 col-xs-1">
                 {{item.prix | currency}}
             </td>
             <td class="col-md-1 col-sm-1 col-xs-1">
-                {{item.prix | currency}}
+                {{(item.prix) | coutPar:item.quantite:item.nombre:item.uniteId.operation:item.uniteId.nombre:item.uniteId.coutParId.abreviation}}
             </td>
             <td class="col-md-2 col-sm-2 col-xs-2" style="text-align: right;">
                 <button class="btn btn-primary btn-sm"

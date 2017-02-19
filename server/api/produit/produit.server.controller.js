@@ -108,6 +108,7 @@ var categorie;
 
 	for (var i=0; i< req.body.historiques.length; ++i) {
 		data.prix = req.body.historiques[i].prix;
+        data.epicerie = req.body.historiques[i].epicerie;
 		data.historiques.push({
 			epicerieId: req.body.historiques[i].epicerieId,
 			date: req.body.historiques[i].date,
@@ -175,6 +176,8 @@ exports.updateOne = function(req, res) {
 						}
 					} else
 					if (req.body.historiques[i].statut==='I') {
+                        data.prix = req.body.historiques[i].prix;
+                        data.epicerie = req.body.historiques[i].epicerie;
 						data.historiques.push({
 							epicerieId: req.body.historiques[i].epicerieId,
 							date: req.body.historiques[i].date,

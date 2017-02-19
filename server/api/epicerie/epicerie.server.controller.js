@@ -32,6 +32,8 @@ exports.updateOne = function(req, res) {
 			if (err) {return res.status(400).json(err);}
 			if (!data) {return res.status(404).json();}
 				data.epicerie = req.body.epicerie; // !! A MODIFIER !!
+                data.lieu = req.body.lieu; // !! A MODIFIER !!
+                data.adresse = req.body.adresse; // !! A MODIFIER !!
                 data.favori = req.body.favori; // A MODIFIER
                 data.latitude = req.body.latitude; // A MODIFIER
                 data.longitude = req.body.longitude; // A MODIFIER

@@ -275,7 +275,7 @@
                         {{histo.enPromotion ? "En promotion" : "Prix régulier"}}
                     </div>
                     <div class="col-md-1 col-sm-1 col-xs-1" style="padding-top: 5px">
-                        {{(histo.prix) | coutPar:vm.item.quantite:vm.item.nombre:vm.item.uniteId.operation:vm.item.uniteId.nombre:vm.item.uniteId.coutParId.abreviation}}</span>
+                        {{(histo.prix) | coutPar:vm.item.quantite:vm.item.nombre:vm.item.uniteId.operation:vm.item.uniteId.nombre:vm.item.uniteId.coutParId.abreviation}}
                     </div>
                     <div class="col-md-1 col-sm-1 col-xs-1" style="text-align: right;">
                         <button class="btn btn-danger btn-sm"
@@ -291,11 +291,6 @@
     </div>
 
     <br>
-
-    <pre> {{vm.item}}</pre>
-
-    <pre> {{vm.item.uniteId}}</pre>
-
 
     <div class="row">
         <div static-include="app/shared/partials/bottom-save-cancel.html"></div>

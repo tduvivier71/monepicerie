@@ -6,10 +6,10 @@
         .module('app.epicerie')
         .controller('EpicerieController', EpicerieController);
 
-    EpicerieController.$inject = ['NgMap', '$timeout',
+    EpicerieController.$inject = ['NgMap', '$timeout', '$sce',
                                   'epicerieService', 'toasterService', 'focus'];
 
-    function EpicerieController(NgMap, $timeout,
+    function EpicerieController(NgMap, $timeout, $sce,
                                 epicerieService, toasterService, focus) {
 
         var vm = this;
@@ -22,9 +22,13 @@
          */
         vm.item = {
             epicerie: '',
+            adresse:'',
+            lieu:'',
             favori: false,
             reset: function () {
                 this.epicerie = '';
+                this.adresse = '';
+                this.lieu = '';
                 this.favori = false;
             }
         };
@@ -50,10 +54,31 @@
         vm.setEdit = setEdit;
         vm.setInsert = setInsert;
         vm.placeChanged = placeChanged;
+        vm.cancelEsc = cancelEsc;
+        vm.clearPlace = clearPlace;
 
         // Montréal
         vm.latitude = 45.5699091;
         vm.longitude = -73.5721709;
+        vm.zoom = 10;
+
+        vm.tips = $sce.trustAsHtml("Réinitialiser </br> le lieu ou l'adresse");
+
+        function cancelEsc(e) {
+            if (e.keyCode === 27) {
+                _clearSearchItem();
+            }
+        };
+
+        function clearPlace () {
+            vm.searchPlace = '';
+            focus('searchPlace_focus');
+        }
+
+        function _clearSearchItem () {
+            vm.searchPlace = '';
+            focus('searchPlace_focus');
+        }
 
         // ************************************************************************************************************/
         // Entry point function
@@ -72,13 +97,20 @@
         function placeChanged()  {
             vm.place = this.getPlace();
             if (!vm.place.geometry) {
-                window.alert("Autocomplete's returned place contains no geometry");
+                window.alert("Aucun lieu n'a été trouvé !");
                 return;
             }
 
+            vm.item.epicerie = vm.place.name;
+            vm.item.adresse = vm.place.formatted_address;
+
             $timeout(function() {
-                vm.map.setCenter(vm.place.geometry.location);
-                vm.map.setZoom(17);
+                //vm.map.setCenter(vm.place.geometry.location);
+
+                vm.latitude = vm.place.geometry.location.lat();
+                vm.longitude = vm.place.geometry.location.lng();
+
+                vm.map.setZoom(16);
             }, 1000);
         }
 
@@ -118,17 +150,21 @@
         }
 
         function setEdit(_item) {
-            // focus('epicerie_input_focus');
+            vm.searchPlace = '';
             _resetForm('dsEdit');
             vm.selectedItem = angular.copy(_item);
             vm.item = _item;
+            vm.zoom = 16;
             vm.latitude = _item.location.lat;
             vm.longitude = _item.location.lng;
         }
 
         function setInsert() {
-            // focus('epicerie_input_focus');
+            vm.searchPlace = '';
             _resetForm('dsInsert');
+            vm.zoom = 10;
+            vm.latitude = 45.5699091;
+            vm.longitude = -73.5721709;
             vm.item.reset();
         }
 
@@ -149,6 +185,7 @@
             if (vm.place.geometry) {
                 var item = new epicerieService();
                 item.epicerie = _item.epicerie;
+                item.adresse = _item.adresse;
                 item.favori = _item.favori;
                 item.location = {
                     lat: vm.place.geometry.location.lat(),
@@ -169,6 +206,7 @@
         }
 
         function _init() {
+            focus('searchPlace_focus');
             vm.item.reset();
             vm.items = epicerieService.query();
             _setBrowse();

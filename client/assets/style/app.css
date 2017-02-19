@@ -5916,6 +5916,30 @@ button.close {
 @media print {
   .hidden-print {
     display: none !important; } }
+/* enable absolute positioning */
+.inner-addon {
+  position: relative; }
+
+/* style icon */
+.inner-addon .material-icons {
+  position: absolute;
+  padding: 10px;
+  pointer-events: none; }
+
+/* align icon */
+.left-addon .material-icons {
+  left: 0px; }
+
+.right-addon .material-icons {
+  right: 0px; }
+
+/* add padding  */
+.left-addon input {
+  padding-left: 30px; }
+
+.right-addon input {
+  padding-right: 30px; }
+
 /*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
  * Copyright 2011-2016 Twitter, Inc.

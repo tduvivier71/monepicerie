@@ -19,7 +19,7 @@ var UniteSchema = new Schema({
 	},
 	operation: {
 		type: String,
-		default: 'division',
+		default: 'aucune',
 	},
 	nombre: {
 		type: Number,

@@ -12,6 +12,18 @@ var EpicerieSchema = new Schema({
 		required: 'Le nom est obligatoire.'
 	},
 
+    adresse: {
+        type: String,
+        default: '',
+        trim: true
+    },
+
+    lieu: {
+        type: String,
+        default: '',
+        trim: true
+    },
+
     favori : {
     	type: Boolean,
 	    default: false

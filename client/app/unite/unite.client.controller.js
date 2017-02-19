@@ -31,7 +31,7 @@
             reset: function () {
                 this.unite = '';
                 this.abreviation = '';
-                this.operation = 'Divisé par';
+                this.operation = 'Aucune';
                 this.nombre = 0;
                 this.coutParId = '';
             }
@@ -173,7 +173,7 @@
             var item = new uniteService();
             item.unite = _item.unite;
             item.abreviation = _item.abreviation;
-            item.operation = _item.operation;
+            item.operation = _item.operation.value;
             item.nombre = _item.nombre;
             item.coutParId = _item.coutParId === "" ? _item.coutParId = undefined : _item.coutParId;
             item.$save(
