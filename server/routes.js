@@ -55,6 +55,7 @@ router.delete('/api/categorie/:id', ensureAuthenticated, categorie.deleteOne);
 router.get('/api/categorie/unique/:categorie', ensureAuthenticated, categorie.findUnique);
 
 router.get('/api/epicerie', ensureAuthenticated, epicerie.find);
+router.get('/api/epicerie/favori', ensureAuthenticated, epicerie.findFavori);
 router.post('/api/epicerie', ensureAuthenticated, epicerie.createOne);
 router.get('/api/epicerie/:id', ensureAuthenticated, epicerie.findOne);
 router.put('/api/epicerie/:id', ensureAuthenticated, epicerie.updateOne);

@@ -13,6 +13,15 @@ exports.find = function(req, res) {
 		});
 };
 
+exports.findFavori = function(req, res) {
+    Model.find('')
+        .sort('epicerie')
+        .exec(function(err, data) {
+            if (err) {return res.status(400).json(err);}
+            res.status(200).json(data);
+        });
+};
+
 exports.findOne = function(req, res) {
 	helpers.findOne(req, res, Model);
 };
