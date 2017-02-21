@@ -14,13 +14,13 @@
                         <span class="input-group-addon">
                             <i class="material-icons md-16">email</i>
                         </span>
-                        <input autocomplete="on"
-                               class="form-control"
+                        <input required
+                               autocomplete="off"
+                               class="form-control input k-textbox"
                                data-ng-model="vm.courriel"
                                id="courriel_input_id"
                                name="courriel_input"
                                placeholder={{"ADRESSECOURRIEL"|translate}}
-                               required
                                type="email">
                     </div>
                     <validate-input form="vm.form" field="vm.form.courriel_input"></validate-input>
@@ -31,15 +31,15 @@
                         <span class="input-group-addon">
                             <i class="material-icons md-16">lock</i>
                         </span>
-                        <input autocomplete="off"
+                        <input required
+                               autocomplete="off"
                                id="motdepasse_input_id"
                                type="password"
-                               class="form-control"
+                               class="form-control input k-textbox"
                                name="motdepasse_input"
                                data-ng-model="vm.motDePasse"
                                data-ng-minlength ="1"
-                               placeholder={{"MOTDEPASSE"|translate}}
-                               required>
+                               placeholder={{"MOTDEPASSE"|translate}}>
                     </div>
                     <validate-input form="vm.form" field="vm.form.motdepasse_input"></validate-input>
                 </div>
