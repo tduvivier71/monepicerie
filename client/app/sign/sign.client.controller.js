@@ -76,6 +76,25 @@
                 motDePasse: item.motDePasse
             };
 
+            if (!vm.form.$valid) {
+                if (!vm.form.courriel_input.$valid) {
+                    focus('courriel_input_focus');
+                    return;
+                } else if (!vm.form.prenom_input.$valid) {
+                    focus('prenom_input_focus');
+                    return;
+                } else if (!vm.form.nom_input.$valid) {
+                    focus('nom_input_focus');
+                    return;
+                } else if (!vm.form.motdepasse_input.$valid) {
+                    focus('motdepasse_input_focus');
+                    return;
+                } else if (!vm.form.motdepasse2_input.$valid) {
+                    focus('motdepasse2_input_focus');
+                    return;
+                }
+            }
+
             if (credentials.nom && credentials.prenom && credentials.courriel && credentials.motDePasse) {
 
                 $auth.signup(credentials)
@@ -115,7 +134,7 @@
             };
 
             if (!vm.form.$valid) {
-                if (vm.form.courriel_input.$error) {
+                if (!credentials.form.courriel_input.$valid) {
                     focus('courriel_input_focus');
                     return;
                 } else {
@@ -124,7 +143,7 @@
                 }
             }
 
-            if (vm.courriel && vm.motDePasse) {
+            if (credentials.courriel && credentials.motDePasse) {
 
                 $auth.login(credentials)
                     .then(function () {

@@ -3,7 +3,7 @@
     <div class="col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 well" style="opacity: 0.95">
         <legend>Inscription</legend>
         <div style="float:right; position: relative; top:-10px; font-size: 85%;">
-            <a href="/#signin">{{"DEJAINSCRIPT"|translate}}</a>
+            <a href="/#signin" style="text-decoration: none;">{{"DEJAINSCRIPT"|translate}}</a>
         </div>
         <br>
         <form novalidate id="vm.form" name="vm.form"  ng-submit="vm.signUp(vm.item)" role="form">
@@ -15,7 +15,8 @@
                 </label>
                 <div class="col-md-9" ng-class="{'has-error': vm.form.$submitted && vm.form.courriel_input.$invalid}">
                     <input required
-                           class="form-control"
+                           class="form-control input k-textbox"
+                           focus-on="courriel_input_focus"
                            id="courriel_input_id"
                            name="courriel_input"
                            data-ng-model="vm.item.courriel"
@@ -32,7 +33,8 @@
                 </label>
                 <div class="col-md-9" ng-class="{'has-error': vm.form.$submitted && vm.form.prenom_input.$invalid}">
                     <input required
-                           class="form-control"
+                           class="form-control input k-textbox"
+                           focus-on="prenom_input_focus"
                            data-ng-model="vm.item.prenom"
                            id="prenom_input_id"
                            name="prenom_input"
@@ -49,8 +51,9 @@
                 </label>
                 <div class="col-md-9" ng-class="{'has-error': vm.form.$submitted && vm.form.nom_input.$invalid}">
                     <input required
-                           class="form-control"
+                           class="form-control input k-textbox"
                            data-ng-model="vm.item.nom"
+                           focus-on="nom_input_focus"
                            id="nom_input_id"
                            name="nom_input"
                            placeholder={{"VOTRENOM"|translate}}
@@ -66,10 +69,11 @@
                 </label>
                 <div class="col-md-9" ng-class="{'has-error': vm.form.$submitted && vm.form.motdepasse_input.$invalid}">
                     <input required
-                           class="form-control"
+                           class="form-control input k-textbox"
                            data-ng-model="vm.item.motDePasse"
                            data-ng-minlength ="5"
                            id="motdepasse_input_id"
+                           focus-on="motdepasse_input_focus"
                            name="motdepasse_input"
                            placeholder={{"MOTDEPASSE"|translate}}
                            type="password"                 >
@@ -80,13 +84,15 @@
             <div class="col-md-12 form-group">
                 <label for="motdepasse2_input_id"
                        class="col-md-3 control-label">
+
                 </label>
                 <div class="col-md-9" ng-class="{'has-error': vm.form.$submitted && vm.form.motdepasse2_input.$invalid}">
                     <input required
-                           class="form-control"
+                           class="form-control input k-textbox"
                            id="motdepasse2_input_id"
                            data-ng-model="vm.item.motDePasse2"
                            data-ng-minlength ="5"
+                           focus-on="motdepasse2_input_focus"
                            name="motdepasse2_input"
                            placeholder={{"SAISIRANOUVEAUMOTDEPASSE"|translate}}
                            type="password">

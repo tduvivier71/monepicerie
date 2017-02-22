@@ -24337,10 +24337,9 @@ $td-divider-color:        #BDBDBD;
 
 /*
 
-.has-error .k-dropdown-wrap {
-  border-width: 1px;
-  border-color: $danger-color;
-  box-shadow: none;
+.has-error .k-combobox  {
+  border: $danger-color;
+ // border-color: $danger-color;
   -webkit-box-shadow: none;
 }
 
