@@ -115,8 +115,13 @@
             };
 
             if (!vm.form.$valid) {
-                focus('courriel_input_focus');
-                return;
+                if (vm.form.courriel_input.$error) {
+                    focus('courriel_input_focus');
+                    return;
+                } else {
+                    focus('motdepasse_input_focus');
+                    return;
+                }
             }
 
             if (vm.courriel && vm.motDePasse) {
