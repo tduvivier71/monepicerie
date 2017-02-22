@@ -14,11 +14,13 @@
                         <span class="input-group-addon">
                             <i class="material-icons md-16">email</i>
                         </span>
-                        <input required
+                        <input auto-focus
+                               required
                                autocomplete="off"
                                class="form-control input k-textbox"
                                data-ng-model="vm.courriel"
                                id="courriel_input_id"
+                               focus-on="courriel_input_focus"
                                name="courriel_input"
                                placeholder={{"ADRESSECOURRIEL"|translate}}
                                type="email">

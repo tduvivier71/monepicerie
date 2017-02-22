@@ -10,9 +10,9 @@
         .module('app.sign')
         .controller('SignController', SignController);
 
-    SignController.$inject = ['toasterService', '$location', '$auth'];
+    SignController.$inject = ['toasterService', '$location', '$auth', 'focus'];
 
-    function SignController(toasterService, $location, $auth) {
+    function SignController(toasterService, $location, $auth, focus) {
 
         // todo changer data-ng-minlength ="1" pour motdepasse_input
         // todo changer type=email pour une meilleure vérification car a@a est valide
@@ -113,6 +113,11 @@
                 courriel: vm.courriel,
                 motDePasse: vm.motDePasse
             };
+
+            if (!vm.form.$valid) {
+                focus('courriel_input_focus');
+                return;
+            }
 
             if (vm.courriel && vm.motDePasse) {
 
