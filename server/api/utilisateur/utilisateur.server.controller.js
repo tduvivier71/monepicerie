@@ -71,7 +71,8 @@ module.exports.localLogin = function (req, res) {
             return res.status(401).send({message: 'Mot de passe invalide'});
         }
 
-        res.send({token: createJWT(user)});
+       res.send({token: createJWT(user)});
+       //res.send({token: createJWT(user).data});
     });
 };
 

@@ -66,6 +66,7 @@
          * @param {string} item.prenom
          * @param {string} item.courriel
          * @param {string} item.motDePasse
+         * @param {string} item.motDePasse2
          */
         function signUp(item) {
 
@@ -73,7 +74,8 @@
                 prenom : item.prenom,
                 nom : item.nom,
                 courriel: item.courriel,
-                motDePasse: item.motDePasse
+                motDePasse: item.motDePasse,
+                motDePasse2: item.motDePasse2
             };
 
             if (!vm.form.$valid) {
@@ -101,7 +103,7 @@
                     .then(function (response) {
                         $auth.setToken(response);
                         $location.path('/accueil');
-                        toasterService.info('Bienvenue, votre compte a été créé avec succès');
+                        toasterService.success('Bienvenue, ' + credentials.prenom + ' ' + credentials.nom +  ' votre compte a été créé avec succès');
                     })
                     .catch(function (error) {
                         if (error.message) {
@@ -134,7 +136,7 @@
             };
 
             if (!vm.form.$valid) {
-                if (!credentials.form.courriel_input.$valid) {
+                if (!vm.form.courriel_input.$valid) {
                     focus('courriel_input_focus');
                     return;
                 } else {
@@ -146,8 +148,10 @@
             if (credentials.courriel && credentials.motDePasse) {
 
                 $auth.login(credentials)
-                    .then(function () {
+                    .then(function (result) {
+                        console.log(JSON.stringify( result));
                         $location.path('/accueil');
+                        toasterService.success('Bienvenue, ' + JSON.stringify( result));
                     })
                     .catch(function (error) {
                         if (error.message) {

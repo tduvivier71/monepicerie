@@ -5,6 +5,9 @@
                 <ng-message when="minlength">La valeur de ce champ est trop courte. </ng-message>
                 <ng-message when="unique">Cette valeur existe déjà. </ng-message>
                 <ng-message when="email">Une adresse courriel valide est requise. </ng-message>
+                <span ng-show="field.$name==='motdepasse2_input'">
+                  <ng-message when="equals">Les mots de passe doivent correspondre. </ng-message>
+                </span>
             </ng-messages>
         </div>
 
