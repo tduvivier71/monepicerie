@@ -37,6 +37,10 @@ body{
   height: 400px;
 }
 
+.noDecoration :hover {
+  text-decoration: none;
+}
+
 /*:focus {
   @include state-focused;
 }*/

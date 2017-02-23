@@ -24422,6 +24422,9 @@ body {
 .angular-google-map-container {
   height: 400px; }
 
+.noDecoration :hover {
+  text-decoration: none; }
+
 /*:focus {
   @include state-focused;
 }*/

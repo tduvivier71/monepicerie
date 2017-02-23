@@ -6,11 +6,11 @@
             <a href="/#signup" style="text-decoration: none;">{{"NOUVELLEINSCRIPTION"|translate}}</a>
         </div>
         <br>
-        <form ng-submit="vm.signIn('local')" novalidate class="form-horizontal" id="vm.form" name="vm.form" role="form">
+        <form novalidate class="form-horizontal" id="vm.form" name="vm.form" role="form">
             <div style="padding-left: 15px; padding-right: 15px;">
                 <div class="form-group">
                     <div class="input-group"
-                         ng-class="{'has-error': vm.form.$submitted && vm.form.courriel_input.$invalid}">
+                         ng-class="{'has-error': vm.localSign===true && vm.form.$submitted && vm.form.courriel_input.$invalid}">
                         <span class="input-group-addon">
                             <i class="material-icons md-16">email</i>
                         </span>
@@ -25,11 +25,11 @@
                                placeholder={{"ADRESSECOURRIEL"|translate}}
                                type="email">
                     </div>
-                    <validate-input form="vm.form" field="vm.form.courriel_input"></validate-input>
+                    <validate-input ng-if="vm.localSign===true" form="vm.form" field="vm.form.courriel_input"></validate-input>
                 </div>
                 <div class="form-group">
                     <div class="input-group"
-                        ng-class="{'has-error': vm.form.$submitted && vm.form.motdepasse_input.$invalid}">
+                        ng-class="{'has-error': vm.localSign===true && vm.form.$submitted && vm.form.motdepasse_input.$invalid}">
                         <span class="input-group-addon">
                             <i class="material-icons md-16">lock</i>
                         </span>
@@ -44,11 +44,11 @@
                                data-ng-minlength ="1"
                                placeholder={{"MOTDEPASSE"|translate}}>
                     </div>
-                    <validate-input form="vm.form" field="vm.form.motdepasse_input"></validate-input>
+                    <validate-input ng-if="vm.localSign===true" form="vm.form" field="vm.form.motdepasse_input"></validate-input>
                 </div>
                 <div class="form-group">
                     <button class="btn btn-block btn-info"
-                            type="submit">
+                            data-ng-click="vm.localSign=true; vm.signIn('local')">
                             {{"SECONNECTER"|translate}}
                     </button>
                 </div>
@@ -66,14 +66,14 @@
             <div class="row">
                 <div class="col-md-6">
                     <button class="btn btn-block btn-facebook"
-                        data-ng-click="vm.signIn('facebook')">
+                        data-ng-click="vm.localSign=false; vm.signIn('facebook')">
                         <span class="fa fa-facebook"></span>
                         Facebook
                     </button>
                 </div>
                 <div class="col-md-6">
                     <button class="btn btn-block btn-primary" style="background: #db4a39;"
-                            data-ng-click="vm.signIn('google')">
+                            data-ng-click="vm.localSign=false; vm.signIn('google')">
                         <span class="fa fa-google-plus"></span>
                         Google
                     </button>

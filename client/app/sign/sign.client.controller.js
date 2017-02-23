@@ -24,11 +24,15 @@
         /* Variables */
         vm.form = {}; // Object
         vm.item = {}; // Object requis pour vm.item.nom, vm.item.prenom etc
+        vm.localSign = true;
+
 
         /* Functions */
         vm.signIn = signIn;
         vm.signOut = signOut;
         vm.signUp = signUp;
+
+
 
         // ************************************************************************************************************/
         // Public function
@@ -175,6 +179,7 @@
          * @param {string} provider - facebook ou google
          */
         function _socialSignIn(provider) {
+
             $auth.authenticate(provider)
                 .then(function () {
                     $location.path('/accueil');
