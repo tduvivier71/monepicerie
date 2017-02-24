@@ -105,6 +105,7 @@
 
                 $auth.signup(credentials)
                     .then(function (response) {
+                        console.log(JSON.stringify( response));
                         $auth.setToken(response);
                         $location.path('/accueil');
                         toasterService.success('Bienvenue, ' + credentials.prenom + ' ' + credentials.nom +  ' votre compte a été créé avec succès');
@@ -153,9 +154,9 @@
 
                 $auth.login(credentials)
                     .then(function (result) {
-                        console.log(JSON.stringify( result));
+                        //console.log(JSON.stringify( result));
                         $location.path('/accueil');
-                        toasterService.success('Bienvenue, ' + JSON.stringify( result));
+                        toasterService.success('Bienvenue, ' + JSON.stringify(result));
                     })
                     .catch(function (error) {
                         if (error.message) {

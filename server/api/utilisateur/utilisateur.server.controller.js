@@ -71,8 +71,10 @@ module.exports.localLogin = function (req, res) {
             return res.status(401).send({message: 'Mot de passe invalide'});
         }
 
-       res.send({token: createJWT(user)});
-       //res.send({token: createJWT(user).data});
+        var token =  createJWT(user);
+
+        res.status(200).json({token: token, user: user });
+
     });
 };
 
@@ -105,7 +107,7 @@ module.exports.localSignUp =  function(req, res) {
             if (err) {
                 res.status(500).send({ message: err.message });
             }
-            res.send({ token: createJWT(result) });
+            res.status(200).json({token: createJWT(user)});
         });
     });
 };
