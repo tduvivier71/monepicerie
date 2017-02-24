@@ -72,8 +72,11 @@ module.exports.localLogin = function (req, res) {
         }
 
         var token =  createJWT(user);
+        var utilisateur =
+            {"nom" : user.nom,
+             "prenom" : user.prenom};
 
-        res.status(200).json({token: token, user: user });
+        res.status(200).json({token: token, user: utilisateur });
 
     });
 };

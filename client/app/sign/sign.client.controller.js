@@ -154,9 +154,9 @@
 
                 $auth.login(credentials)
                     .then(function (result) {
-                        //console.log(JSON.stringify( result));
+                        console.log(JSON.stringify( result));
                         $location.path('/accueil');
-                        toasterService.success('Bienvenue, ' + JSON.stringify(result));
+                        toasterService.success('Bienvenue ' + JSON.stringify(result.data.user.prenom));
                     })
                     .catch(function (error) {
                         if (error.message) {
