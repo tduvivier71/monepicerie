@@ -11,10 +11,10 @@
         .controller('UtilisateurController', UtilisateurController);
 
     UtilisateurController.$inject = ['$q',
-                                     'toasterService', 'focus', 'utilisateurService', '$auth'];
+                                     'toasterService', 'focus', 'utilisateurService', '$auth', '$location'];
 
     function UtilisateurController($q,
-         toasterService, focus, utilisateurService, $auth) {
+         toasterService, focus, utilisateurService, $auth, $location) {
 
         var vm = this;
 
@@ -70,15 +70,24 @@
         // ************************************************************************************************************/
 
         function cancel() {
-           // _cancelEdit();
+            _cancelEdit();
         }
 
 
         function save(_form, _item) {
             if (!_form.$valid) {
+
+
                 focus('prenom_input_focus');
                 return;
+
+
+
+
             }
+
+
+
             _update(_item);
         }
 
@@ -92,10 +101,13 @@
 
         function _init() {
             var queryParam = { id: $auth.getPayload().sub};
-            vm.items = utilisateurService.query(queryParam);
-            vm.item = vm.items[0];
-
+            vm.item = utilisateurService.get(queryParam);
             focus('prenom_focus');
+        }
+
+        function _cancelEdit() {
+            _revertSelectedItem();
+            _setBrowse();
         }
 
         function _update(_item) {
@@ -132,6 +144,7 @@
 
         function _setBrowse() {
             _resetForm('dsBrowse');
+            $location.path('/accueil');
         }
 
 

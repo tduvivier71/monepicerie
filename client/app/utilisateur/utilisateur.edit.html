@@ -10,7 +10,7 @@
                        required
                        autocomplete="off"
                        class="form-control input k-textbox"
-                       focus-on="prenominput__focus"
+                       focus-on="prenom_input__focus"
                        id="prenom_input_id"
                        name="prenom_input"
                        ng-model="vm.item.prenom"
@@ -28,8 +28,8 @@
                 </label>
                 <input required
                        autocomplete="off"
-                       class="form-control input k-texbox"
-                       focus-on="nom_inout_focus"
+                       class="form-control input k-textbox"
+                       focus-on="nom_input_focus"
                        id="nom_input_id"
                        name="nom_input"
                        ng-model="vm.item.nom"
@@ -47,28 +47,28 @@
                 </label>
                 <input required
                        autocomplete="off"
-                       class="form-control input"
+                       class="form-control input k-textbox"
                        focus-on="courriel_input_focus"
                        id="courriel_input_id"
                        name="courriel_input"
                        ng-model="vm.item.courriel"
-                       type="text"/>
+                       type="email"/>
                 <validate-input form="vm.form" field="vm.form.courriel_input"></validate-input>
             </div>
         </div>
         <div class="col-md-6 form-group">
-            <div class="form-group" ng-class="{'has-error': vm.form.$submitted && vm.form.courrielAlt_input.$invalid}">
+            <div class="form-group" ng-class="{'has-error': vm.form.$submitted && vm.form.courriel_alt_input.$invalid}">
                 <label for="courriel_alt_input_id">
                     {{"COURRIELALT"|translate}}
                 </label>
                 <input autocomplete="off"
-                       class="form-control input"
-                       focus-on="courriel_alt_focus"
+                       class="form-control input k-textbox"
+                       focus-on="courriel_alt_input_focus"
                        id="courriel_alt_input_id"
                        name="courriel_alt_input"
                        ng-model="vm.item.courrielAlt"
-                       type="text"/>
-                <validate-input form="vm.form" field="vm.form.courrielAlt_input"></validate-input>
+                       type="email"/>
+                <validate-input form="vm.form" field="vm.form.courriel_alt_input"></validate-input>
             </div>
         </div>
     </div>
@@ -85,12 +85,6 @@
         <div class="col-md-6 form-group">
             <a href="#">Modifier mot de passe</a>
         </div>
-    </div>
-
-    <div>
-        <button ng-click="vm.getPayLoad()">
-            xxxx
-        </button>
     </div>
 
     <div class="row">
