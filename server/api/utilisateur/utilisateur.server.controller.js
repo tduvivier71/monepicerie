@@ -29,20 +29,27 @@ function createJWT(user) {
  |--------------------------------------------------------------------------
  */
 
-exports.deleteOne = function(req, res) {
-	helpers.deleteOne(req, res, Model);
+exports.getMe = function(req, res) {
+
+    Model.findOne( {  _id: req.body.xid }, function(err, data) {
+        if (err) {return res.status(400).json(err);}
+        if (!data) {return res.status(404).json();}
+        res.status(200).json(data);
+    });
+
 };
 
-exports.updateOne = function(req, res) {
-	Model.findOne(
-		{_id: req.params.id},
+exports.updateMe = function(req, res) {
+
+     Model.findOne(
+		{ _id: req.params.id },
 		function(err, data) {
 			if (err) {return res.status(400).json(err);}
 			if (!data) {return res.status(404).json();}
-				data.nom = req.body.nom;
-				data.prenom = req.body.prenom;
-			    data.courriel = req.body.courriel;
-				data.motDePasse = req.body.motDePasse;
+				data.nom = req.body.nom || data.nom;
+				data.prenom = req.body.prenom || data.prenom;
+			    data.courriel = req.body.courriel || data.courriel;
+				data.motDePasse = req.body.motDePasse || data.motDePasse;
 				data.save(function(err,data){
 					res.status(200).json(data);
 				});
@@ -76,7 +83,7 @@ module.exports.localLogin = function (req, res) {
             {"nom" : user.nom,
              "prenom" : user.prenom};
 
-        res.status(200).json({token: token, user: utilisateur });
+        res.status(200).json({token: token, user: user });  // utilisateur
 
     });
 };

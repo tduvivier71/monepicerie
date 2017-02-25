@@ -10,7 +10,16 @@
 
     function utilisateurService($resource) {
 
-        return $resource('api/utilisateur/:id', {id: '@_id'}, {update: {method: 'PUT'}});
+        return $resource('api/utilisateur/:id',
+          {
+            id: '@_id'
+          },
+          {
+            update: {
+                method: 'PUT'
+          }
+        }
+    );
 
     }
 

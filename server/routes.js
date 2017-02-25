@@ -93,11 +93,8 @@ router.delete('/api/liste/:id/detail/:id2', ensureAuthenticated, liste.deleteOne
 router.get('/api/liste/:id', ensureAuthenticated, liste.findOne);
 router.get('/api/liste', ensureAuthenticated, liste.find);
 
-//router.post('/api/utilisateur', ensureAuthenticated, utilisateur.createOne);
-//router.put('/api/utilisateur/:id', ensureAuthenticated, utilisateur.updateOne);
-//router.delete('/api/utilisateur/:id', ensureAuthenticated, utilisateur.deleteOne);
-//router.get('/api/utilisateur/:id', ensureAuthenticated, utilisateur.findOne);
-//router.get('/api/utilisateur', ensureAuthenticated, utilisateur.find);
+router.get('/api/utilisateur/:id', ensureAuthenticated, utilisateur.getMe);
+router.put('/api/utilisateur/:id', ensureAuthenticated, utilisateur.updateMe);
 
 router.post('/auth/signin', utilisateur.localLogin);
 router.post('/auth/signup', utilisateur.localSignUp);

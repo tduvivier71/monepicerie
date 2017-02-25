@@ -11,10 +11,10 @@
         .controller('UtilisateurController', UtilisateurController);
 
     UtilisateurController.$inject = ['$q',
-                                     'toasterService', 'focus', 'utilisateurService'];
+                                     'toasterService', 'focus', 'utilisateurService', '$auth'];
 
     function UtilisateurController($q,
-         toasterService, focus, utilisateurService) {
+         toasterService, focus, utilisateurService, $auth) {
 
         var vm = this;
 
@@ -50,6 +50,7 @@
 
         vm.cancel = cancel;
         vm.save = save;
+        vm.getPayLoad = getPayLoad;
 
 
         // ************************************************************************************************************/
@@ -69,7 +70,7 @@
         // ************************************************************************************************************/
 
         function cancel() {
-            _cancelEdit();
+           // _cancelEdit();
         }
 
 
@@ -81,20 +82,18 @@
             _update(_item);
         }
 
-
-
+        function getPayLoad() {
+            alert(JSON.stringify($auth.getPayload().sub));
+        }
 
         // ************************************************************************************************************/
         // Private function
         // ************************************************************************************************************/
 
         function _init() {
-            var queryParam = {courriel: "titi@titi.com"};
-
-            vm.items = utilisateurService.query(queryParam, function () {
-               // console.log('test ' + vm.items[0].prenom);
-                vm.item = vm.items[0];
-            });
+            var queryParam = { xid: $auth.getPayload().sub};
+            vm.items = utilisateurService.query(queryParam);
+            vm.item = vm.items[0];
 
             focus('prenom_focus');
         }
