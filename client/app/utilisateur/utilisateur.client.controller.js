@@ -91,7 +91,7 @@
         // ************************************************************************************************************/
 
         function _init() {
-            var queryParam = { xid: $auth.getPayload().sub};
+            var queryParam = { id: $auth.getPayload().sub};
             vm.items = utilisateurService.query(queryParam);
             vm.item = vm.items[0];
 

@@ -29,17 +29,18 @@ function createJWT(user) {
  |--------------------------------------------------------------------------
  */
 
-exports.getMe = function(req, res) {
+module.exports.getMe = function(req, res) {
 
-    Model.findOne( {  _id: req.body.xid }, function(err, data) {
+    Model.findOne( {  _id: req.params.id }, function(err, data) {
         if (err) {return res.status(400).json(err);}
         if (!data) {return res.status(404).json();}
         res.status(200).json(data);
+
     });
 
 };
 
-exports.updateMe = function(req, res) {
+module.exports.updateMe = function(req, res) {
 
      Model.findOne(
 		{ _id: req.params.id },
