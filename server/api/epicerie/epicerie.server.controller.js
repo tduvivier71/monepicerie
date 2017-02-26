@@ -5,7 +5,7 @@ var mongoose = require('mongoose'),
 	Model = mongoose.model('Epicerie'); // !! A MODIFIER !!
 
 exports.find = function(req, res) {
-	Model.find('')
+	Model.find({utilisateurId: req.user})
 		.sort('epicerie')
 		.exec(function(err, data) {
 			if (err) {return res.status(400).json(err);}
@@ -27,7 +27,22 @@ exports.findOne = function(req, res) {
 };
 
 exports.createOne = function(req, res) {
-	helpers.createOne(req, res, Model);
+
+    var data  = new Model({
+        epicerie: req.body.epicerie,
+        adresse: req.body.adresse,
+        favori: req.body.favori,
+        location: req.body.location,
+        utilisateurId: req.user
+    });
+
+    data.save(function(err, data) {
+        if (err) {
+            return res.status(400).json(err);
+        }
+        res.status(201).json(data);
+    });
+
 };
 
 exports.deleteOne = function(req, res) {
@@ -41,11 +56,12 @@ exports.updateOne = function(req, res) {
 			if (err) {return res.status(400).json(err);}
 			if (!data) {return res.status(404).json();}
 				data.epicerie = req.body.epicerie; // !! A MODIFIER !!
-                data.lieu = req.body.lieu; // !! A MODIFIER !!
+              //  data.lieu = req.body.lieu; // !! A MODIFIER !!
                 data.adresse = req.body.adresse; // !! A MODIFIER !!
                 data.favori = req.body.favori; // A MODIFIER
-                data.latitude = req.body.latitude; // A MODIFIER
-                data.longitude = req.body.longitude; // A MODIFIER
+			    data.location = req.body.location;
+               // data.latitude = req.body.latitude; // A MODIFIER
+               // data.longitude = req.body.longitude; // A MODIFIER
 				data.save(function(err,data){
 					res.status(200).json(data);
 				});

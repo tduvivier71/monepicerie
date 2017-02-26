@@ -71,22 +71,46 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-md-5">
-            <div class="form-group">
-                <label for="partagerProduits_toogle_id">
-                    Partager anonymement les informations sur les produits
-                </label>
-                <toggle id="partagerProduits_toogle_id"
+    <!--
+     <toggle id="partagerProduits_toogle_id"
                         style="height: 37px"
                         onstyle="btn-success"
                         ng-model="vm.item.partagerProduits"
                         ng-change="vm.togglePartagerProduits()" on="Oui" off="Non">
                 </toggle>
-                {{vm.item.partagerProduits}}
+      -->
+
+
+    <div class="row">
+        <div class="col-md-5">
+            <div class="form-group has-feedback">
+
+                <label class="control-label">
+                    Partager anonymement les informations sur les produits
+                </label>
+                <div class="container">
+                    <input type="radio" name="partagerProduits_non_radio"
+                           ng-model="vm.item.partagerProduits"
+                           ng-value=false
+                           id="partagerProduits_non_radio_id"
+                           class="k-radio">
+                    <label class="radio-inline k-radio-label"
+                           for="partagerProduits_non_radio_id">Non
+                    </label>
+                    <input type="radio"
+                           style="padding-left: 10px;"
+                           name="partagerProduits_oui_radio"
+                           ng-model="vm.item.partagerProduits"
+                           ng-value=true
+                           id="partagerProduits_oui_radio_id"
+                           class="k-radio">
+                    <label class="radio-inline k-radio-label"
+                           for="partagerProduits_oui_radio_id">Oui
+                    </label>
+                </div>
             </div>
         </div>
-        <div class="col-md-2 col-md-offset-1">
+        <div class="col-md-2 col-md-offset-2">
             <div class="form-group">
                 <label  ng-disabled="vm.item.provider==='facebook' || vm.item.provider==='google'">
                    Mode d'inscription
@@ -109,8 +133,6 @@
         </div>
         <div class="col-md-offset-1">
         </div>
-
-
     </div>
 
     <div class="row">

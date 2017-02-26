@@ -111,8 +111,11 @@
 
         function _init() {
             var queryParam = { id: $auth.getPayload().sub};
-            vm.item = utilisateurService.get(queryParam);
-            focus('prenom_focus');
+            // vm.item = utilisateurService.get(queryParam);
+            utilisateurService.get(queryParam, function (result) {
+                vm.item = result;
+                focus('prenom_focus');
+            });
         }
 
         function _cancelEdit() {
@@ -121,7 +124,7 @@
         }
 
         function _update(_item) {
-            _item.partagerProduits = vm.partagerProduits;
+
             _item.$update(
                 function (result) {
                     toasterService.update(result.nom);
@@ -156,9 +159,6 @@
             _resetForm('dsBrowse');
             $location.path('/accueil');
         }
-
-
-
 
     }
 

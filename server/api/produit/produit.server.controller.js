@@ -87,7 +87,7 @@ exports.findAll = function(req, res) {
 
 exports.createOne = function(req, res) {
 
-var categorie;
+     var categorie;
 
 	 CategorieModel.findOne(req.body.categorieId)
 	 .exec(function (err, result) {

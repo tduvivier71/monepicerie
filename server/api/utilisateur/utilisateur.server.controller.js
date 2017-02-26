@@ -53,12 +53,12 @@ module.exports.updateMe = function(req, res) {
 			if (err) {return res.status(400).json(err);}
 			if (!data) {return res.status(404).json();}
                // NEVER UPDATE PROVIDER !!
-				data.nom = req.body.nom || data.nom;
-				data.prenom = req.body.prenom || data.prenom;
-			    data.courriel = req.body.courriel || data.courriel;
-                data.courrielAlt = req.body.courrielAlt || data.courrielAlt;
-				data.motDePasse = req.body.motDePasse || data.motDePasse;
-                data.partagerProduits = req.body.partagerProduits || data.partagerProduits;
+				data.nom = req.body.nom;
+				data.prenom = req.body.prenom;
+			    data.courriel = req.body.courriel;
+                data.courrielAlt = req.body.courrielAlt;
+				data.motDePasse = req.body.motDePasse;
+                data.partagerProduits = req.body.partagerProduits;
 				data.save(function(err,data){
 					res.status(200).json(data);
 				});
@@ -124,7 +124,7 @@ module.exports.localSignUp =  function(req, res) {
 
         user.save(function(err, result) {
             if (err) {
-                res.status(500).json({ message: err.message });
+                res.status(500).send({ message: err.message });
             }
             res.status(200).json({token: createJWT(user)});
         });

@@ -118,7 +118,7 @@
                             // HTTP response error from server
                             toasterService.error(error.data.message, error.status);
                         } else {
-                            toasterService.error(error);
+                            toasterService.error(error.message);
                         }
                     });
 

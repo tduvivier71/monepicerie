@@ -38,7 +38,9 @@ exports.findOne = function(req, res, Model) {
 
 exports.createOne = function(req, res, Model) {
 	Model.create(req.body, function(err, data) {
-		if (err) {return	res.status(400).json(getErrorMessage(err));}
+		if (err) {
+			return res.status(400).json(getErrorMessage(err));
+		}
 		res.status(201).json(data);
 	});
 };

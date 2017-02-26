@@ -17,17 +17,11 @@ var CategorieSchema = new Schema({
 		type: Boolean,
 		default: false
     },
-	//,
-	//creation:{
-	//	creationdt: {
-	//		type: Date,
-	//		"default": Date.now
-	//	}//,
-	//	utilisateurid: {
-	//		type: Schema.ObjectId,
-	//		ref: 'Utilisateur'
-	//	}
-	//}
+    utilisateurId: {
+		type: Schema.ObjectId,
+		ref: 'Utilisateur'
+    }
+
 });
 
 mongoose.model('Categorie', CategorieSchema);

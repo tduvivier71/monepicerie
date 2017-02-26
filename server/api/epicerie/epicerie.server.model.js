@@ -18,38 +18,37 @@ var EpicerieSchema = new Schema({
         trim: true
     },
 
-    lieu: {
-        type: String,
-        default: '',
-        trim: true
-    },
+    // lieu: {
+    //     type: String,
+    //     default: '',
+    //     trim: true
+    // },
 
     favori : {
     	type: Boolean,
 	    default: false
 	},
 
-	latitude : {
-        type: Number,
-        default: 0
-    },
-
-	longitude : {
-        type: Number,
-        default: 0
-    },
+    // latitude : {
+    //     type: Number,
+    //     default: 0
+    // },
+    //
+    // longitude : {
+    //     type: Number,
+    //     default: 0
+    // },
 
 	location : {
 		lat: Number,
 		lng: Number
 	},
 
-	creation:{
-		creationdt: {
-			type: Date,
-			"default": Date.now
-		}
-	}
+    utilisateurId: {
+        type: Schema.ObjectId,
+        ref: 'Utilisateur'
+    }
+
 });
 
 mongoose.model('Epicerie', EpicerieSchema);

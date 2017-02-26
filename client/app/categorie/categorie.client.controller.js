@@ -6,10 +6,10 @@
         .module('app.categorie')
         .controller('CategorieController', CategorieController);
 
-    CategorieController.$inject = ['$log',
+    CategorieController.$inject = ['$log', '$auth',
                                    'categorieService', 'toasterService','focus'];
 
-    function CategorieController($log,
+    function CategorieController($log, $auth,
                                  categorieService, toasterService, focus) {
 
         var vm = this;
@@ -139,8 +139,10 @@
 
         function _init() {
             vm.item.reset();
-            vm.items = categorieService.query();
-            _setBrowse();
+            categorieService.query('', function (result) {
+                vm.items = result;
+                _setBrowse();
+            });
         }
 
         function _update(_item) {
