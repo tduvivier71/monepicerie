@@ -28,6 +28,11 @@ var UtilisateurShema = new Schema({
 		trim: true,
 		index: { unique: true }
 	},
+    courrielAlt: {
+        type: String,
+        lowercase: true,
+        trim: true
+    },
 	facebook: {
         type: String
     },
@@ -39,7 +44,11 @@ var UtilisateurShema = new Schema({
     },
     displayName: {
         type: String
-    }
+    },
+    partagerProduits: {
+		type: Boolean,
+		default: false
+	}
 });
 
 UtilisateurShema.methods.setPassword = function(password){

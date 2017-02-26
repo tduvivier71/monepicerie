@@ -182,7 +182,8 @@
         function _socialSignIn(provider) {
 
             $auth.authenticate(provider)
-                .then(function () {
+                .then(function (response) {
+                    console.log(JSON.stringify( response));
                     $location.path('/accueil');
                 })
                 .catch(function (error) {

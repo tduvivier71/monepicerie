@@ -29,14 +29,19 @@ function createJWT(user) {
  |--------------------------------------------------------------------------
  */
 
-module.exports.getMe = function(req, res) {
+module.exports.getMe = function (req, res) {
 
-    Model.findOne( {  _id: req.params.id }, function(err, data) {
-        if (err) {return res.status(400).json(err);}
-        if (!data) {return res.status(404).json();}
-        res.status(200).json(data);
+    Model.findOne({_id: req.params.id},
+        function (err, data) {
+            if (err) {
+                return res.status(400).json(err);
+            }
+            if (!data) {
+                return res.status(404).json();
+            }
+            res.status(200).json(data);
 
-    });
+        });
 
 };
 
@@ -47,10 +52,13 @@ module.exports.updateMe = function(req, res) {
 		function(err, data) {
 			if (err) {return res.status(400).json(err);}
 			if (!data) {return res.status(404).json();}
+               // NEVER UPDATE PROVIDER !!
 				data.nom = req.body.nom || data.nom;
 				data.prenom = req.body.prenom || data.prenom;
 			    data.courriel = req.body.courriel || data.courriel;
+                data.courrielAlt = req.body.courrielAlt || data.courrielAlt;
 				data.motDePasse = req.body.motDePasse || data.motDePasse;
+                data.partagerProduits = req.body.partagerProduits || data.partagerProduits;
 				data.save(function(err,data){
 					res.status(200).json(data);
 				});
@@ -116,7 +124,7 @@ module.exports.localSignUp =  function(req, res) {
 
         user.save(function(err, result) {
             if (err) {
-                res.status(500).send({ message: err.message });
+                res.status(500).json({ message: err.message });
             }
             res.status(200).json({token: createJWT(user)});
         });
@@ -166,7 +174,9 @@ module.exports.facebookLogin = function(req, res) {
                         user.provider = 'facebook';
                         user.facebook = profile.id;
                         user.picture = user.picture || 'https://graph.facebook.com/v2.3/' + profile.id + '/picture?type=large';
-                        user.displayName = user.displayName || profile.name;
+                        user.courriel = profile.email;
+                        user.prenom = profile.first_name;
+                        user.nom = profile.last_name;
                         user.save(function () {
                             var token = createJWT(user);
                             res.send({token: token});
@@ -184,10 +194,12 @@ module.exports.facebookLogin = function(req, res) {
                     user.provider = 'facebook';
                     user.facebook = profile.id;
                     user.picture = 'https://graph.facebook.com/' + profile.id + '/picture?type=large';
-                    user.displayName = profile.name;
+                    user.courriel = profile.email;
+                    user.prenom = profile.first_name;
+                    user.nom = profile.last_name;
                     user.save(function () {
                         var token = createJWT(user);
-                        res.send({token: token});
+                        res.send({token: token, user: user});
                     });
                 });
             }
@@ -202,6 +214,7 @@ module.exports.facebookLogin = function(req, res) {
  */
 
 module.exports.googleLogin = function(req, res) {
+   // var fields = ['id', 'email', 'first_name', 'last_name', 'link', 'name'];
     var accessTokenUrl = 'https://accounts.google.com/o/oauth2/token';
     var peopleApiUrl = 'https://www.googleapis.com/plus/v1/people/me/openIdConnect';
     var params = {
@@ -237,7 +250,9 @@ module.exports.googleLogin = function(req, res) {
                         user.provider = 'google';
                         user.google = profile.sub;
                         user.picture = user.picture || profile.picture.replace('sz=50', 'sz=200');
-                        user.displayName = user.displayName || profile.name;
+                        user.courriel = profile.email;
+                        user.prenom = profile.first_name;
+                        user.nom = profile.last_name;
                         user.save(function() {
                             var token = createJWT(user);
                             res.send({ token: token });
@@ -254,7 +269,9 @@ module.exports.googleLogin = function(req, res) {
                     user.provider = 'google';
                     user.google = profile.sub;
                     user.picture = profile.picture.replace('sz=50', 'sz=200');
-                    user.displayName = profile.name;
+                    user.courriel = profile.email;
+                    user.prenom = profile.first_name;
+                    user.nom = profile.last_name;
                     user.save(function() {
                         var token = createJWT(user);
                         res.send({ token: token });

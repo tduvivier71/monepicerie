@@ -19,8 +19,6 @@
             </div>
         </div>
 
-
-
        <div class="col-md-6 col-sm-6 col-xs-6">
             <div class="form-group" ng-class="{'has-error': vm.form.$submitted && vm.form.nom_input.$invalid}">
                 <label for="nom_input_id">
@@ -74,17 +72,45 @@
     </div>
 
     <div class="row">
-        <div class="col-md-6 form-group">
-            <input ng-model="vm.item.partagerInfoProduit"
-                   name="partagerInfoProduit_checkbox"
-                   type="checkbox"
-                   style="margin-top: 0px;"/>
-            Partager les informations des produits anonymement
+        <div class="col-md-5">
+            <div class="form-group">
+                <label for="partagerProduits_toogle_id">
+                    Partager anonymement les informations sur les produits
+                </label>
+                <toggle id="partagerProduits_toogle_id"
+                        style="height: 37px"
+                        onstyle="btn-success"
+                        ng-model="vm.item.partagerProduits"
+                        ng-change="vm.togglePartagerProduits()" on="Oui" off="Non">
+                </toggle>
+                {{vm.item.partagerProduits}}
+            </div>
+        </div>
+        <div class="col-md-2 col-md-offset-1">
+            <div class="form-group">
+                <label  ng-disabled="vm.item.provider==='facebook' || vm.item.provider==='google'">
+                   Mode d'inscription
+                </label>
+                <h4> {{vm.item.provider}}</h4>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>
+                    Modifier le mot de passe
+                </label>
+                <button class="btn btn-default btn"
+                        ng-disabled="vm.item.provider==='facebook' || vm.item.provider==='google'"
+                        ng-click="">
+                        <i class="material-icons md-14">security</i>
+                        {{"MODIFIER"|translate}}
+                </button>
+            </div>
+        </div>
+        <div class="col-md-offset-1">
         </div>
 
-        <div class="col-md-6 form-group">
-            <a href="#">Modifier mot de passe</a>
-        </div>
+
     </div>
 
     <div class="row">
