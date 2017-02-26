@@ -76,7 +76,6 @@
             _cancelEdit();
         }
 
-
         function save(_form, _item) {
             if (!_form.$valid) {
 
@@ -93,7 +92,6 @@
                     focus('courriel_alt_input');
                     return;
                 }
-
             }
 
             _update(_item);
@@ -123,6 +121,7 @@
         }
 
         function _update(_item) {
+            _item.partagerProduits = vm.partagerProduits;
             _item.$update(
                 function (result) {
                     toasterService.update(result.nom);
