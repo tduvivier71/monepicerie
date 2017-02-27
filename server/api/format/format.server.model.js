@@ -6,23 +6,23 @@ var mongoose = require('mongoose'),
 
 // Define a new 'Schema'
 var FormatSchema = new Schema({
+
 	format: {
 		type: String,
 		default: '',
 		trim: true,
-	//	unique: true,
+        index: true,
 		required: 'Le format est obligatoire.'
 	},
-	creation:{
-		creationdt: {
-			type: Date,
-			"default": Date.now
-		}//,
-	//	utilisateurid: {
-	//		type: Schema.ObjectId,
-	//		ref: 'Utilisateur'
-	//	}
-	}
+
+    utilisateurId: {
+        type: Schema.ObjectId,
+        ref: 'Utilisateur',
+        index: true,
+    }
+
 });
+
+FormatSchema.index({format: 1, utilisateurId: 1}, {unique: true});
 
 mongoose.model('Format', FormatSchema);

@@ -137,8 +137,10 @@
 
         function _init() {
             vm.item.reset();
-            vm.items = marqueService.query();
-            _setBrowse();
+            marqueService.query('', function (result) {
+                vm.items = result;
+                _setBrowse();
+            });
         }
 
         function _update(_item) {

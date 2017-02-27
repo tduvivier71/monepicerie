@@ -138,8 +138,10 @@
 
         function _init() {
             vm.item.reset();
-            vm.items = formatService.query();
-            _setBrowse();
+            formatService.query('', function (result) {
+                vm.items = result;
+                _setBrowse();
+            });
         }
 
         function _update(_item) {

@@ -26,7 +26,7 @@ var ProduitSchema = new Schema({
 		type: String,
 		default: '',
 		trim: true,
-		// unique: true,
+        index: true,
 		required: 'Le produit est obligatoire.'
 	},
 	marque: {
@@ -68,6 +68,13 @@ var ProduitSchema = new Schema({
 		type: Schema.Types.ObjectId,
 		ref: 'Unite'
 	},
+
+    utilisateurId: {
+        type: Schema.ObjectId,
+        ref: 'Utilisateur',
+        index: true,
+    },
+
 	historiques: [ProduitHistoriqueSchema]
 
 	/*historiques: [ {epicerie:
@@ -90,5 +97,7 @@ function getPrix(num){
 function setPrix(num){
 	return num*100;
 }
+
+ProduitSchema.index({produit: 1, utilisateurId: 1}, {unique: true});
 
 mongoose.model('Produit', ProduitSchema);

@@ -5,7 +5,7 @@ var mongoose = require('mongoose'),
 	Model = mongoose.model('Unite'); // MODIFY
 
 exports.find = function(req, res) {
-	Model.find('')
+    Model.find({utilisateurId: req.user})
 		.sort('unite')
 		.populate('coutParId')
 		.exec(function(err, data) {
@@ -25,7 +25,8 @@ exports.createOne = function(req, res) {
     	abreviation: req.body.abreviation, // A MODIFIER
     	operation: req.body.operation, // A MODIFIER
     	nombre: req.body.nombre, // A MODIFIER
-    	coutParId: req.body.coutParId // A MODIFIER
+    	coutParId: req.body.coutParId, // A MODIFIER
+        utilisateurId: req.user
     });
 
     data.save(function(err, data) {

@@ -9,7 +9,7 @@ var UniteSchema = new Schema({
 		type: String,
 		default: '',
 		trim: true,
-		unique: true,
+        index: true,
 		required: "L'unité est obligatoire."
 	},
 	abreviation: {
@@ -28,7 +28,14 @@ var UniteSchema = new Schema({
 	coutParId:{
 		type: Schema.Types.ObjectId,
 		ref: 'Unite'
-	}
+	},
+    utilisateurId: {
+        type: Schema.ObjectId,
+        ref: 'Utilisateur',
+        index: true,
+    }
 });
+
+UniteSchema.index({unite: 1, utilisateurId: 1}, {unique: true});
 
 mongoose.model('Unite', UniteSchema);

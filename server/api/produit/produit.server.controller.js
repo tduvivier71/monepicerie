@@ -8,34 +8,18 @@ var mongoose = require('mongoose'),
 	url = require('url'); // MODIFY
 
 
-exports.findOne = function(req, res) {
-	Model.findOne( { _id: req.params.id })
-		.populate('categorieId')
-		.populate('uniteId')
-		.populate('formatId')
-		.populate({
-			path:     'uniteId',
-			populate: { path:  'coutParId',
-				model: 'Unite' }
-		})
-		.populate('historiques.epicerieId')
-		.exec(function(err, data) {
-			if (err) {return res.status(400).json(err);}
-			if (!data) {return res.status(404).json();}
-			res.status(200).json(data);
-		});
-};
-
 exports.find = function(req, res) {
 
 	var filter = {};
 
 	if(req.query) {
 		if (req.query.hasOwnProperty('catId')) {
-			filter = { categorieId : { $in: req.query.catId} };
+			filter = { categorieId : { $in: req.query.catId},
+                       utilisateurId: req.user};
 		} else {
 			if (req.query.hasOwnProperty('prodId')) {
-				filter = { _id : { $in: req.query.prodId} };
+				filter = { _id : { $in: req.query.prodId},
+                           utilisateurId: req.user};
 			}
 		}
 	}
@@ -58,6 +42,25 @@ exports.find = function(req, res) {
 			res.status(200).json(data); // return a array
 			console.log('produit find : ' + data);
 		});
+};
+
+
+exports.findOne = function(req, res) {
+    Model.findOne( { _id: req.params.id })
+        .populate('categorieId')
+        .populate('uniteId')
+        .populate('formatId')
+        .populate({
+            path:     'uniteId',
+            populate: { path:  'coutParId',
+                model: 'Unite' }
+        })
+        .populate('historiques.epicerieId')
+        .exec(function(err, data) {
+            if (err) {return res.status(400).json(err);}
+            if (!data) {return res.status(404).json();}
+            res.status(200).json(data);
+        });
 };
 
 /*
@@ -103,7 +106,8 @@ exports.createOne = function(req, res) {
 		formatId: req.body.formatId,
 		quantite: req.body.quantite, // A MODIFIER
 		nombre: req.body.nombre, // A MODIFIER
-	 	uniteId: req.body.uniteId // A MODIDIFIER
+	 	uniteId: req.body.uniteId,
+        utilisateurId: req.user
 	});
 
 	for (var i=0; i< req.body.historiques.length; ++i) {

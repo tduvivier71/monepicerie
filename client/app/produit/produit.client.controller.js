@@ -503,18 +503,23 @@
         function _init() {
             vm.item.reset();
             vm.insertHisto.reset();
-            vm.items = produitService.query();
+
+            produitService.query('', function (result) {
+                vm.items = result;
+                _setBrowse();
+            });
+
             vm.categories = categorieService.query();
             vm.unites = uniteService.query();
             vm.formats = formatService.query();
             vm.epiceries = epicerieService.query();
             vm.marques = marqueService.query();
-            _setBrowse();
             vm.loadTags = function () {
                 var deferred = $q.defer();
                 deferred.resolve(vm.categories);
                 return deferred.promise;
             };
+
         }
 
         function _update(_item) {

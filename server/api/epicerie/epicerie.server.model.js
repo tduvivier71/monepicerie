@@ -8,7 +8,7 @@ var EpicerieSchema = new Schema({
 		type: String,
 		default: '',
 		trim: true,
-	//	unique: true,
+	    index: true,
 		required: 'Le nom est obligatoire.'
 	},
 
@@ -18,26 +18,10 @@ var EpicerieSchema = new Schema({
         trim: true
     },
 
-    // lieu: {
-    //     type: String,
-    //     default: '',
-    //     trim: true
-    // },
-
     favori : {
     	type: Boolean,
 	    default: false
 	},
-
-    // latitude : {
-    //     type: Number,
-    //     default: 0
-    // },
-    //
-    // longitude : {
-    //     type: Number,
-    //     default: 0
-    // },
 
 	location : {
 		lat: Number,
@@ -46,9 +30,13 @@ var EpicerieSchema = new Schema({
 
     utilisateurId: {
         type: Schema.ObjectId,
-        ref: 'Utilisateur'
+        ref: 'Utilisateur',
+        index: true,
+        required: 'utilisateurId est obligatoire.'
     }
 
 });
+
+EpicerieSchema.index({epicerie: 1, utilisateurId: 1}, {unique: true});
 
 mongoose.model('Epicerie', EpicerieSchema);

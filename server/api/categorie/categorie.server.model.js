@@ -1,27 +1,31 @@
 'use strict';
 
-// Load the module dependencies
 var mongoose = require('mongoose'),
 	Schema = mongoose.Schema;
 
-// Define a new 'Schema'
 var CategorieSchema = new Schema({
+
 	categorie: {
 		type: String,
 		default: '',
 		trim: true,
-		unique: true,
+        index: true,
 		required: 'La catégorie est obligatoire.'
 	},
+
 	favori : {
 		type: Boolean,
 		default: false
     },
+
     utilisateurId: {
 		type: Schema.ObjectId,
-		ref: 'Utilisateur'
+		ref: 'Utilisateur',
+        index: true,
     }
 
 });
+
+CategorieSchema.index({categorie: 1, utilisateurId: 1}, {unique: true});
 
 mongoose.model('Categorie', CategorieSchema);

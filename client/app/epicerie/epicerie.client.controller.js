@@ -206,10 +206,12 @@
         }
 
         function _init() {
-            focus('searchPlace_focus');
             vm.item.reset();
-            vm.items = epicerieService.query();
-            _setBrowse();
+            epicerieService.query('', function (result) {
+                vm.items = result;
+                focus('searchPlace_focus');
+                _setBrowse();
+            });
         }
 
         function _update(_item) {
