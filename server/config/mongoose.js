@@ -15,6 +15,7 @@ module.exports = function() {
 	require('../api/format/format.server.model');
 	require('../api/produit/produit.server.model');
 	require('../api/liste/liste.server.model');
+    require('../api/liste-base/liste-base.server.model');
 	require('../api/utilisateur/utilisateur.server.model');
 
 	//require('../api/produit/produitHistorique.server.model');

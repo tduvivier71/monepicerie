@@ -22,7 +22,20 @@
         </div>
         <div id="navbar-main" class="navbar-collapse collapse">
             <ul data-ng-show="isAuthentified" class="nav navbar-nav">
-                <li ng-class="{active:isActive('#/liste')}"><a href="/#liste"><i class="material-icons md-14">dashboard</i> {{"MALISTE_UPPER"|translate}} </a></li>
+
+                <li  ng-class="{active:isActive('#/liste')}" class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false"><i class="material-icons md-14">dashboard</i> {{"MALISTE_UPPER"|translate}}
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/#liste/liste">Listes d'épicerie</a></li>
+                        <li><a href="/#liste">Créer une liste d'épicerie</a></li>
+                        <li class="divider"></li>
+                        <li><a href="/#listebase/liste">Listes de base</a></li>
+                        <li><a href="/#listebase/creation">Créer une liste de base</a></li>
+                    </ul>
+                </li>
+
                 <li ng-class="{active:isActive('#/produit')}"><a href="/#produit"><i class="material-icons md-14">shopping_basket</i> {{"PRODUITS_UPPER"|translate}}  </a></li>
 
               <!--  <li ng-class="{active:isActive('#/ilmanque')}"><a href="/#ilmanque"><i class="material-icons md-14">bookmark</i> {{"ILMANQUE"|translate}} </a></li> -->
@@ -44,10 +57,10 @@
                 </li>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false"><i class="material-icons md-14">person</i>
+                       aria-expanded="false"><i class="material-icons md-14">person</i> {{fullNom}}
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="/#utilisateur"><i class="material-icons md-14">person</i> {{fullNom}}</a></li>
+                        <li><a href="/#utilisateur"><i class="material-icons md-14">person</i> Utilisateur </a></li>
                         <li role="separator" class="divider"></li>
                         <li ng-show="!isAuthentified"><a href="/#signup"><i class="fa fa-square" aria-hidden="true"></i> Inscription</a></li>
                         <li ng-show="!isAuthentified"><a href="/#signin"><i class="fa fa-sign-in" aria-hidden="true"></i> Connection</a></li>

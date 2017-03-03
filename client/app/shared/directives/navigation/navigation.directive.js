@@ -21,7 +21,7 @@
                   var queryParam = { id: $auth.getPayload().sub};
                   // vm.item = utilisateurService.get(queryParam);
                   utilisateurService.get(queryParam, function (result) {
-                      $scope.fullNom = result.prenom || ' ' || result.nom;
+                      $scope.fullNom = result.prenom + ' ' + result.nom;
                   });
               }
            });

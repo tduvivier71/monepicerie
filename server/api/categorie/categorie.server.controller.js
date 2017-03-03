@@ -67,8 +67,6 @@ exports.createOne = function(req, res) {
 
 };
 
-
-
 exports.deleteOne = function(req, res) {
 	helpers.deleteOne(req, res, Model);
 };
@@ -83,8 +81,9 @@ exports.updateOne = function (req, res) {
             return res.status(400).json(err);
         }
         if (data) {
-            // data.id = data._id.toString();
-            update = data.id === req.params.id;
+            update === true;
+            // TO DO !
+            // update = data.id === req.params.id;
         }
         if (update) {
             Model.findOne({_id: req.params.id},

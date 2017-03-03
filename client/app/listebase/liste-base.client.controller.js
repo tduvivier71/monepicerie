@@ -3,23 +3,16 @@
     'use strict';
 
     angular
-        .module('app.categorie')
-        .controller('CategorieController', CategorieController);
+        .module('app.listeBase')
+        .controller('ListeBaseController', ListeBaseController);
 
-    CategorieController.$inject = ['$log', '$auth',
-                                   'categorieService', 'toasterService','focus'];
+    ListeBaseController.$inject = ['$log', '$auth',
+        'listeBaseService', 'toasterService','focus'];
 
-    function CategorieController($log, $auth,
-                                 categorieService, toasterService, focus) {
+    function ListeBaseController($log, $auth,
+                                 listeBaseService, toasterService, focus) {
 
         var vm = this;
-
-        /**
-         * typedef {Object}
-         * @property  {string} categorie
-         * @property  {boolean} favori
-         * @function reset
-         */
 
         /* Variables */
         vm.item = {};           // Object
@@ -35,6 +28,8 @@
             type: 'categorie',
             reverse: false
         };
+
+        vm.input1_focus = 'nom_input_focus';
 
         /* Fonctions */
         vm.cancel = cancel;
@@ -63,7 +58,7 @@
 
         function remove(_item) {
             _item.$remove(function () {
-                toasterService.remove(_item.categorie);
+                toasterService.remove(_item.nom);
                 for (var i in vm.items) {
                     if (vm.items[i] === _item) {
                         vm.items.splice(i, 1);
@@ -77,7 +72,7 @@
 
         function save(_form, _item) {
             if (!_form.$valid) {
-                focus('categorie_input_focus');
+                focus(vm.input1_focus);
                 return;
             }
 
@@ -89,7 +84,7 @@
         }
 
         function setEdit(_item) {
-            focus('categorie_input_focus');
+            focus(vm.input1_focus);
             _resetForm('dsEdit');
             vm.selectedItem = angular.copy(_item);
             vm.item = _item;
@@ -97,7 +92,7 @@
 
         function setInsert() {
             vm.item = {};
-            focus('categorie_input_focus');
+            focus(vm.input1_focus);
             _resetForm('dsInsert');
         }
 
@@ -115,32 +110,23 @@
         }
 
         function _create(_item) {
-            var item = new categorieService();
-            item.categorie = _item.categorie;
-            item.favori = _item.favori;
+            var item = new listeBaseService();
+            item.nom = _item.nom;
+            item.epicerieId = _item.epicerieId;
             item.$save(
                 function () {
-                    if (item.favori ) {
-                        angular.forEach(vm.items, function (item, key) {
-                            if (item.favori === true) {
-                                vm.items[key].favori = false;
-                            }
-                        });
-                    }
-
                     vm.items.push(item);
-
-                    toasterService.save(_item.categorie);
+                    toasterService.save(_item.nom);
                     _setBrowse();
                 }, function (e) {
                     toasterService.error(e.data);
-                    focus('categorie_input_focus');
+                    focus(vm.input1_focus);
                 }
             );
         }
 
         function _init() {
-            categorieService.query('', function (result) {
+            listeBaseService.query('', function (result) {
                 vm.items = result;
                 _setBrowse();
             });
@@ -149,20 +135,11 @@
         function _update(_item) {
             _item.$update(
                 function () {
-                    toasterService.update(_item.categorie);
-
-                    if ( _item.favori ) {
-                        angular.forEach(vm.items, function (item, key) {
-                            if ( item.favori === true &&  _item._id !== item._id) {
-                                vm.items[key].favori = false;
-                            }
-                        });
-                    }
-
+                    toasterService.update(_item.nom);
                     _setBrowse();
                 }, function (e) {
                     toasterService.error(e.data);
-                    focus('categorie_input_focus');
+                    focus(vm.input1_focus);
                 }
             );
         }
@@ -186,9 +163,10 @@
 
         function _setBrowse() {
             focus('searchItem_input_focus');
-            vm.sorting.type = 'categorie';
+            vm.sorting.type = 'nom';
             _resetForm('dsBrowse');
         }
+
     }
 
 })();

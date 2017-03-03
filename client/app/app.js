@@ -9,7 +9,7 @@
 	angular
 		.module('app', ['ngRoute', 'ngResource', 'ngMessages', 'ngSanitize', 'ngAnimate', 'ngToast', 'ui.sortable',
 			'ui.bootstrap', 'pascalprecht.translate', 'angularMoment', 'kendo.directives',
-			'app.accueil', 'app.categorie','app.epicerie','app.unite','app.format','app.produit', 'app.marque','app.liste',
+			'app.accueil', 'app.categorie','app.epicerie','app.unite','app.format','app.produit', 'app.marque','app.liste', 'app.listeBase',
 			'app.utilisateur','app.sign','satellizer', 'ui.toggle','uiGmapgoogle-maps','ngMap']); //ngMap
 
 	angular
