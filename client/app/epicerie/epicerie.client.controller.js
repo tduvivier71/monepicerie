@@ -14,26 +14,9 @@
 
         var vm = this;
 
-        /**
-         * typedef {Object}
-         * @property  {string} epicerie
-         * @property  {boolean} favori
-         * @function reset
-         */
-        vm.item = {
-            epicerie: '',
-            adresse:'',
-            lieu:'',
-            favori: false,
-            reset: function () {
-                this.epicerie = '';
-                this.adresse = '';
-                this.lieu = '';
-                this.favori = false;
-            }
-        };
 
         /* Variables */
+        vm.item = {};           // Object
         vm.items = [];          // List of object
         vm.form = {};           // Object
 
@@ -160,12 +143,12 @@
         }
 
         function setInsert() {
+            vm.item = {};
             vm.searchPlace = '';
             _resetForm('dsInsert');
             vm.zoom = 10;
             vm.latitude = 45.5699091;
             vm.longitude = -73.5721709;
-            vm.item.reset();
         }
 
         // ************************************************************************************************************/
@@ -194,6 +177,14 @@
 
                 item.$save(
                     function () {
+                        if (item.favori ) {
+                            angular.forEach(vm.items, function (item, key) {
+                                if (item.favori === true) {
+                                    vm.items[key].favori = false;
+                                }
+                            });
+                        }
+
                         vm.items.push(item);
                         toasterService.save(item.epicerie);
                         _setBrowse();
@@ -206,7 +197,6 @@
         }
 
         function _init() {
-            vm.item.reset();
             epicerieService.query('', function (result) {
                 vm.items = result;
                 focus('searchPlace_focus');
@@ -218,6 +208,15 @@
             _item.$update(
                 function () {
                     toasterService.update(_item.epicerie);
+
+                    if ( vm.item.favori ) {
+                        angular.forEach(vm.items, function (item, key) {
+                            if ( item.favori === true &&  vm.item._id !== item._id) {
+                                vm.items[key].favori = false;
+                            }
+                        });
+                    }
+
                     _setBrowse();
                 }, function (e) {
                     toasterService.error(e.data);

@@ -38,20 +38,36 @@ exports.findUnique = function (req, res) {
 
 exports.createOne = function(req, res) {
 
-    var data  = new Model({
+    var data = new Model({
         categorie: req.body.categorie,
         favori: req.body.favori,
         utilisateurId: req.user
     });
 
-    data.save(function(err, data) {
+    data.save(function (err, data) {
         if (err) {
-        	return res.status(400).json(err);
+            return res.status(400).json(err);
         }
+
+        if (data.favori) {
+            Model.findOne({favori: data.favori}, function (err, data2) {
+                if (err) {
+                    return res.status(400).json(err);
+                }
+                if (data2) {
+                    data2.favori = false;
+                    data2.save(function (err, data2) {
+                    });
+                }
+            });
+        }
+
         res.status(201).json(data);
     });
 
 };
+
+
 
 exports.deleteOne = function(req, res) {
 	helpers.deleteOne(req, res, Model);
@@ -79,6 +95,21 @@ exports.updateOne = function (req, res) {
                     if (!data) {
                         return res.status(404).json();
                     }
+
+                    if  (req.body.favori || req.body.favori !== data.favori) {
+
+                        Model.findOne({favori: true}, function (err, data2) {
+                            if (err) {
+                                return res.status(400).json(err);
+                            }
+                            if (data2) {
+                                data2.favori = false;
+                                data2.save(function (err, data2) {
+                                });
+                            }
+                        });
+                    }
+
                     data.categorie = req.body.categorie; // A MODIFIER
                     data.favori = req.body.favori; // A MODIFIER
                     // data.utilisateurId = req.body.utilisateurId;

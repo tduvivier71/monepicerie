@@ -20,16 +20,9 @@
          * @property  {boolean} favori
          * @function reset
          */
-        vm.item = {
-            categorie: '',
-            favori: false,
-            reset: function () {
-                this.categorie = '';
-                this.favori = false;
-            }
-        };
 
         /* Variables */
+        vm.item = {};           // Object
         vm.items = [];          // List of object
         vm.form = {};           // Object
 
@@ -103,9 +96,9 @@
         }
 
         function setInsert() {
+            vm.item = {};
             focus('categorie_input_focus');
             _resetForm('dsInsert');
-            vm.item.reset();
         }
 
         // ************************************************************************************************************/
@@ -127,7 +120,16 @@
             item.favori = _item.favori;
             item.$save(
                 function () {
+                    if (item.favori ) {
+                        angular.forEach(vm.items, function (item, key) {
+                            if (item.favori === true) {
+                                vm.items[key].favori = false;
+                            }
+                        });
+                    }
+
                     vm.items.push(item);
+
                     toasterService.save(_item.categorie);
                     _setBrowse();
                 }, function (e) {
@@ -138,7 +140,6 @@
         }
 
         function _init() {
-            vm.item.reset();
             categorieService.query('', function (result) {
                 vm.items = result;
                 _setBrowse();
@@ -146,9 +147,18 @@
         }
 
         function _update(_item) {
-            _item.$update(
+            vm.item.$update(
                 function () {
-                    toasterService.update(_item.categorie);
+                    toasterService.update( vm.item.categorie);
+
+                    if ( vm.item.favori ) {
+                        angular.forEach(vm.items, function (item, key) {
+                            if ( item.favori === true &&  vm.item._id !== item._id) {
+                                vm.items[key].favori = false;
+                            }
+                        });
+                    }
+
                     _setBrowse();
                 }, function (e) {
                     toasterService.error(e.data);
