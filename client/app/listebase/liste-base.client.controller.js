@@ -223,7 +223,8 @@
             item.nom = _item.nom;
             item.epicerieId = _item.epicerieId === "" ? _item.epicerieId = undefined : _item.epicerieId;
             item.$save(
-                function () {
+                function (result) {
+                    vm.item = result;
                     vm.isCollapsed = true;
                     vm.items.push(item);
                     toasterService.save(_item.nom);
