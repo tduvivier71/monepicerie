@@ -82,6 +82,7 @@
             $translatePartialLoaderProvider.addPart('defaut');
 			$translatePartialLoaderProvider.addPart('unite');
 			$translatePartialLoaderProvider.addPart('liste');
+            $translatePartialLoaderProvider.addPart('listebase');
 			$translatePartialLoaderProvider.addPart('utilisateur');
 			$translatePartialLoaderProvider.addPart('sign');
 

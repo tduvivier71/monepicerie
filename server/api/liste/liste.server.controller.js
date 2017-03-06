@@ -115,6 +115,9 @@ exports.deleteOneDetail = function(req, res) {
 	);
 };
 
+
+
+
 exports.updateOne = function(req, res) {
 };
 

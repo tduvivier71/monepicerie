@@ -13,15 +13,22 @@ exports.find = function(req, res) {
 	var filter = {};
 
 	if(req.query) {
+
 		if (req.query.hasOwnProperty('catId')) {
 			filter = { categorieId : { $in: req.query.catId},
                        utilisateurId: req.user};
-		} else {
-			if (req.query.hasOwnProperty('prodId')) {
-				filter = { _id : { $in: req.query.prodId},
-                           utilisateurId: req.user};
-			}
 		}
+
+		if (req.query.hasOwnProperty('prodId')) {
+			filter = { _id : { $in: req.query.prodId},
+                        utilisateurId: req.user};
+		}
+
+        if (req.query.hasOwnProperty('listeIds')) {
+            filter = { _id : { $nin: req.query.listeIds} }
+               // utilisateurId: req.user};
+        }
+
 	}
 
 	Model.find( filter )

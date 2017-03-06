@@ -11,6 +11,11 @@ var ListeBaseDetailSchema = new Schema({
         default: '',
         trim: true
     },
+    marque: {
+        type: String,
+        default: '',
+        trim: true
+    },
     categorie: {
         type: String,
         default: '',

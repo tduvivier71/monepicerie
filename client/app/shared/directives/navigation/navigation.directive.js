@@ -12,7 +12,12 @@
     return {
       restrict: 'EA',
       templateUrl: 'app/shared/directives/navigation/navigation.template.html',
+
       link: function($scope) {
+
+          $scope.setInsert = function() {
+          //  ListeBaseFactory.setInsert();
+        },
 
         $scope.$watch( function () { return $auth.isAuthenticated();}, function(newVal){
               $scope.isAuthentified = newVal;
@@ -26,7 +31,8 @@
               }
            });
       },
-      controller: function($scope, $location) {
+
+      controller : function($scope, $location) {
         $scope.isActive = function (path) {
           var currentPath = $location.path().split('/')[1];
           if (currentPath.indexOf('?') !== -1) {

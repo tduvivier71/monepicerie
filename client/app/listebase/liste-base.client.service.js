@@ -10,7 +10,7 @@
 
     function listeBaseService($resource) {
 
-        return $resource('api/listebase/liste/:id',
+        return $resource('api/listebase/:id',
             {
                 id: '@_id'
             }, {

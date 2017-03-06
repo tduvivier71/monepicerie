@@ -94,9 +94,12 @@ router.delete('/api/liste/:id/detail/:id2', ensureAuthenticated, liste.deleteOne
 router.get('/api/liste/:id', ensureAuthenticated, liste.findOne);
 router.get('/api/liste', ensureAuthenticated, liste.find);
 
-router.get('/api/listebase/liste', ensureAuthenticated, listeBase.find);
-router.post('/api/listebase/creation', ensureAuthenticated, listeBase.createOne);
+router.get('/api/listebase', ensureAuthenticated, listeBase.find);
+router.post('/api/listebase', ensureAuthenticated, listeBase.createOne);
+router.delete('/api/listebase/:id', ensureAuthenticated, listeBase.deleteOne);
 
+router.post('/api/listebase/:id/detail', ensureAuthenticated, listeBase.createOneDetail);
+router.delete('/api/listebase/:id/detail/:id2', ensureAuthenticated, listeBase.deleteOneDetail);
 
 router.get('/api/utilisateur/:id',  utilisateur.getMe);
 router.put('/api/utilisateur/:id',  utilisateur.updateMe);

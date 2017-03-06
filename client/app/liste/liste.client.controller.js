@@ -7,10 +7,12 @@
         .controller('ListeController', ListeController);
 
     ListeController.$inject = ['$q', '$auth',
-        'toasterService', 'focus', 'listeService', 'listeServiceDetail', 'categorieService',  'epicerieService','produitService'];
+        'toasterService', 'focus', 'listeService', 'listeServiceDetail',
+        'categorieService',  'epicerieService','produitService'];
 
     function ListeController($q, $auth,
-         toasterService, focus, listeService, listeServiceDetail, categorieService,  epicerieService, produitService) {
+         toasterService, focus, listeService, listeServiceDetail,
+         categorieService,  epicerieService, produitService) {
 
         var vm = this;
 
@@ -178,7 +180,7 @@
          */
         function removeItem(_item, _itemDetail) {
             console.log('remove');
-            var item = new listeServiceDetail();
+            var item = new listServiceDetail();
             item.$deleteOneDetail({id:_item._id, id2: _itemDetail._id});
             for (var i in _item.listeDetail) {
                 if (_item.listeDetail[i]._id === _itemDetail._id) {

@@ -10,7 +10,7 @@
 
 	function config ($routeProvider) {
 		$routeProvider.
-			when('/listebase/liste', {
+			when('/listebase/', {
 				templateUrl: 'app/listebase/liste-base.template.html',
 				controller: 'ListeBaseController',
 			    controllerAs: 'vm'
