@@ -168,7 +168,8 @@
             </div>
 
             <div class="row">
-                <div class="col-md-6 form-group">
+
+                <div class="col-md-6 col-xm-6 col-sm-6">
                     <div ui-sortable="vm.sortableProduitsOptions" class="apps-container screen"  ng-model="vm.produits" >
                         <div class="app"
                              data-produit_id="{{produit._id}}"
@@ -178,20 +179,25 @@
                              data-conditionnenent="{{produit.quantite}} {{produit.formatId.format}} ({{produit.nombre}} {{produit.uniteId.abreviation}})"
                              data-note="{{ produit.note}}"
                              ng-repeat="produit in vm.produits">
+
                             <b>{{ produit.produit }}</b>
                             <span ng-show="produit.marque"> {{ produit.marque }} </span>
+
                             <span class="alignright" ng-show="produit.description">
                                 <i class="material-icons" uib-tooltip={{produit.description}} style="cursor: pointer;" aria-hidden="true">note</i>
                                 </span>
                             <br>
+
                             <span style=" font-size: 0.8em;">
                                 {{ produit.categorieId.categorie }}
                                 <span ng-show="produit.formatId.format"> - {{produit.quantite}} {{produit.formatId.format}} ({{produit.nombre}} {{produit.uniteId.abreviation}}) </span>
-                                </span>
+                            </span>
                         </div>
+
                     </div>
                 </div>
-                <div class="col-md-6 form-group">
+
+                <div class="col-md-6 col-xm-6 col-sm-6">
                     <div ui-sortable="vm.sortableItemsOptions" class="apps-container screen"  ng-model="vm.items" >
                         <div class="app"
                              id="{{item._id}}"
@@ -212,8 +218,6 @@
             </div>
         </div>
     </div>
-
-
 </form>
 
 
