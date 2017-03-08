@@ -71,9 +71,9 @@
     color: $success-color !important;
   }
 
- /* &:hover {
-    color: rgba(241, 192, 18, 0.89);
-  } */
+  &.md-hover :hover {
+    font-size: 18px;
+  }
 
   &.cursor {
     cursor: pointer;

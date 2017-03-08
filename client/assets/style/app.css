@@ -54,10 +54,7 @@ $td-divider-color:        #BDBDBD;
   font-feature-settings: 'liga';
   /* Rules for sizing the icon. */
   /* Rules for using icons as black on a light background. */
-  /* Rules for using icons as white on a dark background. */
-  /* &:hover {
-     color: rgba(241, 192, 18, 0.89);
-   } */ }
+  /* Rules for using icons as white on a dark background. */ }
   .material-icons.md-12 {
     font-size: 12px; }
   .material-icons.md-14 {
@@ -96,6 +93,8 @@ $td-divider-color:        #BDBDBD;
     color: rgba(241, 192, 18, 0.89); }
   .material-icons.md-success {
     color: #4CAF50 !important; }
+  .material-icons.md-hover :hover {
+    font-size: 18px; }
   .material-icons.cursor {
     cursor: pointer; }
 
