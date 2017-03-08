@@ -75,7 +75,7 @@
             filter:"contains",
             valuePrimitive: true,
             autoBind: false,
-            dataSource: vm.items,
+            dataSource: vm.unites,
             clearButton: true,
             delay: 50,
             noDataTemplate: 'Aucune correspondance...',
@@ -125,14 +125,12 @@
 
         function save(_form, _item) {
             if (!_form.$valid) {
-
                 if (_item.unite) {
                     focus('abreviation_input_focus');
                 }
                 else {
                     focus('unite_input_focus');
                 }
-
                 return;
             }
 
@@ -194,6 +192,7 @@
                 vm.items = result;
                 _setBrowse();
             });
+            vm.unites = uniteService.query();
 
         }
 
