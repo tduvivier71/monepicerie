@@ -71,8 +71,9 @@
     color: $success-color !important;
   }
 
-  &.md-hover :hover {
-    font-size: 18px;
+  &.md-hover-16:hover {
+    font-size: 16px !important;
+    font-weight: bold !important;
   }
 
   &.cursor {

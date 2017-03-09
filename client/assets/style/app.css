@@ -93,8 +93,9 @@ $td-divider-color:        #BDBDBD;
     color: rgba(241, 192, 18, 0.89); }
   .material-icons.md-success {
     color: #4CAF50 !important; }
-  .material-icons.md-hover :hover {
-    font-size: 18px; }
+  .material-icons.md-hover-6:hover {
+    font-size: 26px !important;
+    font-weight: bold !important; }
   .material-icons.cursor {
     cursor: pointer; }
 

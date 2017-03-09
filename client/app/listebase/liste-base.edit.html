@@ -174,7 +174,7 @@
                             <b>{{ produit.produit }}</b>
                             <span ng-show="produit.marque"> {{ produit.marque }} </span>
                             <span class="alignright" ng-show="produit.description">
-                                <i class="material-icons" uib-tooltip={{produit.description}} style="cursor: pointer;" aria-hidden="true">note</i>
+                                <i class="material-icons " uib-tooltip={{produit.description}} style="cursor: pointer;" aria-hidden="true">note</i>
                                 </span>
                             <br>
                             <span style=" font-size: 0.8em;">
@@ -189,12 +189,10 @@
                         <div class="app"
                              id="{{item._id}}"
                              ng-repeat="item in vm.item.listeBaseDetail">
-
-
                              <b>{{ item.produit }}</b>
                              <span ng-show="item.marque"> {{ item.marque }} </span>
-                             <span style="position: absolute; right: 25px; top: 11px; width: 15px; padding: 0;">
-                                <i class="material-icons md-hover"  style="cursor: pointer;"
+                             <span style="">
+                                <i class="material-icons md-hover-16 cursor"
                                    aria-hidden="true" ng-click="vm.removeItem(vm.item, item)">clear</i>
                                  </span>
                              <br>
