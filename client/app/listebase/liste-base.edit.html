@@ -161,7 +161,7 @@
             </div>
 
             <div class="row">
-                <div class="col-md-6 form-group">
+                <div class="col-md-6 col-sm-6 col-xm-6">
                     <div ui-sortable="vm.sortableProduitsOptions" class="apps-container screen"  ng-model="vm.produits" >
                         <div class="app"
                              data-produit_id="{{produit._id}}"
@@ -184,17 +184,17 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-sm-6 col-xm-6 form-group">
+                <div class="col-md-6 col-sm-6 col-xm-6">
                     <div ui-sortable="vm.sortableItemsOptions" class="apps-container screen"  ng-model="vm.items" >
                         <div class="app"
                              id="{{item._id}}"
                              ng-repeat="item in vm.item.listeBaseDetail">
                              <b>{{ item.produit }}</b>
                              <span ng-show="item.marque"> {{ item.marque }} </span>
-                             <span style="">
+                             <span style="float:right;">
                                 <i class="material-icons md-hover-16 cursor"
                                    aria-hidden="true" ng-click="vm.removeItem(vm.item, item)">clear</i>
-                                 </span>
+                             </span>
                              <br>
                              <span style=" font-size: 0.8em;">
                                {{ item.categorie }} {{ item.conditionnement }}
