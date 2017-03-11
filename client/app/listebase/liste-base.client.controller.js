@@ -34,6 +34,9 @@
         vm.input1_focus = 'nom_input_focus';
         vm.isCollapsed = false;
 
+        vm.search1Open = false;
+        vm.search2Open = false;
+
         /* Fonctions */
         vm.cancel = cancel;
         vm.remove = remove;
@@ -41,6 +44,7 @@
         vm.save = save;
         vm.setEdit = setEdit;
         vm.setInsert = setInsert;
+        vm.openSearch1 = openSearch1;
 
         var attr_id;
         var attr_produit;
@@ -112,8 +116,6 @@
             dataSource: vm.categories
         };
 
-
-
         // ************************************************************************************************************/
         // Entry point function
         // ************************************************************************************************************/
@@ -130,6 +132,11 @@
             } else {
                 _cancelEdit();
             }
+        }
+
+        function openSearch1() {
+            vm.search1Open = true;
+            focus('search1Item_focus');
         }
 
         function remove(_item) {
@@ -151,19 +158,15 @@
          * @param {Object} _item
          * @param {Object} _itemDetail
          */
-        function removeItem(_item, _itemDetail) {
-            console.log('remove');
-
+        function removeItem(_produits, _item, _itemDetail) {
             var item = new listeBaseServiceDetail();
-
             item.$deleteOneDetail({id: _item._id, id2: _itemDetail._id});
-
             for (var i in _item.listeBaseDetail) {
                 if (_item.listeBaseDetail[i]._id === _itemDetail._id) {
+                    _produits.push(_item.listeBaseDetail[i]);
                     _item.listeBaseDetail.splice(i, 1);
                 }
             }
-
             toasterService.remove(_itemDetail.produit);
         }
 

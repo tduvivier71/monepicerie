@@ -2,7 +2,6 @@
     <!--    ng-model-options="{ updateOn: 'default', debounce: { 'default': 100, 'blur': 0 } }">  -->
 
     <div class="panel panel-default noborder">
-
         <div ng-show="vm.state==='dsEdit'" class="panel-heading">
             <span class="panel-title with-font-xlarge pull-left">
                 {{vm.item.nom}}
@@ -24,7 +23,6 @@
             </div>
             <div class="clearfix"></div>
         </div>
-
         <div uib-collapse="vm.isCollapsed">
             <div class="panel-body">
                 <div class="row">
@@ -75,67 +73,63 @@
     <div ng-show="vm.state==='dsEdit'" class="panel panel-default noborder">
         <div class="panel-body" style="padding:0">
             <div class="row">
-                <div class="col-md-6 form-group">
-                    <div class="well" style="margin-bottom:0px;">Produits
-                        <div class="pull-right">
-                            <!-- Single button using append-to-body -->
-                            <div class="btn-group" uib-dropdown dropdown-append-to-body>
-                                <button id="btn-append-to-body" type="button" class="btn btn-primary" uib-dropdown-toggle>
-                                    Toutes les catégories <span class="caret"></span>
-                                </button>
-                            </div>
+
+                <div class="col-md-6 col-sm-6 col-xm-6 form-group">
+                    <div class="well" style="height: 60px;padding-right: 8px;
+                          margin-bottom:0px;">Produits
+                        <div style="position: absolute; top: 12px; right: 20px"
+                             ng-mouseover="vm.openSearch1"
+                             ng-click="vm.search1Open=!vm.search1Open">
+                            <i class="material-icons md-36 cursor">search</i>
                         </div>
                         <div class="clearfix"></div>
                     </div>
+                    <div class="input-group input-group-md" ng-show="vm.search1Open">
+                        <input autocomplete="off"
+                               class="k-textbox"
+                               focus-on="search1Item_focus"
+                               id="searchItem_input_id"
+                               name="searchItem_input"
+                               ng-keyup="cancelEsc($event)"
+                               ng-model="searchItem"
+                               placeholder={{"RECHERCHE"|translate}}
+                               type="text"
+                               style="height: 39px !important;">
+                        <span class="input-group-btn">
+                            <button type="button"
+                                    class="btn btn-primary"
+                                    style="margin-left:0px !important; padding-top:9px !important; padding-bottom:9px !important;"
+                                    ng-click="vm.search1Open = false; clearSearch()"
+                                    uib-tooltip-html="tips">
+                                <i class="material-icons">close</i>
+                            </button>
+                        </span>
+                    </div>
                 </div>
-                <div class="col-md-6 form-group">
-                    <div class="well" style="margin-bottom:0px;">
+
+                <div class="col-md-6 col-sm-6 col-xm-6 form-group">
+                    <div class="well" style="height: 60px ;margin-bottom:0px;">
                         Liste
-                        <div class="pull-right">
-                            <div class="btn-group">
-                                <button class="btn btn-default"
-                                        data-toggle="tooltip"
-                                        ng-click="vm.setInsert()"
-                                        uib-tooltip={{"HINT_VIDER_LISTE"|translate}}>
-                                    <span class="fa fa-remove"></span>
-                                </button>
-                            </div>
-                        </div>
                         <div class="pull-right">
                             <div class="btn-group">
                                 <button class="btn btn-primary"
                                         data-toggle="tooltip"
                                         ng-click="vm.setInsert()"
                                         uib-tooltip={{"HINT_AJOUTER_PRODUIT"|translate}}>
-                                    <span class="fa fa-plus"></span> {{"PRODUIT"|translate}}
+                                        <i class="material-icons">add</i>{{"PRODUIT"|translate}}
                                 </button>
                             </div>
                         </div>
                         <div class="clearfix"></div>
                     </div>
                 </div>
+
             </div>
             <div class="row">
                 <div class="col-md-6 col-sm-6 col-xm-6 form-group">
-                    <div class="input-group input-group-md">
-                        <input autocomplete="off"
-                               class="k-textbox"
-                               focus-on="searchItem_focus"
-                               id="searchItem_input_id"
-                               name="searchItem_input"
-                               ng-keyup="cancelEsc($event)"
-                               ng-model="searchItem"
-                               placeholder="Recherche..."
-                               type="text">
-                        <div class="input-group-btn">
-                            <button class="btn btn-default"
-                                    title="Initialiser la recherche"
-                                    type="button"
-                                    ng-click="clearSearchItem()">
-                                    <i class="material-icons">close</i>
-                            </button>
-                        </div>
-                    </div>
+
+
+
                 </div>
                 <div class="col-md-6 col-sm-6 col-xm-6 form-group">
                     <div class="input-group input-group-md">
@@ -193,7 +187,7 @@
                              <span ng-show="item.marque"> {{ item.marque }} </span>
                              <span style="float:right;">
                                 <i class="material-icons md-hover-16 cursor"
-                                   aria-hidden="true" ng-click="vm.removeItem(vm.item, item)">clear</i>
+                                   aria-hidden="true" ng-click="vm.removeItem(vm.produits, vm.item, item)">clear</i>
                              </span>
                              <br>
                              <span style=" font-size: 0.8em;">
@@ -205,8 +199,6 @@
             </div>
         </div>
     </div>
-
-
 </form>
 
 

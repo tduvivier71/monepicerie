@@ -72,8 +72,6 @@
             }
         };
 
-
-
     //    historiques: [vm.itemHistorique],
 
         vm.item = {
@@ -146,8 +144,6 @@
         vm.isCollapsed = true;
 
         vm.tips = $sce.trustAsHtml('Réinitialiser </br> la sélection');
-
-
 
         // ************************************************************************************************************/
         // Entry point function
