@@ -20,6 +20,7 @@
         vm.item = {};           // Object
         vm.items = [];          // List of object
         vm.form = {};           // Object
+        vm.categoriesSel = [];
 
         vm.searchItem = '';     // string
         vm.selectedItem = {};   // Object
@@ -45,6 +46,8 @@
         vm.setEdit = setEdit;
         vm.setInsert = setInsert;
         vm.openSearch1 = openSearch1;
+        vm.addCategorie = addCategorie;
+        vm.categorieRemove = categorieRemove;
 
         var attr_id;
         var attr_produit;
@@ -125,6 +128,40 @@
         // ************************************************************************************************************/
         // Public function
         // ************************************************************************************************************/
+
+        function addCategorie(categorie) {
+
+            var found = vm.categoriesSel.some(function (el) {
+                return el._id === categorie._id;
+            });
+
+            if (!found) {
+                vm.categoriesSel.push(categorie);
+                var arrayCatId = [];
+                vm.categoriesSel.forEach(function(el) {
+                    arrayCatId.push(el._id);
+                });
+                var queryParam = {catId: arrayCatId};
+                vm.produits= produitService.query(queryParam);
+            }
+
+        }
+
+        function categorieRemove(categorie) {
+            for (var i in vm.categoriesSel) {
+                if (vm.categoriesSel[i]._id === categorie._id) {
+                    vm.categoriesSel.splice(i, 1);
+                }
+            }
+
+            var arrayCatId = [];
+            vm.categoriesSel.forEach(function(el) {
+                arrayCatId.push(el._id);
+            });
+            var queryParam = {catId: arrayCatId};
+            vm.produits= produitService.query(queryParam);
+
+        }
 
         function cancel() {
             if (vm.state === 'dsInsert') {
