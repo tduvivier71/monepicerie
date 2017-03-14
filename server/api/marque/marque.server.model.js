@@ -9,18 +9,18 @@ var MarqueSchema = new Schema({
 		type: String,
 		default: '',
 		trim: true,
-        index: true,
+       // index: true,
 		required: 'La marque est obligatoire.'
 	},
 
     utilisateurId: {
         type: Schema.ObjectId,
-        ref: 'Utilisateur',
-        index: true
+        ref: 'Utilisateur'
+		//, index: true
     }
 
 });
 
-MarqueSchema.index({marque: 1, utilisateurId: 1}, {unique: true});
+//MarqueSchema.index({marque: 1, utilisateurId: 1}, {unique: true});
 
 mongoose.model('Marque', MarqueSchema);

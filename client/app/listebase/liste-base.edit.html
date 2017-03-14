@@ -107,26 +107,24 @@
                     </div>
                 </div>
 
-
-
                 <div class="col-md-6 col-sm-6 col-xm-6 form-group">
                     <div class="well" style="height: 60px;padding-right: 8px;
                          margin-bottom:0px;">Produits
                          <div style="position: absolute; top: 12px; right: 20px"
-                              ng-mouseover="vm.openSearch1"
-                              ng-click="vm.search1Open=!vm.search1Open">
+                              ng-mouseover="vm.openSearch2"
+                              ng-click="vm.search2Open=!vm.search2Open">
                               <i class="material-icons md-36 cursor">search</i>
                          </div>
                          <div class="clearfix"></div>
                     </div>
-                    <div class="input-group input-group-md" ng-show="vm.search1Open">
+                    <div class="input-group input-group-md" ng-show="vm.search2Open">
                         <input autocomplete="off"
                                class="k-textbox"
-                               focus-on="search1Item_focus"
-                               id="searchItem_input_id"
-                               name="searchItem_input"
+                               focus-on="search2Item_focus"
+                               id="search2Item_input_id"
+                               name="search2Item_input"
                                ng-keyup="cancelEsc($event)"
-                               ng-model="searchItem"
+                               ng-model="search2Item"
                                placeholder={{"RECHERCHE"|translate}}
                                type="text"
                                style="height: 39px !important;">
@@ -134,7 +132,7 @@
                                    <button type="button"
                                            class="btn btn-primary"
                                            style="margin-left:0px !important; padding-top:9px !important; padding-bottom:9px !important;"
-                                           ng-click="vm.search1Open = false; clearSearch()"
+                                           ng-click="vm.search2Open = false; clearSearch()"
                                            uib-tooltip-html="tips">
                                             <i class="material-icons">close</i>
                                    </button>
@@ -184,14 +182,16 @@
                                  ng-repeat="produit in vm.produits">
                                 <b>{{ produit.produit }}</b>
                                 <span ng-show="produit.marque"> {{ produit.marque }} </span>
-                                <span class="alignright" ng-show="produit.description">
-                                    <i class="material-icons " uib-tooltip={{produit.description}} style="cursor: pointer;" aria-hidden="true">note</i>
-                                    </span>
+                                <span style="float:right;" ng-show="produit.description">
+                                    <i class="material-icons" uib-tooltip={{produit.description}} style="cursor: pointer;" aria-hidden="true">note</i>
+                                </span>
                                 <br>
-                                <span style=" font-size: 0.8em;">
-                                    {{ produit.categorieId.categorie }}
-                                    <span ng-show="produit.formatId.format"> - {{produit.quantite}} {{produit.formatId.format}} ({{produit.nombre}} {{produit.uniteId.abreviation}}) </span>
-                                    </span>
+                                <span style="top: 38px; left: 33px; font-size: 0.7em;" ng-show="produit.formatId.format">
+                                    {{produit.quantite}} {{produit.formatId.format | lowercase}} de {{produit.nombre}} {{produit.uniteId.unite | lowercase}}
+                                </span>
+                                <span style="float:right; font-size: 0.7em;">
+                                    {{ produit.categorieId.categorie | uppercase}}
+                                </span>
                             </div>
                         </div>
                     </div>

@@ -48,10 +48,17 @@ exports.updateOne = function(req, res) {
 	Model.findOne(
 		{_id: req.params.id},
 		function(err, data) {
-			if (err) {return res.status(400).json(err);}
-			if (!data) {return res.status(404).json();}
+			if (err) {
+			    return res.status(400).json(err);
+			}
+			if (!data) {
+			    return res.status(404).json();
+			}
 				data.marque = req.body.marque; // MODIFY
 				data.save(function(err,data){
+                    if (err) {
+                        return res.status(400).json(err);
+                    }
 					res.status(200).json(data);
 				});
 		}
