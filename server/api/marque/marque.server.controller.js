@@ -4,13 +4,26 @@ var mongoose = require('mongoose'),
 	helpers = require('../shared/helpers.server.controller.js'),
 	Model = mongoose.model('Marque'); // MODIFY
 
+function handleError(res, err, msg) {
+
+    if (err.name === 'MongoError' && err.code === 11000) {
+        msg = 'La valeur "' + msg + '" existe déjà.';
+    }
+
+    return res.status(400).json({
+        'success': false,
+        'message': msg
+    });
+}
+
 exports.find = function (req, res) {
 
     Model.find({utilisateurId: req.user})
         .sort('marque')
         .exec(function (err, data) {
             if (err) {
-                return res.status(400).json(err);
+                return handleError(res, err, 'marque');
+                //return res.status(400).json(err);
             }
             if (!data) {
                 return res.status(404).json();
@@ -33,7 +46,7 @@ exports.createOne = function (req, res) {
 
     data.save(function (err, data) {
         if (err) {
-            return res.status(400).json(err);
+            return handleError(res, err, req.body.marque);
         }
         res.status(201).json(data);
     });

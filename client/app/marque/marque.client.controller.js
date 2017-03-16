@@ -129,7 +129,7 @@
                     toasterService.save(_item.marque);
                     _setBrowse();
                 }, function (e) {
-                    toasterService.error(e.data);
+                    toasterService.error(e.data.message);
                     focus('marque_input_focus');
                 }
             );
