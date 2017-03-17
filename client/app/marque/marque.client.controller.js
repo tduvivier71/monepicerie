@@ -120,7 +120,6 @@
         }
 
         function _create(_item) {
-            console.log('create');
             var item = new marqueService();
             item.marque = _item.marque;
             item.$save(

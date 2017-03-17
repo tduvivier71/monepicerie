@@ -1,5 +1,32 @@
 'use strict';
 
+exports.handleError = function (res, err, msg) {
+
+    var message = '';
+    if (err.code) { // err.name === 'MongoError'
+        switch (err.code) {
+            case 11000:
+            case 11001:
+                message = '"' + msg + '" existe déjà.';
+                break;
+            default:
+                message = 'Une erreur fatale est survenue.';
+        }
+    } else { // err.name === 'ValidationError'
+        for (var errName in err.errors) {
+			if (err.errors.hasOwnProperty(errName)) {
+                message = err.errors[errName].message;
+			}
+        }
+    }
+
+    return res.status(400).json({
+        'success': false,
+        'message': message
+    });
+
+}
+
 var getErrorMessage = function(err) {
 	var message = '';
 	if (err.code) {

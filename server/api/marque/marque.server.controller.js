@@ -7,7 +7,15 @@ var mongoose = require('mongoose'),
 function handleError(res, err, msg) {
 
     if (err.name === 'MongoError' && err.code === 11000) {
-        msg = 'La valeur "' + msg + '" existe déjà.';
+        msg = '"' + msg + '" existe déjà.';
+    }
+
+    if (err.name === 'ValidationError') {
+
+        for (var errName in err.errors) {
+             msg = err.errors[errName].message;
+        }
+
     }
 
     return res.status(400).json({

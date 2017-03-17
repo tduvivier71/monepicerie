@@ -45,14 +45,15 @@ exports.createOne = function(req, res) {
     });
 
     data.save(function (err, data) {
+
         if (err) {
-            return res.status(400).json(err);
+            return helpers.handleError(res, err, req.body.categorie);
         }
 
         if (data.favori) {
             Model.findOne({favori: data.favori}, function (err, data2) {
                 if (err) {
-                    return res.status(400).json(err);
+                    return handleError(res, err, req.body.categorie);
                 }
                 if (data2) {
                     data2.favori = false;

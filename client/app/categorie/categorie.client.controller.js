@@ -133,7 +133,7 @@
                     toasterService.save(_item.categorie);
                     _setBrowse();
                 }, function (e) {
-                    toasterService.error(e.data);
+                    toasterService.error(e.data.message);
                     focus('categorie_input_focus');
                 }
             );

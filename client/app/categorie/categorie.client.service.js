@@ -13,8 +13,7 @@
         return $resource('api/categorie/:id',
             {
                 id: '@_id'
-            },
-            {
+            }, {
                 update: {
                     method: 'PUT'
                 }

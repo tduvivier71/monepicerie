@@ -10,7 +10,7 @@ var CategorieSchema = new Schema({
 		default: '',
 		trim: true,
         index: true,
-		required: 'La catégorie est obligatoire.'
+		required: [true, 'La catégorie est obligatoire.']
 	},
 
 	favori : {
@@ -19,9 +19,10 @@ var CategorieSchema = new Schema({
     },
 
     utilisateurId: {
-		type: Schema.ObjectId,
-		ref: 'Utilisateur',
+        type: Schema.ObjectId,
+        ref: 'Utilisateur',
         index: true,
+        required: [true, 'Un utilisateur est obligatoire.']
     }
 
 });
