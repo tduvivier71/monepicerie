@@ -12,13 +12,15 @@ var FormatSchema = new Schema({
 		default: '',
 		trim: true,
         index: true,
-		required: 'Le format est obligatoire.'
+        required: [true, 'Le format est obligatoire.'],
+        maxlength: [50, 'La longueur maximale pour le format est de 50 caractères.']
 	},
 
     utilisateurId: {
         type: Schema.ObjectId,
         ref: 'Utilisateur',
         index: true,
+        required: [true, 'Un utilisateur est obligatoire.']
     }
 
 });

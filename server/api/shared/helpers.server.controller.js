@@ -1,6 +1,6 @@
 'use strict';
 
-exports.handleError = function (res, err, msg) {
+exports.handleSaveError = function (res, err, msg) {
 
     var message = '';
     if (err.code) { // err.name === 'MongoError'
@@ -23,6 +23,25 @@ exports.handleError = function (res, err, msg) {
     return res.status(400).json({
         'success': false,
         'message': message
+    });
+
+}
+
+
+exports.handleDataOneNotFound = function (res, msg) {
+
+    return res.status(404).json({
+        'success': true,
+        'message': msg + " n'a pas été trouvé."
+    });
+
+}
+
+exports.handleDataNotFound = function (res, msg) {
+
+    return res.status(404).json({
+        'success': true,
+        'message': "Aucune donnée trouvée pour " + msg
     });
 
 }

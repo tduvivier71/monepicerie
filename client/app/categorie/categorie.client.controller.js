@@ -150,7 +150,6 @@
             _item.$update(
                 function () {
                     toasterService.update(_item.categorie);
-
                     if ( _item.favori ) {
                         angular.forEach(vm.items, function (item, key) {
                             if ( item.favori === true &&  _item._id !== item._id) {
@@ -158,10 +157,9 @@
                             }
                         });
                     }
-
                     _setBrowse();
                 }, function (e) {
-                    toasterService.error(e.data);
+                    toasterService.error(e.data.message);
                     focus('categorie_input_focus');
                 }
             );

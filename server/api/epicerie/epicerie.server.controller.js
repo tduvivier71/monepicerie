@@ -37,8 +37,9 @@ exports.createOne = function(req, res) {
     });
 
     data.save(function(err, data) {
+
         if (err) {
-            return res.status(400).json(err);
+            return helpers.handleSaveError(res, err, req.body.epicerie);
         }
 
         if (data.favori) {
@@ -69,7 +70,7 @@ exports.updateOne = function (req, res) {
         {_id: req.params.id},
         function (err, data) {
             if (err) {
-                return res.status(400).json(err);
+                return helpers.handleSaveError(res, err, req.body.epicerie);
             }
             if (!data) {
                 return res.status(404).json();

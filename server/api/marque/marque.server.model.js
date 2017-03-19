@@ -10,7 +10,8 @@ var MarqueSchema = new Schema({
 		default: '',
 		trim: true,
         index: true,
-		required: [true, 'La marque est obligatoire.']
+        required: [true, 'La marque est obligatoire.'],
+        maxlength: [50, 'La longueur maximale pour la marque est de 50 caractères.']
 	},
 
     utilisateurId: {
@@ -18,9 +19,7 @@ var MarqueSchema = new Schema({
         ref: 'Utilisateur',
 		index: true,
         required: [true, 'Un utilisateur est obligatoire.']
-    } //,
-
- //   timestamps: true
+    }
 
 });
 
@@ -28,8 +27,3 @@ MarqueSchema.index({marque: 1, utilisateurId: 1}, {unique: true});
 
 mongoose.model('Marque', MarqueSchema);
 
-MarqueSchema.post('save', function(error, doc, next) {
-    if (error.name === 'MongoError' && error.code === 11000) {
-        next(new Error('There was a duplicate key error'));
-    }
-});

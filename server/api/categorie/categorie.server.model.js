@@ -10,7 +10,8 @@ var CategorieSchema = new Schema({
 		default: '',
 		trim: true,
         index: true,
-		required: [true, 'La catégorie est obligatoire.']
+		required: [true, 'La catégorie est obligatoire.'],
+        maxlength: [50, 'La longueur maximale pour la catégorie est de 50 caractères.']
 	},
 
 	favori : {

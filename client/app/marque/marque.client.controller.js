@@ -14,17 +14,8 @@
 
         var vm = this;
 
-
-        /**
-         * typedef {Object}
-         * @property  {string} marque
-         * @function reset
-         */
         vm.item = {
-            marque: '',
-            reset: function () {
-                this.marque = '';
-            }
+            marque: ''
         };
 
         /* Variables */
@@ -101,9 +92,9 @@
         }
 
         function setInsert() {
+            vm.item = {};
             focus('marque_input_focus');
             _resetForm('dsInsert');
-            vm.item.reset();
         }
 
         // ************************************************************************************************************/
@@ -135,7 +126,6 @@
         }
 
         function _init() {
-            vm.item.reset();
             marqueService.query('', function (result) {
                 vm.items = result;
                 _setBrowse();
@@ -148,7 +138,8 @@
                     toasterService.update(_item.marque);
                     _setBrowse();
                 }, function (e) {
-                    toasterService.error(e.data);
+                    toasterService.error(e.data.message);
+                    focus('marque_input_focus');
                 }
             );
         }

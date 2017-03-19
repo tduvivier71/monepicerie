@@ -9,7 +9,8 @@ var EpicerieSchema = new Schema({
 		default: '',
 		trim: true,
 	    index: true,
-		required: 'Le nom est obligatoire.'
+        required: [true, "L'épicerie est obligatoire."],
+        maxlength: [50, "La longueur maximale pour l'épicerie est de 50 caractères."]
 	},
 
     adresse: {
@@ -32,7 +33,7 @@ var EpicerieSchema = new Schema({
         type: Schema.ObjectId,
         ref: 'Utilisateur',
         index: true,
-        required: 'utilisateurId est obligatoire.'
+        required: [true, 'Un utilisateur est obligatoire.']
     }
 
 });

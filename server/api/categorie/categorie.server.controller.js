@@ -9,12 +9,15 @@ exports.find = function (req, res) {
     Model.find({utilisateurId: req.user})
         .sort('categorie')
         .exec(function (err, data) {
+
             if (err) {
                 return res.status(400).json(err);
             }
+
             if (!data) {
                 return res.status(404).json();
             }
+
             res.status(200).json(data);
         });
 
@@ -25,13 +28,17 @@ exports.findOne = function(req, res) {
 };
 
 exports.findUnique = function (req, res) {
+
     Model.findOne({categorie: req.params.categorie}, function (err, data) {
+
         if (err) {
             return res.status(400).json(err);
         }
+
         if (!data) {
             return res.status(404).json();
         }
+
         res.status(200).json(data);
     });
 };
@@ -47,17 +54,18 @@ exports.createOne = function(req, res) {
     data.save(function (err, data) {
 
         if (err) {
-            return helpers.handleError(res, err, req.body.categorie);
+            return helpers.handleSaveError(res, err, req.body.categorie);
         }
 
         if (data.favori) {
             Model.findOne({favori: data.favori}, function (err, data2) {
                 if (err) {
-                    return handleError(res, err, req.body.categorie);
+                    return helpers.handleSaveError(res, err, req.body.categorie);
                 }
                 if (data2) {
                     data2.favori = false;
                     data2.save(function (err, data2) {
+                        // to do
                     });
                 }
             });
@@ -74,21 +82,23 @@ exports.deleteOne = function(req, res) {
 
 exports.updateOne = function (req, res) {
 
-    var update = true;
+    var update = false;
 
     Model.findOne({categorie: req.body.categorie}, function (err, data) {
-        console.log('findOne : ' + JSON.stringify(data));
+
         if (err) {
-            return res.status(400).json(err);
+            return helpers.handleSaveError(res, err, req.body.categorie);
         }
+
         if (data) {
-            update === true;
-            // TO DO !
-            // update = data.id === req.params.id;
+            update = true;
         }
+
         if (update) {
             Model.findOne({_id: req.params.id},
+
                 function (err, data) {
+
                     if (err) {
                         return res.status(400).json(err);
                     }
