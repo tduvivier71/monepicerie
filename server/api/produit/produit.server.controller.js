@@ -25,7 +25,7 @@ exports.find = function(req, res) {
 		}
 
         if (req.query.hasOwnProperty('listeIds')) {
-            filter = { _id : { $nin: req.query.listeIds} }
+            filter = { _id : { $nin: req.query.listeIds} };
                // utilisateurId: req.user};
         }
 

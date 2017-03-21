@@ -58,16 +58,21 @@ exports.createOne = function(req, res) {
         }
 
         if (data.favori) {
-            Model.findOne({favori: data.favori}, function (err, data2) {
-                if (err) {
-                    return helpers.handleSaveError(res, err, req.body.categorie);
-                }
-                if (data2) {
+            Model.findOne({utilisateurId: req.user,
+                           favori: data.favori,
+                           _id : { $ne: data._id }}, function (err, data2) {
+
+                if (data2) { //  TO DO BETTER
                     data2.favori = false;
                     data2.save(function (err, data2) {
-                        // to do
+
+                        if (err) {
+                            return helpers.handleSaveError(res, err, data2.categorie);
+                        }
+
                     });
                 }
+
             });
         }
 
@@ -84,52 +89,42 @@ exports.updateOne = function (req, res) {
 
     var update = false;
 
-    Model.findOne({categorie: req.body.categorie}, function (err, data) {
-
-        if (err) {
-            return helpers.handleSaveError(res, err, req.body.categorie);
-        }
+    Model.findOne({
+        utilisateurId: req.user,
+        categorie: req.body.categorie
+    }, function (err, data) {
 
         if (data) {
-            update = true;
-        }
 
-        if (update) {
-            Model.findOne({_id: req.params.id},
+            if (req.body.favori || req.body.favori !== data.favori) {
+                Model.findOne({
+                    utilisateurId: req.user,
+                    favori: true,
+                    _id: {$ne: data._id}
+                }, function (err, data2) {
 
-                function (err, data) {
-
-                    if (err) {
-                        return res.status(400).json(err);
-                    }
-                    if (!data) {
-                        return res.status(404).json();
-                    }
-
-                    if  (req.body.favori || req.body.favori !== data.favori) {
-
-                        Model.findOne({favori: true}, function (err, data2) {
+                    if (data2) { //  TO DO BETTER
+                        data2.favori = false;
+                        data2.save(function (err, data2) {
                             if (err) {
-                                return res.status(400).json(err);
-                            }
-                            if (data2) {
-                                data2.favori = false;
-                                data2.save(function (err, data2) {
-                                });
+                                return helpers.handleSaveError(res, err, data2.categorie);
                             }
                         });
                     }
+                });
+            }
 
-                    data.categorie = req.body.categorie; // A MODIFIER
-                    data.favori = req.body.favori; // A MODIFIER
-                    // data.utilisateurId = req.body.utilisateurId;
-                    data.save(function (err, data) {
-                        res.status(200).json(data);
-                    });
+            data.categorie = req.body.categorie; // A MODIFIER
+            data.favori = req.body.favori; // A MODIFIER
+            data.save(function (err, data) {
+
+                if (err) {
+                    return helpers.handleSaveError(res, err, data.categorie);
                 }
-            );
-        } else {
-            res.status(409).json('La catégorie ne peut être renommnée "' + req.body.categorie + '" car elle existe déjà.');
+
+                res.status(200).json(data);
+
+            });
         }
     });
 };
