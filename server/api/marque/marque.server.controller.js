@@ -49,9 +49,10 @@ exports.deleteOne = function(req, res) {
 
 exports.updateOne = function(req, res) {
 
-	Model.findOne({_id: req.params.id},
-
-		function(err, data) {
+    Model.findOne({
+            utilisateurId: req.user,
+            _id: req.params.id
+        }, function (err, data) {
 
 			if (err) {
 			    return res.status(400).json(err);

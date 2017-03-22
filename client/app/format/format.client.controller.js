@@ -130,7 +130,7 @@
                     toasterService.save(_item.format);
                     _setBrowse();
                 }, function (e) {
-                    toasterService.error(e.data);
+                    toasterService.error(e.data.message);
                     focus('format_input_focus');
                 }
             );
@@ -150,8 +150,8 @@
                     toasterService.update(_item.format);
                     _setBrowse();
                 }, function (e) {
-                    toasterService.error(e.data);
-                    focus('format_inpput_focus');
+                    toasterService.error(e.data.message);
+                    focus('format_input_focus');
                 }
             );
         }

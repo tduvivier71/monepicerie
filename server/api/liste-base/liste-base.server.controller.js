@@ -12,20 +12,16 @@ var mongoose = require('mongoose'),
 
 exports.find = function (req, res) {
 
-	var filter = {};
-
-    Model.find(filter)
+    Model.find({utilisateurId: req.user})
         .populate('epicerieId')
         .populate('listeDetail.produitId')
         .exec(function (err, data) {
+
             if (err) {
                 return res.status(400).json(err);
             }
-            if (!data) {
-                return res.status(404).json({"message": "non trouvé"});
-            }
+
             res.status(200).json(data); // return a array
-            console.log('liste find : ' + data);
         });
 
 };
@@ -34,24 +30,27 @@ exports.createOne = function (req, res) {
 
     var data = new Model({
         nom: req.body.nom,
-        epicerieId: req.body.epicerieId
+        epicerieId: req.body.epicerieId,
+        utilisateurId: req.user
     });
 
     data.save(function (err, data) {
 
         if (err) {
-            return res.status(400).json(err);
+            return helpers.handleSaveError(res, err, req.body.nom);
         }
 
-        Model.findOne( {_id : data.id} )
+        Model.findOne( {_id : data.id,
+                        utilisateurId: req.user} )
             .populate('epicerieId')
             .populate('listeBaseDetail.produitId')
             .exec(function (err, data) {
+
                 if (err) {
                     return res.status(400).json(err);
                 }
+
                 res.status(201).json(data);
-                console.log('liste createOne : ' + data);
             });
 
     });
@@ -64,7 +63,7 @@ exports.deleteOne = function(req, res) {
 };
 
 
-exports.createOneDetail = function(req, res) {
+exports.createOneDetail = function (req, res) {
     Model.findById(req.params.id,
         function (err, data) {
             if (!err) {
@@ -74,11 +73,16 @@ exports.createOneDetail = function(req, res) {
                     marque: req.body.marque,
                     categorie: req.body.categorie,
                     conditionnement: req.body.conditionnement,
-                    note: req.body.note
+                    note: req.body.note,
+                    utilisateurId: req.user
                 });
                 data.save(function (err, data) {
-                    if (err) {return res.status(400).json(err);}
-                    var lastDetail = data.listeBaseDetail[data.listeBaseDetail.length-1];
+
+                    if (err) {
+                        return helpers.handleSaveError(res, err, req.body.produit);
+                    }
+
+                    var lastDetail = data.listeBaseDetail[data.listeBaseDetail.length - 1];
                     res.status(201).json(lastDetail);
                 });
             }
