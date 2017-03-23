@@ -44,13 +44,27 @@ var ListeBaseSchema = new Schema({
     nom: {
         type: String,
         default: '',
-        trim: true
+        trim: true,
+        index: true,
+        required: [true, 'Le nom de la liste est obligatoire.'],
+        maxlength: [50, 'La longueur maximale pour le nom de la liste est de 50 caractères.']
     },
+
     epicerieId: {
         type: Schema.Types.ObjectId,
         ref: 'Epicerie'
     },
+
+    utilisateurId: {
+        type: Schema.ObjectId,
+        ref: 'Utilisateur',
+        index: true,
+        required: [true, 'Un utilisateur est obligatoire.']
+    },
+
     listeBaseDetail: [ListeBaseDetailSchema]
 });
+
+ListeBaseSchema.index({nom: 1, utilisateurId: 1}, {unique: true});
 
 mongoose.model('ListeBase', ListeBaseSchema);

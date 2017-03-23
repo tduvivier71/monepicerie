@@ -270,7 +270,7 @@
                     toasterService.save(_item.nom);
                     vm.state = 'dsEdit';
                 }, function (e) {
-                    toasterService.error(e.data);
+                    toasterService.error(e.data.message);
                     focus(vm.input1_focus);
                 }
             );
@@ -325,7 +325,7 @@
                     toasterService.update(_item.nom);
                     _setBrowse();
                 }, function (e) {
-                    toasterService.error(e.data);
+                    toasterService.error(e.data.message);
                     focus(vm.input1_focus);
                 }
             );

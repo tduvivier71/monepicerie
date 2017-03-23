@@ -12,7 +12,7 @@ var mongoose = require('mongoose'),
 
 exports.find = function (req, res) {
 
-    Model.find({utilisateurId: req.user})
+    Model.find()
         .populate('epicerieId')
         .populate('listeDetail.produitId')
         .exec(function (err, data) {
@@ -73,8 +73,7 @@ exports.createOneDetail = function (req, res) {
                     marque: req.body.marque,
                     categorie: req.body.categorie,
                     conditionnement: req.body.conditionnement,
-                    note: req.body.note,
-                    utilisateurId: req.user
+                    note: req.body.note
                 });
                 data.save(function (err, data) {
 
@@ -112,6 +111,37 @@ exports.deleteOneDetail = function(req, res) {
             data.save(function (err) {
                 if (err) {console.log('**data save deleteOneDetail -> err **');}
                 console.log('the sub-doc was removed');
+            });
+
+        }
+    );
+};
+
+exports.updateOne = function (req, res) {
+
+    Model.findOne({
+            utilisateurId: req.user,
+            _id: req.params.id
+        }, function (err, data) {
+
+            if (err) {
+                return res.status(400).json(err);
+            }
+
+            if (!data) {
+                return res.status(404).json();
+            }
+
+            data.nom = req.body.nom; // A MODIFIER
+            data.epicerieId = req.body.epicerieId; // A MODIFIER
+            data.save(function (err, data) {
+
+                if (err) {
+                    return helpers.handleSaveError(res, err, req.body.nom);
+                }
+
+                res.status(200).json(data);
+
             });
 
         }
