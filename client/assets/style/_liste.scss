@@ -14,11 +14,11 @@
 }
 
 .app {
-  padding: 5px 10px;
+  padding: 4px 10px;
   margin: 5px 0;
-  border: 1px solid #979797;
-  border-radius: 5px;
-  background-color: #f0e7e2;
+  border: 1px solid $td-primary-color;
+  background-color: $td-primary-color;
+  color: $primary-color-text !important;
   font-size: 1.0em;
   cursor: move;
 }

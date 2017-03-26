@@ -7,9 +7,9 @@
         .controller('UniteController', UniteController);
 
     UniteController.$inject = ['$log',
-        'uniteService', 'toasterService','focus'];
+        'uniteService', 'toasterService','focus', '$http'];
 
-    function UniteController($log, uniteService, toasterService, focus) {
+    function UniteController($log, uniteService, toasterService, focus, $http) {
 
         var vm = this;
 
@@ -22,20 +22,7 @@
          * @property  {string} coutParId
          * @function reset
          */
-        vm.item = {
-            unite: '',
-            abreviation: '',
-            operation: '',
-            nombre: 0,
-            coutParId: '',
-            reset: function () {
-                this.unite = '';
-                this.abreviation = '';
-                this.operation = 'Aucune';
-                this.nombre = 0;
-                this.coutParId = '';
-            }
-        };
+        vm.item = {};
 
         /* Variables */
         vm.items = [];          // List of object
@@ -73,9 +60,22 @@
             dataTextField: "unite",
             dataValueField: "_id",
             filter:"contains",
-            valuePrimitive: true,
+            valuePrimitive: false,
             autoBind: false,
-            dataSource: vm.unites,
+           // dataSource: vm.unites,
+            dataSource: {
+                transport: {
+                    read: function (e) {
+                        $http.get('/api/unite')
+                            .then(function success(response) {
+                                e.success(response.data);
+                            }, function error(response) {
+                                alert('something went wrong')
+                                console.log(response);
+                            });
+                    }
+                }
+            },
             clearButton: true,
             delay: 50,
             noDataTemplate: 'Aucune correspondance...',
@@ -112,6 +112,8 @@
         function remove(_item) {
             _item.$remove(function () {
                 toasterService.remove(_item.unite);
+                vm.comboCoutPar.dataSource.read();
+
                 for (var i in vm.items) {
                     if (vm.items[i] === _item) {
                         vm.items.splice(i, 1);
@@ -139,6 +141,17 @@
             } else {
                 _update(_item);
             }
+
+            // vm.unites = uniteService.query();
+            // vm.comboCoutPar.refresh();
+
+            // uniteService.query('', function (result) {
+            //     vm.unites = result;
+            //     vm.comboCoutPar.dataSource.read();
+            // });
+
+            vm.comboCoutPar.dataSource.read();
+           // vm.comboCoutPar.refresh();
         }
 
         function setEdit(_item) {
@@ -151,7 +164,7 @@
         function setInsert() {
             focus('unite_input_focus');
             _resetForm('dsInsert');
-            vm.item.reset();
+            vm.item = {};
         }
 
         // ************************************************************************************************************/
@@ -171,28 +184,39 @@
             var item = new uniteService();
             item.unite = _item.unite;
             item.abreviation = _item.abreviation;
-            item.operation = _item.operation.value;
+            item.operation = _item.operation;
             item.nombre = _item.nombre;
-            item.coutParId = _item.coutParId === "" ? _item.coutParId = undefined : _item.coutParId;
+            item.coutParId = _item.coutParId; // _item.coutParId === "" ? _item.coutParId = undefined : _item.coutParId;
             item.$save(
                 function () {
                     vm.items.push(item);
                     toasterService.save(_item.unite);
                     _setBrowse();
+
+                    // angular.forEach(vm.items, function (item, key) {
+                    //     if (item._id === _item._id) {
+                    //
+                    //         if (vm.item.coutParId && vm.item.coutParId.coutPar) {
+                    //             vm.items[key].coutParId.coutPar = vm.item.coutParId.coutPar;
+                    //         }
+                    //
+                    //     }
+                    // });
+
+
                 }, function (e) {
-                    toasterService.error(e.data);
+                    toasterService.error(e.data.message);
                     focus('unite_input_focus');
                 }
             );
         }
 
         function _init() {
-            vm.item.reset();
+          //  vm.unites = uniteService.query();
             uniteService.query('', function (result) {
                 vm.items = result;
                 _setBrowse();
             });
-            vm.unites = uniteService.query();
 
         }
 
@@ -211,7 +235,7 @@
                     toasterService.update(_item.unite);
                     _setBrowse();
                 }, function (error) {
-                    toasterService.error(error.data);
+                    toasterService.error(error.data.message);
                 }
             );
         }

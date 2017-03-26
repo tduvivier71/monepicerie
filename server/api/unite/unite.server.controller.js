@@ -8,6 +8,7 @@ exports.find = function (req, res) {
 
     Model.find({utilisateurId: req.user})
         .sort('unite')
+        .populate('coutParId')
         .exec(function (err, data) {
 
             if (err) {
@@ -79,15 +80,14 @@ exports.updateOne = function (req, res) {
 
                 Model.findOne({
                     _id: req.params.id,
-                    utilisateurId: req.user,
-                })
-                    .populate('coutParId')
-                    .exec(function (err, data) {
-                        if (err) {
-                            return res.status(400).json(err);
-                        }
-                        res.status(200).json(data);
-                    });
+                    utilisateurId: req.user})
+                .populate('coutParId')
+                .exec(function (err, data) {
+                    if (err) {
+                        return res.status(400).json(err);
+                    }
+                    res.status(200).json(data);
+                });
 
 
             });

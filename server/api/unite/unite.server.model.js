@@ -10,12 +10,14 @@ var UniteSchema = new Schema({
 		default: '',
 		trim: true,
         index: true,
-		required: "L'unité est obligatoire."
+		required: [true, "L'unité est obligatoire."],
+        maxlength: [50, "La longueur maximale de l'unité est de 50 caractères."]
 	},
 	abreviation: {
 		type: String,
         default: '',
-		required: "L'abréviation de l'unité est obligatoire."
+		required: [true, "L'abréviation de l'unité est obligatoire."],
+        maxlength: [5, "La longueur maximale de l'abréviation est de 5 caractères."]
 	},
 	operation: {
 		type: String,
@@ -33,6 +35,7 @@ var UniteSchema = new Schema({
         type: Schema.ObjectId,
         ref: 'Utilisateur',
         index: true,
+        required: [true, 'Un utilisateur est obligatoire.']
     }
 });
 

@@ -42,7 +42,7 @@
 
     <div class="panel panel-default noborder" style="padding: 15px;">
 
-        <div class="panel-heading"><b> {{"COUTPAR"|translate}}</b>
+        <div class="panel-heading"><b> {{"EQUIVALENCE"|translate}}</b>
             <i class="material-icons md-18">help_outline</i>
         </div>
 
@@ -52,28 +52,12 @@
 
                 <div class="col-md-2 col-sm-2 col-xs-2">
                     <div class="form-group">
-                        <label for="unite2_input_id">
-                            {{"UNITE"|translate}}
-                        </label>
-                        <input required
-                               autocomplete="off"
-                               class="form-control input"
-                               id="unite2_input_id"
-                               name="unite2_input"
-                               ng-model="vm.item.unite"
-                               ng-disabled="true"
-                               style="height: 37px;"
-                               type="text"/>
-                    </div>
-                </div>
-
-                <div class="col-md-2 col-sm-2 col-xs-2">
-                    <div class="form-group">
                         <label for="operation_input_id">
                             {{"OPERATION"|translate}}
                         </label>
                         <select data-kendo-drop-down-list
                                 data-k-ng-model="vm.item.operation"
+                                data-value-primitive="true"
                                 id="operation_input_id"
                                 focus-on="operation_focus"
                                 name="operation_input"
@@ -108,11 +92,11 @@
                 <div class="col-md-4 col-sm-4 col-xs-4">
                     <div class="form-group">
                         <label for="CoutParId_input_id">
-                            {{"EGALE"|translate}}
+                            {{"UNITE"|translate}}
                         </label>
-                        <select data-kendo-combo-box
+                        <select data-kendo-combo-box = "vm.comboCoutPar"
                                 data-k-options="vm.selectOptionsCoutParId"
-                                data-k-ng-model="vm.item.coutParId._id"
+                                data-k-ng-model="vm.item.coutParId"
                                 id="CoutParId_input_id"
                                 name="coutParId_select"
                                 style="width: 100%">
