@@ -10,9 +10,16 @@
 
     function uniteService($resource) {
 
-        return $resource('api/unite/:id', {id: '@_id'}, {update: {method: 'PUT'}});
+        return $resource('api/unite/:id',
+            {
+                id: '@_id'
+            },
+            {
+                update: {
+                    method: 'PUT'
+                }
+            });
 
-       // return $resource('api/unite', {id: '@_id'}, {update: {method: 'PUT'}});
 
     }
 

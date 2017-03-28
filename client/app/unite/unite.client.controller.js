@@ -86,7 +86,7 @@
                     this.value("");
                 }
                 else {
-                    vm.coutPar = this.text();
+                    vm.item.coutParId.unite = this.text();
                 }
             }
         };
@@ -142,16 +142,8 @@
                 _update(_item);
             }
 
-            // vm.unites = uniteService.query();
-            // vm.comboCoutPar.refresh();
-
-            // uniteService.query('', function (result) {
-            //     vm.unites = result;
-            //     vm.comboCoutPar.dataSource.read();
-            // });
-
             vm.comboCoutPar.dataSource.read();
-           // vm.comboCoutPar.refresh();
+
         }
 
         function setEdit(_item) {
@@ -186,24 +178,12 @@
             item.abreviation = _item.abreviation;
             item.operation = _item.operation;
             item.nombre = _item.nombre;
-            item.coutParId = _item.coutParId; // _item.coutParId === "" ? _item.coutParId = undefined : _item.coutParId;
+            item.coutParId = _item.coutParId === "" ? _item.coutParId = undefined : _item.coutParId;
             item.$save(
                 function () {
                     vm.items.push(item);
                     toasterService.save(_item.unite);
                     _setBrowse();
-
-                    // angular.forEach(vm.items, function (item, key) {
-                    //     if (item._id === _item._id) {
-                    //
-                    //         if (vm.item.coutParId && vm.item.coutParId.coutPar) {
-                    //             vm.items[key].coutParId.coutPar = vm.item.coutParId.coutPar;
-                    //         }
-                    //
-                    //     }
-                    // });
-
-
                 }, function (e) {
                     toasterService.error(e.data.message);
                     focus('unite_input_focus');
@@ -222,20 +202,11 @@
 
         function _update(_item) {
             _item.$update(
-                function (result) {
-              /*      angular.forEach(vm.items, function (item, key) {
-                        if (item._id === _item._id) {
-
-                            if (vm.item.coutParId && vm.item.coutParId.coutPar) {
-                                vm.items[key].coutParId.coutPar = vm.item.coutParId.coutPar;
-                            }
-
-                        }
-                    });*/
+                function () {
                     toasterService.update(_item.unite);
                     _setBrowse();
                 }, function (error) {
-                    toasterService.error(error.data.message);
+                    toasterService.error(error.data.message || error.data);
                 }
             );
         }

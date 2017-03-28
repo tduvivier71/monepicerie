@@ -31,7 +31,7 @@ exports.createOne = function (req, res) {
         abreviation: req.body.abreviation, // A MODIFIER
         operation: req.body.operation, // A MODIFIER
         nombre: req.body.nombre, // A MODIFIER
-        coutParId: req.body.coutParId, // A MODIFIER
+        coutParId: req.body.coutParId._id, // A MODIFIER
         utilisateurId: req.user
     });
 
@@ -41,12 +41,20 @@ exports.createOne = function (req, res) {
             return helpers.handleSaveError(res, err, req.body.unite);
         }
 
-        res.status(201).json(data);
+        //   res.status(201).json(data);
+
+
+        Model.findOne({
+            utilisateurId: req.user,
+            _id: data.id
+        })
+            .populate('coutParId')
+            .exec(function (err, data) {
+                res.status(201).json(data);
+            });
 
     });
 };
-
-
 
 exports.deleteOne = function(req, res) {
 	helpers.deleteOne(req, res, Model);

@@ -74,31 +74,6 @@
 
     //    historiques: [vm.itemHistorique],
 
-        vm.item = {
-            produit: '',
-            marque: '',
-            formatId: '',
-            description: '',
-            categorieId: '',
-            quantite: 0,
-            nombre: 0,
-            prix: 0,
-            uniteId: '',
-            historiques: [],
-            reset : function() {
-                this.produit = '';
-                this.marque = '';
-                this.formatId = '';
-                this.description = '';
-                this.categorieId = '';
-                this.quantite =  0;
-                this.nombre = 0;
-                this.prix = 0;
-                this.uniteId = '';
-                this.historiques = [];
-            }
-        };
-
         //       this.historiques = [];
 
 
@@ -361,7 +336,7 @@
          * Set insert State
          */
         function setInsert() {
-            vm.item.reset();
+            vm.item = {};
             vm.isCollapsed = true;
             focus('produit_input_focus');
             _resetForm('dsInsert');
@@ -462,7 +437,7 @@
             item.marque = _item.marque;
             item.categorieId = _item.categorieId._id;
             item.formatId = _item.formatId === "" ? _item.formatId = undefined : _item.formatId;
-            item.uniteId = _item.uniteId === "" ? _item.uniteId = undefined : _item.uniteId._id; // Important : _item.uniteId._id
+            item.uniteId = _item.uniteId === "" ? _item.uniteId = undefined : _item.uniteId; // Important : _item.uniteId._id
             item.quantite = _item.quantite;
             item.nombre = _item.nombre;
             item.description = _item.description;
@@ -489,7 +464,7 @@
                     _setBrowse();
                 },
                 function (e) {
-                    toasterService.error(e.data);
+                    toasterService.error(e.data.message);
                     focus('produit_input_focus');
                 }
             );
@@ -497,8 +472,6 @@
         }
 
         function _init() {
-            vm.item.reset();
-            vm.insertHisto.reset();
 
             produitService.query('', function (result) {
                 vm.items = result;

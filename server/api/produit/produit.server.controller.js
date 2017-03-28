@@ -128,24 +128,28 @@ exports.createOne = function(req, res) {
 		});
 	}
 
-	data.save(function(err, data) {
-		if (err) {return	res.status(400).json(err);}
-		// use findOne for re-populate
-		Model.findOne( { _id: data.id })
-			.populate('categorieId')
-			.populate('uniteId')
-			.populate({
-				path:     'uniteId',
-				populate: { path:  'coutParId',
-					model: 'Unite' }
-			})
-			.populate('formatId')
-			.populate('historiques.epicerieId')
-			.exec(function(err, data) {
-				res.status(201).json(data);
-				console.log('produit createOne : ' + data);
-			});
-	});
+    data.save(function (err, data) {
+        if (err) {
+            return helpers.handleSaveError(res, err, req.body.categorie);
+        }
+        // use findOne for re-populate
+        Model.findOne({_id: data.id})
+            .populate('categorieId')
+            .populate('uniteId')
+            .populate({
+                path: 'uniteId',
+                populate: {
+                    path: 'coutParId',
+                    model: 'Unite'
+                }
+            })
+            .populate('formatId')
+            .populate('historiques.epicerieId')
+            .exec(function (err, data) {
+                res.status(201).json(data);
+                console.log('produit createOne : ' + data);
+            });
+    });
 };
 
 
