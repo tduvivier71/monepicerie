@@ -31,7 +31,7 @@ exports.createOne = function (req, res) {
         abreviation: req.body.abreviation, // A MODIFIER
         operation: req.body.operation, // A MODIFIER
         nombre: req.body.nombre, // A MODIFIER
-        coutParId: req.body.coutParId._id, // A MODIFIER
+        coutParId: req.body.coutParId, // A MODIFIER
         utilisateurId: req.user
     });
 

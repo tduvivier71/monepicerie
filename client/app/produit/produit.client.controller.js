@@ -53,29 +53,9 @@
 
         var vm = this
 
-        /**
-         * typedef {Object}
-         * @property
-         * @property
-         * @function reset
-         */
-        vm.insertHisto = {
-            epicerieId: '',
-            date: '',
-            prix: 0,
-            enPromotion: false,
-            reset : function() {
-                this.epicerieId = '';
-                this.marque = '';
-                this.prix = 0;
-                this.enPromotion = false;
-            }
-        };
 
-    //    historiques: [vm.itemHistorique],
-
-        //       this.historiques = [];
-
+        vm.item = {};
+        vm.insertHisto = {};
 
         vm.statutD = 'D';
         vm.addHisto = false;
@@ -136,6 +116,7 @@
         };
 
         vm.no_template1 = "<div>Aucune correspondance. Voulez-vous ajouter  <i>'#: instance.element.val() #'</i> ?</div><br/>";
+
       //  vm.no_template2 = "class='k-button' onClick=" +  '"vm.addNewMarque('  + "'#: instance.element[0].id #', '#: instance.element.val() #')" + '"';
          vm.no_template2 = "class='k-button' ng-click=" +  '"vm.addNewMarque()"' ;
      //   vm.no_template2 = "class='k-button' onClick=" +  '"vm.addNewMarque('  + "'#: vm.instance.element.val() #')" + '"';
@@ -298,7 +279,7 @@
                     }
                 }
             }, function (e) {
-                toasterService.error(e.data);
+                toasterService.error(e.data.message);
             });
             _setBrowse();
         }
@@ -412,7 +393,7 @@
                             toasterService.save(value);
                         },
                         function (e) {
-                            toasterService.error(e.data);
+                            toasterService.error(e.data.message);
                         }
                     );
                 }
