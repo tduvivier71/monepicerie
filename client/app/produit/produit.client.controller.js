@@ -88,6 +88,8 @@
 
         vm.addNewMarque = _addNewMarque;
 
+        vm.addNewCategorie = _addNewCategorie;
+
         vm.createHisto = createHisto;
         vm.deleteHisto = deleteHisto;
 
@@ -117,10 +119,11 @@
 
         vm.no_template1 = "<div>Aucune correspondance. Voulez-vous ajouter  <i>'#: instance.text() #'</i> ?</div><br/>";
 
-      //  vm.no_template2 = "class='k-button' onClick=" +  '"vm.addNewMarque('  + "'#: instance.element[0].id #', '#: instance.element.val() #')" + '"';
-         vm.no_template2 = "class='k-button' ng-click=" +  '"vm.addNewMarque()"' ;
-     //   vm.no_template2 = "class='k-button' onClick=" +  '"vm.addNewMarque('  + "'#: vm.instance.element.val() #')" + '"';
+        vm.no_template2 = "class='k-button' ng-click=" +  '"vm.addNewMarque()"' ;
         vm.no_template  = vm.no_template1 + "<button " + vm.no_template2 + ">Ajouter</button>";
+
+        vm.no_templateCat1 = "class='k-button' ng-click=" +  '"vm.addNewCategorie()"' ;
+        vm.no_templateCat2 = vm.no_template1 + "<button " + vm.no_templateCat1 + ">Ajouter</button>";
 
 
         /** MULTI CATÉGORIE !!!! **/
@@ -160,9 +163,6 @@
                 }
             },
 
-
-
-
             valuePrimitive: true, //  true obligatoire, n'est pas un objet
             autoBind: false, //
             clearButton: true,
@@ -188,10 +188,23 @@
             filter:"contains",
             valuePrimitive: false, // false obligatoire car c est un objet
             autoBind: false, // obligatoire
-            dataSource: vm.categories,
+         //   dataSource: vm.categories,
+            dataSource: {
+                transport: {
+                    read: function (e) {
+                        $http.get('/api/categorie')
+                            .then(function success(response) {
+                                e.success(response.data);
+                            }, function error(response) {
+                                alert('something went wrong')
+                                console.log(response);
+                            });
+                    }
+                }
+            },
             clearButton: false,
             delay: 50,
-            noDataTemplate: 'Aucune correspondance...',
+            noDataTemplate: vm.no_templateCat2,
             suggest: true,
             highlightFirst: true,
             change : function(e) {
@@ -425,6 +438,28 @@
                 }
             } finally {
                 vm.marqueWidget.close();
+            }
+        }
+
+        function _addNewCategorie() {
+            var value = vm.categorieWidget.text();
+            try {
+                if (value) {
+                    var item = new categorieService();
+                    item.categorie = value;
+                    item.$save(
+                        function () {
+                            vm.items.push(item);
+                            vm.categorieWidget.dataSource.read();
+                            toasterService.save(value);
+                        },
+                        function (e) {
+                            toasterService.error(e.data.message);
+                        }
+                    );
+                }
+            } finally {
+                vm.categorieWidget.close();
             }
         }
 
