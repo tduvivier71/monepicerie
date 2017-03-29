@@ -3,6 +3,7 @@
             <ng-messages for="field.$error">
                 <ng-message when="required">Une valeur est requise.</ng-message>
                 <ng-message when="minlength">La valeur de ce champ est trop courte. </ng-message>
+                <ng-message when="maxlength">La valeur de ce champ est trop longue. </ng-message>
                 <ng-message when="unique">Cette valeur existe déjà. </ng-message>
                 <ng-message when="email">Une adresse courriel valide est requise. </ng-message>
                 <span ng-show="field.$name==='motdepasse2_input'">

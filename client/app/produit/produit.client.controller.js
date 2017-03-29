@@ -115,7 +115,7 @@
             parseFormats: ["yyyy-MM-ddTHH:mm:sszzz"]
         };
 
-        vm.no_template1 = "<div>Aucune correspondance. Voulez-vous ajouter  <i>'#: instance.element.val() #'</i> ?</div><br/>";
+        vm.no_template1 = "<div>Aucune correspondance. Voulez-vous ajouter  <i>'#: instance.text() #'</i> ?</div><br/>";
 
       //  vm.no_template2 = "class='k-button' onClick=" +  '"vm.addNewMarque('  + "'#: instance.element[0].id #', '#: instance.element.val() #')" + '"';
          vm.no_template2 = "class='k-button' ng-click=" +  '"vm.addNewMarque()"' ;
@@ -145,7 +145,24 @@
             dataTextField: "marque",
             dataValueField: "marque",
             filter:"contains",
-            dataSource: vm.marques,
+         //   dataSource: vm.marques,
+            dataSource: {
+                transport: {
+                    read: function (e) {
+                        $http.get('/api/marque')
+                            .then(function success(response) {
+                                e.success(response.data);
+                            }, function error(response) {
+                                alert('something went wrong')
+                                console.log(response);
+                            });
+                    }
+                }
+            },
+
+
+
+
             valuePrimitive: true, //  true obligatoire, n'est pas un objet
             autoBind: false, //
             clearButton: true,
@@ -153,7 +170,15 @@
             delay: 50,
             noDataTemplate: vm.no_template,
             suggest: true,
-            highlightFirst: true
+            highlightFirst: true,
+            change : function(e) {
+                if (this.select() < 0) {
+                    this.value("");
+                }
+                else {
+                    vm.item.marque = this.text();
+                }
+            }
         };
 
         vm.selectOptionsCategorie = {
@@ -382,7 +407,7 @@
         // ************************************************************************************************************/
 
         function _addNewMarque() {
-            var value = vm.marqueWidget.value();
+            var value = vm.marqueWidget.text();
             try {
                 if (value) {
                     var item = new marqueService();
@@ -390,6 +415,7 @@
                     item.$save(
                         function () {
                             vm.items.push(item);
+                            vm.marqueWidget.dataSource.read();
                             toasterService.save(value);
                         },
                         function (e) {
