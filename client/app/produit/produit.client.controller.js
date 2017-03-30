@@ -367,6 +367,7 @@
             _resetForm('dsEdit');
             vm.selectedItem = angular.copy(_item);
             vm.item = _item;
+            vm.insertHisto = {};
         }
 
         /**
@@ -374,6 +375,7 @@
          */
         function setInsert() {
             vm.item = {};
+            vm.insertHisto = {}; // to do do better
             vm.isCollapsed = true;
             focus('produit_input_focus');
             _resetForm('dsInsert');
