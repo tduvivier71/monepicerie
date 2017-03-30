@@ -55,6 +55,7 @@
 
 
         vm.item = {};
+
         vm.insertHisto = {};
 
         vm.statutD = 'D';
@@ -87,8 +88,8 @@
         vm.setInsert = setInsert;
 
         vm.addNewMarque = _addNewMarque;
-
         vm.addNewCategorie = _addNewCategorie;
+        vm.addNewFormat = _addNewFormat;
 
         vm.createHisto = createHisto;
         vm.deleteHisto = deleteHisto;
@@ -125,6 +126,9 @@
         vm.no_templateCat1 = "class='k-button' ng-click=" +  '"vm.addNewCategorie()"' ;
         vm.no_templateCat2 = vm.no_template1 + "<button " + vm.no_templateCat1 + ">Ajouter</button>";
 
+        vm.no_templateFor1 = "class='k-button' ng-click=" +  '"vm.addNewFormat()"' ;
+        vm.no_templateFor2 = vm.no_template1 + "<button " + vm.no_templateFor1 + ">Ajouter</button>";
+
 
         /** MULTI CATÉGORIE !!!! **/
         vm.selectOptionsMultiCategories = {
@@ -146,7 +150,7 @@
         vm.selectOptionsMarque = {
             placeholder: "Sélectionnez une marque...",
             dataTextField: "marque",
-            dataValueField: "marque",
+            dataValueField: "_id",
             filter:"contains",
          //   dataSource: vm.marques,
             dataSource: {
@@ -163,22 +167,22 @@
                 }
             },
 
-            valuePrimitive: true, //  true obligatoire, n'est pas un objet
+            valuePrimitive: false, //
             autoBind: false, //
             clearButton: true,
             ignoreCase: true,
             delay: 50,
             noDataTemplate: vm.no_template,
             suggest: true,
-            highlightFirst: true,
-            change : function(e) {
-                if (this.select() < 0) {
-                    this.value("");
-                }
-                else {
-                    vm.item.marque = this.text();
-                }
-            }
+            highlightFirst: true// ,
+            // change : function(e) {
+            //     if (this.select() < 0) {
+            //         this.value("");
+            //     }
+            //     else {
+            //         vm.item.marqueId.marque  = this.text();
+            //     }
+            // }
         };
 
         vm.selectOptionsCategorie = {
@@ -224,10 +228,23 @@
             filter:"contains",
             valuePrimitive: false, // false obligatoire car c est un objet
             autoBind: false,
-            dataSource: vm.formats,
+            //dataSource: vm.formats,
+            dataSource: {
+                transport: {
+                    read: function (e) {
+                        $http.get('/api/format')
+                            .then(function success(response) {
+                                e.success(response.data);
+                            }, function error(response) {
+                                alert('something went wrong')
+                                console.log(response);
+                            });
+                    }
+                }
+            },
             clearButton: true,
             delay: 50,
-            noDataTemplate: 'Aucune correspondance...',
+            noDataTemplate: vm.no_templateFor2,
             suggest: true,
             highlightFirst: true,
             change : function(e) {
@@ -244,38 +261,39 @@
             placeholder: "Sélectionnez une unité...",
             dataTextField: "unite",
             dataValueField: "_id",
-            filter:"contains",
+          //  filter:"contains",
             valuePrimitive: false, // false obligatoire car c est un objet
             autoBind: false, //!Important
             dataSource: vm.unites,
-            clearButton: true,
+          //  clearButton: true,
             delay: 50,
-            noDataTemplate: 'Aucune correspondance...',
-            suggest: true,
-            highlightFirst: true,
-            change : function(e) {
-                if (this.select() < 0) {
-                    this.value("");
-                }
-                else {
-                    vm.item.uniteId.unite = this.text();
-                }
-            }
+          //  noDataTemplate: 'Aucune correspondance...',
+          //  suggest: true,
+           // highlightFirst: true
+            // ,
+            // change : function(e) {
+            //     if (this.select() < 0) {
+            //         this.value("");
+            //     }
+            //     else {
+            //         vm.item.uniteId.unite = this.text();
+            //     }
+            // }
         };
 
         vm.selectOptionsEpicerie = {
             placeholder: "Sélectionnez une épicerie...",
             dataTextField: "epicerie",
             dataValueField: "_id",
-            filter:"contains",
+            //filter:"contains",
             valuePrimitive: false,
             autoBind: false,
             dataSource: vm.epiceries,
-            clearButton: true,
+            //clearButton: true,
             delay: 50,
             noDataTemplate: 'Aucune correspondance...',
-            suggest: true,
-            highlightFirst: true,
+            //suggest: true,
+            // highlightFirst: true
             change : function(e) {
                 if (this.select() < 0) {
                     this.value("");
@@ -378,6 +396,10 @@
                     vm.insertHisto.date = moment(vm.insertHisto.date);
                 }
 
+                if (!vm.item.historiques) {
+                    vm.item.historiques = [];
+                }
+
                 vm.item.historiques.push(
                     {
                         epicerieId: vm.insertHisto.epicerieId,
@@ -427,7 +449,6 @@
                     item.marque = value;
                     item.$save(
                         function () {
-                            vm.items.push(item);
                             vm.marqueWidget.dataSource.read();
                             toasterService.save(value);
                         },
@@ -449,7 +470,6 @@
                     item.categorie = value;
                     item.$save(
                         function () {
-                            vm.items.push(item);
                             vm.categorieWidget.dataSource.read();
                             toasterService.save(value);
                         },
@@ -462,6 +482,28 @@
                 vm.categorieWidget.close();
             }
         }
+
+        function _addNewFormat() {
+            var value = vm.formatWidget.text();
+            try {
+                if (value) {
+                    var item = new formatService();
+                    item.format = value;
+                    item.$save(
+                        function () {
+                            vm.formatWidget.dataSource.read();
+                            toasterService.save(value);
+                        },
+                        function (e) {
+                            toasterService.error(e.data.message);
+                        }
+                    );
+                }
+            } finally {
+                vm.formatWidget.close();
+            }
+        }
+
 
         function _cancelEdit() {
             _revertSelectedItem();
@@ -476,8 +518,8 @@
             vm.addHisto = false;
             var item = new produitService();
             item.produit = _item.produit;
-            item.marque = _item.marque;
-            item.categorieId = _item.categorieId._id;
+            item.marqueId = _item.marqueId === "" ? _item.marqueId = undefined : _item.marqueId;
+            item.categorieId = _item.categorieId === "" ? _item.categorieId = undefined : _item.categorieId;
             item.formatId = _item.formatId === "" ? _item.formatId = undefined : _item.formatId;
             item.uniteId = _item.uniteId === "" ? _item.uniteId = undefined : _item.uniteId; // Important : _item.uniteId._id
             item.quantite = _item.quantite;

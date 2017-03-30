@@ -32,6 +32,7 @@ exports.find = function(req, res) {
 	}
 
 	Model.find( filter )
+        .populate('marqueId')
 		.populate('categorieId')
 		.populate('uniteId')
 		.populate({
@@ -54,6 +55,7 @@ exports.find = function(req, res) {
 
 exports.findOne = function(req, res) {
     Model.findOne( { _id: req.params.id })
+        .populate('marqueId')
         .populate('categorieId')
         .populate('uniteId')
         .populate('formatId')
@@ -107,7 +109,7 @@ exports.createOne = function(req, res) {
 
 	var data  = new Model({
 		produit: req.body.produit, // A MODIFIER
-		marque: req.body.marque, // A MODIFIER
+		marqueId: req.body.marqueId, // A MODIFIER
 		categorieId: req.body.categorieId, // A MODIFIER
 		description: req.body.description,
 		formatId: req.body.formatId,
@@ -119,7 +121,7 @@ exports.createOne = function(req, res) {
 
 	for (var i=0; i< req.body.historiques.length; ++i) {
 		data.prix = req.body.historiques[i].prix;
-        data.epicerie = req.body.historiques[i].epicerie;
+        data.epicerie = req.body.historiques[i].epicerieId.epicerie;
 		data.historiques.push({
 			epicerieId: req.body.historiques[i].epicerieId,
 			date: req.body.historiques[i].date,
@@ -134,6 +136,7 @@ exports.createOne = function(req, res) {
         }
         // use findOne for re-populate
         Model.findOne({_id: data.id})
+            .populate('marqueId')
             .populate('categorieId')
             .populate('uniteId')
             .populate({
@@ -173,7 +176,7 @@ exports.updateOne = function(req, res) {
 			if (err) {return res.status(400).json(err);}
 			if (!data) {return res.status(404).json();}
 				data.produit = req.body.produit; // A MODIFIER
-			    data.marque = req.body.marque; // A MODIFIER
+			    data.marqueId = req.body.marqueId; // A MODIFIER
 			    data.categorieId = req.body.categorieId; // A MODIFIER
 			    data.uniteId = req.body.uniteId; // A MODIFIER
 			 	data.formatId = req.body.formatId; // A MODIFIER
@@ -213,6 +216,7 @@ exports.updateOne = function(req, res) {
 			 	data.save(function(err,data){
 					if (err) {console.log('Erreur ' + err);}
 					Model.findOne( { _id: data.id })
+                        .populate('marqueId')
 						.populate('categorieId')
 						.populate('uniteId')
 						.populate('formatId')

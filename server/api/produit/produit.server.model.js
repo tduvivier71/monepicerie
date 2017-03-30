@@ -29,11 +29,10 @@ var ProduitSchema = new Schema({
         index: true,
 		required: 'Le produit est obligatoire.'
 	},
-	marque: {
-		type: String,
-		default: '',
-		trim: true
-	},
+    marqueId: {
+        type: Schema.Types.ObjectId,
+        ref: 'Marque'
+    },
 	formatId: {
 		type: Schema.Types.ObjectId,
 		ref: 'Format'
@@ -56,14 +55,20 @@ var ProduitSchema = new Schema({
 		type: Number,
 		default: '0'
 	},
+
+    // dernier prix
 	prix:{
-		type: Number,
-		default: '0'
-	},
-    epicerie:{
-        type: String,
-        default: ''
+		 type: Number,
+		 default: '0'
     },
+
+    // derniere epicerie
+	Epicerie: {
+        type: String,
+        default: '',
+        trim: true
+    },
+
 	uniteId:{
 		type: Schema.Types.ObjectId,
 		ref: 'Unite'

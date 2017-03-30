@@ -29,7 +29,7 @@
             </label>
             <select data-kendo-combo-box="vm.marqueWidget"
                     data-k-options="vm.selectOptionsMarque"
-                    data-k-ng-model="vm.item.marque"
+                    data-k-ng-model="vm.item.marqueId"
                     id="marque_input_id"
                     name="marque_input"
                     style="width: 100%">
@@ -117,7 +117,7 @@
                     <label for="formatId_input_id">
                         {{"FORMAT"|translate}}
                     </label>
-                    <select data-kendo-combo-box
+                    <select data-kendo-combo-box="vm.formatWidget"
                             data-k-options="vm.selectOptionsFormat"
                             data-k-ng-model="vm.item.formatId"
                             id="formatId_input_id"
@@ -144,7 +144,7 @@
                         {{"UNITE"|translate}}
                     </label>
                     <!-- Must be k-value and primitive=false -->
-                    <select data-kendo-combo-box
+                    <select data-kendo-drop-down-list
                             data-k-options="vm.selectOptionsUnite"
                             data-k-ng-model="vm.item.uniteId"
                             id="unite_input_id"
@@ -201,7 +201,7 @@
                         <label for="epicerieId_select_edit_id">
                             {{"EPICERIE"|translate}}
                         </label>
-                        <select data-kendo-combo-box
+                        <select data-kendo-drop-down-list
                                 data-k-options="vm.selectOptionsEpicerie"
                                 data-k-ng-model="vm.insertHisto.epicerieId"
                                 data-ng-model="vm.insertHisto.epicerieId"
@@ -261,7 +261,7 @@
             <div data-ng-hide="histo.statut == 'D'"
                  data-ng-repeat="histo in (vm.item.historiques).slice(((vm.pagination.currentPage-1)*vm.pagination.itemsPerPage),
                                  ((vm.pagination.currentPage)*vm.pagination.itemsPerPage))  | orderBy : vm.sorting.type:vm.sorting.reverse">
-                <div class="row">
+                <div class="row" style="padding-bottom: 5px">
                     <div class="col-md-2 col-sm-2 col-xs-2" style="padding-left: 30px; padding-top: 5px">
                         {{histo.prix | currency}}
                     </div>
