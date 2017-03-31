@@ -42,13 +42,20 @@
                 {{item.epicerie}}
             </td>
             <td class="col-md-2 col-sm-2 col-xs-2">
-                {{item.quantite}} {{item.formatId.format}} ({{item.nombre}} {{item.uniteId.abreviation}})
+                <span ng-hide="item.quantite=='0' || !item.formatId">{{item.quantite}} {{item.formatId.format}}</span>
+                <span ng-show="item.quantite!='0' && item.formatId && item.nombre!='0' && item.uniteId">(</span>
+                <span ng-hide="item.nombre=='0' || !item.uniteId">{{item.nombre}} {{item.uniteId.abreviation}}</span>
+                <span ng-show="item.quantite!='0' && item.formatId && item.nombre!='0' && item.uniteId">)</span>
             </td>
             <td class="col-md-1 col-sm-1 col-xs-1">
-                {{item.prix | currency}}
+                <span ng-show="item.prix!='0'">
+                    {{item.prix | currency}}
+                </span>
             </td>
             <td class="col-md-1 col-sm-1 col-xs-1">
-                {{(item.prix) | coutPar:item.quantite:item.nombre:item.uniteId.operation:item.uniteId.nombre:item.uniteId.coutParId.abreviation}}
+                <span ng-hide="item.quantite=='0' || item.nombre=='0' || typeof(item.uniteId.coutParId) === 'undefined'">
+                    {{(item.prix) | coutPar:item.quantite:item.nombre:item.uniteId.operation:item.uniteId.nombre:item.uniteId.coutParId.abreviation}}
+                </span>
             </td>
             <td class="col-md-2 col-sm-2 col-xs-2" style="text-align: right;">
                 <button class="btn btn-primary btn-sm"

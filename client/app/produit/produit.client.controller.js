@@ -265,8 +265,8 @@
             valuePrimitive: false, // false obligatoire car c est un objet
             autoBind: false, //!Important
             dataSource: vm.unites,
-          //  clearButton: true,
-            delay: 50,
+            clearButton: true,
+            delay: 50
           //  noDataTemplate: 'Aucune correspondance...',
           //  suggest: true,
            // highlightFirst: true
@@ -285,11 +285,11 @@
             placeholder: "Sélectionnez une épicerie...",
             dataTextField: "epicerie",
             dataValueField: "_id",
-            //filter:"contains",
+          //  filter:"contains",
             valuePrimitive: false,
             autoBind: false,
             dataSource: vm.epiceries,
-            //clearButton: true,
+            clearButton: true,
             delay: 50,
             noDataTemplate: 'Aucune correspondance...',
             //suggest: true,
