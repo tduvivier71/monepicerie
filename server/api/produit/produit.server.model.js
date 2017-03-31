@@ -63,7 +63,7 @@ var ProduitSchema = new Schema({
     },
 
     // derniere epicerie
-	Epicerie: {
+	epicerie: {
         type: String,
         default: '',
         trim: true
