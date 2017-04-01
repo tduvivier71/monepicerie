@@ -177,19 +177,19 @@
                                  data-produit="{{produit.produit}}"
                                  data-marque="{{ produit.marque }}"
                                  data-categorie="{{ produit.categorieId.categorie }}"
-                                 data-conditionnenent="{{produit.quantite}} {{produit.formatId.format}} ({{produit.nombre}} {{produit.uniteId.abreviation}})"
-                                 data-note="{{produit.note}}"
+                                 data-conditionnenent="{{produit.fullConditionnement}}"
+                                 data-note="{{produit.description}}"
                                  ng-repeat="produit in vm.produits">
 
                                 <div>
                                     {{ produit.produit }}
                                     <span ng-show="produit.marque"> {{ produit.marque }} </span>
-                                    <span style="float:right; font-size: 1em;">
+                                    <span style="float:right; font-size: 0.7em;">
                                         {{ produit.categorieId.categorie | uppercase}}
                                     </span>
                                     <br>
-                                    <span style=" font-size: 0.7em;" ng-show="produit.formatId.format">
-                                        {{produit.quantite}} {{produit.formatId.format | lowercase}} de {{produit.nombre}} {{produit.uniteId.unite | lowercase}}
+                                    <span style=" font-size: 0.7em;" ng-show="produit.fullConditionnement">
+                                        {{produit.fullConditionnement}}
                                     </span>
                                     <span style="float:right;" ng-show="produit.description">
                                         <i class="material-icons" uib-tooltip={{produit.description}} style="cursor: pointer;" aria-hidden="true">note</i>
@@ -207,16 +207,29 @@
                         <div class="app"
                              id="{{item._id}}"
                              ng-repeat="item in vm.item.listeBaseDetail">
-                             <b>{{ item.produit }}</b>
-                             <span ng-show="item.marque"> {{ item.marque }} </span>
-                             <span style="float:right;">
-                                <i class="material-icons md-hover-16 cursor"
-                                   aria-hidden="true" ng-click="vm.removeItem(vm.produits, vm.item, item)">clear</i>
-                             </span>
-                             <br>
-                             <span style=" font-size: 0.8em;">
-                               {{ item.categorie }} {{ item.conditionnement }}
-                             </span>
+
+                            <div>
+                                {{ item.produit }}
+                                <span ng-show="item.marque"> {{ item.marque }} </span>
+
+                                <span style="float:right;">
+                                  <i class="material-icons md-hover-16 cursor"
+                                     aria-hidden="true" ng-click="vm.removeItem(vm.produits, vm.item, item)">clear</i>
+                                </span>
+
+                                <span style="float:right; font-size: 0.7em; padding: 3px;">
+                                        {{ item.categorie | uppercase}}
+                                    </span>
+                                <br>
+                                <span style=" font-size: 0.7em;" ng-show="item.conditionnement">
+                                        {{item.conditionnement}}
+                                    </span>
+                                <span style="float:right;" ng-show="item.description">
+                                        <i class="material-icons" uib-tooltip={{item.description}} style="cursor: pointer;" aria-hidden="true">note</i>
+                                </span>
+                            </div>
+
+
                         </div>
                     </div>
                 </div>

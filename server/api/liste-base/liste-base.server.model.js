@@ -26,7 +26,7 @@ var ListeBaseDetailSchema = new Schema({
         default: '',
         trim: true
     },
-    note: {
+    description: {
         type: String,
         default: '',
         trim: true

@@ -42,10 +42,7 @@
                 {{item.epicerie}}
             </td>
             <td class="col-md-2 col-sm-2 col-xs-2">
-                <span ng-hide="item.quantite=='0' || !item.formatId">{{item.quantite}} {{item.formatId.format}}</span>
-                <span ng-show="item.quantite!='0' && item.formatId && item.nombre!='0' && item.uniteId">(</span>
-                <span ng-hide="item.nombre=='0' || !item.uniteId">{{item.nombre}} {{item.uniteId.abreviation}}</span>
-                <span ng-show="item.quantite!='0' && item.formatId && item.nombre!='0' && item.uniteId">)</span>
+                {{item.fullConditionnement}}
             </td>
             <td class="col-md-1 col-sm-1 col-xs-1">
                 <span ng-show="item.prix!='0'">

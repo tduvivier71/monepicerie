@@ -284,17 +284,19 @@
             item.marque = attr_marque;
             item.categorie = attr_categorie;
             item.conditionnement = attr_conditionnenent;
-            item.note = attr_note;
+            item.description = attr_note;
             item.$save(function (result) {
-                    vm.item.listeBaseDetail.push({
+
+                   vm.item.listeBaseDetail.push({
                         _id : result._id,
                         produit_id: attr_produit_id,
                         produit: attr_produit,
                         marque : attr_marque,
                         categorie : attr_categorie,
                         conditionnement : attr_conditionnenent,
-                        note : attr_note
+                        description : attr_note
                     });
+
                     toasterService.save(attr_produit);
                 }
             );
