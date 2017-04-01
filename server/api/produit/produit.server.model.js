@@ -82,17 +82,6 @@ var ProduitSchema = new Schema({
 
 	historiques: [ProduitHistoriqueSchema]
 
-	/*historiques: [ {epicerie:
-						{type : String,
-					  	 trim: true}
-				   },
-				   {prix:
-						{type: Number}
-				   },
-				   {date : { type : Date,
-						default : Date.now()}
-				   }]*/
-
 });
 
 function getPrix(num){
@@ -103,6 +92,52 @@ function setPrix(num){
 	return num*100;
 }
 
+ProduitSchema.set('toJSON', { virtuals: true })
+
+
+
+ProduitSchema.virtual('fullFormat').get(function() {
+
+    if (this.nombre  === 0 && this.formatId.format === '') {
+        return '';
+    }
+
+    if (this.nombre === 0 && this.formatId.format !== '') {
+        return '1 ' + this.formatId.format;
+    }
+
+    return this.nombre + ' ' + this.formatId.format;
+
+});
+
+ProduitSchema.virtual('fullUnite').get(function() {
+
+	if (this.quantite  === 0 ) {
+		return '';
+	}
+
+    return this.quantite + ' ' + this.uniteId.abreviation;
+});
+
+ProduitSchema.virtual('fullConditionnement').get(function() {
+
+    if (this.fullFormat === '' && this.fullUnite !== '') {
+        return this.fullUnite;
+    }
+
+    if (this.fullFormat !== '' && this.fullUnite === '') {
+        return this.fullFormat;
+    }
+
+	if (this.fullFormat !== '' && this.fullUnite !== '') {
+        return this.fullFormat + ' (' + this.fullUnite + ')';
+    }
+
+});
+
+
+
 ProduitSchema.index({produit: 1, utilisateurId: 1}, {unique: true});
 
 mongoose.model('Produit', ProduitSchema);
+
