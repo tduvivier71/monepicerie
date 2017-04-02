@@ -175,7 +175,7 @@
                             <div class="app"
                                  data-produit_id="{{produit._id}}"
                                  data-produit="{{produit.produit}}"
-                                 data-marque="{{ produit.marque }}"
+                                 data-marque="{{ produit.marqueId.marque }}"
                                  data-categorie="{{ produit.categorieId.categorie }}"
                                  data-conditionnenent="{{produit.fullConditionnement}}"
                                  data-note="{{produit.description}}"
@@ -183,7 +183,7 @@
 
                                 <div>
                                     {{ produit.produit }}
-                                    <span ng-show="produit.marque"> {{ produit.marque }} </span>
+                                    <span ng-show="produit.marqueId.marque"> {{ produit.marqueId.marque }} </span>
                                     <span style="float:right; font-size: 0.7em;">
                                         {{ produit.categorieId.categorie | uppercase}}
                                     </span>
@@ -210,7 +210,7 @@
 
                             <div>
                                 {{ item.produit }}
-                                <span ng-show="item.marque"> {{ item.marque }} </span>
+                                <span ng-show="item.marque"> {{item.marque}} </span>
 
                                 <span style="float:right;">
                                   <i class="material-icons md-hover-16 cursor"

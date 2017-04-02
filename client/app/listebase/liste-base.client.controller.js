@@ -200,7 +200,18 @@
             item.$deleteOneDetail({id: _item._id, id2: _itemDetail._id});
             for (var i in _item.listeBaseDetail) {
                 if (_item.listeBaseDetail[i]._id === _itemDetail._id) {
-                    _produits.push(_item.listeBaseDetail[i]);
+                    _produits.push({
+                        _id: _item.listeBaseDetail[i].produit_id,
+                        produit: _item.listeBaseDetail[i].produit,
+                        fullConditionnement: _item.listeBaseDetail[i].conditionnement,
+                        description : _item.listeBaseDetail[i].description,
+                        marqueId : {
+                            marque : _item.listeBaseDetail[i].marque
+                        },
+                        categorieId : {
+                            categorie : _item.listeBaseDetail[i].categorie
+                        }
+                    });
                     _item.listeBaseDetail.splice(i, 1);
                 }
             }
