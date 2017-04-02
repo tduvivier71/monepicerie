@@ -117,6 +117,44 @@ exports.deleteOneDetail = function(req, res) {
     );
 };
 
+exports.deleteAllDetail = function(req, res) {
+    console.log('**deleteOneDetail**');
+    console.log('id : ' + req.params.id);
+    console.log('id2 : ' + req.params.id2);
+
+    Model.findById(req.params.id,
+        function (err, data) {
+            if (err) {
+                console.log('**deleteOneDetail -> err **');
+                return res.status(404).json({"err": err});
+            }
+            if (!data) {
+                console.log('**deleteOneDetail -> id non trouvé **');
+                return res.status(404).json({"id non trouvé": req.body.id});
+            }
+            console.log('**deleteOneDetail -> data trouvé **');
+            console.log(data);
+
+            //console.log('**data.listeDetail** : ' + data.listeDetail );
+
+
+
+            while(data.listeBaseDetail.length > 0) {
+                data.listeBaseDetail.id(req.params.id2).remove();
+            }
+
+
+
+
+            data.save(function (err) {
+                if (err) {console.log('**data save deleteOneDetail -> err **');}
+                console.log('the sub-doc was removed');
+            });
+
+        }
+    );
+};
+
 exports.updateOne = function (req, res) {
 
     Model.findOne({

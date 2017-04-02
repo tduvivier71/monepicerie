@@ -6,11 +6,11 @@
         .module('app.listeBase')
         .controller('ListeBaseController', ListeBaseController);
 
-    ListeBaseController.$inject = ['$log', '$auth', '$routeParams',
+    ListeBaseController.$inject = ['$log', '$auth', '$routeParams', '$http',
         'listeBaseService', 'listeBaseServiceDetail', 'toasterService','focus',
         'categorieService',  'epicerieService','produitService'];
 
-    function ListeBaseController($log, $auth, $routeParams,
+    function ListeBaseController($log, $auth, $routeParams, $http,
         listeBaseService, listeBaseServiceDetail, toasterService, focus,
         categorieService,  epicerieService, produitService) {
 
@@ -48,6 +48,7 @@
         vm.openSearch1 = openSearch1;
         vm.addCategorie = addCategorie;
         vm.categorieRemove = categorieRemove;
+        vm.emptyBaseList = emptyBaseList;
 
         var attr_id;
         var attr_produit;
@@ -81,7 +82,7 @@
             //   'ui-floating': true,
             receive: function (event, ui) {
                 _createListeDetail(vm.item._id, attr_id);
-            },
+            }
         };
 
         vm.selectOptionsEpicerie = {
@@ -91,7 +92,21 @@
             filter:"contains",
             valuePrimitive: false,
             autoBind: false,
-            dataSource: vm.epiceries,
+          //  dataSource: vm.epiceries,
+            dataSource: {
+                transport: {
+                    read: function (e) {
+                        $http.get('/api/epicerie')
+                            .then(function success(response) {
+                                e.success(response.data);
+                            }, function error(response) {
+                                alert('something went wrong')
+                                console.log(response);
+                            });
+                    }
+                }
+            },
+
             clearButton: true,
             delay: 50,
             noDataTemplate: 'Aucune correspondance...',
@@ -102,7 +117,7 @@
                     this.value("");
                 }
                 else {
-                    vm.item.epicerie = this.text();
+                    vm.item.epicerieId.epicerie = this.text();
                 }
             }
         };
@@ -169,6 +184,18 @@
             } else {
                 _cancelEdit();
             }
+        }
+
+        function emptyBaseList(_produits, _item) {
+
+            for(var i = 1; i <= _item.listeBaseDetail.length; i++) {
+
+                var item = new listeBaseServiceDetail();
+                item.$deleteOneDetail({id: _item._id, id2: _itemDetail._id});
+
+            }
+
+
         }
 
         function openSearch1() {
@@ -328,7 +355,7 @@
 
 
             vm.categories = categorieService.query();
-            vm.epiceries = epicerieService.query();
+
 
         }
 

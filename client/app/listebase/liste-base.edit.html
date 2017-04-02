@@ -53,6 +53,7 @@
                             <select data-kendo-combo-box
                                     data-k-options="vm.selectOptionsEpicerie"
                                     data-k-ng-model="vm.item.epicerieId"
+
                                     id="epicerieId_select_edit_id"
                                     name="epicerieId_select"
                                     style="width: 100%">
@@ -110,6 +111,10 @@
                 <div class="col-md-6 col-sm-6 col-xm-6 form-group">
                     <div class="well" style="height: 60px;padding-right: 8px;
                          margin-bottom:0px;">Produits
+                        <div style="position: absolute; top: 12px; right: 60px"
+                             ng-click="vm.emptyBaseList">
+                            <i class="material-icons md-36 cursor">delete</i>
+                        </div>
                          <div style="position: absolute; top: 12px; right: 20px"
                               ng-mouseover="vm.openSearch2"
                               ng-click="vm.search2Open=!vm.search2Open">
