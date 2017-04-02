@@ -137,14 +137,9 @@ exports.deleteAllDetail = function(req, res) {
 
             //console.log('**data.listeDetail** : ' + data.listeDetail );
 
-
-
-            while(data.listeBaseDetail.length > 0) {
-                data.listeBaseDetail.id(req.params.id2).remove();
+            for(var i =0; i < data.listeBaseDetail.length; i++ ) {
+                data.listeBaseDetail.remove(data.listeBaseDetail[i]._id.toString());
             }
-
-
-
 
             data.save(function (err) {
                 if (err) {console.log('**data save deleteOneDetail -> err **');}

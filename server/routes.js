@@ -100,6 +100,7 @@ router.put('/api/listebase/:id', ensureAuthenticated, listeBase.updateOne);
 router.delete('/api/listebase/:id', ensureAuthenticated, listeBase.deleteOne);
 
 router.post('/api/listebase/:id/detail', ensureAuthenticated, listeBase.createOneDetail);
+router.delete('/api/listebase/:id/detail', ensureAuthenticated, listeBase.deleteAllDetail);
 router.delete('/api/listebase/:id/detail/:id2', ensureAuthenticated, listeBase.deleteOneDetail);
 
 router.get('/api/utilisateur/:id',  utilisateur.getMe);
