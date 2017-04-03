@@ -47,7 +47,6 @@
                             <select data-kendo-combo-box
                                     data-k-options="vm.selectOptionsEpicerie"
                                     data-k-ng-model="vm.item.epicerieId"
-
                                     id="epicerieId_select_edit_id"
                                     name="epicerieId_select"
                                     style="width: 100%">
@@ -106,7 +105,7 @@
                     <div class="well" style="height: 60px;padding-right: 8px;
                          margin-bottom:0px;">Produits
                         <div style="position: absolute; top: 12px; right: 60px"
-                             ng-click="vm.emptyBaseList">
+                             ng-click="vm.deleteAllDetail()">
                             <i class="material-icons md-36 cursor">delete</i>
                         </div>
                          <div style="position: absolute; top: 12px; right: 20px"
@@ -146,18 +145,17 @@
 
                     <div class="col-md-3 col-sm-3 col-xm-3  well" style="font-size: 14px; padding: 15px;">
 
-                        Filtres
-                        <ul class="nobullet">
-                            <div ng-repeat="categorieSel in vm.categoriesSel">
-                                <li style="margin-right:-15px; color: black;">
-                                    {{categorieSel.categorie}}
-                                    <i ng-click="vm.categorieRemove(categorieSel)" class="material-icons md-hover-16 cursor">clear</i>
-                                </li>
-                            </div>
-                        </ul>
-
-                        <br>
-
+                        <div ng-hide="vm.categoriesSel.length===0">Filtre(s)
+                            <ul class="nobullet">
+                                <div ng-repeat="categorieSel in vm.categoriesSel">
+                                    <li style="margin-right:-15px; color: black;">
+                                        {{categorieSel.categorie}}
+                                        <i ng-click="vm.categorieRemove(categorieSel)" class="material-icons md-hover-16 cursor">clear</i>
+                                    </li>
+                                </div>
+                            </ul>
+                            <br>
+                        </div>
 
                         Catégories
                         <ul class="square">
@@ -203,10 +201,10 @@
 
                 <div class="col-md-6 col-sm-6 col-xm-6">
                     <div ui-sortable="vm.sortableItemsOptions" class="apps-container screen"  ng-model="vm.items" >
+                        <span style=" display: table; margin: auto; top:25px;">déplacez-ici</span>
                         <div class="app"
                              id="{{item._id}}"
                              ng-repeat="item in vm.item.listeBaseDetail">
-
                             <div>
                                 {{ item.produit }}
                                 <span ng-show="item.marque"> {{item.marque}} </span>
