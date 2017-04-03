@@ -96,11 +96,11 @@ ProduitSchema.set('toJSON', { virtuals: true })
 
 ProduitSchema.virtual('fullFormat').get(function() {
 
-    if (this.quantite === 0 && this.formatId.format === '') {
+    if (this.quantite === 0 && this.formatId && this.formatId.format === '') {
         return '';
     }
 
-    if (this.quantite === 0 && this.formatId.format !== '') {
+    if (this.quantite === 0 && this.formatId && this.formatId.format !== '') {
         return this.formatId.format.toLowerCase();
     }
 

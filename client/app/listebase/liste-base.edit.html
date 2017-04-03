@@ -201,7 +201,8 @@
 
                 <div class="col-md-6 col-sm-6 col-xm-6">
                     <div ui-sortable="vm.sortableItemsOptions" class="apps-container screen"  ng-model="vm.items" >
-                        <span style=" display: table; margin: auto; top:25px;">déplacez-ici</span>
+                        <span ng-show=vm.items.length===0"
+                              style=" display: table; margin: auto; color:grey; font-style: italic">déplacez-ici</span>
                         <div class="app"
                              id="{{item._id}}"
                              ng-repeat="item in vm.item.listeBaseDetail">
