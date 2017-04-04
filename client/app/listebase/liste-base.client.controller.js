@@ -49,6 +49,7 @@
         vm.addCategorie = addCategorie;
         vm.categorieRemove = categorieRemove;
         vm.deleteAllDetail = deleteAllDetail;
+        vm.chooseProduit = chooseProduit;
 
         var attr_id;
         var attr_produit;
@@ -186,6 +187,20 @@
             }
         }
 
+        function chooseProduit(_produit, _item, _produits, _i) {
+            _item.listeBaseDetail.push({
+                produit_id: _produit._id,
+                produit: _produit.produit,
+                conditionnement: _produit.fullConditionnement,
+                description: _produit.description,
+                marque: (!_produit.marqueId)  ? "" : _produit.marqueId.marque,
+                categorie: _produit.categorieId.categorie
+            });
+
+            _produits.splice(_i, 1);
+
+        }
+
         function deleteAllDetail() {
            var i = vm.item.listeBaseDetail.length; //or 10
            while(i--) {
@@ -194,7 +209,7 @@
            var item = new listeBaseServiceDetail();
            item.$deleteAllDetail({id: vm.item._id});
            vm.produits = produitService.query();
-           toasterService.info('La liste a été vidée.');
+           toasterService.error('La liste a été vidée.');
         }
 
         function openSearch1() {
