@@ -24532,5 +24532,7 @@ body {
 /*:focus {
   @include state-focused;
 }*/
+.bgPrimaryColor {
+  background-color: #448AFF; }
 
 /*# sourceMappingURL=app.css.map */

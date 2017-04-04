@@ -96,6 +96,10 @@ ProduitSchema.set('toJSON', { virtuals: true })
 
 ProduitSchema.virtual('fullFormat').get(function() {
 
+	if (!this.formatId) {
+        return '';
+	}
+
     if (this.quantite === 0 && this.formatId && this.formatId.format === '') {
         return '';
     }

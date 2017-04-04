@@ -45,6 +45,10 @@ body{
   @include state-focused;
 }*/
 
+.bgPrimaryColor {
+  background-color: $accent-color !important;
+}
+
 
 //textarea, input, button { outline: none; }
 
