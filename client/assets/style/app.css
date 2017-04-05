@@ -73,8 +73,12 @@ $td-divider-color:        #BDBDBD;
     font-size: 22px; }
   .material-icons.md-24 {
     font-size: 24px; }
+  .material-icons.md-30 {
+    font-size: 32px; }
   .material-icons.md-32 {
     font-size: 32px; }
+  .material-icons.md-34 {
+    font-size: 34px; }
   .material-icons.md-36 {
     font-size: 36px; }
   .material-icons.md-48 {
@@ -24533,6 +24537,9 @@ body {
   @include state-focused;
 }*/
 .bgPrimaryColor {
-  background-color: #448AFF; }
+  background-color: #2196F3 !important; }
+
+.txtPrimaryColor {
+  color: #FFFFFF !important; }
 
 /*# sourceMappingURL=app.css.map */

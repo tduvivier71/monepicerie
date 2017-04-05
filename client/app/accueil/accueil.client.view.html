@@ -7,6 +7,7 @@
 
             <h1>Accueil </h1>
 
+            <br>
             <ul>
                 <li>Voulez-vous créer une nouvelle liste d'épicerie ou en modifier existante ?</li>
 
@@ -20,16 +21,26 @@
         <div class="col-md-4 col-sm-4 col-xs-4">
 
 
-            <div class="panel panel-default bgPrimaryColor">
-                <div class="panel-heading bgPrimaryColor">Liste rapide
-                    <span class="navbar-right">
-
-                             <i class="material-icons md-30 cursor">delete</i>
-
+            <div class="panel panel-default ">
+                <div class="panel-heading bgPrimaryColor txtPrimaryColor">Liste rapide
+                    <span class="navbar-right" style="margin-right:0px;">
+                        <i class="material-icons md-20 cursor">delete</i>
                     </span>
-
                 </div>
-                <div class="panel-body">Panel Content</div>
+                <div class="panel-body">
+
+                    <div class="row">
+                        <label for="produit_input_id">
+                            {{"PRODUIT"|translate}}
+                        </label>
+                        <input data-kendo-auto-complete
+                               data-k-options="vm.inputOptionsProduit"
+                               id="produit_input_id"
+                               ng-model="vm.produit"
+                               style="width: 100%;" />
+
+                    </div>
+                </div>
             </div>
 
 

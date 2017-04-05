@@ -46,8 +46,14 @@ body{
 }*/
 
 .bgPrimaryColor {
-  background-color: $accent-color !important;
+  background-color: $primary-color  !important;
 }
+
+.txtPrimaryColor {
+  color: $primary-color-text !important;
+}
+
+
 
 
 //textarea, input, button { outline: none; }
