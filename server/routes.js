@@ -13,6 +13,7 @@ var format = require('./api/format/format.server.controller.js');
 var produit = require('./api/produit/produit.server.controller.js');
 var liste = require('./api/liste/liste.server.controller.js');
 var listeBase = require('./api/liste-base/liste-base.server.controller.js');
+var listeRapide = require('./api/liste-rapide/liste-rapide.server.controller.js');
 var utilisateur = require('./api/utilisateur/utilisateur.server.controller.js');
 
 /*
@@ -102,6 +103,10 @@ router.delete('/api/listebase/:id', ensureAuthenticated, listeBase.deleteOne);
 router.post('/api/listebase/:id/detail', ensureAuthenticated, listeBase.createOneDetail);
 router.delete('/api/listebase/:id/detail', ensureAuthenticated, listeBase.deleteAllDetail);
 router.delete('/api/listebase/:id/detail/:id2', ensureAuthenticated, listeBase.deleteOneDetail);
+
+router.get('/api/listerapide', ensureAuthenticated, listeRapide.find);
+router.post('/api/listerapide', ensureAuthenticated, listeRapide.createOne);
+router.delete('/api/listeRapide/:id', ensureAuthenticated, listeRapide.deleteOne);
 
 router.get('/api/utilisateur/:id',  utilisateur.getMe);
 router.put('/api/utilisateur/:id',  utilisateur.updateMe);
