@@ -20,7 +20,13 @@
             vm.form = {};           // Object
             vm.items = [];          // List of object
 
-            //    vm.addListeRapide = addListerapide;
+
+            vm.addListeRapide = addListerapide;
+
+            // ************************************************************************************************************/
+            // Object configuration
+            // ************************************************************************************************************/
+
 
             vm.inputOptionsProduit = {
                 placeholder: "Sélectionnez un produit...",
@@ -48,13 +54,13 @@
                 suggest: true,
                 highlightFirst: true,
                 change: function (e) {
-                    if (this.select() < 0) {
-                        this.value("");
-                    }
-                    else {
-                        console.log('XX');
-                        // vm.item.categorieId.categorie = this.text();
-                    }
+                        console.log(this.value());
+                },
+                select: function(e) {
+                    var item = e.item;
+                   // var text = item.text();
+                    console.log(item);
+                    // Use the selected item or its text
                 }
             }
 
@@ -69,6 +75,30 @@
             // Public function
             // ************************************************************************************************************/
 
+            function addListerapide() {
+
+                var value = vm.produitWidget.value();
+                try {
+                    if (value) {
+                        var item = new listeRapideService();
+                        item.produit = value;
+                        item.$save(
+                            function (item) {
+                                vm.items.push(item);
+                                vm.produitWidget.close();
+                                vm.produitWidget.value('');
+                                toasterService.save(value);
+                            },
+                            function (e) {
+                                toasterService.error(e.data.message);
+                            }
+                        );
+                    }
+                } finally {
+                    vm.produitWidget.close();
+                }
+
+            }
 
             // ************************************************************************************************************/
             // Private function

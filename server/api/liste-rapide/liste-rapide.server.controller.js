@@ -6,8 +6,7 @@
 
 var mongoose = require('mongoose'),
 	helpers = require('../shared/helpers.server.controller.js'),
-	Model = mongoose.model('ListeBase'), // MODIFY
-    SubModel = mongoose.model('ListeBaseDetail'),
+	Model = mongoose.model('ListeRapide'), // MODIFY
 	url = require('url'); // MODIFY
 
 exports.find = function (req, res) {
