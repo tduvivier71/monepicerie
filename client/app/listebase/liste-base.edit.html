@@ -70,7 +70,15 @@
 
                 <div class="col-md-6 col-sm-6 col-xm-6 form-group">
                     <div class="well" style="height: 60px;padding-right: 8px;
-                          margin-bottom:0px;">Produits
+                          margin-bottom:0px;">
+
+                        <div>
+                            <button class="btn btn-defautlt"
+                                    ng-click="vm.toggle = !vm.toggle">
+                                    <span ng-show="vm.toggle"><i class="material-icons">shopping_basket</i> Liste de produits</span>
+                                    <span ng-hide="vm.toggle"><i class="material-icons">trending_up</i> Liste rapide</span>
+                            </button>
+                        </div>
                         <div style="position: absolute; top: 12px; right: 20px"
                              ng-mouseover="vm.openSearch1"
                              ng-click="vm.search1Open=!vm.search1Open">

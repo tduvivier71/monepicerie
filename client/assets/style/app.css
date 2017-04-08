@@ -17837,6 +17837,27 @@ $td-divider-color:        #BDBDBD;
     border-width: 0 0 2px 0;
     border-color: #FFFFFF; }
 
+.nav-custom-liste {
+  top: -15px;
+  background: transparent;
+  border-color: transparent;
+  color: black !important; }
+  .nav-custom-liste .navbar-nav > li > a {
+    color: black;
+    height: 40px; }
+    .nav-custom-liste .navbar-nav > li > a:hover, .nav-custom-liste .navbar-nav > li > a:focus {
+      background-color: transparent;
+      border-style: solid;
+      border-width: 0 0 2px 0;
+      border-color: transparent; }
+  .nav-custom-liste .navbar-nav .active > a,
+  .nav-custom-liste .navbar-nav .active > a:hover,
+  .nav-custom-liste .navbar-nav .active > a:focus {
+    background-color: #2196F3;
+    border-style: solid;
+    border-width: 0 0 2px 0;
+    border-color: #FFFFFF; }
+
 @media (max-width: 767px) {
   .navbar-default
   .navbar-nav

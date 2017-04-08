@@ -38,6 +38,8 @@
         vm.search1Open = false;
         vm.search2Open = false;
 
+        vm.toggle = true;
+
         /* Fonctions */
         vm.cancel = cancel;
         vm.remove = remove;
