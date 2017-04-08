@@ -57,12 +57,18 @@
 
                     <div class="row">
 
-                        <ul>
-                            <li ng-repeat="item in vm.items">
-                                {{item.produit}}
-                            </li>
-                        </ul>
-
+                        <div style="margin: 15px;">
+                            <div
+                                 ng-repeat="item in vm.items">
+                                <div class="app">
+                                <span style="float:right;">
+                                  <i class="material-icons md-hover-16 cursor"
+                                     aria-hidden="true" ng-click="vm.removeItem(item)">clear</i>
+                                </span>
+                                <span style="max-width: 10px;" >{{item.produit}} </span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                 </div>

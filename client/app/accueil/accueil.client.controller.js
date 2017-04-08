@@ -21,7 +21,8 @@
             vm.items = [];          // List of object
 
 
-            vm.addListeRapide = addListerapide;
+            vm.addListeRapide = addListerapide;;
+            vm.removeItem = removeItem;
 
             // ************************************************************************************************************/
             // Object configuration
@@ -50,7 +51,7 @@
                 },
                 clearButton: true,
                 delay: 50,
-                //    noDataTemplate: vm.no_templateCat2,
+                noDataTemplate: 'Aucune correspondance...',
                 suggest: true,
                 highlightFirst: true,
                 change: function (e) {
@@ -97,8 +98,24 @@
                 } finally {
                     vm.produitWidget.close();
                 }
-
             }
+
+            function removeItem(_item) {
+                _item.$remove(function () {
+                    toasterService.remove(_item.produit);
+                    for (var i in vm.items) {
+                        if (vm.items[i] === _item) {
+                            vm.items.splice(i, 1);
+                        }
+                    }
+                }, function (e) {
+                    toasterService.error(e.data);
+                });
+            }
+
+
+
+
 
             // ************************************************************************************************************/
             // Private function
