@@ -1,6 +1,15 @@
 <!-- Search box -->
 
 <div class="input-group">
+    <span class="input-group-btn">
+         <button type="button"
+                 class="btn btn-primary"
+                 style="margin-left:0px !important; padding-top:9px !important; padding-bottom:9px !important;"
+                 ng-click="clearSearch()"
+                 uib-tooltip-html="tips">
+                 <i class="material-icons">close</i>
+         </button>
+    </span>
     <input autocomplete="off"
            auto-focus
            class="k-textbox"
@@ -12,15 +21,7 @@
            placeholder={{"RECHERCHE"|translate}}
            type="text"
            style="height: 39px !important;">
-    <span class="input-group-btn">
-         <button type="button"
-                 class="btn btn-primary"
-                 style="margin-left:0px !important; padding-top:9px !important; padding-bottom:9px !important;"
-                 ng-click="clearSearch()"
-                 uib-tooltip-html="tips">
-                 <i class="material-icons">close</i>
-         </button>
-    </span>
+
 </div>
 
 

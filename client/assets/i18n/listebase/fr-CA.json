@@ -1,10 +1,10 @@
 {
 
-  "LISTEBASE":"Liste de base",
-  "LISTESBASE":"Listes de base",
+  "LISTEBASE":"Modèle",
+  "LISTESBASE":"Modèles",
 
-  "AJOUTER_LISTE":"Ajouter une liste",
-  "EDITER_LISTE":"Éditer une liste",
+  "AJOUTER_LISTE":"Ajouter un modèle",
+  "EDITER_LISTE":"Éditer une modèle",
   "LISTE_LISTES":"Listes",
 
   "HINT_AJOUTER_LISTE":"Ajouter une liste",

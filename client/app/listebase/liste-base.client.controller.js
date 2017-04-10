@@ -17,11 +17,10 @@
         var vm = this;
 
         /* Variables */
+        vm.form = {};           // Object
         vm.item = {};           // Object
         vm.items = [];          // List of object
-        vm.form = {};           // Object
         vm.categoriesSel = [];
-
         vm.searchItem = '';     // string
         vm.selectedItem = {};   // Object
         vm.state = '';          // string
@@ -52,6 +51,11 @@
         vm.categorieRemove = categorieRemove;
         vm.deleteAllDetail = deleteAllDetail;
         vm.chooseProduit = chooseProduit;
+
+        // ************************************************************************************************************/
+        // Object configuration
+        // ************************************************************************************************************/
+
 
         var attr_id;
         var attr_produit;
@@ -369,10 +373,7 @@
                 }
             });
 
-
             vm.categories = categorieService.query();
-
-
         }
 
         function _update(_item) {

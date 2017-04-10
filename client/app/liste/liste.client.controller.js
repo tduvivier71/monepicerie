@@ -6,11 +6,11 @@
         .module('app.liste')
         .controller('ListeController', ListeController);
 
-    ListeController.$inject = ['$q', '$auth',
+    ListeController.$inject = ['$routeParams','$http','$q', '$auth',
         'toasterService', 'focus', 'listeService', 'listeServiceDetail',
         'categorieService',  'epicerieService','produitService'];
 
-    function ListeController($q, $auth,
+    function ListeController($routeParams, $http, $q, $auth,
          toasterService, focus, listeService, listeServiceDetail,
          categorieService,  epicerieService, produitService) {
 
@@ -35,7 +35,13 @@
             reverse: false
         };
 
+        vm.input1_focus = 'date_input_focus';
         vm.isCollapsed = false;
+
+        vm.search1Open = false;
+        vm.search2Open = false;
+
+        vm.toggle = true;
 
         /* Fonctions */
         vm.cancel = cancel;
@@ -49,16 +55,11 @@
         vm.filterCategorie = filterCategorie;
         vm.getCategories = getCategories;
 
-
-        // ************************************************************************************************************/
-        // Entry point function
-        // ************************************************************************************************************/
-
-        _init();
-
-        vm.isAuthenticated = function() {
-            return $auth.isAuthenticated();
-        };
+        vm.openSearch1 = openSearch1;
+        vm.addCategorie = addCategorie;
+        vm.categorieRemove = categorieRemove;
+        vm.deleteAllDetail = deleteAllDetail;
+        vm.chooseProduit = chooseProduit;
 
         // ************************************************************************************************************/
         // Object configuration
@@ -108,9 +109,23 @@
             dataTextField: "epicerie",
             dataValueField: "_id",
             filter:"contains",
-            valuePrimitive: true,
+            valuePrimitive: false,
             autoBind: false,
-            dataSource: vm.epiceries,
+            //  dataSource: vm.epiceries,
+            dataSource: {
+                transport: {
+                    read: function (e) {
+                        $http.get('/api/epicerie')
+                            .then(function success(response) {
+                                e.success(response.data);
+                            }, function error(response) {
+                                alert('something went wrong')
+                                console.log(response);
+                            });
+                    }
+                }
+            },
+
             clearButton: true,
             delay: 50,
             noDataTemplate: 'Aucune correspondance...',
@@ -121,21 +136,55 @@
                     this.value("");
                 }
                 else {
-                    vm.item.epicerie = this.text();
+                    vm.item.epicerieId.epicerie = this.text();
                 }
             }
         };
 
-        vm.selectOptionsMultiCategories = {
-            placeholder: "Sélection de catégorie(s)...",
-            dataTextField: "categorie",
+        vm.selectOptionsModele = {
+            placeholder: "Sélectionnez un modèle...",
+            dataTextField: "nom",
             dataValueField: "_id",
-            valuePrimitive: true,
-            autoBind: false,
+            filter:"contains",
+            valuePrimitive: false, // false obligatoire car c est un objet
+            autoBind: false, // obligatoire
+            //   dataSource: vm.categories,
+            dataSource: {
+                transport: {
+                    read: function (e) {
+                        $http.get('/api/listebase')
+                            .then(function success(response) {
+                                e.success(response.data);
+                            }, function error(response) {
+                                alert('something went wrong')
+                                console.log(response);
+                            });
+                    }
+                }
+            },
+            clearButton: false,
             delay: 50,
-            noDataTemplate: 'Aucune correspondance...',
+            noDataTemplate: 'Aucune correspondance',
             suggest: true,
-            dataSource: vm.categories
+            highlightFirst: true,
+            change : function(e) {
+                if (this.select() < 0) {
+                    this.value("");
+                }
+                else {
+                    vm.item.modele = this.text();
+                }
+            }
+        };
+
+        // ************************************************************************************************************/
+        // Entry point function
+        // ************************************************************************************************************/
+
+        _init();
+
+        vm.isAuthenticated = function() {
+            return $auth.isAuthenticated();
         };
 
         // ************************************************************************************************************/
@@ -152,6 +201,36 @@
             } else {
                 _cancelEdit();
             }
+        }
+
+        function chooseProduit(_produit, _item, _produits, _i) {
+            _item.listeBaseDetail.push({
+                produit_id: _produit._id,
+                produit: _produit.produit,
+                conditionnement: _produit.fullConditionnement,
+                description: _produit.description,
+                marque: (!_produit.marqueId)  ? "" : _produit.marqueId.marque,
+                categorie: _produit.categorieId.categorie
+            });
+
+            _produits.splice(_i, 1);
+
+        }
+
+        function deleteAllDetail() {
+            var i = vm.item.listeBaseDetail.length; //or 10
+            while(i--) {
+                vm.item.listeBaseDetail.splice(i, 1);
+            }
+            var item = new listeBaseServiceDetail();
+            item.$deleteAllDetail({id: vm.item._id});
+            vm.produits = produitService.query();
+            toasterService.error('La liste a été vidée.');
+        }
+
+        function openSearch1() {
+            vm.search1Open = true;
+            focus('search1Item_focus');
         }
 
         /**
@@ -218,12 +297,10 @@
          * Set insert State for new liste
          */
         function setInsert() {
-            console.log('setInsert');
-            _resetForm();
-            _resetItem();
-            vm.state = 'dsInsert';
-            //TODO Focus ne fonctionne pas
-            focus('epicerie_focus');
+            vm.item = {};
+            vm.produits = produitService.query();
+            focus(vm.input1_focus);
+            _resetForm('dsInsert');
         }
 
         function getCategories() {
@@ -305,20 +382,24 @@
             );
         }
 
+
+
         function _init() {
-            focus('searchText');
-            _setBrowse();
-            _resetItem();
-            vm.items = listeService.query();
-            vm.produits = produitService.query();
-            vm.categories = categorieService.query();
-            vm.epiceries = epicerieService.query();
-            vm.loadTags = function () {
-                var deferred = $q.defer();
-                deferred.resolve(vm.categories);
-                return deferred.promise;
-            };
+
+            var state = $routeParams.state;
+
+            listeService.query('', function (result) {
+                vm.items = result;
+                if (state === 'insert') {
+                    setInsert();
+                } else {
+                    _setBrowse();
+                }
+            });
+
+
         }
+
 
         function _update(_item) {
             _item.$update(
@@ -339,35 +420,27 @@
             );
         }
 
-        function _resetItem() {
-            for (var prop in  vm.item)
-                { if ( vm.item.hasOwnProperty(prop)) {
-                    delete  vm.item[prop];
-                }
-            }
-        }
-
-        function _resetForm() {
+        function _resetForm(state) {
+            vm.state = state;
             if (vm.form.$dirty || vm.form.$submitted) {
                 vm.form.$setPristine();
                 vm.form.$setUntouched();
             }
         }
 
-        function _resetSearchItem() {
-            vm.searchItem = '';
-        }
-
         function _revertSelectedItem() {
+            angular.forEach(vm.items, function (item, key) {
+                if (item._id === vm.selectedItem._id) {
+                    vm.items[key] = vm.selectedItem;
+                }
+            });
+            vm.selectedItem = null;
         }
 
         function _setBrowse() {
-            console.log('_setBrowse');
-            vm.sorting.type = 'produit';
-            vm.state = 'dsBrowse';
-            vm.selectedItem = null;
-            vm.form.$dirty = false;
-            focus('searchItem_focus');
+            focus('searchItem_input_focus');
+            vm.sorting.type = 'date';
+            _resetForm('dsBrowse');
         }
     }
 

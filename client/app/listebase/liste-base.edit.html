@@ -73,7 +73,7 @@
                           margin-bottom:0px;">
 
                         <div>
-                            <button class="btn btn-defautlt"
+                            <button class="btn btn-defautlt" style="position: absolute; top: 15px; left: 25px"
                                     ng-click="vm.toggle = !vm.toggle">
                                     <span ng-show="vm.toggle"><i class="material-icons">shopping_basket</i> Liste de produits</span>
                                     <span ng-hide="vm.toggle"><i class="material-icons">trending_up</i> Liste rapide</span>
@@ -118,12 +118,12 @@
                             <i class="material-icons md-36 cursor">delete</i>
                         </div>
                         <div style="position: absolute; top: 12px; right: 60px"
-                             ng-click="vm.addProduit()">
+                             ng-click="vm.search2Open = false; vm.ajoutRapideOpen=!vm.ajoutRapideOpen">
                             <i class="material-icons md-36 cursor">add</i>
                         </div>
                         <div style="position: absolute; top: 12px; right: 20px"
                               ng-mouseover="vm.openSearch2"
-                              ng-click="vm.search2Open=!vm.search2Open">
+                              ng-click="vm.ajoutRapideOpen = false; vm.search2Open=!vm.search2Open">
                               <i class="material-icons md-36 cursor">search</i>
                          </div>
                          <div class="clearfix"></div>
@@ -139,7 +139,7 @@
                                placeholder={{"RECHERCHE"|translate}}
                                type="text"
                                style="height: 39px !important;">
-                        <span class="input-group-btn">
+                               <span class="input-group-btn">
                                    <button type="button"
                                            class="btn btn-primary"
                                            style="margin-left:0px !important; padding-top:9px !important; padding-bottom:9px !important;"
@@ -149,6 +149,36 @@
                                    </button>
                                </span>
                     </div>
+                    <div class="input-group input-group-md" ng-show="vm.ajoutRapideOpen">
+
+                      <span class="input-group-btn">
+                           <button type="button"
+                                   class="btn btn-primary"
+                                   style="margin-left:0px !important; padding-top:9px !important; padding-bottom:9px !important;"
+                                   ng-click="vm.ajoutRapideOpen = false; clearSearch()"
+                                   uib-tooltip-html="tips">
+                                    <i class="material-icons">close</i>
+                           </button>
+                       </span>
+
+                        <input data-kendo-auto-complete = "vm.produitWidget"
+                               data-k-options="vm.inputOptionsProduit"
+                               id="produit_input_id"
+                               ng-model="vm.produit"
+                               style="width: 100%; height: 39px;" />
+                               <span class="input-group-btn">
+                                   <button type="button"
+                                           class="btn btn-primary"
+                                           style="margin-left:0px !important; padding-top:9px !important; padding-bottom:9px !important;"
+                                           ng-click="vm.search2Open = false; clearSearch()"
+                                           uib-tooltip-html="tips">
+                                            <i class="material-icons">add</i>
+                                   </button>
+                               </span>
+
+
+                    </div>
+
                 </div>
 
             </div>
