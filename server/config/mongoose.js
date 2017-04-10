@@ -30,7 +30,7 @@ module.exports = function() {
 	});
 
 	db.connection.on('disconnected',function(err) {
-		console.log('Erreur fatale - Moogonse disconnected...');
+		console.log('Erreur fatale - Moogonse disconnected...' +  err);
 	});
 
 	// CAPTURE APP TERMINATION / RESTART EVENTS

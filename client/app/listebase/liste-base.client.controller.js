@@ -129,18 +129,6 @@
             }
         };
 
-        vm.selectOptionsMultiCategories = {
-            placeholder: "Sélection de catégorie(s)...",
-            dataTextField: "categorie",
-            dataValueField: "_id",
-            valuePrimitive: true,
-            autoBind: false,
-            delay: 50,
-            noDataTemplate: 'Aucune correspondance...',
-            suggest: true,
-            dataSource: vm.categories
-        };
-
         // ************************************************************************************************************/
         // Entry point function
         // ************************************************************************************************************/

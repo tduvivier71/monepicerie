@@ -20,15 +20,11 @@
         vm.form = {};           // Object
         vm.item = {};           // Object
         vm.items = [];          // List of object
+        vm.categoriesSel = [];
         vm.searchItem = '';     // string
         vm.selectedItem = {};   // Object
         vm.state = '';          // string
         vm.error = '';          // string
-
-        vm.categories = [];     // List of object
-        vm.selectedCategories = [];
-        vm.unites = [];
-        vm.marques = [];      // List of object
 
         vm.sorting = {
             type: 'produit',
@@ -52,21 +48,19 @@
         vm.setInsert = setInsert;
         vm.createListeDetail = _createListeDetail;
 
-        vm.filterCategorie = filterCategorie;
-        vm.getCategories = getCategories;
-
-        vm.openSearch1 = openSearch1;
         vm.addCategorie = addCategorie;
         vm.categorieRemove = categorieRemove;
+
+        vm.openSearch1 = openSearch1;
         vm.deleteAllDetail = deleteAllDetail;
         vm.chooseProduit = chooseProduit;
 
         // ************************************************************************************************************/
         // Object configuration
         // ************************************************************************************************************/
-
         var attr_id;
         var attr_produit;
+        var attr_produit_id;
         var attr_marque;
         var attr_categorie;
         var attr_conditionnenent;
@@ -191,11 +185,45 @@
         // Public function
         // ************************************************************************************************************/
 
+        function addCategorie(categorie) {
+
+            var found = vm.categoriesSel.some(function (el) {
+                return el._id === categorie._id;
+            });
+
+            if (!found) {
+                vm.categoriesSel.push(categorie);
+                var arrayCatId = [];
+                vm.categoriesSel.forEach(function(el) {
+                    arrayCatId.push(el._id);
+                });
+                var queryParam = {catId: arrayCatId};
+                vm.produits= produitService.query(queryParam);
+            }
+
+        }
+
+        function categorieRemove(categorie) {
+            for (var i in vm.categoriesSel) {
+                if (vm.categoriesSel[i]._id === categorie._id) {
+                    vm.categoriesSel.splice(i, 1);
+                }
+            }
+
+            var arrayCatId = [];
+            vm.categoriesSel.forEach(function(el) {
+                arrayCatId.push(el._id);
+            });
+            var queryParam = {catId: arrayCatId};
+            vm.produits= produitService.query(queryParam);
+
+        }
+
         /**
          * Cancel edit/insert
          */
         function cancel() {
-            console.log('cancel');
+
             if (vm.state === 'dsInsert') {
                 _cancelInsert();
             } else {
@@ -204,7 +232,7 @@
         }
 
         function chooseProduit(_produit, _item, _produits, _i) {
-            _item.listeBaseDetail.push({
+            _item.listeDetail.push({
                 produit_id: _produit._id,
                 produit: _produit.produit,
                 conditionnement: _produit.fullConditionnement,
@@ -218,11 +246,11 @@
         }
 
         function deleteAllDetail() {
-            var i = vm.item.listeBaseDetail.length; //or 10
+            var i = vm.item.listeDetail.length; //or 10
             while(i--) {
-                vm.item.listeBaseDetail.splice(i, 1);
+                vm.item.listeDetail.splice(i, 1);
             }
-            var item = new listeBaseServiceDetail();
+            var item = new listeServiceDetail();
             item.$deleteAllDetail({id: vm.item._id});
             vm.produits = produitService.query();
             toasterService.error('La liste a été vidée.');
@@ -238,7 +266,6 @@
          * @param {Object} _item
          */
         function remove(_item) {
-            console.log('remove');
             _item.$remove(function () {
                 toasterService.remove(_item.date);
                 for (var i in vm.items) {
@@ -257,25 +284,40 @@
          * @param {Object} _item
          * @param {Object} _itemDetail
          */
-        function removeItem(_item, _itemDetail) {
-            console.log('remove');
-            var item = new listServiceDetail();
-            item.$deleteOneDetail({id:_item._id, id2: _itemDetail._id});
+        function removeItem(_produits, _item, _itemDetail) {
+            var item = new listeServiceDetail();
+            item.$deleteOneDetail({id: _item._id, id2: _itemDetail._id});
             for (var i in _item.listeDetail) {
                 if (_item.listeDetail[i]._id === _itemDetail._id) {
+                    _produits.push({
+                        _id: _item.listeDetail[i].produit_id,
+                        produit: _item.listeDetail[i].produit,
+                        fullConditionnement: _item.listeDetail[i].conditionnement,
+                        description : _item.listeDetail[i].description,
+                        marqueId : {
+                            marque : _item.listeDetail[i].marque
+                        },
+                        categorieId : {
+                            categorie : _item.listeDetail[i].categorie
+                        }
+                    });
                     _item.listeDetail.splice(i, 1);
                 }
             }
-            toasterService.remove(_itemDetail.produitId.produit);
+            toasterService.remove(_itemDetail.produit);
         }
 
         /**
          * Save liste
          */
-        function save(_form, _item, _oneMore) {
-            console.log('save');
+        function save(_form, _item) {
+            if (!_form.$valid) {
+                focus(vm.input1_focus);
+                return;
+            }
+
             if (vm.state === 'dsInsert') {
-                _create(_form, _item, _oneMore);
+                _create(_item);
             } else {
                 _update(_item);
             }
@@ -283,14 +325,22 @@
 
         /**
          * Set edit state
-         */
-        function setEdit(_item) {
-            console.log('setEdit');
-            _resetForm();
+         */        function setEdit(_item) {
+            focus(vm.input1_focus);
+            _resetForm('dsEdit');
             vm.selectedItem = angular.copy(_item);
             vm.item = _item;
-            vm.state = 'dsEdit';
             vm.isCollapsed = true;
+
+            var ids = [];
+
+            vm.item.listeDetail.forEach(function(element) {
+                ids.push(element.produitId);
+            });
+
+            var queryParam = {listeIds: ids };
+            vm.produits = produitService.query(queryParam);
+
         }
 
         /**
@@ -303,80 +353,59 @@
             _resetForm('dsInsert');
         }
 
-        function getCategories() {
-            console.log('getCategories');
-            return categorieService.query();
-        }
-
-        function filterCategorie() {
-            var queryParam = {catId: vm.selectedCategories};
-            vm.items = produitService.query(queryParam);
-        }
-
-
         // ************************************************************************************************************/
         // Private function
         // ************************************************************************************************************/
 
 
         function _cancelEdit() {
-            console.log('cancelEdit');
             _revertSelectedItem();
             _setBrowse();
         }
 
         function _cancelInsert() {
-            console.log('_cancelInsert');
             _setBrowse();
         }
 
-        function _create(_form, _item, _oneMore) {
-            console.log('create');
-            if (_form.$valid) {
-                var item = new listeService();
-                item.date = _item.date;
-                item.epicerieId = _item.epicerieId === "" ? _item.epicerieId = undefined : _item.epicerieId;
-                item.$save(
-                    function (result) {
-                        vm.items.push(item);
-                        toasterService.save(item.date);
-                        if (_oneMore) {
-                            _resetForm();
-                            setInsert();
-                        }
-                        else {
-                            vm.isCollapsed = true;
-                        }
-                        vm.item = result;
-                        vm.oneMore = false;
-                    },
-                    function (e) {
-                        toasterService.error(e.data);
-                        focus('date_focus');
-                    }
-                );
-            } else {
-                focus('date_focus');
-            }
+        function _create(_item) {
+            var item = new listeService();
+            item.date = _item.date;
+            item.epicerieId = _item.epicerieId === "" ? _item.epicerieId = undefined : _item.epicerieId;
+            item.$save(
+                function (result) {
+                    vm.item = result;
+                    vm.isCollapsed = true;
+                    vm.items.push(item);
+                    toasterService.save(_item.date);
+                    vm.state = 'dsEdit';
+                }, function (e) {
+                    toasterService.error(e.data.message);
+                    focus(vm.input1_focus);
+                }
+            );
         }
 
         function _createListeDetail(_id, _produitId) {
             var item = new listeServiceDetail();
             item._id = _id;
+            item.produitId = attr_produit_id;
             item.produit = attr_produit;
             item.marque = attr_marque;
             item.categorie = attr_categorie;
             item.conditionnement = attr_conditionnenent;
-            item.note = attr_note;
+            item.description = attr_note;
             item.$save(function (result) {
-                    vm.item.listeDetail.push({
+
+                    vm.item.listeBaseDetail.push({
                         _id : result._id,
+                        produit_id: attr_produit_id,
                         produit: attr_produit,
                         marque : attr_marque,
                         categorie : attr_categorie,
                         conditionnement : attr_conditionnenent,
-                        note : attr_note
+                        description : attr_note
                     });
+
                     toasterService.save(attr_produit);
                 }
             );
@@ -403,19 +432,12 @@
 
         function _update(_item) {
             _item.$update(
-                function (result) {
-                    angular.forEach(vm.items, function (item, key) {
-                        if (item._id === _item._id) {
-                            if (vm.item.epicerieId && vm.item.epicerieId.epicerie) {
-                                vm.items[key].epicerieId.epicerie = vm.item.epicerieId.epicerie;
-                            }
-                        }
-                    });
-                    toasterService.update(result.date);
-                    vm.isCollapsed = true;
-                },
-                function (e) {
-                    toasterService.error(e.data);
+                function () {
+                    toasterService.update(_item.date);
+                    _setBrowse();
+                }, function (e) {
+                    toasterService.error(e.data.message);
+                    focus(vm.input1_focus);
                 }
             );
         }
