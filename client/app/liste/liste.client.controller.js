@@ -7,12 +7,10 @@
         .controller('ListeController', ListeController);
 
     ListeController.$inject = ['$routeParams','$http','$q', '$auth',
-        'toasterService', 'focus', 'listeService', 'listeServiceDetail',
-        'categorieService',  'epicerieService','produitService'];
+        'toasterService', 'focus', 'listeService', 'listeServiceDetail', 'produitService'];
 
     function ListeController($routeParams, $http, $q, $auth,
-         toasterService, focus, listeService, listeServiceDetail,
-         categorieService,  epicerieService, produitService) {
+         toasterService, focus, listeService, listeServiceDetail, produitService) {
 
         var vm = this;
 
@@ -348,6 +346,9 @@
          */
         function setInsert() {
             vm.item = {};
+            vm.item = {
+                date : null
+            };
             vm.produits = produitService.query();
             focus(vm.input1_focus);
             _resetForm('dsInsert');
