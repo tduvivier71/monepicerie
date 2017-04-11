@@ -286,6 +286,21 @@
 
         function setInsert() {
             vm.item = {};
+
+            $http.get('/api/epicerie/favori')
+                .then(function success(response) {
+                    vm.item = {
+                        epicerieId: response.data._id
+                    };
+
+                  //  vm.epicerieWidget.text(response.data.epicerie);
+                    vm.epicerieWidget.value(response.data.epicerie);
+
+                }, function error(response) {
+                    alert('something went wrong')
+                    console.log(response);
+                });
+
             vm.produits = produitService.query();
             focus(vm.input1_focus);
             _resetForm('dsInsert');

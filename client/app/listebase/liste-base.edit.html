@@ -24,7 +24,7 @@
                     <div class="col-md-6 col-sm-6-col-xs-6">
                         <div class="form-group" data-ng-class="{'has-error': vm.form.$submitted && vm.form.nom_input.$invalid}">
                             <label for="nom_input_id">
-                                {{"NOM"|translate}}<span style="color: red;" data-uib-tooltip={{"VALEUR_OBLIGATOIRE"|translate}}>*</span>
+                                {{"MODELE"|translate}}<span style="color: red;" data-uib-tooltip={{"VALEUR_OBLIGATOIRE"|translate}}>*</span>
                             </label>
                             <input auto-focus
                                    required
@@ -44,7 +44,7 @@
                             <label for="epicerieId_select_edit_id">
                                 {{"EPICERIE"|translate}}
                             </label>
-                            <select data-kendo-combo-box ="vm.epicerieWidget"
+                            <select data-kendo-combo-box = "vm.epicerieWidget"
                                     data-k-options="vm.selectOptionsEpicerie"
                                     data-k-ng-model="vm.item.epicerieId"
                                     id="epicerieId_select_edit_id"

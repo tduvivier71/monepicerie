@@ -354,9 +354,8 @@
                         epicerieId: response.data._id
                     };
 
-                 //  vm.epicerieWidget.dataSource.read();
+                    vm.epicerieWidget.value(response.data.epicerie);
 
-                 //   vm.epicerieWidget.toggle();
 
                 }, function error(response) {
                     alert('something went wrong')
@@ -444,6 +443,18 @@
                     _setBrowse();
                 }
             });
+
+            $http.get('/api/epicerie/favori')
+                .then(function success(response) {
+                    vm.item = {
+                        date :  moment().toDate(),
+                        epicerieId: response.data._id
+                    };
+
+                }, function error(response) {
+                    alert('something went wrong')
+                    console.log(response);
+                });
 
 
         }
