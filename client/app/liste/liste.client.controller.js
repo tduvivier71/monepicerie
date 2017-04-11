@@ -154,7 +154,7 @@
                     }
                 }
             },
-            clearButton: false,
+            clearButton: true,
             delay: 50,
             noDataTemplate: 'Aucune correspondance',
             suggest: true,
@@ -346,12 +346,30 @@
          */
         function setInsert() {
             vm.item = {};
-            vm.item = {
-                date : null
-            };
+
+            $http.get('/api/epicerie/favori')
+                .then(function success(response) {
+                    vm.item = {
+                        date :  moment().toDate(),
+                        epicerieId: response.data._id
+                    };
+
+                 //  vm.epicerieWidget.dataSource.read();
+
+                 //   vm.epicerieWidget.toggle();
+
+                }, function error(response) {
+                    alert('something went wrong')
+                    console.log(response);
+                });
+
             vm.produits = produitService.query();
             focus(vm.input1_focus);
             _resetForm('dsInsert');
+
+
+
+
         }
 
         // ************************************************************************************************************/

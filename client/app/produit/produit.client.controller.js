@@ -379,6 +379,25 @@
             vm.isCollapsed = true;
             focus('produit_input_focus');
             _resetForm('dsInsert');
+
+
+            $http.get('/api/epicerie/favori')
+                .then(function success(response) {
+                    vm.insertHisto = {
+                        date :  moment().toDate(),
+                        epicerieId: response.data._id
+                    };
+
+                     vm.epicerieWidget.text(response.data.epicerie);
+
+
+
+                }, function error(response) {
+                    alert('something went wrong')
+                    console.log(response);
+                });
+
+
            // vm.insertHisto.reset();
         }
 

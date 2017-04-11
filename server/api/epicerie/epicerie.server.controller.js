@@ -7,7 +7,9 @@ var mongoose = require('mongoose'),
 exports.find = function (req, res) {
 
     Model.find({
-        utilisateurId: req.user})
+            utilisateurId: req.user
+        }
+    )
         .sort('epicerie')
         .exec(function (err, data) {
 
@@ -19,11 +21,16 @@ exports.find = function (req, res) {
         });
 };
 
-exports.findFavori = function(req, res) {
-    Model.find('')
+exports.findFavori = function (req, res) {
+    Model.findOne({
+        utilisateurId: req.user,
+        favori: true
+    })
         .sort('epicerie')
-        .exec(function(err, data) {
-            if (err) {return res.status(400).json(err);}
+        .exec(function (err, data) {
+            if (err) {
+                return res.status(400).json(err);
+            }
             res.status(200).json(data);
         });
 };
