@@ -382,6 +382,14 @@
         function _update(_item) {
             _item.$update(
                 function () {
+              /*      angular.forEach(vm.items, function (item, key) {
+                        if (item._id === _item._id) {
+
+                            if (vm.item.epicerieId && vm.item.epicerieId.epicerie) {
+                                vm.items[key].epicerieId.epicerie = vm.item.epicerieId.epicerie;
+                            vm.items[key].epicerieId.epicerie = vm.epicerieWidget.text();}
+                        }
+                    }); */
                     toasterService.update(_item.nom);
                     _setBrowse();
                 }, function (e) {
