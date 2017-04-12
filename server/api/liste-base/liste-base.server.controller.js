@@ -173,7 +173,20 @@ exports.updateOne = function (req, res) {
                     return helpers.handleSaveError(res, err, req.body.nom);
                 }
 
-                res.status(200).json(data);
+                Model.findOne( {_id : data.id,
+                    utilisateurId: req.user} )
+                    .populate('epicerieId')
+                    .populate('listeBaseDetail.produitId')
+                    .exec(function (err, data) {
+
+                        if (err) {
+                            return res.status(400).json(err);
+                        }
+
+                        res.status(200).json(data);
+                    });
+
+
 
             });
 

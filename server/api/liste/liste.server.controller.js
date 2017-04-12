@@ -6,7 +6,6 @@ var mongoose = require('mongoose'),
     SubModel = mongoose.model('ListeDetail'),
 	url = require('url'); // MODIFY
 
-
 exports.findOne = function(req, res) {
 	Model.findOne( { _id: req.params.id })
 		.populate('epicerieId')
@@ -115,10 +114,50 @@ exports.deleteOneDetail = function(req, res) {
 	);
 };
 
-
-
-
 exports.updateOne = function(req, res) {
+
+    Model.findOne({
+            utilisateurId: req.user,
+            _id: req.params.id
+        }, function (err, data) {
+
+            if (err) {
+                return res.status(400).json(err);
+            }
+
+            if (!data) {
+                return res.status(404).json();
+            }
+
+            data.date = req.body.date; // A MODIFIER
+            data.epicerieId = req.body.epicerieId; // A MODIFIER
+            data.save(function (err, data) {
+
+                if (err) {
+                    return helpers.handleSaveError(res, err, req.body.nom);
+                }
+
+                Model.findOne( {_id : data.id,
+                    utilisateurId: req.user} )
+                    .populate('epicerieId')
+                    .populate('listeDetail.produitId')
+                    .exec(function (err, data) {
+
+                        if (err) {
+                            return res.status(400).json(err);
+                        }
+
+                        res.status(200).json(data);
+                    });
+
+
+
+            });
+
+        }
+    );
+
+
 };
 
 

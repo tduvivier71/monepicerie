@@ -182,14 +182,29 @@
         }
 
         function chooseProduit(_produit, _item, _produits, _i) {
-            _item.listeBaseDetail.push({
-                produit_id: _produit._id,
-                produit: _produit.produit,
-                conditionnement: _produit.fullConditionnement,
-                description: _produit.description,
-                marque: (!_produit.marqueId)  ? "" : _produit.marqueId.marque,
-                categorie: _produit.categorieId.categorie
-            });
+            var item = new listeBaseServiceDetail();
+            item._id = _item._id;
+            item.produitId = _produit._id;
+            item.produit = _produit.produit;
+            item.marque = (!_produit.marqueId)  ? "" : _produit.marqueId.marque;
+            item.categorie = _produit.categorieId.categorie;
+            item.conditionnement = _produit.fullConditionnement;
+            item.description = _produit.description;
+            item.$save(function (result) {
+
+                    vm.item.listeBaseDetail.push({
+                        _id : result._id,
+                        produit_id: _produit._id,
+                        produit: _produit.produit,
+                        conditionnement: _produit.fullConditionnement,
+                        description: _produit.description,
+                        marque: (!_produit.marqueId)  ? "" : _produit.marqueId.marque,
+                        categorie: _produit.categorieId.categorie
+                    });
+
+                    toasterService.save(attr_produit);
+                }
+            );
 
             _produits.splice(_i, 1);
 
@@ -381,15 +396,14 @@
 
         function _update(_item) {
             _item.$update(
-                function () {
-              /*      angular.forEach(vm.items, function (item, key) {
-                        if (item._id === _item._id) {
-
-                            if (vm.item.epicerieId && vm.item.epicerieId.epicerie) {
-                                vm.items[key].epicerieId.epicerie = vm.item.epicerieId.epicerie;
-                            vm.items[key].epicerieId.epicerie = vm.epicerieWidget.text();}
+                function (response) {
+                  angular.forEach(vm.items, function (item, key) {
+                        if (item._id === response._id) {
+                            if (response.epicerieId && response.epicerieId.epicerie) {
+                                vm.items[key].epicerieId.epicerie = response.epicerieId.epicerie;
+                             }
                         }
-                    }); */
+                    });
                     toasterService.update(_item.nom);
                     _setBrowse();
                 }, function (e) {
