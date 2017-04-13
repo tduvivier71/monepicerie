@@ -6,13 +6,11 @@
         .module('app.listeBase')
         .controller('ListeBaseController', ListeBaseController);
 
-    ListeBaseController.$inject = ['$log', '$auth', '$routeParams', '$http',
-        'listeBaseService', 'listeBaseServiceDetail', 'toasterService','focus',
-        'categorieService',  'epicerieService','produitService'];
+    ListeBaseController.$inject = ['$routeParams', '$http',
+        'listeBaseService', 'listeBaseServiceDetail', 'toasterService','focus', 'categorieService',  'produitService'];
 
-    function ListeBaseController($log, $auth, $routeParams, $http,
-        listeBaseService, listeBaseServiceDetail, toasterService, focus,
-        categorieService,  epicerieService, produitService) {
+    function ListeBaseController($routeParams, $http,
+        listeBaseService, listeBaseServiceDetail, toasterService, focus, categorieService,  produitService) {
 
         var vm = this;
 
@@ -55,7 +53,6 @@
         // ************************************************************************************************************/
         // Object configuration
         // ************************************************************************************************************/
-
 
         var attr_id;
         var attr_produit;
@@ -122,9 +119,6 @@
             change : function(e) {
                 if (this.select() < 0) {
                     this.value("");
-                }
-                else {
-                    vm.item.epicerieId.epicerie = this.text();
                 }
             }
         };
@@ -202,7 +196,7 @@
                         categorie: _produit.categorieId.categorie
                     });
 
-                    toasterService.save(attr_produit);
+                    toasterService.save(item.produit);
                 }
             );
 

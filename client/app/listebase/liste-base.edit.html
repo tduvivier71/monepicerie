@@ -1,5 +1,4 @@
 <form novalidate name="vm.form" role="form">
-    <!--    ng-model-options="{ updateOn: 'default', debounce: { 'default': 100, 'blur': 0 } }">  -->
 
     <div class="panel panel-default noborder">
         <div ng-show="vm.state==='dsEdit'" class="panel-heading">
@@ -64,21 +63,14 @@
         </div>
     </div>
 
-    <div ng-show="vm.state==='dsEdit'" class="panel panel-default noborder">
+    <div data-ng-show="vm.state==='dsEdit'" class="panel panel-default noborder">
         <div class="panel-body" style="padding:0">
             <div class="row">
 
                 <div class="col-md-6 col-sm-6 col-xm-6 form-group">
                     <div class="well" style="height: 60px;padding-right: 8px;
                           margin-bottom:0px;">
-
-                        <div>
-                            <button class="btn btn-defautlt" style="position: absolute; top: 15px; left: 25px"
-                                    ng-click="vm.toggle = !vm.toggle">
-                                    <span ng-show="vm.toggle"><i class="material-icons">shopping_basket</i> Liste de produits</span>
-                                    <span ng-hide="vm.toggle"><i class="material-icons">trending_up</i> Liste rapide</span>
-                            </button>
-                        </div>
+                        Liste de produits
                         <div style="position: absolute; top: 12px; right: 20px"
                              ng-mouseover="vm.openSearch1"
                              ng-click="vm.search1Open=!vm.search1Open">
@@ -112,14 +104,10 @@
                 <div class="col-md-6 col-sm-6 col-xm-6 form-group">
                     <div class="well" style="height: 60px;padding-right: 8px;
                          margin-bottom:0px;">Produits
-                        <div style="position: absolute; top: 12px; right: 100px"
+                        <div style="position: absolute; top: 12px; right: 60px"
                              ng-hide="vm.item.listeBaseDetail.length===0"
                              ng-click="vm.deleteAllDetail()">
                             <i class="material-icons md-36 cursor">delete</i>
-                        </div>
-                        <div style="position: absolute; top: 12px; right: 60px"
-                             ng-click="vm.search2Open = false; vm.ajoutRapideOpen=!vm.ajoutRapideOpen">
-                            <i class="material-icons md-36 cursor">add</i>
                         </div>
                         <div style="position: absolute; top: 12px; right: 20px"
                               ng-mouseover="vm.openSearch2"

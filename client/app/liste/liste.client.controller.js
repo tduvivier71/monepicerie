@@ -6,10 +6,10 @@
         .module('app.liste')
         .controller('ListeController', ListeController);
 
-    ListeController.$inject = ['$routeParams','$http','$q', '$auth',
+    ListeController.$inject = ['$routeParams','$http','$q', '$auth', '$filter',
         'toasterService', 'focus', 'listeService', 'listeServiceDetail', 'produitService'];
 
-    function ListeController($routeParams, $http, $q, $auth,
+    function ListeController($routeParams, $http, $q, $auth, $filter,
          toasterService, focus, listeService, listeServiceDetail, produitService) {
 
         var vm = this;
@@ -162,9 +162,6 @@
             change : function(e) {
                 if (this.select() < 0) {
                     this.value("");
-                }
-                else {
-                    vm.item.modele = this.text();
                 }
             }
         };
@@ -389,12 +386,13 @@
             var item = new listeService();
             item.date = _item.date;
             item.epicerieId = _item.epicerieId === "" ? _item.epicerieId = undefined : _item.epicerieId;
+            item.modeleId = _item.modeleId === "" ? _item.modeleId = undefined : _item.modeleId;
             item.$save(
                 function (result) {
                     vm.item = result;
                     vm.isCollapsed = true;
                     vm.items.push(item);
-                    toasterService.save(_item.date);
+                    toasterService.save($filter('date')(_item.date, 'yyyy-MM-dd HH:mm:ss'));
                     vm.state = 'dsEdit';
                 }, function (e) {
                     toasterService.error(e.data.message);

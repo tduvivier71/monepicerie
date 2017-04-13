@@ -4,7 +4,6 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
-
 var ListeDetailSchema = new Schema({
     produit: {
         type: String,
@@ -41,22 +40,17 @@ mongoose.model('ListeDetail', ListeDetailSchema);
 
 // Define a new 'Schema'
 var ListeSchema = new Schema({
-    epicerieId: {
-        type: Schema.Types.ObjectId,
-        ref: 'Epicerie'
-    },
     date: {
         type: Date,
         default: Date.now()
     },
-    gabarit: {
-        type: Boolean,
-        default: false
+    epicerieId: {
+        type: Schema.Types.ObjectId,
+        ref: 'Epicerie'
     },
-    nomGabarit: {
-        type: String,
-        default: '',
-        trim: true
+    modeleId: {
+        type: Schema.Types.ObjectId,
+        ref: 'ListeBase'
     },
     listeDetail: [ListeDetailSchema]
 });

@@ -9,6 +9,7 @@ var mongoose = require('mongoose'),
 exports.findOne = function(req, res) {
 	Model.findOne( { _id: req.params.id })
 		.populate('epicerieId')
+        .populate('modeleId')
 		.populate('listeDetail.produitId')
 		.exec(function(err, data) {
 			if (err) {return res.status(400).json(err);}
@@ -21,6 +22,7 @@ exports.find = function(req, res) {
 	var filter = {};
 	Model.find( filter )
 		.populate('epicerieId')
+        .populate('modeleId')
 		.populate('listeDetail.produitId')
 		.exec(function(err, data) {
 			if (err)
@@ -32,24 +34,42 @@ exports.find = function(req, res) {
 		});
 };
 
-exports.createOne = function(req, res) {
-	var data  = new Model({
-		date: req.body.date,
-		epicerieId: req.body.epicerieId,
-		gabarit: req.body.epicerieId,
-		nomGabarait: req.body.nomGabarait
-	});
-	data.save(function(err, data) {
-		if (err) {return	res.status(400).json(err);}
-		Model.findOne( { _id: data.id })
-			.populate('epicerieId')
-			.populate('listeDetail.produitId')
-			.exec(function(err, data) {
-				if (err) {return	res.status(400).json(err);}
-				res.status(201).json(data);
-				console.log('liste createOne : ' + data);
-			});
-	});
+exports.createOne = function (req, res) {
+
+    var data = new Model({
+        date: req.body.date,
+        epicerieId: req.body.epicerieId,
+        modeleId: req.body.modeleId,
+        utilisateurId: req.user
+    });
+
+    data.save(function (err, data) {
+
+        if (err) {
+            return helpers.handleSaveError(res, err, req.body.date);
+        }
+
+        Model.findOne({
+            _id: data.id,
+            utilisateurId: req.user
+        })
+            .populate('epicerieId')
+            .populate('modeleId','nom')
+            .populate('listeDetail.produitId')
+            .exec(function (err, data) {
+
+            	if (err) {
+                    return res.status(400).json(err);
+                }
+
+                if (!data) {
+            		return res.status(404).json();
+            	}
+
+                res.status(201).json(data);
+
+            });
+    });
 };
 
 
