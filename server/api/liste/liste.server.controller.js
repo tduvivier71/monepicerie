@@ -54,7 +54,7 @@ exports.createOne = function (req, res) {
             utilisateurId: req.user
         })
             .populate('epicerieId')
-            .populate('modeleId','nom')
+        //    .populate('modeleId','nom')
             .populate('listeDetail.produitId')
             .exec(function (err, data) {
 
