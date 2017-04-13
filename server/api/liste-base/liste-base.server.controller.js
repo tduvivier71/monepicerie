@@ -12,7 +12,7 @@ var mongoose = require('mongoose'),
 
 exports.find = function (req, res) {
 
-    Model.find()
+    Model.find({  utilisateurId: req.user})
         .populate('epicerieId')
         .populate('listeDetail.produitId')
         .exec(function (err, data) {

@@ -52,6 +52,15 @@ var ListeSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'ListeBase'
     },
+    utilisateurId: {
+        type: Schema.ObjectId,
+        ref: 'Utilisateur',
+        index: true,
+        required: [true, 'Un utilisateur est obligatoire.']
+    },
+
+
+
     listeDetail: [ListeDetailSchema]
 });
 

@@ -7,7 +7,10 @@ var mongoose = require('mongoose'),
 	url = require('url'); // MODIFY
 
 exports.findOne = function(req, res) {
-	Model.findOne( { _id: req.params.id })
+	Model.findOne( { _id: req.params.id,
+      				  utilisateurId: req.user
+
+	})
 		.populate('epicerieId')
         .populate('modeleId')
 		.populate('listeDetail.produitId')
@@ -19,18 +22,20 @@ exports.findOne = function(req, res) {
 };
 
 exports.find = function(req, res) {
-	var filter = {};
-	Model.find( filter )
+    Model.find({  utilisateurId: req.user})
 		.populate('epicerieId')
         .populate('modeleId')
 		.populate('listeDetail.produitId')
 		.exec(function(err, data) {
+
 			if (err)
-			{return res.status(400).json(err);}
+				{return res.status(400).json(err);}
+
 			if (!data)
-			{return res.status(404).json({"message":"non trouvé"});}
+				{return res.status(404).json({"message":"non trouvé"});}
+
 			res.status(200).json(data); // return a array
-			console.log('liste find : ' + data);
+
 		});
 };
 
@@ -54,7 +59,7 @@ exports.createOne = function (req, res) {
             utilisateurId: req.user
         })
             .populate('epicerieId')
-        //    .populate('modeleId','nom')
+            .populate('modeleId')
             .populate('listeDetail.produitId')
             .exec(function (err, data) {
 

@@ -461,7 +461,7 @@
         function _update(_item) {
             _item.$update(
                 function () {
-                    toasterService.update(_item.date);
+                    toasterService.update($filter('date')(_item.date, 'yyyy-MM-dd HH:mm:ss'));
                     _setBrowse();
                 }, function (e) {
                     toasterService.error(e.data.message);
