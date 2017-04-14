@@ -48,6 +48,20 @@ exports.createOne = function (req, res) {
         utilisateurId: req.user
     });
 
+    if (req.body.modeleId && req.body.modeleId.listeBaseDetail) {
+		for (var i=0; i< req.body.modeleId.listeBaseDetail.length; ++i) {
+			data.listeDetail.push({
+				produit: req.body.modeleId.listeBaseDetail[i].produit,
+				marque: req.body.modeleId.listeBaseDetail[i].marque,
+				categorie: req.body.modeleId.listeBaseDetail[i].categorie,
+				conditionnement: req.body.modeleId.listeBaseDetail[i].conditionnement,
+				note: req.body.modeleId.listeBaseDetail[i].description,
+				produitId: req.body.modeleId.listeBaseDetail[i].produitId
+
+			});
+    	}
+    }
+
     data.save(function (err, data) {
 
         if (err) {
@@ -156,6 +170,8 @@ exports.updateOne = function(req, res) {
 
             data.date = req.body.date; // A MODIFIER
             data.epicerieId = req.body.epicerieId; // A MODIFIER
+            data.modeleId = req.body.modeleId; // A MODIFIER
+
             data.save(function (err, data) {
 
                 if (err) {
@@ -165,6 +181,7 @@ exports.updateOne = function(req, res) {
                 Model.findOne( {_id : data.id,
                     utilisateurId: req.user} )
                     .populate('epicerieId')
+                    .populate('modeleId')
                     .populate('listeDetail.produitId')
                     .exec(function (err, data) {
 

@@ -4,7 +4,7 @@
     <div class="panel panel-default noborder">
         <div ng-show="vm.state==='dsEdit'" class="panel-heading">
             <span class="panel-title with-font-xlarge pull-left">
-                {{vm.item.date}}
+                {{vm.item.date | date:'yyyy-MM-dd HH:mm'}}
             </span>
             <div class="pull-right">
                 <button class="btn btn-link"
@@ -60,6 +60,7 @@
                             <select data-kendo-combo-box="vm.modeleWidget"
                                     data-k-options="vm.selectOptionsModele"
                                     data-k-ng-model="vm.item.modeleId"
+                                    ng-disabled="vm.state==='dsEdit'"
                                     id="modeleId_select_id"
                                     name="modeleId_select"
                                     style="width: 100%">

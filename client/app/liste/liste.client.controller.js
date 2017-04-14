@@ -262,12 +262,12 @@
          */
         function remove(_item) {
             _item.$remove(function () {
-                toasterService.remove(_item.date);
                 for (var i in vm.items) {
                     if (vm.items[i] === _item) {
                         vm.items.splice(i, 1);
                     }
                 }
+                toasterService.remove($filter('date')(_item.date, 'yyyy-MM-dd HH:mm:ss'));
             }, function (e) {
                 toasterService.error(e.data);
             });
@@ -348,11 +348,12 @@
                 .then(function success(response) {
                     vm.item = {
                         date :  moment().toDate(),
-                        epicerieId: response.data._id
+                        epicerieId: response.data ? response.data.id : null
                     };
 
-                    vm.epicerieWidget.value(response.data.epicerie);
-
+                    if (response.data) {
+                        vm.epicerieWidget.value(response.data.epicerie);
+                    }
 
                 }, function error(response) {
                     alert('something went wrong')
@@ -441,19 +442,6 @@
                     _setBrowse();
                 }
             });
-
-            $http.get('/api/epicerie/favori')
-                .then(function success(response) {
-                    vm.item = {
-                        date :  moment().toDate(),
-                        epicerieId: response.data._id
-                    };
-
-                }, function error(response) {
-                    alert('something went wrong')
-                    console.log(response);
-                });
-
 
         }
 

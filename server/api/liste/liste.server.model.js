@@ -59,8 +59,6 @@ var ListeSchema = new Schema({
         required: [true, 'Un utilisateur est obligatoire.']
     },
 
-
-
     listeDetail: [ListeDetailSchema]
 });
 
