@@ -281,6 +281,7 @@
             var item = new listeServiceDetail();
             item.$deleteAllDetail({id: vm.item._id});
             vm.produits = produitService.query();
+            vm.listeRapide = listeRapideService.query();
             toasterService.error('La liste a été vidée.');
         }
 
@@ -446,7 +447,7 @@
             item.description = attr_note;
             item.$save(function (result) {
 
-                    vm.item.listeBaseDetail.push({
+                    vm.item.listeDetail.push({
                         _id : result._id,
                         produit_id: attr_produit_id,
                         produit: attr_produit,
