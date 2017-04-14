@@ -7,10 +7,10 @@
         .controller('ListeController', ListeController);
 
     ListeController.$inject = ['$routeParams','$http','$q', '$auth', '$filter',
-        'toasterService', 'focus', 'listeService', 'listeServiceDetail', 'produitService'];
+        'toasterService', 'focus', 'listeService', 'listeServiceDetail', 'produitService', 'listeRapideService'];
 
     function ListeController($routeParams, $http, $q, $auth, $filter,
-         toasterService, focus, listeService, listeServiceDetail, produitService) {
+         toasterService, focus, listeService, listeServiceDetail, produitService, listeRapideService) {
 
         var vm = this;
 
@@ -35,6 +35,8 @@
         vm.search1Open = false;
         vm.search2Open = false;
 
+        vm.listeRapide = [];
+
         vm.toggle = true;
 
         /* Fonctions */
@@ -52,6 +54,7 @@
         vm.openSearch1 = openSearch1;
         vm.deleteAllDetail = deleteAllDetail;
         vm.chooseProduit = chooseProduit;
+        vm.chooseListeRapide = chooseListeRapide
 
         // ************************************************************************************************************/
         // Object configuration
@@ -79,6 +82,23 @@
                 attr_conditionnenent = ui.item.attr('data-conditionnenent');
                 attr_note = ui.item.attr('data-note');
                 attr_prix = ui.item.attr('data-prix');
+            }
+        };
+
+        vm.sortableListeRapideOptions = {
+            //   cursor : 'none',
+            //   scroll : false,
+            placeholder: "app",
+            connectWith: ".apps-container",
+            'ui-floating': true,
+            start: function (event, ui) {
+                attr_id = ui.item.attr('id');
+                attr_produit = ui.item.attr('data-produit');
+                attr_marque = ui.item.attr('data-marque');
+                attr_categorie = ui.item.attr('data-categorie');
+                attr_conditionnenent = ui.item.attr('data-conditionnenent');
+             //   attr_note = ui.item.attr('data-note');
+              //  attr_prix = ui.item.attr('data-prix');
             }
         };
 
@@ -234,6 +254,19 @@
                 description: _produit.description,
                 marque: (!_produit.marqueId)  ? "" : _produit.marqueId.marque,
                 categorie: _produit.categorieId.categorie
+            });
+
+            _produits.splice(_i, 1);
+
+        }
+
+        function chooseListeRapide(_produit, _item, _produits, _i) {
+            _item.listeDetail.push({
+                produit_id: _produit._id,
+                produit: _produit.produit,
+                conditionnement: (!_produit.conditionnement)  ? "" : _produit.conditionnement,
+                marque: (!_produit.marque)  ? "" : _produit.marque,
+                categorie: (!_produit.categorie)  ? "" : _produit.categorie,
             });
 
             _produits.splice(_i, 1);
@@ -442,6 +475,8 @@
                     _setBrowse();
                 }
             });
+
+            vm.listeRapide = listeRapideService.query();
 
         }
 

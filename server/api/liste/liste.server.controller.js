@@ -31,8 +31,8 @@ exports.find = function(req, res) {
 			if (err)
 				{return res.status(400).json(err);}
 
-			if (!data)
-				{return res.status(404).json({"message":"non trouvé"});}
+		//	if (!data)
+		//		{return res.status(404).json({"message":"non trouvé"});}
 
 			res.status(200).json(data); // return a array
 
@@ -50,13 +50,14 @@ exports.createOne = function (req, res) {
 
     if (req.body.modeleId && req.body.modeleId.listeBaseDetail) {
 		for (var i=0; i< req.body.modeleId.listeBaseDetail.length; ++i) {
+			console.log(i);
 			data.listeDetail.push({
-				produit: req.body.modeleId.listeBaseDetail[i].produit,
-				marque: req.body.modeleId.listeBaseDetail[i].marque,
-				categorie: req.body.modeleId.listeBaseDetail[i].categorie,
-				conditionnement: req.body.modeleId.listeBaseDetail[i].conditionnement,
-				note: req.body.modeleId.listeBaseDetail[i].description,
-				produitId: req.body.modeleId.listeBaseDetail[i].produitId
+				produit: req.body.modeleId.listeBaseDetail[i].produit ? req.body.modeleId.listeBaseDetail[i].produit : null,
+				marque: req.body.modeleId.listeBaseDetail[i].marque ?  req.body.modeleId.listeBaseDetail[i].marque : null,
+				categorie: req.body.modeleId.listeBaseDetail[i].categorie ? req.body.modeleId.listeBaseDetail[i].categorie : null,
+				conditionnement: req.body.modeleId.listeBaseDetail[i].conditionnement ? req.body.modeleId.listeBaseDetail[i].conditionnement : null,
+				note: req.body.modeleId.listeBaseDetail[i].description ? req.body.modeleId.listeBaseDetail[i].description : null //,
+			//	 produitId: req.body.modeleId.listeBaseDetail[i].produitId ? req.body.modeleId.listeBaseDetail[i].produitId : null
 
 			});
     	}

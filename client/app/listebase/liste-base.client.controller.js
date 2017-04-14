@@ -299,11 +299,12 @@
             $http.get('/api/epicerie/favori')
                 .then(function success(response) {
                     vm.item = {
-                        epicerieId: response.data._id
+                        epicerieId: response.data ? response.data.id : null
                     };
 
-                  //  vm.epicerieWidget.text(response.data.epicerie);
-                    vm.epicerieWidget.value(response.data.epicerie);
+                    if (response.data) {
+                        vm.epicerieWidget.value(response.data.epicerie);
+                    }
 
                 }, function error(response) {
                     alert('something went wrong')

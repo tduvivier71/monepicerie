@@ -79,6 +79,8 @@
         </div>
     </div>
 
+    <!-- Debut liste -->
+
     <div ng-show="vm.state==='dsEdit'" class="panel panel-default noborder">
         <div class="panel-body" style="padding:0">
             <div class="row">
@@ -199,74 +201,124 @@
             </div>
 
             <div class="row">
+
                 <div class="col-md-6 col-sm-6 col-xm-6">
 
-                    <div class="col-md-3 col-sm-3 col-xm-3  well" style="font-size: 14px; padding: 15px;">
+                    <!-- Liste de produit-->
+                    <div data-ng-show="vm.toggle">
 
-                        <div ng-hide="vm.categoriesSel.length===0">Filtre(s)
-                            <ul class="nobullet">
-                                <div ng-repeat="categorieSel in vm.categoriesSel">
-                                    <li style="margin-right:-15px; color: black;">
-                                        {{categorieSel.categorie}}
-                                        <i ng-click="vm.categorieRemove(categorieSel)" class="material-icons md-hover-16 cursor">clear</i>
+                        <div class="col-md-3 col-sm-3 col-xm-3  well" style="font-size: 14px; padding: 15px;">
+
+                            <div ng-hide="vm.categoriesSel.length===0">Filtre(s)
+                                <ul class="nobullet">
+                                    <div ng-repeat="categorieSel in vm.categoriesSel">
+                                        <li style="margin-right:-15px; color: black;">
+                                            {{categorieSel.categorie}}
+                                            <i ng-click="vm.categorieRemove(categorieSel)" class="material-icons md-hover-16 cursor">clear</i>
+                                        </li>
+                                    </div>
+                                </ul>
+                                <br>
+                            </div>
+
+                            Catégories
+                            <ul class="square">
+                                <div ng-repeat="categorie in vm.categories">
+                                    <li ng-click="vm.addCategorie(categorie)" style="text-decoration: none; color: black; cursor:pointer">
+                                        {{categorie.categorie}}
                                     </li>
                                 </div>
                             </ul>
-                            <br>
                         </div>
 
-                        Catégories
-                        <ul class="square">
-                            <div ng-repeat="categorie in vm.categories">
-                                <li ng-click="vm.addCategorie(categorie)" style="text-decoration: none; color: black; cursor:pointer">
-                                    {{categorie.categorie}}
-                                </li>
-                            </div>
-                        </ul>
-                    </div>
+                        <div class="col-md-9 col-sm-9 col-xm-9" style="padding-right: 0;">
 
-                    <div class="col-md-9 col-sm-9 col-xm-9" style="padding-right: 0;">
-                        <div ui-sortable="vm.sortableProduitsOptions" class="apps-container screen"  ng-model="vm.produits" >
-                            <div class="app"
-                                 data-produit_id="{{produit._id}}"
-                                 data-produit="{{produit.produit}}"
-                                 data-marque="{{ produit.marqueId.marque }}"
-                                 data-categorie="{{ produit.categorieId.categorie }}"
-                                 data-conditionnenent="{{produit.fullConditionnement}}"
-                                 data-note="{{produit.description}}"
-                                 ng-repeat="produit in vm.produits">
+                            <div ui-sortable="vm.sortableProduitsOptions" class="apps-container screen"  ng-model="vm.produits">
+                                <div class="app"
+                                     data-produit_id="{{produit._id}}"
+                                     data-produit="{{produit.produit}}"
+                                     data-marque="{{ produit.marqueId.marque }}"
+                                     data-categorie="{{ produit.categorieId.categorie }}"
+                                     data-conditionnenent="{{produit.fullConditionnement}}"
+                                     data-note="{{produit.description}}"
+                                     ng-repeat="produit in vm.produits">
 
-                                <div>
-                                    {{ produit.produit }}
-                                    <span ng-show="produit.marqueId.marque"> {{ produit.marqueId.marque }} </span>
+                                    <div>
+                                        {{ produit.produit }}
+                                        <span ng-show="produit.marqueId.marque"> {{ produit.marqueId.marque }} </span>
 
-                                    <span style="float:right;">
-                                      <i class="material-icons md-hover-16 cursor"
-                                         aria-hidden="true" ng-click="vm.chooseProduit(produit, vm.item, vm.produits, $index)">chevron_right</i>
-                                    </span>
+                                        <span style="float:right;">
+                                          <i class="material-icons md-hover-16 cursor"
+                                             aria-hidden="true" ng-click="vm.chooseProduit(produit, vm.item, vm.produits, $index)">chevron_right</i>
+                                        </span>
 
-                                    <span style="float:right; font-size: 0.7em; padding: 3px;">
-                                        {{ produit.categorieId.categorie | uppercase}}
-                                    </span>
-                                    <br>
-                                    <span style=" font-size: 0.7em;" ng-show="produit.fullConditionnement">
-                                        {{produit.fullConditionnement}}
-                                    </span>
-                                    <span style="float:right;" ng-show="produit.description">
-                                        <i class="material-icons" uib-tooltip={{produit.description}} style="cursor: pointer;" aria-hidden="true">note</i>
-                                    </span>
+                                        <span style="float:right; font-size: 0.7em; padding: 3px;">
+                                            {{ produit.categorieId.categorie | uppercase}}
+                                        </span>
+                                        <br>
+                                        <span style=" font-size: 0.7em;" ng-show="produit.fullConditionnement">
+                                            {{produit.fullConditionnement}}
+                                        </span>
+                                        <span style="float:right;" ng-show="produit.description">
+                                            <i class="material-icons" uib-tooltip={{produit.description}} style="cursor: pointer;" aria-hidden="true">note</i>
+                                        </span>
+                                    </div>
+
                                 </div>
-
                             </div>
+
                         </div>
+
                     </div>
+
+                    <!-- Liste rapide-->
+                    <div data-ng-hide="vm.toggle">
+
+                        <div class="col-md-12 col-sm-12 col-xm-12" style="padding-right: 0;">
+
+                            <div ui-sortable="vm.sortableListeRapideOptions" class="apps-container screen"  ng-model="vm.listeRapide">
+                                <div class="app"
+                                     data-produit_id="{{listeRapide._id}}"
+                                     data-produit="{{listeRapide.produit}}"
+                                     data-marque="{{ listeRapide.marque }}"
+                                     data-categorie="{{ listeRapide.categorie }}"
+                                     data-conditionnenent="{{listeRapide.conditionnement}}"
+                                     ng-repeat="listeRapide in vm.listeRapide">
+
+                                    <div>
+                                        {{ listeRapide.produit }}
+                                        <span ng-show="listeRapide.marque"> {{ listeRapide.marque }} </span>
+
+                                        <span style="float:right;">
+                                          <i class="material-icons md-hover-16 cursor"
+                                             aria-hidden="true" ng-click="vm.chooseListeRapide(listeRapide, vm.item, vm.listeRapide, $index)">chevron_right</i>
+                                        </span>
+
+                                        <span style="float:right; font-size: 0.7em; padding: 3px;">
+                                            {{ listeRapide.categorie | uppercase}}
+                                        </span>
+                                        <br>
+                                        <span style=" font-size: 0.7em;" ng-show="produit.fullConditionnement">
+                                            {{listeRapide.conditionnement}}
+                                        </span>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
 
                 </div>
 
+
+
                 <div class="col-md-6 col-sm-6 col-xm-6">
                     <div ui-sortable="vm.sortableItemsOptions" class="apps-container screen"  ng-model="vm.items" >
-                        <span ng-show=" vm.item.listeDetail.length===0"
-                              style=" display: table; margin: auto; color:grey; font-style: italic">déposez ici</span>
+                            <span ng-show=" vm.item.listeDetail.length===0"
+                                  style=" display: table; margin: auto; color:grey; font-style: italic">déposez ici</span>
                         <div class="app"
                              id="{{item._id}}"
                              ng-repeat="item in vm.item.listeDetail">
@@ -275,20 +327,20 @@
                                 <span ng-show="item.marque"> {{item.marque}} </span>
 
                                 <span style="float:right;">
-                                  <i class="material-icons md-hover-16 cursor"
-                                     aria-hidden="true" ng-click="vm.removeItem(vm.produits, vm.item, item)">clear</i>
-                                </span>
+                                      <i class="material-icons md-hover-16 cursor"
+                                         aria-hidden="true" ng-click="vm.removeItem(vm.produits, vm.item, item)">clear</i>
+                                    </span>
 
                                 <span style="float:right; font-size: 0.7em; padding: 3px;">
-                                        {{ item.categorie | uppercase}}
-                                    </span>
+                                            {{ item.categorie | uppercase}}
+                                        </span>
                                 <br>
                                 <span style=" font-size: 0.7em;" ng-show="item.conditionnement">
-                                        {{item.conditionnement}}
-                                    </span>
+                                            {{item.conditionnement}}
+                                        </span>
                                 <span style="float:right;" ng-show="item.description">
-                                        <i class="material-icons" uib-tooltip={{item.description}} style="cursor: pointer;" aria-hidden="true">note</i>
-                                </span>
+                                            <i class="material-icons" uib-tooltip={{item.description}} style="cursor: pointer;" aria-hidden="true">note</i>
+                                    </span>
                             </div>
 
 
@@ -297,6 +349,8 @@
                 </div>
 
             </div>
+
+
         </div>
     </div>
 </form>

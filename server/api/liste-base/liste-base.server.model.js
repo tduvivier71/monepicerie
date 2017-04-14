@@ -4,7 +4,6 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
-
 var ListeBaseDetailSchema = new Schema({
     produit: {
         type: String,

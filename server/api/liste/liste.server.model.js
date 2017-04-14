@@ -62,4 +62,6 @@ var ListeSchema = new Schema({
     listeDetail: [ListeDetailSchema]
 });
 
+ListeSchema.index({date: 1, utilisateurId: 1}, {unique: true});
+
 mongoose.model('Liste', ListeSchema);
