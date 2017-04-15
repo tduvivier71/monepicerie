@@ -37,7 +37,7 @@
 
 <div class="row">
     <div>
-        <div ng-cloak ng-show="vm.state != 'dsBrowse'" ng-include src="'app/listebase/liste-base.edit.html'"></div>
+        <div ng-cloak ng-show="vm.state == 'dsInsert' || vm.state == 'dsEdit'" ng-include src="'app/listebase/liste-base.edit.html'"></div>
         <div ng-cloak ng-show="vm.state == 'dsBrowse'" ng-include src="'app/listebase/liste-base.list.html'"></div>
     </div>
 </div>

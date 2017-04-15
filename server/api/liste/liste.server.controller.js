@@ -16,7 +16,7 @@ exports.findOne = function(req, res) {
 		.populate('listeDetail.produitId')
 		.exec(function(err, data) {
 			if (err) {return res.status(400).json(err);}
-			if (!data) {return res.status(404).json();}
+		//	if (!data) {return res.status(404).json();}
 			res.status(200).json(data);
 		});
 };
@@ -82,9 +82,9 @@ exports.createOne = function (req, res) {
                     return res.status(400).json(err);
                 }
 
-                if (!data) {
-            		return res.status(404).json();
-            	}
+             //   if (!data) {
+            	//	return res.status(404).json();
+            //	}
 
                 res.status(201).json(data);
 
@@ -138,10 +138,10 @@ exports.deleteOneDetail = function(req, res) {
 				console.log('**deleteOneDetail -> err **');
 				return res.status(404).json({"err": err});
 			}
-			if (!data) {
-				console.log('**deleteOneDetail -> id non trouvé **');
-				return res.status(404).json({"id non trouvé": req.body.id});
-			}
+		///	if (!data) {
+		//		console.log('**deleteOneDetail -> id non trouvé **');
+			//	return res.status(404).json({"id non trouvé": req.body.id});
+		//	}
 			console.log('**deleteOneDetail -> data trouvé **');
 			console.log(data);
 				//console.log('**data.listeDetail** : ' + data.listeDetail );
@@ -166,10 +166,10 @@ exports.deleteAllDetail = function(req, res) {
                 console.log('**deleteAllDetail -> err **');
                 return res.status(404).json({"err": err});
             }
-            if (!data) {
-                console.log('**deleteAllDetail -> id non trouvé **');
-                return res.status(404).json({"id non trouvé": req.body.id});
-            }
+        //    if (!data) {
+         //       console.log('**deleteAllDetail -> id non trouvé **');
+           //     return res.status(404).json({"id non trouvé": req.body.id});
+        //    }
             console.log('**deleteOneDetail -> data trouvé **');
             console.log(data);
 
