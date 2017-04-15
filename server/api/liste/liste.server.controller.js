@@ -100,16 +100,17 @@ exports.createOne = function (req, res) {
  *
  */
 exports.createOneDetail = function(req, res) {
+    // req.params.id = conteneur
 	Model.findById(req.params.id,
 		function (err, data) {
 			if (!err) {
 					data.listeDetail.push({
-						produitId: req.body.produitId,
 						produit: req.body.produit,
 						marque: req.body.marque,
 						categorie: req.body.categorie,
 						conditionnement: req.body.conditionnement,
-						note: req.body.note
+                        description: req.body.description,
+                        produitId: req.body.produitId
 				});
 				data.save(function (err, data) {
 					if (err) {return res.status(400).json(err);}

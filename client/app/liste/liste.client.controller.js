@@ -22,7 +22,6 @@
         vm.searchItem = '';     // string
         vm.selectedItem = {};   // Object
         vm.state = '';          // string
-        vm.error = '';          // string
 
         vm.sorting = {
             type: 'produit',
@@ -46,14 +45,16 @@
         vm.save = save;
         vm.setEdit = setEdit;
         vm.setInsert = setInsert;
+
         vm.createListeDetail = _createListeDetail;
+
 
         vm.addCategorie = addCategorie;
         vm.categorieRemove = categorieRemove;
 
         vm.openSearch1 = openSearch1;
         vm.deleteAllDetail = deleteAllDetail;
-        vm.chooseProduit = chooseProduit;
+        vm.addProduitByChevron = _addProduitByChevron;
         vm.chooseListeRapide = chooseListeRapide
 
         // ************************************************************************************************************/
@@ -61,12 +62,11 @@
         // ************************************************************************************************************/
         var attr_id;
         var attr_produit;
-        var attr_produit_id;
         var attr_marque;
         var attr_categorie;
         var attr_conditionnenent;
         var attr_note;
-        var attr_prix;
+        var attr_produitId;
 
         vm.sortableProduitsOptions = {
          //   cursor : 'none',
@@ -75,13 +75,13 @@
             connectWith: ".apps-container",
             'ui-floating': true,
             start: function (event, ui) {
-                attr_id = ui.item.attr('id');
+                attr_id = ui.item.attr('data-id');
                 attr_produit = ui.item.attr('data-produit');
                 attr_marque = ui.item.attr('data-marque');
                 attr_categorie = ui.item.attr('data-categorie');
                 attr_conditionnenent = ui.item.attr('data-conditionnenent');
                 attr_note = ui.item.attr('data-note');
-                attr_prix = ui.item.attr('data-prix');
+                attr_produitId = ui.item.attr('data-produitId');
             }
         };
 
@@ -92,22 +92,27 @@
             connectWith: ".apps-container",
             'ui-floating': true,
             start: function (event, ui) {
-                attr_id = ui.item.attr('id');
                 attr_produit = ui.item.attr('data-produit');
                 attr_marque = ui.item.attr('data-marque');
                 attr_categorie = ui.item.attr('data-categorie');
                 attr_conditionnenent = ui.item.attr('data-conditionnenent');
-             //   attr_note = ui.item.attr('data-note');
-              //  attr_prix = ui.item.attr('data-prix');
+                attr_note = ui.item.attr('data-note');
+                attr_produitId = ui.item.attr('data-produitId');
             }
         };
 
         vm.sortableItemsOptions = {
             placeholder: "app",
-         //   connectWith: ".apps-container",
-         //   'ui-floating': true,
             receive: function (event, ui) {
-                _createListeDetail(vm.item._id, attr_id);
+                var droppedDetail = {
+                    produit : attr_produit,
+                    marque : attr_marque,
+                    categorie : attr_categorie,
+                    conditionnement : attr_conditionnenent,
+                    description : attr_note,
+                    produitId : attr_produitId
+                };
+                _addDetailByDrop(vm.item._id, droppedDetail);
             },
         };
 
@@ -246,18 +251,50 @@
             }
         }
 
-        function chooseProduit(_produit, _item, _produits, _i) {
-            _item.listeDetail.push({
-                produit_id: _produit._id,
-                produit: _produit.produit,
-                conditionnement: _produit.fullConditionnement,
-                description: _produit.description,
-                marque: (!_produit.marqueId)  ? "" : _produit.marqueId.marque,
-                categorie: _produit.categorieId.categorie
-            });
+        function _addProduitByChevron(_produit, _i) {
 
-            _produits.splice(_i, 1);
+            var droppedDetail = {
+                produit : _produit.produit,
+                marque : (!_produit.marqueId)  ? "" : _produit.marqueId.marque,
+                categorie : _produit.categorieId.categorie,
+                conditionnement :  _produit.fullConditionnement,
+                description : _produit.description,
+                produitId : _produit._id
+            };
 
+
+            _createListeDetail(vm.item._id, droppedDetail);
+
+            vm.produits.splice(_i, 1);
+
+        }
+
+        function _addDetailByDrop(_id, _detail) {
+            _createListeDetail(_id, _detail);
+        }
+
+        function _createListeDetail(_id, _detail) {
+            var item = new listeServiceDetail();
+            item._id = _id;
+            item.produit = _detail.produit;
+            item.marque = _detail.marque;
+            item.categorie = _detail.categorie;
+            item.conditionnement = _detail.conditionnement;
+            item.description = _detail.description;
+            item.produitId = _detail.produitId;
+            item.$save(function (result) {
+                    vm.item.listeDetail.push({
+                        _id : result._id,
+                        produitId: result.produitId,
+                        produit: result.produit,
+                        marque : result.marque,
+                        categorie : result.categorie,
+                        conditionnement : result.conditionnement,
+                        description : result.description
+                    });
+                    toasterService.save(result.produit);
+                }
+            );
         }
 
         function chooseListeRapide(_produit, _item, _produits, _i) {
@@ -354,7 +391,8 @@
 
         /**
          * Set edit state
-         */        function setEdit(_item) {
+         */
+        function setEdit(_item) {
             focus(vm.input1_focus);
             _resetForm('dsEdit');
             vm.selectedItem = angular.copy(_item);
@@ -369,7 +407,6 @@
 
             var queryParam = {listeIds: ids };
             vm.produits = produitService.query(queryParam);
-
         }
 
         /**
@@ -397,6 +434,8 @@
             vm.produits = produitService.query();
             focus(vm.input1_focus);
             _resetForm('dsInsert');
+
+            vm.isCollapsed = false;
 
 
 
@@ -436,31 +475,7 @@
             );
         }
 
-        function _createListeDetail(_id, _produitId) {
-            var item = new listeServiceDetail();
-            item._id = _id;
-            item.produitId = attr_produit_id;
-            item.produit = attr_produit;
-            item.marque = attr_marque;
-            item.categorie = attr_categorie;
-            item.conditionnement = attr_conditionnenent;
-            item.description = attr_note;
-            item.$save(function (result) {
 
-                    vm.item.listeDetail.push({
-                        _id : result._id,
-                        produit_id: attr_produit_id,
-                        produit: attr_produit,
-                        marque : attr_marque,
-                        categorie : attr_categorie,
-                        conditionnement : attr_conditionnenent,
-                        description : attr_note
-                    });
-
-                    toasterService.save(attr_produit);
-                }
-            );
-        }
 
 
 

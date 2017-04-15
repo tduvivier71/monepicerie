@@ -109,8 +109,7 @@ ProduitSchema.virtual('fullFormat').get(function() {
     }
 
     return '';
-
- //   return this.quantite + ' ' + this.formatId.format.toLowerCase();
+    //return this.quantite + ' ' + this.formatId.format.toLowerCase();
 
 });
 
