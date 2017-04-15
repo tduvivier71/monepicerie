@@ -108,7 +108,9 @@ ProduitSchema.virtual('fullFormat').get(function() {
         return this.formatId.format.toLowerCase();
     }
 
-    return this.quantite + ' ' + this.formatId.format.toLowerCase();
+    return '';
+
+ //   return this.quantite + ' ' + this.formatId.format.toLowerCase();
 
 });
 

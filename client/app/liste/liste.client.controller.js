@@ -279,8 +279,11 @@
                 vm.item.listeDetail.splice(i, 1);
             }
             var item = new listeServiceDetail();
+
             item.$deleteAllDetail({id: vm.item._id});
+
             vm.produits = produitService.query();
+
             toasterService.error('La liste a été vidée.');
         }
 

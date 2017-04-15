@@ -52,11 +52,11 @@ exports.createOne = function (req, res) {
 		for (var i=0; i< req.body.modeleId.listeBaseDetail.length; ++i) {
 			console.log(i);
 			data.listeDetail.push({
-				produit: req.body.modeleId.listeBaseDetail[i].produit ? req.body.modeleId.listeBaseDetail[i].produit : null,
-				marque: req.body.modeleId.listeBaseDetail[i].marque ?  req.body.modeleId.listeBaseDetail[i].marque : null,
-				categorie: req.body.modeleId.listeBaseDetail[i].categorie ? req.body.modeleId.listeBaseDetail[i].categorie : null,
-				conditionnement: req.body.modeleId.listeBaseDetail[i].conditionnement ? req.body.modeleId.listeBaseDetail[i].conditionnement : null,
-				note: req.body.modeleId.listeBaseDetail[i].description ? req.body.modeleId.listeBaseDetail[i].description : null //,
+				produit: req.body.modeleId.listeBaseDetail[i].produit ? req.body.modeleId.listeBaseDetail[i].produit : null //,
+		//		marque: req.body.modeleId.listeBaseDetail[i].marque ?  req.body.modeleId.listeBaseDetail[i].marque : null,
+		//		categorie: req.body.modeleId.listeBaseDetail[i].categorie ? req.body.modeleId.listeBaseDetail[i].categorie : null,
+		//		conditionnement: req.body.modeleId.listeBaseDetail[i].conditionnement ? req.body.modeleId.listeBaseDetail[i].conditionnement : null,
+		//		note: req.body.modeleId.listeBaseDetail[i].description ? req.body.modeleId.listeBaseDetail[i].description : null //,
 			//	 produitId: req.body.modeleId.listeBaseDetail[i].produitId ? req.body.modeleId.listeBaseDetail[i].produitId : null
 
 			});
