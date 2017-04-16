@@ -48,7 +48,6 @@
 
         vm.createListeDetail = _createListeDetail;
 
-
         vm.addCategorie = addCategorie;
         vm.categorieRemove = categorieRemove;
 
@@ -262,7 +261,6 @@
                 produitId : _produit._id
             };
 
-
             _createListeDetail(vm.item._id, droppedDetail);
 
             vm.produits.splice(_i, 1);
@@ -402,7 +400,7 @@
             var ids = [];
 
             vm.item.listeDetail.forEach(function(element) {
-                ids.push(element.produitId);
+                ids.push(element.produitId._id);
             });
 
             var queryParam = {listeIds: ids };
@@ -468,15 +466,22 @@
                     vm.items.push(item);
                     toasterService.save($filter('date')(_item.date, 'yyyy-MM-dd HH:mm:ss'));
                     vm.state = 'dsEdit';
+
+                    var ids = [];
+
+                    vm.item.listeDetail.forEach(function(element) {
+                        ids.push(element.produitId);
+                    });
+
+                    var queryParam = {listeIds: ids };
+                    vm.produits = produitService.query(queryParam);
+
                 }, function (e) {
                     toasterService.error(e.data.message);
                     focus(vm.input1_focus);
                 }
             );
         }
-
-
-
 
 
         function _init() {
@@ -519,7 +524,7 @@
 
         function _revertSelectedItem() {
             angular.forEach(vm.items, function (item, key) {
-                if (item._id === vm.selectedItem._id) {
+                if (item && item._id && vm.selectedItem && vm.selectedItem._id && item._id === vm.selectedItem._id) {
                     vm.items[key] = vm.selectedItem;
                 }
             });

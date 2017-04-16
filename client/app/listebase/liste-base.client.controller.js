@@ -420,7 +420,7 @@
 
         function _revertSelectedItem() {
             angular.forEach(vm.items, function (item, key) {
-                if (item._id && vm.selectedItem._id && item._id === vm.selectedItem._id) {
+                if (item && item._id && vm.selectedItem && vm.selectedItem._id && item._id === vm.selectedItem._id) {
                     vm.items[key] = vm.selectedItem;
                 }
             });

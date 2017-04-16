@@ -12,8 +12,8 @@ var unite = require('./api/unite/unite.server.controller.js');
 var format = require('./api/format/format.server.controller.js');
 var produit = require('./api/produit/produit.server.controller.js');
 var liste = require('./api/liste/liste.server.controller.js');
-var listeBase = require('./api/liste-base/liste-base.server.controller.js');
-var listeRapide = require('./api/liste-modele/liste-modele.server.controller.js');
+var listeBase = require('./api/liste-modele/liste-modele.server.controller.js');
+var listeRapide = require('./api/liste-rapide/liste-rapide.server.controller.js');
 var utilisateur = require('./api/utilisateur/utilisateur.server.controller.js');
 
 /*

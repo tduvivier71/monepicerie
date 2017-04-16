@@ -2,6 +2,7 @@
 
 var mongoose = require('mongoose'),
 	helpers = require('../shared/helpers.server.controller.js'),
+    Produit = mongoose.model('Produit'), // MODIFY
 	Model = mongoose.model('Liste'), // MODIFY
     SubModel = mongoose.model('ListeDetail'),
 	url = require('url'); // MODIFY
@@ -48,18 +49,53 @@ exports.createOne = function (req, res) {
         utilisateurId: req.user
     });
 
-    if (req.body.modeleId && req.body.modeleId.listeBaseDetail) {
-		for (var i=0; i< req.body.modeleId.listeBaseDetail.length; ++i) {
-			console.log(i);
-			data.listeDetail.push({
-				produit: req.body.modeleId.listeBaseDetail[i].produit ? req.body.modeleId.listeBaseDetail[i].produit : null //,
-		//		marque: req.body.modeleId.listeBaseDetail[i].marque ?  req.body.modeleId.listeBaseDetail[i].marque : null,
-		//		categorie: req.body.modeleId.listeBaseDetail[i].categorie ? req.body.modeleId.listeBaseDetail[i].categorie : null,
-		//		conditionnement: req.body.modeleId.listeBaseDetail[i].conditionnement ? req.body.modeleId.listeBaseDetail[i].conditionnement : null,
-		//		note: req.body.modeleId.listeBaseDetail[i].description ? req.body.modeleId.listeBaseDetail[i].description : null //,
-			//	 produitId: req.body.modeleId.listeBaseDetail[i].produitId ? req.body.modeleId.listeBaseDetail[i].produitId : null
+   if (req.body.modeleId && req.body.modeleId.listeBaseDetail) {
 
-			});
+		for (var i=0; i< req.body.modeleId.listeBaseDetail.length; ++i) {
+
+            data.listeDetail.push({
+                produit: req.body.modeleId.listeBaseDetail[i].produit ? req.body.modeleId.listeBaseDetail[i].produit : null,
+                marque: req.body.modeleId.listeBaseDetail[i].marque ?  req.body.modeleId.listeBaseDetail[i].marque : null,
+                categorie: req.body.modeleId.listeBaseDetail[i].categorie ? req.body.modeleId.listeBaseDetail[i].categorie : null,
+                conditionnement: req.body.modeleId.listeBaseDetail[i].conditionnement ? req.body.modeleId.listeBaseDetail[i].conditionnement : null,
+                description: req.body.modeleId.listeBaseDetail[i].description ? req.body.modeleId.listeBaseDetail[i].description : null,
+                produitId: req.body.modeleId.listeBaseDetail[i].produitId ? req.body.modeleId.listeBaseDetail[i].produitId : null
+            });
+
+         /*   if (req.body.modeleId.listeBaseDetail[i].produitId) {
+
+                Produit.findOne( { _id: req.body.modeleId.listeBaseDetail[i].produitId,
+                    utilisateurId: req.user
+                })
+                    .populate('categorieId')
+                    .populate('marqueId')
+                    .exec(function(err, data2) {
+
+                       if  (data2) {
+
+                           data.listeDetail.push({
+                               produit: data2.produit,
+                               marque: data2.marqueId.marque ,
+                               categorie: data2.categorieId.categorie,
+                               conditionnement: data2.fullConditionnement,
+                               description: data2.description,
+                               produitId: data2.id
+                           });
+
+                       }
+
+                    });
+
+            } else {
+                data.listeDetail.push({
+                    produit: req.body.modeleId.listeBaseDetail[i].produit ? req.body.modeleId.listeBaseDetail[i].produit : null,
+                    marque: req.body.modeleId.listeBaseDetail[i].marque ?  req.body.modeleId.listeBaseDetail[i].marque : null,
+                    categorie: req.body.modeleId.listeBaseDetail[i].categorie ? req.body.modeleId.listeBaseDetail[i].categorie : null,
+                    conditionnement: req.body.modeleId.listeBaseDetail[i].conditionnement ? req.body.modeleId.listeBaseDetail[i].conditionnement : null,
+                    description: req.body.modeleId.listeBaseDetail[i].description ? req.body.modeleId.listeBaseDetail[i].description : null
+                });
+            } */
+
     	}
     }
 
@@ -73,18 +109,15 @@ exports.createOne = function (req, res) {
             _id: data.id,
             utilisateurId: req.user
         })
+
             .populate('epicerieId')
             .populate('modeleId')
-            .populate('listeDetail.produitId')
+          //  .populate('listeDetail.produitId')
             .exec(function (err, data) {
 
             	if (err) {
                     return res.status(400).json(err);
                 }
-
-             //   if (!data) {
-            	//	return res.status(404).json();
-            //	}
 
                 res.status(201).json(data);
 

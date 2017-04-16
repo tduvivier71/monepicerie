@@ -307,47 +307,48 @@
                             </div>
 
                         </div>
-
                     </div>
-
                 </div>
 
                 <div class="col-md-6 col-sm-6 col-xm-6">
-                    <div ui-sortable="vm.sortableItemsOptions" class="apps-container screen"  ng-model="vm.items" >
-                            <span ng-show=" vm.item.listeDetail.length===0"
+                    <div ui-sortable="vm.sortableItemsOptions" class="apps-container screen"  data-ng-model="vm.items" >
+                            <span data-ng-show=" vm.item.listeDetail.length===0"
                                   style=" display: table; margin: auto; color:grey; font-style: italic">déposez ici</span>
                         <div class="app"
                              id="{{item._id}}"
-                             ng-repeat="item in vm.item.listeDetail">
+                             data-ng-repeat="item in vm.item.listeDetail">
                             <div>
                                 {{ item.produit }}
-                                <span ng-show="item.marque"> {{item.marque}} </span>
-
+                                <span data-ng-show="item.marque">
+                                    {{item.marque}}
+                                </span>
                                 <span style="float:right;">
                                       <i class="material-icons md-hover-16 cursor"
-                                         aria-hidden="true" ng-click="vm.removeItem(vm.produits, vm.item, item)">clear</i>
-                                    </span>
-
+                                         aria-hidden="true"
+                                         data-ng-click="vm.removeItem(vm.produits, vm.item, item)">
+                                          clear
+                                      </i>
+                                </span>
                                 <span style="float:right; font-size: 0.7em; padding: 3px;">
-                                            {{ item.categorie | uppercase}}
-                                        </span>
+                                    {{ item.categorie | uppercase}}
+                                </span>
                                 <br>
-                                <span style=" font-size: 0.7em;" ng-show="item.conditionnement">
-                                            {{item.conditionnement}}
-                                        </span>
-                                <span style="float:right;" ng-show="item.description">
-                                            <i class="material-icons" uib-tooltip={{item.description}} style="cursor: pointer;" aria-hidden="true">description</i>
-                                    </span>
+                                <span style=" font-size: 0.7em;"
+                                      data-ng-show="item.conditionnement">
+                                    {{item.conditionnement}}
+                                </span>
+                                <span style="float:right;" data-ng-show="item.description">
+                                    <i class="material-icons"
+                                       uib-tooltip={{item.description}}
+                                       style="cursor: pointer;" aria-hidden="true">
+                                        description
+                                    </i>
+                                </span>
                             </div>
-
-
                         </div>
                     </div>
                 </div>
-
             </div>
-
-
         </div>
     </div>
 </form>

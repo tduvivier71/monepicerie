@@ -96,30 +96,24 @@ ProduitSchema.set('toJSON', { virtuals: true })
 
 ProduitSchema.virtual('fullFormat').get(function() {
 
-	if (!this.formatId) {
+	if (!this.formatId || !this.formatId.format) {
         return '';
 	}
 
-    if (this.quantite === 0 && this.formatId && this.formatId.format === '') {
-        return '';
-    }
-
-    if (this.quantite === 0 && this.formatId && this.formatId.format !== '') {
-        return this.formatId.format.toLowerCase();
+    if (this.quantite ) {
+        if (this.quantite === 0) {
+            if (this.formatId.format === '') {
+                return '';
+            } else {
+                return this.formatId.format.toLowerCase();
+            }
+        } else {
+            return this.quantite + ' ' + this.formatId.format.toLowerCase();
+		}
     }
 
     return '';
-    //return this.quantite + ' ' + this.formatId.format.toLowerCase();
 
-});
-
-ProduitSchema.virtual('fullUnite').get(function() {
-
-	if (this.nombre  === 0 ) {
-		return '';
-	}
-
-    return this.nombre + ' ' + this.uniteId.abreviation.toLowerCase();
 });
 
 ProduitSchema.virtual('fullConditionnement').get(function() {
@@ -132,11 +126,27 @@ ProduitSchema.virtual('fullConditionnement').get(function() {
         return this.fullFormat.toLowerCase();
     }
 
-	if (this.fullFormat !== '' && this.fullUnite !== '') {
+    if (this.fullFormat !== '' && this.fullUnite !== '') {
         return this.fullFormat.toLowerCase() + ' (' + this.fullUnite.toLowerCase() + ')';
     }
 
 });
+
+ProduitSchema.virtual('fullUnite').get(function() {
+
+	if (!this.nombre) {
+        return '';
+	}
+
+	if (this.nombre  !== 0 && this.uniteId && this.uniteId.abreviation) {
+        return this.nombre + ' ' + this.uniteId.abreviation.toLowerCase();
+    }
+
+    return '';
+
+});
+
+
 
 
 

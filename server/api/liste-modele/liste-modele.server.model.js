@@ -4,7 +4,7 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
-var ListeRapideSchema = new Schema({
+var ListeBaseDetailSchema = new Schema({
     produit: {
         type: String,
         default: '',
@@ -25,18 +25,45 @@ var ListeRapideSchema = new Schema({
         default: '',
         trim: true
     },
+    description: {
+        type: String,
+        default: '',
+        trim: true
+    },
     produitId: {
         type: Schema.Types.ObjectId,
         ref: 'Produit'
+    }
+});
+
+mongoose.model('ListeBaseDetail', ListeBaseDetailSchema);
+
+var ListeBaseSchema = new Schema({
+
+    nom: {
+        type: String,
+        default: '',
+        trim: true,
+        index: true,
+        required: [true, 'Le nom de la liste est obligatoire.'],
+        maxlength: [50, 'La longueur maximale pour le nom de la liste est de 50 caractères.']
     },
+
+    epicerieId: {
+        type: Schema.Types.ObjectId,
+        ref: 'Epicerie'
+    },
+
     utilisateurId: {
         type: Schema.ObjectId,
         ref: 'Utilisateur',
         index: true,
         required: [true, 'Un utilisateur est obligatoire.']
-    }
+    },
+
+    listeBaseDetail: [ListeBaseDetailSchema]
 });
 
-ListeRapideSchema.index({produit: 1, utilisateurId: 1}, {unique: true});
+ListeBaseSchema.index({nom: 1, utilisateurId: 1}, {unique: true});
 
-mongoose.model('ListeRapide', ListeRapideSchema);
+mongoose.model('ListeBase', ListeBaseSchema);
