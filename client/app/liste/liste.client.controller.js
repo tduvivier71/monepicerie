@@ -295,17 +295,26 @@
             );
         }
 
-        function chooseListeRapide(_produit, _item, _produits, _i) {
-            _item.listeDetail.push({
-                produit_id: _produit._id,
-                produit: _produit.produit,
-                conditionnement: (!_produit.conditionnement)  ? "" : _produit.conditionnement,
-                marque: (!_produit.marque)  ? "" : _produit.marque,
-                categorie: (!_produit.categorie)  ? "" : _produit.categorie,
+        function chooseListeRapide(_produit, _i) {
+
+            var droppedDetail = {
+                produit : _produit.produit,
+                marque : _produit.marque,
+                categorie : _produit.categorie,
+                conditionnement :  _produit.conditionnement,
+                description : _produit.description,
+                produitId : _produit._id
+            };
+
+            _createListeDetail(vm.item._id, droppedDetail);
+
+            vm.listeRapide.splice(_i, 1);
+
+            _produit.$remove(function () {
+                toasterService.remove(_produit.produit);
+            }, function (e) {
+                toasterService.error(e.data);
             });
-
-            _produits.splice(_i, 1);
-
         }
 
         function deleteAllDetail() {
