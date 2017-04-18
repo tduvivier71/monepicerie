@@ -1,5 +1,4 @@
 <form novalidate name="vm.form" role="form">
-    <!--ng-model-options="{ updateOn: 'default', debounce: { 'default': 100, 'blur': 0 } }">-->
     <div class="row">
         <div class="col-md-1 col-sm-1 col-xs-2">
             <div class="form-group">
@@ -8,15 +7,15 @@
                 </label>
                 <i class="material-icons md-36 md-light cursor"
                    style="margin-left: 5px;"
-                   ng-model="vm.item.favori"
-                   ng-click="vm.item.favori=!vm.item.favori"
-                   ng-class="vm.item.favori ? 'md-yellow' : 'md-light'">star</i>
+                   data-ng-model="vm.item.favori"
+                   data-ng-click="vm.item.favori=!vm.item.favori"
+                   data-ng-class="vm.item.favori ? 'md-yellow' : 'md-light'">star</i>
             </div>
         </div>
         <div class="col-md-11 col-sm-11 col-xs-10">
-            <div class="form-group" ng-class="{'has-error': vm.form.$submitted && vm.form.categorie_input.$invalid}">
+            <div class="form-group" data-ng-class="{'has-error': vm.form.$submitted && vm.form.categorie_input.$invalid}">
                 <label for="categorie_input_id">
-                    {{"CATEGORIE"|translate}}<span style="color: red;" uib-tooltip={{"VALEUR_OBLIGATOIRE"|translate}}>*</span>
+                    {{"CATEGORIE"|translate}}<span style="color: red;" data-uib-tooltip={{"VALEUR_OBLIGATOIRE"|translate}}>*</span>
                 </label>
                 <input auto-focus
                        autocomplete="off"

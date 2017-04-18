@@ -409,7 +409,9 @@
             var ids = [];
 
             vm.item.listeDetail.forEach(function(element) {
-                ids.push(element.produitId._id);
+                if (element.produitId) {
+                    ids.push(element.produitId._id);
+                }
             });
 
             var queryParam = {listeIds: ids };

@@ -8,13 +8,13 @@
             <th class="col-md-9 col-sm-9 col-xs-9">
                 <a href="javascript:void(0)"
                    style="text-decoration:none; color:black;"
-                   uib-tooltip={{"HINT_TRIER_CATEGORIE"|translate}}
+                   data-uib-tooltip={{"HINT_TRIER_CATEGORIE"|translate}}
                    ng-click="vm.sorting.reverse = !vm.sorting.reverse">
                    {{"CATEGORIE"|translate}}
-                   <span ng-show="!vm.sorting.reverse">
+                   <span data-ng-show="!vm.sorting.reverse">
                        <i class="material-icons md-16">arrow_drop_down</i>
                    </span>
-                   <span ng-show="vm.sorting.reverse">
+                   <span data-ng-show="vm.sorting.reverse">
                        <i class="material-icons md-16">arrow_drop_up</i>
                    </span>
                 </a>
@@ -40,14 +40,14 @@
             <td class="col-md-2 col-sm-2 col-xs-2" style="text-align: right;">
                 <button class="btn btn-primary btn-sm"
                         data-toggle="tooltip"
-                        ng-click="vm.setEdit(item)"
-                        uib-tooltip={{"HINT_EDITER_CATEGORIE"|translate}}>
+                        data-ng-click="vm.setEdit(item)"
+                        data-uib-tooltip={{"HINT_EDITER_CATEGORIE"|translate}}>
                         <i class="material-icons md-16">edit</i>
                 </button>
                 <button class="btn btn-danger btn-sm"
                         data-toggle="tooltip"
-                        ng-click="vm.remove(item)"
-                        uib-tooltip={{"HINT_DETRUIRE_CATEGORIE"|translate}}>
+                        data-ng-click="vm.remove(item, $index)"
+                        data-uib-tooltip={{"HINT_DETRUIRE_CATEGORIE"|translate}}>
                         <i class="material-icons md-16">delete</i>
                 </button>
             </td>

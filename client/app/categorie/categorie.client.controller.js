@@ -6,20 +6,11 @@
         .module('app.categorie')
         .controller('CategorieController', CategorieController);
 
-    CategorieController.$inject = ['$log', '$auth',
-                                   'categorieService', 'toasterService','focus'];
+    CategorieController.$inject = ['categorieService', 'toasterService','focus'];
 
-    function CategorieController($log, $auth,
-                                 categorieService, toasterService, focus) {
+    function CategorieController(categorieService, toasterService, focus) {
 
         var vm = this;
-
-        /**
-         * typedef {Object}
-         * @property  {string} categorie
-         * @property  {boolean} favori
-         * @function reset
-         */
 
         /* Variables */
         vm.item = {};           // Object
@@ -29,7 +20,6 @@
         vm.searchItem = '';     // string
         vm.selectedItem = {};   // Object
         vm.state = '';          // string
-        vm.error = '';          // string
 
         vm.sorting = {
             type: 'categorie',
@@ -61,14 +51,10 @@
             }
         }
 
-        function remove(_item) {
+        function remove(_item, _i) {
             _item.$remove(function () {
                 toasterService.remove(_item.categorie);
-                for (var i in vm.items) {
-                    if (vm.items[i] === _item) {
-                        vm.items.splice(i, 1);
-                    }
-                }
+                vm.items.splice(_i, 1);
             }, function (e) {
                 toasterService.error(e.data);
             });
@@ -127,9 +113,7 @@
                             }
                         });
                     }
-
                     vm.items.push(item);
-
                     toasterService.save(_item.categorie);
                     _setBrowse();
                 }, function (e) {

@@ -2,7 +2,7 @@
 
 var mongoose = require('mongoose'),
 	helpers = require('../shared/helpers.server.controller.js'),
-	Model = mongoose.model('Categorie'); // MODIFY
+	Model = mongoose.model('Categorie');
 
 exports.find = function (req, res) {
 
@@ -29,10 +29,6 @@ exports.findUnique = function (req, res) {
 
         if (err) {
             return res.status(400).json(err);
-        }
-
-        if (!data) {
-            return res.status(404).json();
         }
 
         res.status(200).json(data);
