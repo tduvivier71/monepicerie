@@ -6,9 +6,9 @@
         .module('app.categorie')
         .controller('CategorieController', CategorieController);
 
-    CategorieController.$inject = ['categorieService', 'toasterService','focus'];
+    CategorieController.$inject = ['categorieService', 'toasterService','focus', 'helperService'];
 
-    function CategorieController(categorieService, toasterService, focus) {
+    function CategorieController(categorieService, toasterService, focus, helperService) {
 
         var vm = this;
 
@@ -158,12 +158,14 @@
         }
 
         function _revertSelectedItem() {
-            angular.forEach(vm.items, function (item, key) {
+            helperService.revertSelectedItem(vm.items, vm.selectedItem);
+
+    /*        angular.forEach(vm.items, function (item, key) {
                 if (item._id === vm.selectedItem._id) {
                     vm.items[key] = vm.selectedItem;
                 }
             });
-            vm.selectedItem = null;
+            vm.selectedItem = null; */
         }
 
         function _setBrowse() {
