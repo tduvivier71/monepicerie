@@ -92,7 +92,7 @@
         // ************************************************************************************************************/
 
         function _cancelEdit() {
-            _revertSelectedItem();
+            helperService.revertSelectedItem(vm.items, vm.selectedItem);
             _setBrowse();
         }
 
@@ -155,17 +155,6 @@
                 vm.form.$setPristine();
                 vm.form.$setUntouched();
             }
-        }
-
-        function _revertSelectedItem() {
-            helperService.revertSelectedItem(vm.items, vm.selectedItem);
-
-    /*        angular.forEach(vm.items, function (item, key) {
-                if (item._id === vm.selectedItem._id) {
-                    vm.items[key] = vm.selectedItem;
-                }
-            });
-            vm.selectedItem = null; */
         }
 
         function _setBrowse() {

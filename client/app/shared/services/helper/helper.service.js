@@ -6,12 +6,14 @@
         .module('app')
         .service('helperService', helperService);
 
-    helperService.$inject = [''];
+ //   helperService.$inject = [''];
 
     function helperService() {
 
         var service = {
             revertSelectedItem: _revertSelectedItem,
+            resetForm: _resetForm
+
         };
         return service;
 
@@ -24,6 +26,14 @@
                 }
             });
             _selectedItem = null;
+        }
+
+        function _resetForm(state) {
+            vm.state = state;
+            if (vm.form && vm.form.$dirty && vm.form.$submitted) {
+                vm.form.$setPristine();
+                vm.form.$setUntouched();
+            }
         }
 
 

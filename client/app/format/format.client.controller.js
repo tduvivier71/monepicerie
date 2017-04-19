@@ -7,10 +7,10 @@
         .controller('FormatController', FormatController);
 
     FormatController.$inject = ['$log',
-                                'formatService', 'toasterService', 'focus'];
+                                'formatService', 'toasterService', 'focus', 'helperService'];
 
     function FormatController($log,
-                              formatService, toasterService, focus) {
+                              formatService, toasterService, focus, helperService) {
 
         var vm = this;
 
@@ -113,7 +113,7 @@
         // ************************************************************************************************************/
 
         function _cancelEdit() {
-            _revertSelectedItem();
+            helperService.revertSelectedItem(vm.items, vm.selectedItem);
             _setBrowse();
         }
 
@@ -170,14 +170,6 @@
             }
         }
 
-        function _revertSelectedItem() {
-            angular.forEach(vm.items, function (item, key) {
-                if (item._id === vm.selectedItem._id) {
-                    vm.items[key] = vm.selectedItem;
-                }
-            });
-            vm.selectedItem = null;
-        }
     }
 
 })();
