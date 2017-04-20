@@ -12,17 +12,20 @@
 
         var vm = this;
 
+        vm.searchItem = 'searchItem_input_focus';
+        vm.focusItem = 'categorie_input_focus';
+        vm.sortingItem = 'categorie';
+
         /* Variables */
         vm.item = {};           // Object
         vm.items = [];          // List of object
         vm.form = {};           // Object
 
-        vm.searchItem = '';     // string
         vm.selectedItem = {};   // Object
         vm.state = '';          // string
 
         vm.sorting = {
-            type: 'categorie',
+            type: '',
             reverse: false
         };
 
@@ -63,7 +66,7 @@
 
         function save(_form, _item) {
             if (!_form.$valid) {
-                focus('categorie_input_focus');
+                focus(vm.focusItem);
                 return;
             }
 
@@ -75,7 +78,7 @@
         }
 
         function setEdit(_item) {
-            focus('categorie_input_focus');
+            focus(vm.focusItem);
             _resetForm('dsEdit');
             vm.selectedItem = angular.copy(_item);
             vm.item = _item;
@@ -83,7 +86,7 @@
 
         function setInsert() {
             vm.item = {};
-            focus('categorie_input_focus');
+            focus(vm.focusItem);
             _resetForm('dsInsert');
         }
 
@@ -118,7 +121,7 @@
                     _setBrowse();
                 }, function (e) {
                     toasterService.error(e.data.message);
-                    focus('categorie_input_focus');
+                    focus(vm.focusItem);
                 }
             );
         }
@@ -144,7 +147,7 @@
                     _setBrowse();
                 }, function (e) {
                     toasterService.error(e.data.message);
-                    focus('categorie_input_focus');
+                    focus(vm.focusItem);
                 }
             );
         }
@@ -158,8 +161,8 @@
         }
 
         function _setBrowse() {
-            focus('searchItem_input_focus');
-            vm.sorting.type = 'categorie';
+            focus(vm.searchItem);
+            vm.sorting.type = vm.sortingItem;
             _resetForm('dsBrowse');
         }
     }
