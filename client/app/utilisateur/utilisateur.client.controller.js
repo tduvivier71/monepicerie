@@ -11,10 +11,10 @@
         .controller('UtilisateurController', UtilisateurController);
 
     UtilisateurController.$inject = ['$q',
-                                     'toasterService', 'focus', 'utilisateurService', '$auth', '$location'];
+                                     'toasterService', 'focus', 'utilisateurService', '$auth', '$location', 'helperService'];
 
     function UtilisateurController($q,
-         toasterService, focus, utilisateurService, $auth, $location) {
+         toasterService, focus, utilisateurService, $auth, $location, helperService) {
 
         var vm = this;
 
@@ -119,7 +119,7 @@
         }
 
         function _cancelEdit() {
-            _revertSelectedItem();
+            helperService.revertSelectedItem(vm.items, vm.selectedItem);
             _setBrowse();
         }
 
@@ -144,16 +144,6 @@
                 vm.form.$setUntouched();
             }
         }
-
-        function _revertSelectedItem() {
-            angular.forEach(vm.items, function (item, key) {
-                if (item._id === vm.selectedItem._id) {
-                    vm.items[key] = vm.selectedItem;
-                }
-            });
-            vm.selectedItem = null;
-        }
-
 
         function _setBrowse() {
             _resetForm('dsBrowse');

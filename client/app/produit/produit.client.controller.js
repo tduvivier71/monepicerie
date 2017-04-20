@@ -46,10 +46,10 @@
     }
 
     ProduitController.$inject = ['$scope','$log', '$filter', '$location', '$http', '$q', '$sce',
-        'toasterService', 'produitService', 'categorieService', 'focus', 'uniteService', 'formatService', 'epicerieService','marqueService'];
+        'toasterService', 'produitService', 'categorieService', 'focus', 'uniteService', 'formatService', 'epicerieService','marqueService','helperService'];
 
     function ProduitController($scope, $log, $filter, $location, $http, $q, $sce,
-                               toasterService, produitService, categorieService, focus, uniteService, formatService, epicerieService, marqueService) {
+                               toasterService, produitService, categorieService, focus, uniteService, formatService, epicerieService, marqueService, helperService) {
 
         var vm = this
 
@@ -527,7 +527,7 @@
 
 
         function _cancelEdit() {
-            _revertSelectedItem();
+            helperService.revertSelectedItem(vm.items, vm.selectedItem);
             _setBrowse();
         }
 
@@ -625,15 +625,6 @@
                 vm.form.$setPristine();
                 vm.form.$setUntouched();
             }
-        }
-
-        function _revertSelectedItem() {
-            angular.forEach(vm.items, function (item, key) {
-                if (item._id === vm.selectedItem._id) {
-                    vm.items[key].produit = vm.selectedItem.produit;
-                }
-            });
-            vm.selectedItem = null;
         }
 
         function _setBrowse() {

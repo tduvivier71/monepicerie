@@ -7,10 +7,10 @@
         .controller('ListeBaseController', ListeBaseController);
 
     ListeBaseController.$inject = ['$routeParams', '$http',
-        'listeBaseService', 'listeBaseServiceDetail', 'toasterService','focus', 'categorieService',  'produitService'];
+        'listeBaseService', 'listeBaseServiceDetail', 'toasterService','focus', 'categorieService',  'produitService', 'helperService'];
 
     function ListeBaseController($routeParams, $http,
-        listeBaseService, listeBaseServiceDetail, toasterService, focus, categorieService,  produitService) {
+        listeBaseService, listeBaseServiceDetail, toasterService, focus, categorieService,  produitService, helperService) {
 
         var vm = this;
 
@@ -323,7 +323,7 @@
         // ************************************************************************************************************/
 
         function _cancelEdit() {
-            _revertSelectedItem();
+            helperService.revertSelectedItem(vm.items, vm.selectedItem);
             _setBrowse();
         }
 
@@ -416,15 +416,6 @@
                 vm.form.$setPristine();
                 vm.form.$setUntouched();
             }
-        }
-
-        function _revertSelectedItem() {
-            angular.forEach(vm.items, function (item, key) {
-                if (item && item._id && vm.selectedItem && vm.selectedItem._id && item._id === vm.selectedItem._id) {
-                    vm.items[key] = vm.selectedItem;
-                }
-            });
-            vm.selectedItem = null;
         }
 
         function _setBrowse() {

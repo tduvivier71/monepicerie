@@ -6,25 +6,14 @@
         .module('app.unite')
         .controller('UniteController', UniteController);
 
-    UniteController.$inject = ['$log',
-        'uniteService', 'toasterService','focus', '$http'];
+    UniteController.$inject = ['uniteService', 'toasterService','focus', '$http', 'helperService'];
 
-    function UniteController($log, uniteService, toasterService, focus, $http) {
+    function UniteController(uniteService, toasterService, focus, $http, helperService) {
 
         var vm = this;
 
-        /**
-         * typedef {Object}
-         * @property  {string} unite
-         * @property  {string} abreviation
-         * @property  {string} operation
-         * @property  {number} nombre
-         * @property  {string} coutParId
-         * @function reset
-         */
-        vm.item = {};
-
         /* Variables */
+        vm.item = {};
         vm.items = [];          // List of object
         vm.form = {};           // Object
 
@@ -33,8 +22,6 @@
         vm.searchItem = '';     // string
         vm.selectedItem = {};   // Object
         vm.state = '';          // string
-        vm.error = '';          // string
-
         vm.sorting = {
             type: 'unite',
             reverse: false
@@ -96,7 +83,6 @@
         // ************************************************************************************************************/
 
         function cancel() {
-            console.log('cancel');
             if (vm.state === 'dsInsert') {
                 _cancelInsert();
             } else {
@@ -164,7 +150,7 @@
         // ************************************************************************************************************/
 
         function _cancelEdit() {
-            _revertSelectedItem();
+            helperService.revertSelectedItem(vm.items, vm.selectedItem);
             _setBrowse();
         }
 
@@ -192,7 +178,6 @@
         }
 
         function _init() {
-          //  vm.unites = uniteService.query();
             uniteService.query('', function (result) {
                 vm.items = result;
                 _setBrowse();
@@ -225,14 +210,6 @@
             }
         }
 
-        function _revertSelectedItem() {
-            angular.forEach(vm.items, function (item, key) {
-                if (item._id === vm.selectedItem._id) {
-                    vm.items[key] = vm.selectedItem;
-                }
-            });
-            vm.selectedItem = null;
-        }
     }
 
 })();

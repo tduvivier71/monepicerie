@@ -7,10 +7,10 @@
         .controller('MarqueController', MarqueController);
 
     MarqueController.$inject = ['$log',
-                                   'marqueService', 'toasterService','focus'];
+                                   'marqueService', 'toasterService','focus', 'helperService'];
 
     function MarqueController($log,
-                                 marqueService, toasterService, focus) {
+                                 marqueService, toasterService, focus, helperService) {
 
         var vm = this;
 
@@ -102,7 +102,7 @@
         // ************************************************************************************************************/
 
         function _cancelEdit() {
-            _revertSelectedItem();
+            helperService.revertSelectedItem(vm.items, vm.selectedItem);
             _setBrowse();
         }
 
@@ -158,14 +158,6 @@
             }
         }
 
-        function _revertSelectedItem() {
-            angular.forEach(vm.items, function (item, key) {
-                if (item._id === vm.selectedItem._id) {
-                    vm.items[key] = vm.selectedItem;
-                }
-            });
-            vm.selectedItem = null;
-        }
     }
 
 })();

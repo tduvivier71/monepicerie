@@ -14,12 +14,9 @@
 
             var vm = this;
 
-            vm.isAuthentified = $auth.isAuthenticated();
-
             vm.item = {};
             vm.form = {};           // Object
             vm.items = [];          // List of object
-
 
             vm.addListeRapide = addListerapide;;
             vm.removeItem = removeItem;
@@ -28,7 +25,6 @@
             // Object configuration
             // ************************************************************************************************************/
 
-
             vm.inputOptionsProduit = {
                 placeholder: "Sélectionnez un produit...",
                 dataTextField: "produit",
@@ -36,12 +32,15 @@
                 filter: "contains",
                 valuePrimitive: false, // false obligatoire car c est un objet
                 autoBind: false, // obligatoire
+                template:
+                '<span class="k-state-default"><h3>#: data.produit #</h3><p>#: data.epicerie #</p></span>',
                 dataSource: {
                     transport: {
                         read: function (e) {
                             $http.get('/api/produit')
                                 .then(function success(response) {
                                     e.success(response.data);
+                                    console.log(response.data);
                                 }, function error(response) {
                                     alert('something went wrong')
                                     console.log(response);
@@ -77,21 +76,20 @@
             // ************************************************************************************************************/
 
             function addListerapide() {
-
                 var value = vm.produitWidget.value();
                 try {
                     if (value) {
                         var item = new listeRapideService();
                         item.produit = value;
                         item.$save(
-                            function (item) {
-                                vm.items.push(item);
+                            function (result) {
+                                vm.items.push(result);
                                 vm.produitWidget.close();
                                 vm.produitWidget.value('');
                                 toasterService.save(value);
                             },
-                            function (e) {
-                                toasterService.error(e.data.message);
+                            function (error) {
+                                toasterService.error(error.data.message);
                             }
                         );
                     }
@@ -100,34 +98,23 @@
                 }
             }
 
-            function removeItem(_item) {
-                _item.$remove(function () {
-                    toasterService.remove(_item.produit);
-                    for (var i in vm.items) {
-                        if (vm.items[i] === _item) {
-                            vm.items.splice(i, 1);
-                        }
-                    }
-                }, function (e) {
-                    toasterService.error(e.data);
+            function removeItem(_item, _i) {
+                _item.$remove(function (result) {
+                    toasterService.remove(result.produit);
+                    vm.items.splice(_i, 1);
+                }, function (error) {
+                    toasterService.error(error.data);
                 });
             }
-
-
-
-
 
             // ************************************************************************************************************/
             // Private function
             // ************************************************************************************************************/
 
             function _init() {
-
                 listeRapideService.query('', function (result) {
                     vm.items = result;
-
                 });
-
             }
 
         }
