@@ -108,20 +108,27 @@ exports.createOne = function(req, res) {
 	 });
 
 	var data  = new Model({
-		produit: req.body.produit, // A MODIFIER
-		marqueId: req.body.marqueId, // A MODIFIER
-		categorieId: req.body.categorieId, // A MODIFIER
+		produit: req.body.produit,
+		marqueId: req.body.marqueId,
+		categorieId: req.body.categorieId,
 		description: req.body.description,
 		formatId: req.body.formatId,
-		quantite: req.body.quantite, // A MODIFIER
-		nombre: req.body.nombre, // A MODIFIER
 	 	uniteId: req.body.uniteId,
+        conditionnement: {
+			quantite: req.body.quantite,
+            format: req.body.formatId ? req.body.formatId.format : undefined,
+            nombre: req.body.nombre,
+			unite: req.body.uniteId ? req.body.uniteId.unite : undefined
+        },
+
         utilisateurId: req.user
 	});
 
 	for (var i=0; i< req.body.historiques.length; ++i) {
-		data.prix = req.body.historiques[i].prix;
-        data.epicerie = req.body.historiques[i].epicerieId.epicerie;
+
+		data.prixRecent.prix = req.body.historiques[i].prix;
+        data.prixRecent.epicerie =  req.body.historiques[i].epicerieId.epicerie;
+
 		data.historiques.push({
 			epicerieId: req.body.historiques[i].epicerieId,
 			date: req.body.historiques[i].date,
@@ -180,8 +187,11 @@ exports.updateOne = function(req, res) {
 			    data.categorieId = req.body.categorieId; // A MODIFIER
 			    data.uniteId = req.body.uniteId; // A MODIFIER
 			 	data.formatId = req.body.formatId; // A MODIFIER
-			    data.quantite = req.body.quantite; // A MODIFIER
-				data.nombre = req.body.nombre; // A MODIFIER
+			    data.conditionnement.quantite = req.body.conditionnement.quantite; // A MODIFIER
+				data.conditionnement.nombre = req.body.conditionnement.nombre; // A MODIFIER
+             	data.conditionnement.format = req.body.formatId ? req.body.formatId.format : undefined
+             	data.conditionnement.unite = req.body.uniteId ? req.body.uniteId.unite : undefined
+
 			    data.enPromotion =  req.body.enPromotion; // A MODIFIER
 
 			    data.description = req.body.description; // A MODIFIER
@@ -194,8 +204,8 @@ exports.updateOne = function(req, res) {
 						}
 					} else
 					if (req.body.historiques[i].statut==='I') {
-                        data.prix = req.body.historiques[i].prix;
-                        data.epicerie = req.body.historiques[i].epicerie;
+                        data.prixRecent.prix = req.body.historiques[i].prix;
+                        data.prixRecent.epicerie = req.body.historiques[i].epicerie;
 						data.historiques.push({
 							epicerieId: req.body.historiques[i].epicerieId,
 							date: req.body.historiques[i].date,

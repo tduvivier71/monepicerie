@@ -33,7 +33,7 @@
                 valuePrimitive: false, // false obligatoire car c est un objet
                 autoBind: false, // obligatoire
                 template:
-                '<span class="k-state-default"><h3>#: data.produit #</h3><p>#: data.epicerie #</p></span>',
+                '<span><h4>#: data.produit #</h4><p>#: data.marqueId.marque #</p></span>',
                 dataSource: {
                     transport: {
                         read: function (e) {

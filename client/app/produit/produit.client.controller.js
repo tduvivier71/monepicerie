@@ -543,8 +543,8 @@
             item.categorieId = _item.categorieId === "" ? _item.categorieId = undefined : _item.categorieId;
             item.formatId = _item.formatId === "" ? _item.formatId = undefined : _item.formatId;
             item.uniteId = _item.uniteId === "" ? _item.uniteId = undefined : _item.uniteId; // Important : _item.uniteId._id
-            item.quantite = _item.quantite;
-            item.nombre = _item.nombre;
+            item.conditionnement.quantite = _item.conditionnement.quantite;
+            item.conditionnement.nombre = _item.conditionnement.nombre;
             item.description = _item.description;
             item.enPromotion = _item.enPromotion;
             item.historiques = [];

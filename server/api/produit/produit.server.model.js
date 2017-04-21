@@ -22,6 +22,7 @@ mongoose.model('ProduitHistorique', ProduitHistoriqueSchema);
 
 // Define a new 'Schema'
 var ProduitSchema = new Schema({
+
 	produit: {
 		type: String,
 		default: '',
@@ -29,45 +30,63 @@ var ProduitSchema = new Schema({
         index: true,
 		required: 'Le produit est obligatoire.'
 	},
+
     marqueId: {
         type: Schema.Types.ObjectId,
         ref: 'Marque'
     },
+
 	formatId: {
 		type: Schema.Types.ObjectId,
 		ref: 'Format'
 	},
+
 	description: {
 		type: String,
 		default: '',
 		trim: true
 	},
+
 	categorieId:{
 		type: Schema.Types.ObjectId,
 		ref: 'Categorie',
 		required: 'La catégorie est obligatoire.'
 	},
-	quantite:{
-		type: Number,
-		default: '0'
-	},
-	nombre:{
-		type: Number,
-		default: '0'
+
+	conditionnement : {
+
+        quantite:{
+            type: Number,
+            default: '0'
+        },
+
+        format:{
+        	type: String
+		},
+
+        nombre:{
+            type: Number,
+            default: '0'
+        },
+
+        unite:{
+            type: String
+        }
 	},
 
-    // dernier prix
-	prix:{
-		 type: Number,
-		 default: '0'
-    },
+    prixRecent: {
 
-    // derniere epicerie
-	epicerie: {
-        type: String,
-        default: '',
-        trim: true
-    },
+        prix:{
+            type: Number,
+            default: '0'
+        },
+
+        epicerie: {
+            type: String,
+            default: '',
+            trim: true
+        }
+	},
 
 	uniteId:{
 		type: Schema.Types.ObjectId,
@@ -83,14 +102,6 @@ var ProduitSchema = new Schema({
 	historiques: [ProduitHistoriqueSchema]
 
 });
-
-function getPrix(num){
-	return (num/100).toFixed(2);
-}
-
-function setPrix(num){
-	return num*100;
-}
 
 ProduitSchema.set('toJSON', { virtuals: true })
 
