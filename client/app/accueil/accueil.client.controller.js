@@ -33,7 +33,9 @@
                 valuePrimitive: false, // false obligatoire car c est un objet
                 autoBind: false, // obligatoire
                 template:
-                '<span><h4>#: data.produit #</h4><p>#: data.marqueId.marque #</p></span>',
+
+            '<span>#: data.produit #</span><span data-ng-show="data.marque">#: data.marque #</span><span style="float:right; font-size: 0.7em; padding: 1px;"> #: data.categorieId.categorie #</span><br>' +
+                '<span style=" font-size: 0.7em;">#: data.fullConditionnement #</span>',
                 dataSource: {
                     transport: {
                         read: function (e) {

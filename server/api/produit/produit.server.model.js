@@ -111,15 +111,15 @@ ProduitSchema.virtual('fullFormat').get(function() {
         return '';
 	}
 
-    if (this.quantite ) {
-        if (this.quantite === 0) {
+    if (this.conditionnement && this.conditionnement.quantite ) {
+        if (this.conditionnement.quantite === 0) {
             if (this.formatId.format === '') {
                 return '';
             } else {
                 return this.formatId.format.toLowerCase();
             }
         } else {
-            return this.quantite + ' ' + this.formatId.format.toLowerCase();
+            return this.conditionnement.quantite + ' ' + this.formatId.format.toLowerCase();
 		}
     }
 
@@ -145,12 +145,12 @@ ProduitSchema.virtual('fullConditionnement').get(function() {
 
 ProduitSchema.virtual('fullUnite').get(function() {
 
-	if (!this.nombre) {
+	if (!this.conditionnement.nombre) {
         return '';
 	}
 
-	if (this.nombre  !== 0 && this.uniteId && this.uniteId.abreviation) {
-        return this.nombre + ' ' + this.uniteId.abreviation.toLowerCase();
+	if (this.conditionnement.nombre  !== 0 && this.uniteId && this.uniteId.abreviation) {
+        return this.conditionnement.nombre + ' ' + this.uniteId.abreviation.toLowerCase();
     }
 
     return '';

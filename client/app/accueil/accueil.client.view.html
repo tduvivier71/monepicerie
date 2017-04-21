@@ -66,6 +66,10 @@
                                      aria-hidden="true" ng-click="vm.removeItem(item, $index)">clear</i>
                                 </span>
                                 <span style="max-width: 10px;" >{{item.produit}} </span>
+                                <span data-ng-show="item.marque">
+                                    {{item.marque}}
+                                </span>
+
                                 </div>
                             </div>
                         </div>
