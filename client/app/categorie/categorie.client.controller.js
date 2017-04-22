@@ -12,7 +12,7 @@
 
         var vm = this;
 
-        vm.searchItem = 'searchItem_input_focus';
+        vm.focusSearch = 'searchItem_input_focus';
         vm.focusItem = 'categorie_input_focus';
         vm.sortingItem = 'categorie';
 
@@ -20,10 +20,8 @@
         vm.item = {};           // Object
         vm.items = [];          // List of object
         vm.form = {};           // Object
-
         vm.selectedItem = {};   // Object
         vm.state = '';          // string
-
         vm.sorting = {
             type: '',
             reverse: false
@@ -161,7 +159,7 @@
         }
 
         function _setBrowse() {
-            focus(vm.searchItem);
+            focus(vm.focusSearch);
             vm.sorting.type = vm.sortingItem;
             _resetForm('dsBrowse');
         }

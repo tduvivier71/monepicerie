@@ -14,19 +14,19 @@
 
         var vm = this;
 
+        vm.focusSearch = 'searchItem_input_focus';
+        vm.focusItem = 'epicerie_input_focus';
+        vm.focusPlace = 'searchPlace_focus';
+        vm.sortingItem = 'epicerie';
 
         /* Variables */
         vm.item = {};           // Object
         vm.items = [];          // List of object
         vm.form = {};           // Object
-
-        vm.searchItem = '';     // string
         vm.selectedItem = {};   // Object
         vm.state = '';          // string
-        vm.error = '';          // string
-
         vm.sorting = {
-            type: 'epicerie',
+            type: '',
             reverse: false
         };
 
@@ -41,11 +41,21 @@
         vm.clearPlace = clearPlace;
 
         // Montréal
-        vm.latitude = 45.5699091;
-        vm.longitude = -73.5721709;
-        vm.zoom = 10;
+        vm.latitudeMtl = 45.4982948;
+        vm.longitudeMtl =-73.5658087;
+        vm.zoomMtl = 10;
 
         vm.tips = $sce.trustAsHtml("Réinitialiser </br> le lieu ou l'adresse");
+
+        // ************************************************************************************************************/
+        // Entry point function
+        // ************************************************************************************************************/
+
+        _init();
+
+        // ************************************************************************************************************/
+        // Public function
+        // ************************************************************************************************************/
 
         function cancelEsc(e) {
             if (e.keyCode === 27) {
@@ -55,32 +65,21 @@
 
         function clearPlace () {
             vm.searchPlace = '';
-            focus('searchPlace_focus');
+            focus(vm.focusPlace);
         }
-
-        function _clearSearchItem () {
-            vm.searchPlace = '';
-            focus('searchPlace_focus');
-        }
-
-        // ************************************************************************************************************/
-        // Entry point function
-        // ************************************************************************************************************/
-
-        _init();
-
-        NgMap.getMap().then(function(map) {
-            vm.map = map;
-        });
-
-        // ************************************************************************************************************/
-        // Public function
-        // ************************************************************************************************************/
 
         function placeChanged()  {
             vm.place = this.getPlace();
+
+            if (!vm.place) {
+                return;
+            }
+
             if (!vm.place.geometry) {
-                window.alert("Aucun lieu n'a été trouvé !");
+                return;
+            }
+
+            if (vm.place.length === 0) {
                 return;
             }
 
@@ -89,11 +88,11 @@
 
             $timeout(function() {
                 //vm.map.setCenter(vm.place.geometry.location);
-
                 vm.latitude = vm.place.geometry.location.lat();
                 vm.longitude = vm.place.geometry.location.lng();
-
-                vm.map.setZoom(16);
+                if (vm.map) {
+                    vm.map.setZoom(16);
+                }
             }, 1000);
         }
 
@@ -105,14 +104,10 @@
             }
         }
 
-        function remove(_item) {
+        function remove(_item, _i) {
             _item.$remove(function () {
                 toasterService.remove(_item.epicerie);
-                for (var i in vm.items) {
-                    if (vm.items[i] === _item) {
-                        vm.items.splice(i, 1);
-                    }
-                }
+                vm.items.splice(_i, 1);
             }, function (e) {
                 toasterService.error(e.data);
             });
@@ -121,7 +116,7 @@
 
         function save(_form, _item) {
             if (!_form.$valid) {
-                focus('epicerie_input_focus');
+                focus(vm.focusItem);
                 return;
             }
 
@@ -133,10 +128,11 @@
         }
 
         function setEdit(_item) {
-            vm.searchPlace = '';
+            focus(vm.focusItem);
             _resetForm('dsEdit');
             vm.selectedItem = angular.copy(_item);
             vm.item = _item;
+            vm.searchPlace = '';
             vm.zoom = 16;
             vm.latitude = _item.location.lat;
             vm.longitude = _item.location.lng;
@@ -144,11 +140,12 @@
 
         function setInsert() {
             vm.item = {};
-            vm.searchPlace = '';
+            focus(vm.focusItem);
             _resetForm('dsInsert');
-            vm.zoom = 10;
-            vm.latitude = 45.5699091;
-            vm.longitude = -73.5721709;
+            vm.searchPlace = '';
+            vm.zoom = vm.zoomMtl;
+            vm.latitude = vm.latitudeMtl;
+            vm.longitude = vm.longitudeMtl;
         }
 
         // ************************************************************************************************************/
@@ -162,6 +159,11 @@
 
         function _cancelInsert() {
             _setBrowse();
+        }
+
+        function _clearSearchItem () {
+            vm.searchPlace = '';
+            focus(vm.focusPlace);
         }
 
         function _create(_item) {
@@ -184,22 +186,26 @@
                                 }
                             });
                         }
-
                         vm.items.push(item);
                         toasterService.save(item.epicerie);
                         _setBrowse();
                     }, function (e) {
                         toasterService.error(e.data);
-                        focus('epicerie_input_focus');
+                        focus(vm.focusItem);
                     }
                 );
             }
         }
 
         function _init() {
+
+            NgMap.getMap().then(function(map) {
+                vm.map = map;
+            });
+
             epicerieService.query('', function (result) {
                 vm.items = result;
-                focus('searchPlace_focus');
+                focus(vm.focusPlace);
                 _setBrowse();
             });
         }
@@ -208,7 +214,6 @@
             _item.$update(
                 function () {
                     toasterService.update(_item.epicerie);
-
                     if ( vm.item.favori ) {
                         angular.forEach(vm.items, function (item, key) {
                             if ( item.favori === true &&  vm.item._id !== item._id) {
@@ -216,20 +221,12 @@
                             }
                         });
                     }
-
                     _setBrowse();
                 }, function (e) {
                     toasterService.error(e.data);
-                    focus('epicerie_input_focus');
+                    focus(vm.focusItem);
                 }
             );
-        }
-
-        function _setBrowse() {
-            focus('searchItem_input_focus');
-            _resetForm('dsBrowse');
-            vm.sorting.type = 'epicerie';
-            vm.place = {}; // CHANGER !!!
         }
 
         function _resetForm(state) {
@@ -238,6 +235,13 @@
                 vm.form.$setPristine();
                 vm.form.$setUntouched();
             }
+        }
+
+        function _setBrowse() {
+            focus(vm.focusSearch);
+            vm.sorting.type = vm.sortingItem;
+            _resetForm('dsBrowse');
+            vm.place = {}; // CHANGER !!!
         }
 
 

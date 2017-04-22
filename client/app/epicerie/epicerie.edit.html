@@ -81,17 +81,18 @@
 
     </div>
 
+
     <ng-map center=[{{vm.latitude}},{{vm.longitude}}]
             zoom={{vm.zoom}}>
+            <marker position="[{{vm.latitude}},{{vm.longitude}}]"
+                    title={{vm.item.epicerie}}>
+            </marker>
     </ng-map>
-
-  <!--  <div map-lazy-load="https://maps.googleapis.com/maps/api/js?key=AIzaSyABE67zQOFZrbXJIow-5-kLVD4FpWf52KQ&sensor=false&libraries=places,visualization,drawing,geometry">
-        <ng-map center="45.5699091,-73.5721709" zoom="10"></ng-map>
-    </div> -->
 
     <div class="row">
         <ng-include
             src="'app/shared/partials/bottom-save-cancel.html'">
         </ng-include>
     </div>
+
 </form>
