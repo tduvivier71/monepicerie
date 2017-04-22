@@ -161,7 +161,7 @@ ProduitSchema.virtual('fullUnite').get(function() {
 
 
 
-ProduitSchema.index({produit: 1, utilisateurId: 1}, {unique: true});
+//ProduitSchema.index({produit: 1, utilisateurId: 1}, {unique: true});
 
 mongoose.model('Produit', ProduitSchema);
 

@@ -115,9 +115,9 @@ exports.createOne = function(req, res) {
 		formatId: req.body.formatId,
 	 	uniteId: req.body.uniteId,
         conditionnement: {
-			quantite: req.body.quantite,
+			quantite: req.body.conditionnement.quantite,
             format: req.body.formatId ? req.body.formatId.format : undefined,
-            nombre: req.body.nombre,
+            nombre: req.body.conditionnement.nombre,
 			unite: req.body.uniteId ? req.body.uniteId.unite : undefined
         },
 
@@ -187,8 +187,8 @@ exports.updateOne = function(req, res) {
 			    data.categorieId = req.body.categorieId; // A MODIFIER
 			    data.uniteId = req.body.uniteId; // A MODIFIER
 			 	data.formatId = req.body.formatId; // A MODIFIER
-			    data.conditionnement.quantite = req.body.conditionnement.quantite; // A MODIFIER
-				data.conditionnement.nombre = req.body.conditionnement.nombre; // A MODIFIER
+			    data.conditionnement.quantite = req.body.conditionnement.quantite;
+				data.conditionnement.nombre = req.body.conditionnement.nombre;
              	data.conditionnement.format = req.body.formatId ? req.body.formatId.format : undefined
              	data.conditionnement.unite = req.body.uniteId ? req.body.uniteId.unite : undefined
 
