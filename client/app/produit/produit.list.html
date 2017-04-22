@@ -45,13 +45,13 @@
                 {{item.fullConditionnement}}
             </td>
             <td class="col-md-1 col-sm-1 col-xs-1">
-                <span ng-show="item.prix!='0'">
+                <span ng-show="item.prixRecent.prix!='0'">
                     {{item.prixRecent.prix | currency}}
                 </span>
             </td>
             <td class="col-md-1 col-sm-1 col-xs-1">
-                <span ng-hide="item.quantite=='0' || item.nombre=='0' || typeof(item.uniteId.coutParId) === 'undefined'">
-                    {{(item.prixRecent.prix) | coutPar:item.quantite:item.nombre:item.uniteId.operation:item.uniteId.nombre:item.uniteId.coutParId.abreviation}}
+                <span ng-hide="item.conditionnement.quantite=='0' || item.conditionnement.nombre=='0' || typeof(item.uniteId.coutParId) === 'undefined'">
+                    {{(item.prixRecent.prix) | coutPar:item.conditionnement.quantite:item.conditionnement.nombre:item.uniteId.operation:item.uniteId.nombre:item.uniteId.coutParId.abreviation}}
                 </span>
             </td>
             <td class="col-md-2 col-sm-2 col-xs-2" style="text-align: right;">
