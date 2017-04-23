@@ -14,30 +14,16 @@
 
         var vm = this;
 
-        /**
-         * typedef {Object}
-         * @property  {string} format
-         * @function reset
-         */
-        vm.item = {
-            format: '',
-            reset: function () {
-                this.format = '';
-            }
-        };
-
-
+        vm.focusSearch = 'searchItem_input_focus';
+        vm.focusItem = 'format_input_focus';
+        vm.sortingItem = 'format';
 
         /* Variables */
         vm.items = [];          // List of object
         vm.form = {};           // Object
-
         vm.searchItem = '';     // string
         vm.selectedItem = {};   // Object
         vm.state = '';          // string
-        vm.error = '';          // string
-
-
         vm.sorting = {
             type: 'format',
             reverse: false
@@ -68,14 +54,10 @@
             }
         }
 
-        function remove(_item) {
+        function remove(_item, _i) {
             _item.$remove(function () {
                 toasterService.remove(_item.format);
-                for (var i in vm.items) {
-                    if (vm.items[i] === _item) {
-                        vm.items.splice(i, 1);
-                    }
-                }
+                vm.items.splice(_i, 1);
             }, function (e) {
                 toasterService.error(e.data);
             });
@@ -84,7 +66,7 @@
 
         function save(_form, _item) {
             if (!_form.$valid) {
-                focus('format_input_focus');
+                focus(vm.focusItem);
                 return;
             }
 
@@ -96,16 +78,16 @@
         }
 
         function setEdit(_item) {
-            focus('format_input_focus');
+            focus(vm.focusItem);
             _resetForm('dsEdit');
             vm.selectedItem = angular.copy(_item);
             vm.item = _item;
         }
 
         function setInsert() {
-            focus('format_input_focus');
+            vm.item = {};
+            focus(vm.focusItem);
             _resetForm('dsInsert');
-            vm.item.reset();
         }
 
         // ************************************************************************************************************/
@@ -131,13 +113,12 @@
                     _setBrowse();
                 }, function (e) {
                     toasterService.error(e.data.message);
-                    focus('format_input_focus');
+                    focus(vm.focusItem);
                 }
             );
         }
 
         function _init() {
-            vm.item.reset();
             formatService.query('', function (result) {
                 vm.items = result;
                 _setBrowse();
@@ -151,15 +132,9 @@
                     _setBrowse();
                 }, function (e) {
                     toasterService.error(e.data.message);
-                    focus('format_input_focus');
+                    focus(vm.focusItem);
                 }
             );
-        }
-
-        function _setBrowse() {
-            focus('searchItem_input_focus');
-            vm.sorting.type = 'format';
-            _resetForm('dsBrowse');
         }
 
         function _resetForm(state) {
@@ -170,6 +145,11 @@
             }
         }
 
+        function _setBrowse() {
+            focus(vm.focusSearch);
+            vm.sorting.type = vm.sortingItem;
+            _resetForm('dsBrowse');
+        }
     }
 
 })();

@@ -1,4 +1,9 @@
 {
   "MARQUES":"Marques",
-  "MARQUE":"Marque"
+  "MARQUE":"Marque",
+
+  "HINT_EDITER_MARQUE":"Éditer une marque",
+  "HINT_DETRUIRE_MARQUE":"Détruire une marque",
+  "HINT_TRIER_MARQUE":"Trier par marque"
+
 }

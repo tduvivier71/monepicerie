@@ -12,20 +12,25 @@
 
         var vm = this;
 
+        vm.focusSearch = 'searchItem_input_focus';
+        vm.focusItem = 'unite_input_focus';
+        vm.sortingItem = 'unite';
+        vm.nombreFocus = 'nombre_input_focus',
+        vm.abreviationFocus = 'abreviation_input_focus',
+
+
         /* Variables */
         vm.item = {};
         vm.items = [];          // List of object
         vm.form = {};           // Object
-
-        vm.coutPar = '';
-
-        vm.searchItem = '';     // string
         vm.selectedItem = {};   // Object
         vm.state = '';          // string
         vm.sorting = {
             type: 'unite',
             reverse: false
         };
+
+        vm.coutPar = '';
 
         /* Fonctions */
         vm.cancel = cancel;
@@ -49,7 +54,6 @@
             filter:"contains",
             valuePrimitive: false,
             autoBind: false,
-           // dataSource: vm.unites,
             dataSource: {
                 transport: {
                     read: function (e) {
@@ -92,19 +96,15 @@
 
         function changeOperation(_operation) {
             vm.item.operation = _operation;
-            focus('nombre_input_focus');
+            focus(vm.nombreFocus);
         }
 
-        function remove(_item) {
+        function remove(_item, _i) {
             _item.$remove(function () {
                 toasterService.remove(_item.unite);
                 vm.comboCoutPar.dataSource.read();
+                vm.items.splice(_i, 1);
 
-                for (var i in vm.items) {
-                    if (vm.items[i] === _item) {
-                        vm.items.splice(i, 1);
-                    }
-                }
             }, function (e) {
                 toasterService.error(e.data);
             });
@@ -114,10 +114,10 @@
         function save(_form, _item) {
             if (!_form.$valid) {
                 if (_item.unite) {
-                    focus('abreviation_input_focus');
+                    focus(vm.abreviationFocus);
                 }
                 else {
-                    focus('unite_input_focus');
+                    focus(vm.focusItem);
                 }
                 return;
             }
@@ -133,16 +133,16 @@
         }
 
         function setEdit(_item) {
-            focus('unite_input_focus');
+            focus(vm.focusItem);
             _resetForm('dsEdit');
             vm.selectedItem = angular.copy(_item);
             vm.item = _item;
         }
 
         function setInsert() {
-            focus('unite_input_focus');
-            _resetForm('dsInsert');
             vm.item = {};
+            focus(vm.focusItem);
+            _resetForm('dsInsert');
         }
 
         // ************************************************************************************************************/
@@ -172,7 +172,7 @@
                     _setBrowse();
                 }, function (e) {
                     toasterService.error(e.data.message);
-                    focus('unite_input_focus');
+                    focus(vm.focusItem);
                 }
             );
         }
@@ -196,18 +196,18 @@
             );
         }
 
-        function _setBrowse() {
-            focus('searchItem_input_focus');
-            vm.sorting.type = 'unite';
-            _resetForm('dsBrowse');
-        }
-
         function _resetForm(state) {
             vm.state = state;
             if (vm.form.$dirty || vm.form.$submitted) {
                 vm.form.$setPristine();
                 vm.form.$setUntouched();
             }
+        }
+
+        function _setBrowse() {
+            focus(vm.focusSearch);
+            vm.sorting.type = vm.sortingItem;
+            _resetForm('dsBrowse');
         }
 
     }

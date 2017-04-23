@@ -39,5 +39,6 @@
 
   "HINT_AJOUTER_PRODUIT":"Ajouter un produit",
   "HINT_EDITER_PRODUIT":"Éditer un produit existant",
-  "HINT_DETRUIRE_PRODUIT":"Détruire un produit"
+  "HINT_DETRUIRE_PRODUIT":"Détruire un produit",
+  "HINT_TRIER_PRODUIT":"Trier par produit"
 }

@@ -3,7 +3,8 @@
         <thead>
         <tr>
             <th class="col-md-2 col-sm-2 col-xs-2">
-                <a href="javascript:void(0)" style="text-decoration:none; color:black;"
+                <a href="javascript:void(0)"
+                   style="text-decoration:none; color:black;"data-uib-tooltip={{"HINT_TRIER_UNITE"|translate}}
                    ng-click="vm.sorting.reverse = !vm.sorting.reverse">
                     {{"UNITE"|translate}}
                     <span ng-show="!vm.sorting.reverse"><i class="material-icons md-16">arrow_drop_down</i></span>
@@ -42,7 +43,7 @@
                 </button>
                 <button class="btn btn-danger btn-sm"
                         data-toggle="tooltip"
-                        ng-click="vm.remove(item)"
+                        ng-click="vm.remove(item, $index)"
                         uib-tooltip={{"HINT_DETRUIRE_UNITE"|translate}}>
                         <i class="material-icons md-16">delete</i>
                 </button>
