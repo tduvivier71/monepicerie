@@ -64,6 +64,7 @@
                     style="height: 37px;"
                     data-toggle="tooltip"
                     ng-click="vm.collapse()"
+                    tabindex="-1"
                     uib-tooltip={{"DESCRIPTION_SUPP"|translate}}>
                     <i ng-show="vm.isCollapsed" class="material-icons">keyboard_arrow_down</i>
                     <i ng-show="!vm.isCollapsed" class="material-icons">keyboard_arrow_up</i>
@@ -171,6 +172,7 @@
                     <div class="form-group">
                         <label for="prix_input_id">
                             <a href="javascript:void(0)" style="text-decoration:none; color:black;"
+                               tabIndex="-1"
                                ng-click="vm.sorting.reverse = !vm.sorting.reverse">
                                 {{"PRIX"|translate}}
                                 <span ng-show="!vm.sorting.reverse"><i class="material-icons md-16">arrow_drop_down</i></span>

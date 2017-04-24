@@ -151,7 +151,6 @@
             dataTextField: "marque",
             dataValueField: "_id",
             filter:"contains",
-         //   dataSource: vm.marques,
             dataSource: {
                 transport: {
                     read: function (e) {
@@ -167,22 +166,19 @@
             },
 
             valuePrimitive: false, //
-            autoBind: false, //
+            autoBind: false,
             clearButton: true,
             ignoreCase: true,
             delay: 50,
             noDataTemplate: vm.no_template,
             suggest: true,
-            highlightFirst: true// ,
-            // change : function(e) {
-            //     if (this.select() < 0) {
-            //         this.value("");
-            //     }
-            //     else {
-            //         vm.item.marqueId.marque  = this.text();
-            //     }
-            // }
-        };
+            highlightFirst: true,
+            change : function(e) {
+                 if (this.select() < 0) {
+                     this.value("");
+                 }
+            }
+        }
 
         vm.selectOptionsCategorie = {
             placeholder: "Sélectionnez une catégorie...",
@@ -191,7 +187,6 @@
             filter:"contains",
             valuePrimitive: false, // false obligatoire car c est un objet
             autoBind: false, // obligatoire
-         //   dataSource: vm.categories,
             dataSource: {
                 transport: {
                     read: function (e) {
@@ -213,9 +208,6 @@
             change : function(e) {
                 if (this.select() < 0) {
                     this.value("");
-                }
-                else {
-                    vm.item.categorieId.categorie = this.text();
                 }
             }
         };
@@ -249,9 +241,6 @@
             change : function(e) {
                 if (this.select() < 0) {
                     this.value("");
-                }
-                else {
-                    vm.item.formatId.format = this.text();
                 }
             }
         };
@@ -287,7 +276,20 @@
           //  filter:"contains",
             valuePrimitive: false,
             autoBind: false,
-            dataSource: vm.epiceries,
+        //    dataSource: vm.epiceries,
+            dataSource: {
+                transport: {
+                    read: function (e) {
+                        $http.get('/api/epicerie')
+                            .then(function success(response) {
+                                e.success(response.data);
+                            }, function error(response) {
+                                alert('something went wrong')
+                                console.log(response);
+                            });
+                    }
+                }
+            },
             clearButton: true,
             delay: 50,
             noDataTemplate: 'Aucune correspondance...',
@@ -296,9 +298,6 @@
             change : function(e) {
                 if (this.select() < 0) {
                     this.value("");
-                }
-                else {
-                    vm.insertHisto.epicerie = this.text();
                 }
             }
         };
@@ -520,8 +519,8 @@
             item.formatId = _item.formatId === "" ? _item.formatId = undefined : _item.formatId;
             item.uniteId = _item.uniteId === "" ? _item.uniteId = undefined : _item.uniteId; // Important : _item.uniteId._id
             item.conditionnement = {
-                quantite : _item.conditionnement.quantite,
-                nombre : _item.conditionnement.nombre
+                quantite : (!_item.conditionnement) ? 0 :  _item.conditionnement.quantite,
+                nombre :  (!_item.nombre) ? 0 :  _item.conditionnement.nombre
             };
             item.description = _item.description;
             item.enPromotion = _item.enPromotion;
@@ -563,14 +562,6 @@
 
             vm.categories = categorieService.query();
             vm.unites = uniteService.query();
-            vm.formats = formatService.query();
-            vm.epiceries = epicerieService.query();
-            vm.marques = marqueService.query();
-            vm.loadTags = function () {
-                var deferred = $q.defer();
-                deferred.resolve(vm.categories);
-                return deferred.promise;
-            };
 
         }
 
