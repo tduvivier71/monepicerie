@@ -53,32 +53,31 @@
 
         var vm = this
 
-
-        vm.item = {};
-
-        vm.insertHisto = {};
-
-        vm.statutD = 'D';
-        vm.addHisto = false;
+        vm.focusSearch = 'searchItem_input_focus';
+        vm.focusItem = 'produit_input_focus';
+        vm.focusDescription = 'description_textArea_focus';
+        vm.sortingItem = 'produit';
 
         /* Variables */
-        vm.form = {};           // Object
-
+        vm.item = {};
         vm.items = [];          // List of object
-        vm.searchItem = '';     // string
+        vm.form = {};           // Object
         vm.selectedItem = {};   // Object
         vm.state = '';          // string
-        vm.error = '';          // string
+        vm.sorting = {
+            type: '',
+            reverse: false
+        };
 
+
+        vm.insertHisto = {};
+        vm.statutD = 'D';
+        vm.addHisto = false;
         vm.categories = [];     // List of object
         vm.selectedCategories = [];
         vm.unites = [];
         vm.marques = [];      // List of object
 
-        vm.sorting = {
-            type: 'produit',
-            reverse: false
-        };
 
         /* Fonctions */
         vm.cancel = cancel;
@@ -308,9 +307,6 @@
         // Public function
         // ************************************************************************************************************/
 
-        /**
-         * Cancel edit/insert
-         */
         function cancel() {
             if (vm.state === 'dsInsert') {
                 _cancelInsert();
@@ -322,18 +318,14 @@
         function collapse() {
             vm.isCollapsed = !vm.isCollapsed;
             if (!vm.isCollapsed) {
-                focus("description_textArea_focus");
+                focus(vm.focusDescription);
             }
         }
 
-        function remove(_item) {
+        function remove(_item, _i) {
             _item.$remove(function () {
                 toasterService.remove(_item.produit);
-                for (var i in vm.items) {
-                    if (vm.items[i] === _item) {
-                        vm.items.splice(i, 1);
-                    }
-                }
+                vm.items.splice(_i, 1);
             }, function (e) {
                 toasterService.error(e.data.message);
             });
@@ -348,7 +340,7 @@
             }
 
             if (!_form.$valid) {
-                 focus('produit_input_focus');
+                 focus(vm.focusItem);
                  return;
             }
 
@@ -359,25 +351,19 @@
             }
         }
 
-        /**
-         * Set edit state
-         */
         function setEdit(_item) {
-            focus('produit_input_focus');
+            focus(vm.focusItem);
             _resetForm('dsEdit');
             vm.selectedItem = angular.copy(_item);
             vm.item = _item;
             vm.insertHisto = {};
         }
 
-        /**
-         * Set insert State
-         */
         function setInsert() {
             vm.item = {};
             vm.insertHisto = {}; // to do do better
             vm.isCollapsed = true;
-            focus('produit_input_focus');
+            focus(vm.focusItem);
             _resetForm('dsInsert');
 
 
@@ -396,14 +382,8 @@
                     alert('something went wrong')
                     console.log(response);
                 });
-
-
-           // vm.insertHisto.reset();
         }
 
-        /**
-         * Create Histo
-         * */
         function createHisto() {
 
             vm.addHisto = true;
@@ -435,12 +415,8 @@
         }
 
         function deleteHisto(histo, $index) {
-            //   if (histo.statut = 'I') {
-            //       vm.item.historiques.splice($index,1)
-            //   } else
             vm.addHisto = false;
             histo.statut = 'D';
-            console.log('histo : ' + JSON.stringify(histo));
         }
 
         function getCategories() {
@@ -572,7 +548,7 @@
                 },
                 function (e) {
                     toasterService.error(e.data.message);
-                    focus('produit_input_focus');
+                    focus(vm.focusItem);
                 }
             );
 
@@ -617,6 +593,7 @@
                 },
                 function (e) {
                     toasterService.error(e.data);
+                    focus(vm.focusItem);
                 }
             );
         }
@@ -630,10 +607,9 @@
         }
 
         function _setBrowse() {
-            focus('searchItem_input_focus');
-            vm.sorting.type = 'produit';
+            focus(vm.focusSearch);
+            vm.sorting.type = vm.sortingItem;
             _resetForm('dsBrowse');
-            vm.state = 'dsBrowse';
         }
     }
 
