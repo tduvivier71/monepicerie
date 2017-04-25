@@ -249,34 +249,32 @@
             placeholder: "Sélectionnez une unité...",
             dataTextField: "unite",
             dataValueField: "_id",
-          //  filter:"contains",
-            valuePrimitive: false, // false obligatoire car c est un objet
-            autoBind: false, //!Important
-            dataSource: vm.unites,
+            valuePrimitive: false,
+            autoBind: false,
+            dataSource: {
+                transport: {
+                    read: function (e) {
+                        $http.get('/api/unite')
+                            .then(function success(response) {
+                                e.success(response.data);
+                            }, function error(response) {
+                                alert('something went wrong')
+                                console.log(response);
+                            });
+                    }
+                }
+            },
             clearButton: true,
             delay: 50
-          //  noDataTemplate: 'Aucune correspondance...',
-          //  suggest: true,
-           // highlightFirst: true
-            // ,
-            // change : function(e) {
-            //     if (this.select() < 0) {
-            //         this.value("");
-            //     }
-            //     else {
-            //         vm.item.uniteId.unite = this.text();
-            //     }
-            // }
         };
 
         vm.selectOptionsEpicerie = {
             placeholder: "Sélectionnez une épicerie...",
             dataTextField: "epicerie",
             dataValueField: "_id",
-          //  filter:"contains",
+            filter:"contains",
             valuePrimitive: false,
             autoBind: false,
-        //    dataSource: vm.epiceries,
             dataSource: {
                 transport: {
                     read: function (e) {
@@ -293,8 +291,8 @@
             clearButton: true,
             delay: 50,
             noDataTemplate: 'Aucune correspondance...',
-            //suggest: true,
-            // highlightFirst: true
+            suggest: true,
+            highlightFirst: true,
             change : function(e) {
                 if (this.select() < 0) {
                     this.value("");
@@ -370,11 +368,12 @@
                 .then(function success(response) {
                     vm.item = {
                         date :  moment().toDate(),
-                        epicerieId: response.data ? response.data.id : null
+                  //      epicerieId: response.data ? response.data._id : null
                     };
 
                     if (response.data) {
-                        vm.epicerieWidget.value(response.data.epicerie);
+                        vm.epicerieWidget.value(response.data.epicerieId);
+                        vm.epicerieWidget.text(response.data.epicerie);
                     }
 
                 }, function error(response) {
@@ -520,20 +519,19 @@
             item.uniteId = _item.uniteId === "" ? _item.uniteId = undefined : _item.uniteId; // Important : _item.uniteId._id
             item.conditionnement = {
                 quantite : (!_item.conditionnement) ? 0 :  _item.conditionnement.quantite,
-                nombre :  (!_item.nombre) ? 0 :  _item.conditionnement.nombre
+                nombre :  (!_item.conditionnement) ? 0 :  _item.conditionnement.nombre
             };
             item.description = _item.description;
             item.enPromotion = _item.enPromotion;
             item.historiques = [];
 
-            if (vm.insertHisto.epicerieId) {
+            if (vm.item.epicerieId) {
                 item.historiques.push(
                     {
-                        epicerieId: vm.insertHisto.epicerieId,
-                        epicerie: vm.insertHisto.epicerie,
-                        date: vm.insertHisto.date ||  moment(),
-                        prix: vm.insertHisto.prix || 0,
-                        enPromotion: vm.insertHisto.enPromotion || false,
+                        epicerieId: vm.item.epicerieId,
+                        date: vm.item.date ||  moment(),
+                        prix: vm.item.prix || 0,
+                        enPromotion: vm.item.enPromotion || false,
                         statut: 'I'
                     }
                 );
