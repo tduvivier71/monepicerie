@@ -354,6 +354,18 @@
             vm.selectedItem = angular.copy(_item);
             vm.item = _item;
             vm.insertHisto = {};
+
+            $http.get('/api/epicerie/favori')
+                .then(function success(response) {
+                   if (response.data) {
+                         vm.insertHisto.epicerieId = response.data
+                    }
+
+                }, function error(response) {
+                    alert('something went wrong')
+                    console.log(response);
+                });
+
         }
 
         function setInsert() {
@@ -366,14 +378,17 @@
 
             $http.get('/api/epicerie/favori')
                 .then(function success(response) {
-                    vm.item = {
-                        date :  moment().toDate(),
+                //    vm.item = {
+                     //   date :  moment().toDate(),
                   //      epicerieId: response.data ? response.data._id : null
-                    };
+                  //  };
 
                     if (response.data) {
-                        vm.epicerieWidget.value(response.data.epicerieId);
-                        vm.epicerieWidget.text(response.data.epicerie);
+                       vm.item.epicerieId = response.data; // fonctionne
+
+                       // vm.insertHisto.epicerieId = response.data;
+                     //   vm.epicerieWidget.value(response.data._id);
+                     //   vm.epicerieWidget.text(response.data.epicerie);
                     }
 
                 }, function error(response) {
