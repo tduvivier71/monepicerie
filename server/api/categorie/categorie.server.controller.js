@@ -23,6 +23,20 @@ exports.findOne = function(req, res) {
 	helpers.findOne(req, res, Model);
 };
 
+exports.findFavori = function (req, res) {
+    Model.findOne({
+        utilisateurId: req.user,
+        favori: true
+    })
+
+        .exec(function (err, data) {
+            if (err) {
+                return res.status(400).json(err);
+            }
+            res.status(200).json(data);
+        });
+};
+
 exports.findUnique = function (req, res) {
 
     Model.findOne({categorie: req.params.categorie}, function (err, data) {

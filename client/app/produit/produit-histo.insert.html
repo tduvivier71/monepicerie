@@ -13,47 +13,36 @@
                     <label for="prix_input_id">
                         <a href="javascript:void(0)" style="text-decoration:none; color:black;"
                            tabIndex="-1"
-                           ng-click="vm.sorting.reverse = !vm.sorting.reverse">
-                            {{"PRIX"|translate}}
-                            <span ng-show="!vm.sorting.reverse"><i class="material-icons md-16">arrow_drop_down</i></span>
-                            <span ng-show="vm.sorting.reverse"><i class="material-icons md-16">arrow_drop_up</i></span>
+                           data-ng-click="vm.sorting.reverse = !vm.sorting.reverse">
+                            {{"PRIX"|translate}}<span style="color: lightgray;" uib-tooltip={{"PRIX_EPICERIE"|translate}}>*</span>
+                            <span data-ng-show="!vm.sorting.reverse"><i class="material-icons md-16">arrow_drop_down</i></span>
+                            <span data-ng-show="vm.sorting.reverse"><i class="material-icons md-16">arrow_drop_up</i></span>
                         </a>
                     </label>
                     <input
-                            autocomplete="off"
-                            data-kendo-numeric-text-box
-                            data-k-min="0.00"
-                            id="prix_input_id"
-                            name="prix_input"
-                            data-ng-model="vm.item.prix"
-                            type="number"
-                            style="width: 100%"/>
-                    <div class="error-message">
-                        <ng-messages for="vm.form.prix_input.$error">
-                            <ng-message when="required"> Une valeur est requise. </ng-message>
-                        </ng-messages>
-                    </div>
+                        autocomplete="off"
+                        data-kendo-numeric-text-box
+                        data-k-min="0.00"
+                        id="prix_input_id"
+                        name="prix_input"
+                        data-ng-model="vm.item.prix"
+                        type="number"
+                        style="width: 100%"/>
                 </div>
             </div>
 
             <div class="col-md-4 col-sm-4 col-xs-4">
                 <div class="form-group">
                     <label for="epicerieId_select_edit_id">
-                        {{"EPICERIE"|translate}}
+                        {{"EPICERIE"|translate}}<span style="color: lightgray;" uib-tooltip={{"PRIX_EPICERIE"|translate}}>*</span>
                     </label>
                     <select data-kendo-combo-box="vm.epicerieWidget"
                             data-k-options="vm.selectOptionsEpicerie"
                             data-k-ng-model="vm.item.epicerieId"
-                            data-ng-model="vm.item.epicerieId"
                             id="epicerieId_select_edit_id"
                             name="epicerieId_select"
                             style="width: 100%">
                     </select>
-                    <div class="error-message">
-                        <ng-messages for="vm.form.epicerieId_select.$error">
-                            <ng-message when="required">Une valeur est requise.</ng-message>
-                        </ng-messages>
-                    </div>
                 </div>
             </div>
 
@@ -64,7 +53,7 @@
                     </label>
                     <input data-kendo-date-picker
                            data-k-options="vm.datePickerOptions"
-                           ng-model="vm.item.date"
+                           data-k-ng-model="vm.item.date"
                            id="date_input_id2"
                            name="date_input"
                            style="width: 100%"/>

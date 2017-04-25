@@ -49,7 +49,9 @@ function ensureAuthenticated(req, res, next) {
  |--------------------------------------------------------------------------
  */
 
+
 router.get('/api/categorie', ensureAuthenticated, categorie.find);
+router.get('/api/categorie/favori', ensureAuthenticated, categorie.findFavori);
 router.post('/api/categorie', ensureAuthenticated, categorie.createOne);
 router.get('/api/categorie/:id', ensureAuthenticated, categorie.findOne);
 router.put('/api/categorie/:id', ensureAuthenticated, categorie.updateOne);

@@ -205,7 +205,7 @@ exports.updateOne = function(req, res) {
 					} else
 					if (req.body.historiques[i].statut==='I') {
                         data.prixRecent.prix = req.body.historiques[i].prix;
-                        data.prixRecent.epicerie = req.body.historiques[i].epicerie;
+                        data.prixRecent.epicerie = req.body.historiques[i].epicerieId.epicerie;
 						data.historiques.push({
 							epicerieId: req.body.historiques[i].epicerieId,
 							date: req.body.historiques[i].date,

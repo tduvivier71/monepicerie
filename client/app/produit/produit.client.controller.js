@@ -69,14 +69,10 @@
             reverse: false
         };
 
-
         vm.insertHisto = {};
         vm.statutD = 'D';
-        vm.addHisto = false;
         vm.categories = [];     // List of object
         vm.selectedCategories = [];
-        vm.unites = [];
-        vm.marques = [];      // List of object
 
 
         /* Fonctions */
@@ -128,19 +124,30 @@
         vm.no_templateFor1 = "class='k-button' ng-click=" +  '"vm.addNewFormat()"' ;
         vm.no_templateFor2 = vm.no_template1 + "<button " + vm.no_templateFor1 + ">Ajouter</button>";
 
-
         /** MULTI CATÉGORIE !!!! **/
         vm.selectOptionsMultiCategories = {
             placeholder: "Sélection de catégorie(s)...",
             dataTextField: "categorie",
             dataValueField: "_id",
-            valuePrimitive: true, // true obligatoire
+            valuePrimitive: true, // TRUE EST OBLIGATOIRE
             autoBind: false,
             delay: 50,
             clearButton: false,
             noDataTemplate: 'Aucune correspondance...',
             suggest: true,
-            dataSource: vm.categories,
+            dataSource: {
+                transport: {
+                    read: function (e) {
+                        $http.get('/api/categorie')
+                            .then(function success(response) {
+                                e.success(response.data);
+                            }, function error(response) {
+                                alert('something went wrong')
+                                console.log(response);
+                            });
+                    }
+                }
+            },
             change: function () {
                 vm.filterCategorie();
             }
@@ -165,7 +172,7 @@
                 }
             },
 
-            valuePrimitive: false, //
+            valuePrimitive: false,
             autoBind: false,
             clearButton: true,
             ignoreCase: true,
@@ -219,7 +226,6 @@
             filter:"contains",
             valuePrimitive: false, // false obligatoire car c est un objet
             autoBind: false,
-            //dataSource: vm.formats,
             dataSource: {
                 transport: {
                     read: function (e) {
@@ -330,12 +336,6 @@
         }
 
         function save(_form, _item) {
-            if (vm.addHisto) {
-                vm.addHisto = false;
-                vm.form.prix_input.$setValidity("required",true);
-                vm.form.epicerieId_select.$setValidity("required",true);
-            }
-
             if (!_form.$valid) {
                  focus(vm.focusItem);
                  return;
@@ -354,18 +354,7 @@
             vm.selectedItem = angular.copy(_item);
             vm.item = _item;
             vm.insertHisto = {};
-
-            $http.get('/api/epicerie/favori')
-                .then(function success(response) {
-                   if (response.data) {
-                         vm.insertHisto.epicerieId = response.data
-                    }
-
-                }, function error(response) {
-                    alert('something went wrong')
-                    console.log(response);
-                });
-
+            _setEpicerieFavorite();
         }
 
         function setInsert() {
@@ -374,32 +363,11 @@
             vm.isCollapsed = true;
             focus(vm.focusItem);
             _resetForm('dsInsert');
-
-
-            $http.get('/api/epicerie/favori')
-                .then(function success(response) {
-                //    vm.item = {
-                     //   date :  moment().toDate(),
-                  //      epicerieId: response.data ? response.data._id : null
-                  //  };
-
-                    if (response.data) {
-                       vm.item.epicerieId = response.data; // fonctionne
-
-                       // vm.insertHisto.epicerieId = response.data;
-                     //   vm.epicerieWidget.value(response.data._id);
-                     //   vm.epicerieWidget.text(response.data.epicerie);
-                    }
-
-                }, function error(response) {
-                    alert('something went wrong')
-                    console.log(response);
-                });
+            _setEpicerieFavorite();
+            _setCategorieFavorite();
         }
 
         function createHisto() {
-
-            vm.addHisto = true;
 
             if (vm.insertHisto.prix &&  vm.insertHisto.epicerieId) {
 
@@ -428,7 +396,6 @@
         }
 
         function deleteHisto(histo, $index) {
-            vm.addHisto = false;
             histo.statut = 'D';
         }
 
@@ -525,7 +492,6 @@
         }
 
         function _create(_item) {
-            vm.addHisto = false;
             var item = new produitService();
             item.produit = _item.produit;
             item.marqueId = _item.marqueId === "" ? _item.marqueId = undefined : _item.marqueId;
@@ -540,7 +506,7 @@
             item.enPromotion = _item.enPromotion;
             item.historiques = [];
 
-            if (vm.item.epicerieId) {
+            if (vm.item.epicerieId && vm.item.prix) {
                 item.historiques.push(
                     {
                         epicerieId: vm.item.epicerieId,
@@ -567,15 +533,40 @@
         }
 
         function _init() {
-
             produitService.query('', function (result) {
                 vm.items = result;
                 _setBrowse();
             });
+        }
 
-            vm.categories = categorieService.query();
-            vm.unites = uniteService.query();
+        function _setCategorieFavorite() {
+            $http.get('/api/categorie/favori')
+                .then(function success(response) {
+                    if (response.data) {
+                        vm.item.categorieId = response.data; // fonctionne
+                    }
 
+                }, function error(response) {
+                    alert('something went wrong')
+                    console.log(response);
+                });
+        }
+
+        function _setEpicerieFavorite() {
+            $http.get('/api/epicerie/favori')
+                .then(function success(response) {
+                    if (response.data) {
+                        if (vm.state === 'dsInsert') {
+                            vm.item.epicerieId = response.data; // fonctionne
+                        } else {
+                            vm.insertHisto.epicerieId = response.data; // fonctionne
+                        }
+                    }
+
+                }, function error(response) {
+                    alert('something went wrong')
+                    console.log(response);
+                });
         }
 
         function _update(_item) {
