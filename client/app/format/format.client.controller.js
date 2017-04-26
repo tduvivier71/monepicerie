@@ -112,7 +112,7 @@
                     toasterService.save(_item.format);
                     _setBrowse();
                 }, function (e) {
-                    toasterService.error(e.data.message);
+                    toasterService.error(e);
                     focus(vm.focusItem);
                 }
             );

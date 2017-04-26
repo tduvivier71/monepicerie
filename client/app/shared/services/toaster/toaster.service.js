@@ -44,9 +44,16 @@
         }
 
         function error(message) {
+            var msg;
+            if (typeof message === 'string' || message instanceof String)  {
+                msg = message;
+            } else {
+                msg =  message.data.message || message.data;
+            }
+
             ngToast.create({
                 className: 'danger',
-                content: message
+                content: msg
             });
         }
 
