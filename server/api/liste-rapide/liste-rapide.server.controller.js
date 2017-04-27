@@ -58,8 +58,8 @@ exports.deleteOne = function(req, res) {
     helpers.deleteOne(req, res, Model);
 };
 
-exports.deleteAllProduit = function(req, res) {
-
+exports.deleteAll = function(req, res) {
+    Model.collection.drop();
 };
 
 

@@ -19,6 +19,7 @@
             'deleteOneDetail': { method: 'DELETE', params:{id:'@_id', id2: '@_id2' }
            }
         });
+
     }
 
 })();

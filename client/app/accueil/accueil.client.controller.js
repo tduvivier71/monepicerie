@@ -18,6 +18,7 @@
             vm.form = {};           // Object
             vm.items = [];          // List of object
 
+            vm.deleteListeRapide = deleteListeRapide;
             vm.addListeRapide = addListerapide;;
             vm.removeItem = removeItem;
 
@@ -98,6 +99,18 @@
                 } finally {
                     vm.produitWidget.close();
                 }
+            }
+
+            function deleteListeRapide() {
+             //   var i = vm.items.length; //or 10
+             //   while(i--) {
+             //       vm.items.splice(i, 1);
+             //   }
+                vm.items.length = 0;
+                var item = new listeRapideService();
+                item.$deleteListeRapide();
+                toasterService.error('La liste a été vidée.');
+
             }
 
             function removeItem(_item, _i) {

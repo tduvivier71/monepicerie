@@ -111,6 +111,7 @@ router.delete('/api/listebase/:id/detail/:id2', ensureAuthenticated, listeBase.d
 router.get('/api/listerapide', ensureAuthenticated, listeRapide.find);
 router.post('/api/listerapide', ensureAuthenticated, listeRapide.createOne);
 router.delete('/api/listeRapide/:id', ensureAuthenticated, listeRapide.deleteOne);
+router.delete('/api/listeRapide/', ensureAuthenticated, listeRapide.deleteAll);
 
 router.get('/api/utilisateur/:id',  utilisateur.getMe);
 router.put('/api/utilisateur/:id',  utilisateur.updateMe);
