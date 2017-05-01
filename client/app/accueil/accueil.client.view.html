@@ -38,8 +38,8 @@
                                 <label class="label label-primary">Produits</label>
                             </h3>
                             <ul style="list-style-type: none;">
-                                <li><a href="/#liste"><i class="material-icons">view_list</i> Listes d'épicerie</a></li>
-                                <li><a href="/#liste?state=insert"><i class="material-icons">add_circle</i> Créer une liste d'épicerie</a></li>
+                                <li><a href="/#liste"><i class="material-icons">view_list</i> Listes des produits</a></li>
+                                <li><a href="/#liste?state=insert"><i class="material-icons">add_circle</i> Ajouter un produit</a></li>
                             </ul>
                         </div>
                     </div>
@@ -89,24 +89,32 @@
 
                     <div class="row">
 
-                        <div class="col-md-10 col-sm-10 col-xs-10">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
 
                             <label for="produit_input_id">
                                 {{"PRODUIT"|translate}}
                             </label>
+
+                            <div class="input-group input-group-md">
+
                             <input data-kendo-auto-complete = "vm.produitWidget"
                                    data-k-options="vm.inputOptionsProduit"
                                    id="produit_input_id"
                                    ng-model="vm.produit"
                                    style="width: 100%;" />
 
-                        </div>
+                                  <span class="input-group-btn">
+                                   <button type="button"
+                                           class="btn btn-primary"
+                                           style="height: 37px; margin-left:0px !important; padding-top:9px !important; padding-bottom:9px !important;"
+                                           ng-click="vm.addListeRapide()"
+                                           uib-tooltip-html="tips">
+                                            <i class="material-icons">add</i>
+                                   </button>
+                               </span>
 
-                        <div class="col-md-2 col-sm-2 col-xs-2" style="padding-left:0px;padding-top:27px">
-                            <button type="button" class="btn btn-primary" style="height: 37px;"
-                               ng-click="vm.addListeRapide()">
-                               <i class="material-icons md-24 cursor">add</i>
-                            </button>
+                             </div>
+
                         </div>
 
                     </div>

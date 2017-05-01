@@ -24318,9 +24318,6 @@ $td-divider-color:        #BDBDBD;
 .shape {
   border-color: rgba(255, 255, 255, 0) #d9534f rgba(255, 255, 255, 0) rgba(255, 255, 255, 0); }
 
-.offer:hover .shape-text:hover {
-  color: red; }
-
 .shape-text {
   color: #fff;
   font-size: 12px;
@@ -24360,6 +24357,11 @@ $td-divider-color:        #BDBDBD;
 
 .offer-primary .shape {
   border-color: transparent #2196F3 transparent transparent; }
+
+.offer-primary:hover {
+  border-color: red; }
+  .offer-primary:hover .shape {
+    border-color: transparent red transparent transparent; }
 
 .label-primary {
   background-color: #2196F3; }

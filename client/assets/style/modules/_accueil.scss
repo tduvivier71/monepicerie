@@ -23,12 +23,6 @@
   border-color: rgba(255,255,255,0) #d9534f rgba(255,255,255,0) rgba(255,255,255,0);
 }
 
-.offer:hover {
-  .shape-text:hover{
-    color: red;
-  }
-}
-
 .shape-text{
   color:#fff;
   font-size:12px;
@@ -75,6 +69,16 @@
 .offer-primary .shape {
   border-color: transparent $td-primary-color transparent transparent;
 }
+
+.offer-primary:hover {
+  border-color: red;
+
+  .shape {
+    border-color: transparent red transparent transparent;
+  }
+}
+
+
 
 .label-primary {
   background-color: $td-primary-color;
