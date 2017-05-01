@@ -24690,4 +24690,7 @@ body {
 .txtPrimaryColor {
   color: #FFFFFF !important; }
 
+a:hover, a:visited, a:link, a:active {
+  text-decoration: none !important; }
+
 /*# sourceMappingURL=app.css.map */
