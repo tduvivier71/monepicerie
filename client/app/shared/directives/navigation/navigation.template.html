@@ -20,7 +20,9 @@
             </a>
 
         </div>
+
         <div id="navbar-main" class="navbar-collapse collapse">
+
             <ul data-ng-show="isAuthentified" class="nav navbar-nav">
 
                 <li  ng-class="{active:isActive('#/liste')}" class="dropdown">
@@ -38,8 +40,6 @@
 
                 <li ng-class="{active:isActive('#/produit')}"><a href="/#produit"><i class="material-icons md-14">shopping_basket</i> {{"PRODUITS_UPPER"|translate}}  </a></li>
                 <li ng-class="{active:isActive('#/comparatif')}"><a href="/#comparatif"><i class="material-icons md-14">compare</i> {{"COMPARATIF_UPPER"|translate}}  </a></li>
-
-              <!--  <li ng-class="{active:isActive('#/ilmanque')}"><a href="/#ilmanque"><i class="material-icons md-14">bookmark</i> {{"ILMANQUE"|translate}} </a></li> -->
 
             </ul>
 
@@ -71,5 +71,7 @@
             </ul>
 
         </div>
+
     </div>
+
 </nav>
