@@ -71,10 +71,10 @@
 }
 
 .offer-primary:hover {
-  border-color: red;
+  border-color: $td-primary-color-dark;
 
   .shape {
-    border-color: transparent red transparent transparent;
+    border-color: transparent $td-primary-color-dark transparent transparent;
   }
 }
 

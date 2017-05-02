@@ -45,10 +45,10 @@
         };
     }
 
-    ProduitController.$inject = ['$scope','$log', '$filter', '$location', '$http', '$q', '$sce',
+    ProduitController.$inject = ['$scope','$log', '$filter', '$location', '$http', '$q', '$sce', '$routeParams',
         'toasterService', 'produitService', 'categorieService', 'focus', 'uniteService', 'formatService', 'epicerieService','marqueService','helperService'];
 
-    function ProduitController($scope, $log, $filter, $location, $http, $q, $sce,
+    function ProduitController($scope, $log, $filter, $location, $http, $q, $sce, $routeParams,
                                toasterService, produitService, categorieService, focus, uniteService, formatService, epicerieService, marqueService, helperService) {
 
         var vm = this
@@ -533,9 +533,16 @@
         }
 
         function _init() {
+
+            var state = $routeParams.state;
+
             produitService.query('', function (result) {
                 vm.items = result;
-                _setBrowse();
+                if (state === 'insert') {
+                    setInsert();
+                } else {
+                    _setBrowse();
+                }
             });
         }
 
