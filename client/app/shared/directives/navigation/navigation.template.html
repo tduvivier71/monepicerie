@@ -38,7 +38,18 @@
                     </ul>
                 </li>
 
-                <li ng-class="{active:isActive('#/produit')}"><a href="/#produit"><i class="material-icons md-14">shopping_basket</i> {{"PRODUITS_UPPER"|translate}}  </a></li>
+                <li ng-class="{active:isActive('#/produit')}" class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false"><i class="material-icons md-14">shopping_basket</i> {{"PRODUITS_UPPER"|translate}}
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/#produit">Listes des produits</a></li>
+                        <li><a href="/#produit?state=insert">Ajouter un produit</a></li>
+                    </ul>
+
+                </li>
+
+
                 <li ng-class="{active:isActive('#/comparatif')}"><a href="/#comparatif"><i class="material-icons md-14">compare</i> {{"COMPARATIF_UPPER"|translate}}  </a></li>
 
             </ul>
