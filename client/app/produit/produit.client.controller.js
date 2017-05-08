@@ -132,7 +132,7 @@
             valuePrimitive: true, // TRUE EST OBLIGATOIRE
             autoBind: false,
             delay: 50,
-            clearButton: false,
+            clearButton: true,
             noDataTemplate: 'Aucune correspondance...',
             suggest: true,
             dataSource: {
