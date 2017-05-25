@@ -139,21 +139,22 @@
                     </div>
                     <div class="input-group input-group-md" ng-show="vm.ajoutRapideOpen">
 
-                      <span class="input-group-btn">
-                           <button type="button"
-                                   class="btn btn-primary"
-                                   style="margin-left:0px !important; padding-top:9px !important; padding-bottom:9px !important;"
-                                   ng-click="vm.ajoutRapideOpen = false; clearSearch()"
-                                   uib-tooltip-html="tips">
-                                    <i class="material-icons">close</i>
-                           </button>
-                       </span>
+
 
                         <input data-kendo-auto-complete = "vm.produitWidget"
                                data-k-options="vm.inputOptionsProduit"
                                id="produit_input_id"
                                ng-model="vm.produit"
                                style="width: 100%; height: 39px;" />
+                        <span class="input-group-btn">
+                           <button type="button"
+                                   class="btn"
+                                   style="margin-left:0px !important; padding-top:9px !important; padding-bottom:9px !important;"
+                                   ng-click="vm.ajoutRapideOpen = false; clearSearch()"
+                                   uib-tooltip-html="tips">
+                                    <i class="material-icons">close</i>
+                           </button>
+                       </span>
                                <span class="input-group-btn">
                                    <button type="button"
                                            class="btn btn-primary"

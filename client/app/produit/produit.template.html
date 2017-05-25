@@ -25,13 +25,15 @@
 </div>
 
 <div class="row" ng-show="vm.state == 'dsBrowse'" style="padding-top: 10px; padding-bottom: 25px;">
-    <div class="col-md-6 paddinleft-992">
+    <input name="txtName" id="txtName">
+    <span><i class="material-icons md-14 errspan">view_list</i></span>
+    <div class="col-md-6 col-sm-12 col-xs12">
         <search-item
                 search-item="vm.searchItem">
         </search-item>
     </div>
-    <div class="col-md-6 paddingright-992">
-        <div class="input-group">
+    <div class="col-md-6 col-sm-12 col-xs12">
+        <div>
             <select
                     data-kendo-multi-select
                     data-k-options="vm.selectOptionsMultiCategories"
@@ -39,15 +41,6 @@
                     style="width: 100%;"
                     id="categories_input_id">
             </select>
-            <span class="input-group-btn">
-                <button type="button"
-                        class="btn btn-primary"
-                        data-ng-click="vm.clearCategorie()"
-                        style="margin-left:1px !important; padding-top:9px !important; padding-bottom:9px !important;"
-                        uib-tooltip-html="vm.tips">
-                        <i class="material-icons">close</i>
-                </button>
-            </span>
         </div>
     </div>
 </div>
