@@ -51,7 +51,7 @@
     function ProduitController($scope, $log, $filter, $location, $http, $q, $sce, $routeParams,
                                toasterService, produitService, categorieService, focus, uniteService, formatService, epicerieService, marqueService, helperService) {
 
-        var vm = this
+        var vm = this;
 
         vm.focusSearch = 'searchItem_input_focus';
         vm.focusItem = 'produit_input_focus';
@@ -142,7 +142,7 @@
                             .then(function success(response) {
                                 e.success(response.data);
                             }, function error(response) {
-                                alert('something went wrong')
+                                alert('something went wrong');
                                 console.log(response);
                             });
                     }
@@ -165,7 +165,7 @@
                             .then(function success(response) {
                                 e.success(response.data);
                             }, function error(response) {
-                                alert('something went wrong')
+                                alert('something went wrong');
                                 console.log(response);
                             });
                     }
@@ -185,7 +185,7 @@
                      this.value("");
                  }
             }
-        }
+        };
 
         vm.selectOptionsCategorie = {
             placeholder: "Sélectionnez une catégorie...",
@@ -201,7 +201,7 @@
                             .then(function success(response) {
                                 e.success(response.data);
                             }, function error(response) {
-                                alert('something went wrong')
+                                alert('something went wrong');
                                 console.log(response);
                             });
                     }
@@ -233,7 +233,7 @@
                             .then(function success(response) {
                                 e.success(response.data);
                             }, function error(response) {
-                                alert('something went wrong')
+                                alert('something went wrong');
                                 console.log(response);
                             });
                     }
@@ -264,7 +264,7 @@
                             .then(function success(response) {
                                 e.success(response.data);
                             }, function error(response) {
-                                alert('something went wrong')
+                                alert('something went wrong');
                                 console.log(response);
                             });
                     }
@@ -288,7 +288,7 @@
                             .then(function success(response) {
                                 e.success(response.data);
                             }, function error(response) {
-                                alert('something went wrong')
+                                alert('something went wrong');
                                 console.log(response);
                             });
                     }
@@ -554,7 +554,7 @@
                     }
 
                 }, function error(response) {
-                    alert('something went wrong')
+                    alert('something went wrong');
                     console.log(response);
                 });
         }
@@ -571,7 +571,7 @@
                     }
 
                 }, function error(response) {
-                    alert('something went wrong')
+                    alert('something went wrong');
                     console.log(response);
                 });
         }

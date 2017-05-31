@@ -19,7 +19,7 @@
             vm.items = [];          // List of object
 
             vm.deleteListeRapide = deleteListeRapide;
-            vm.addListeRapide = addListerapide;;
+            vm.addListeRapide = addListerapide;
             vm.removeItem = removeItem;
 
             // ************************************************************************************************************/
@@ -45,7 +45,7 @@
                                     e.success(response.data);
                                     console.log(response.data);
                                 }, function error(response) {
-                                    alert('something went wrong')
+                                    alert('something went wrong');
                                     console.log(response);
                                 });
                         }
@@ -65,7 +65,7 @@
                     console.log(item);
                     // Use the selected item or its text
                 }
-            }
+            };
 
 
             // ************************************************************************************************************/

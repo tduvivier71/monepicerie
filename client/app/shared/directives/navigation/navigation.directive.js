@@ -15,22 +15,28 @@
 
       link: function($scope) {
 
-          $scope.setInsert = function() {
-          //  ListeBaseFactory.setInsert();
-        },
+        // $scope.setInsert = function() {
+        //   //  ListeBaseFactory.setInsert();
+        // },
 
-        $scope.$watch( function () { return $auth.isAuthenticated();}, function(newVal){
-              $scope.isAuthentified = newVal;
-              if ($scope.isAuthentified) {
+        $scope.$watch(
+            function () {
+                return $auth.isAuthenticated();
+                },
+            function(newVal) {
+                $scope.isAuthentified = newVal;
+                if ($scope.isAuthentified) {
 
-                  var queryParam = { id: $auth.getPayload().sub};
-                  // vm.item = utilisateurService.get(queryParam);
-                  utilisateurService.get(queryParam, function (result) {
-                      $scope.fullNom = result.prenom + ' ' + result.nom;
-                  });
+                    var queryParam = {id: $auth.getPayload().sub};
+                    // vm.item = utilisateurService.get(queryParam);
+                    utilisateurService.get(queryParam, function (result) {
+                        $scope.fullNom = result.prenom + ' ' + result.nom;
+                    });
+                }
               }
-           });
-      },
+           );
+
+      }, // link
 
       controller : function($scope, $location) {
         $scope.isActive = function (path) {

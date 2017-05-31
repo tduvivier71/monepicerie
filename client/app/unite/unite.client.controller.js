@@ -15,11 +15,12 @@
         vm.focusSearch = 'searchItem_input_focus';
         vm.focusItem = 'unite_input_focus';
         vm.sortingItem = 'unite';
-        vm.nombreFocus = 'nombre_input_focus',
-        vm.abreviationFocus = 'abreviation_input_focus',
+        vm.nombreFocus = 'nombre_input_focus';
+        vm.abreviationFocus = 'abreviation_input_focus';
 
 
         /* Variables */
+
         vm.item = {};
         vm.items = [];          // List of object
         vm.form = {};           // Object
@@ -61,7 +62,7 @@
                             .then(function success(response) {
                                 e.success(response.data);
                             }, function error(response) {
-                                alert('something went wrong')
+                                alert('something went wrong');
                                 console.log(response);
                             });
                     }

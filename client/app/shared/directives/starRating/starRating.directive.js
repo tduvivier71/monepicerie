@@ -22,7 +22,7 @@
                 readonly: '=?'
             },
             link: function(scope, element, attributes) {
-                if (scope.max == undefined) {
+                if (scope.max === undefined) {
                     scope.max = 5;
                 }
                 function updateStars() {
@@ -34,7 +34,7 @@
                     }
                 }
                 scope.toggle = function(index) {
-                    if (scope.readonly == undefined || scope.readonly === false){
+                    if (scope.readonly === undefined || scope.readonly === false){
                         scope.ratingValue = index + 1;
                         scope.onRatingSelect({
                             rating: index + 1

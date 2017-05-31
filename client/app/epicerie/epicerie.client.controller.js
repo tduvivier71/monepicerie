@@ -1,6 +1,6 @@
 (function () {
 
-    'use strict';
+  //  'use strict';
 
     angular
         .module('app.epicerie')
@@ -61,7 +61,7 @@
             if (e.keyCode === 27) {
                 _clearSearchItem();
             }
-        };
+        }
 
         function clearPlace () {
             vm.searchPlace = '';

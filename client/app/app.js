@@ -18,7 +18,7 @@
 		.config(config)
         .controller('indexCtrl', indexCtrl)
 	    .value('language', 'fr-CA')
-		.run(runApp)
+		.run(runApp);
 
 		/**
 		 * Config

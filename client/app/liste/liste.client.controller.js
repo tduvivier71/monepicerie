@@ -56,7 +56,7 @@
         vm.openSearch1 = openSearch1;
         vm.deleteAllDetail = deleteAllDetail;
         vm.addProduitByChevron = _addProduitByChevron;
-        vm.chooseListeRapide = chooseListeRapide
+        vm.chooseListeRapide = chooseListeRapide;
 
         // ************************************************************************************************************/
         // Object configuration
@@ -137,7 +137,7 @@
                             .then(function success(response) {
                                 e.success(response.data);
                             }, function error(response) {
-                                alert('something went wrong')
+                                alert('something went wrong');
                                 console.log(response);
                             });
                     }
@@ -174,7 +174,7 @@
                             .then(function success(response) {
                                 e.success(response.data);
                             }, function error(response) {
-                                alert('something went wrong')
+                                alert('something went wrong');
                                 console.log(response);
                             });
                     }
@@ -438,7 +438,7 @@
                     }
 
                 }, function error(response) {
-                    alert('something went wrong')
+                    alert('something went wrong');
                     console.log(response);
                 });
 

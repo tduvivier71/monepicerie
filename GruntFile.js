@@ -122,8 +122,15 @@
 
         grunt.loadNpmTasks('grunt-contrib-jshint');
 
-        grunt.registerTask( 'deploy' , 'Deploys files' ,
-            [ 'jshint', 'clean' , 'createFolder' , 'copyFiles', 'less', 'cssmin:css' ]);
+        grunt.registerTask(
+            'deploy', 'Deploys files' ,
+                [ 'jshint',
+                  'clean' ,
+                  'createFolder' ,
+                  'copyFiles',
+                  'less',
+                  'cssmin:css'
+                ]);
 
     };
 }());

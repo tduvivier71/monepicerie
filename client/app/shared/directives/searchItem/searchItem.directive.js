@@ -27,7 +27,7 @@
 
         scope.clearSearch = function clearSearch () {
             scope.searchItem = '';
-        }
+        };
 
 
         scope.clearSearchItem = function clearSearchItem() {
