@@ -30,30 +30,8 @@
                 target: {
                     files: {
                         //target file : source file
-                        'working/client/assets/style/style.min.css': 'client/assets/style/style.css'
+                        'working/client/assets/style/style.min.css': 'client/assets/style/app.css'
                     }
-                }
-            },
-
-            less: {
-                compile: {
-                    files: {
-                        'working/client/assets/style/compiled.css': 'client/assets/style/style.less'
-                    }
-                },
-                development: {
-                    options: {
-                        paths: ["client/assets/style"]
-                    },
-                            // target : source
-                    files: {"working/client/assets/style/style.css": "working/client/assets/style/style.less"}
-                },
-                production: {
-                    options: {
-                        paths: ["assets/style"],
-                        cleancss: true
-                    },
-                    files: {"path/to/result.css": "path/to/source.less"}
                 }
             },
 
@@ -63,13 +41,11 @@
                         style: 'expanded'
                     },
                     files: {                         // Dictionary of files
-                     'working/client/assets/style/style.css': 'working/client/assets/style/style.less'
+                                                     // dest : source
+                     "working/client/assets/style/style.css": "client/assets/style/app.scss"
                     }
                 }
             }
-
-
-
 
         });
 
@@ -94,12 +70,6 @@
             }
 
         });
-
-
-        /**
-         * less
-         */
-        grunt.loadNpmTasks('grunt-contrib-less');
 
         /**
          * sass
@@ -137,6 +107,17 @@
         });
 
         grunt.loadNpmTasks('grunt-contrib-jshint');
+
+
+        grunt.registerTask(
+            'dev', 'Dev task',
+            [ 'jshint',
+              'clean' ,
+              'createFolder' ,
+              'copyFiles',
+              'sass:dist',
+              'cssmin:css'
+            ]);
 
         grunt.registerTask(
             'deploy', 'Deploys files' ,
