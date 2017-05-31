@@ -55,6 +55,17 @@
                     },
                     files: {"path/to/result.css": "path/to/source.less"}
                 }
+            },
+
+            sass: {                              // Task
+                dist: {                            // Target
+                    options: {                       // Target options
+                        style: 'expanded'
+                    },
+                    files: {                         // Dictionary of files
+                     'working/client/assets/style/style.css': 'working/client/assets/style/style.less'
+                    }
+                }
             }
 
 
@@ -89,6 +100,11 @@
          * less
          */
         grunt.loadNpmTasks('grunt-contrib-less');
+
+        /**
+         * sass
+         */
+        grunt.loadNpmTasks('grunt-contrib-sass');
 
         /**
          * cssmin
@@ -128,7 +144,7 @@
                   'clean' ,
                   'createFolder' ,
                   'copyFiles',
-                  'less',
+                  'sass:dist',
                   'cssmin:css'
                 ]);
 
