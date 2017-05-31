@@ -16,7 +16,11 @@
                 options: {
                     workingDirectory: 'working',
                 manifest: [
-                    'client/index.html' , 'client/assets/' , 'client/app/'
+                    'client/index.html' ,
+                    'client/assets/' ,
+                    'client/app/',
+                    'client/fonts/'
+                //   , 'client/bower_components/'
                 ]}
             },
 
@@ -95,10 +99,13 @@
 
         grunt.registerTask( 'copyFiles' , function(){
             var files, workingDirectory;
+
             grunt.config.requires( 'copyFiles.options.manifest' );
             grunt.config.requires( 'copyFiles.options.workingDirectory' );
-            files = grunt.config.get( 'copyFiles.options.manifest' ); workingDirectory =
-                grunt.config.get( 'copyFiles.options.workingDirectory' );
+
+            files = grunt.config.get( 'copyFiles.options.manifest' );
+            workingDirectory = grunt.config.get( 'copyFiles.options.workingDirectory' );
+
             files.forEach( function(file) {
                 var destination = workingDirectory + '/' + file;
                 grunt.log.writeln( 'Copying ' + file + ' to ' + destination);

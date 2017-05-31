@@ -11,7 +11,7 @@
 			'ui.bootstrap', 'pascalprecht.translate', 'angularMoment', 'kendo.directives',
 			'app.accueil', 'app.categorie','app.epicerie','app.unite','app.format','app.produit', 'app.marque','app.liste',
 			'app.listeBase', 'app.comparatif',
-			'app.utilisateur','app.sign','satellizer', 'ui.toggle','uiGmapgoogle-maps','ngMap']); //ngMap
+			'app.utilisateur','app.sign','satellizer', 'ui.toggle', 'ngMap']); //ngMap
 
 	angular
 		.module('app')
@@ -25,10 +25,10 @@
 		 */
 
 		config.$inject = ['$locationProvider','$translateProvider','$translatePartialLoaderProvider','ngToastProvider',
-			'$authProvider','uiGmapGoogleMapApiProvider'];
+			'$authProvider'];
 
 		function config($locationProvider,$translateProvider,$translatePartialLoaderProvider, ngToastProvider,
-			$authProvider, uiGmapGoogleMapApiProvider) {
+			$authProvider) {
 
 			moment().locale('fr_ca');
 
