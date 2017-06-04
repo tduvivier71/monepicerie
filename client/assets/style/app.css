@@ -22,6 +22,18 @@ $td-secondary-text-color: #757575;
 $td-divider-color:        #BDBDBD;
 
 */
+/*
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url(../bower_components/material-design-icons/iconfont/MaterialIcons-Regular.eot);
+  src: local('Material Icons'),
+  local('MaterialIcons-Regular'),
+  url(../bower_components/material-design-icons/iconfont/MaterialIcons-Regular.woff2) format('woff2'),
+  url(../bower_components/material-design-icons/iconfont/MaterialIcons-Regular.woff) format('woff'),
+  url(../bower_components/material-design-icons/iconfont/MaterialIcons-Regular.ttf) format('truetype');
+} */
 @import url(../../../bower_components/kendo-ui/styles/kendo.common-bootstrap.min.css);
 @import url(../../../bower_components/kendo-ui/styles/kendo.bootstrap.min.css);
 @import url(../../../bower_components/angular-bootstrap-toggle/dist/angular-bootstrap-toggle.min.css);
@@ -11907,29 +11919,6 @@ textarea.k-textbox {
 .k-widget {
   @include height(34);
 } */
-/*
-
-input[type='text'] {
-  background-image: url(../../../bower_components/material-design-icons/content/1x_web/ic_clear_black_18dp.png);
-  background-position: 7px 7px;
-  background-repeat: no-repeat;
-
-}
-
-*/
-/*
-
-
-.errspan {
-  float: right;
-  margin-right: 6px;
-  margin-top: -20px;
-  position: relative;
-  z-index: 2;
-  color: red;
-}
-
-*/
 /*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
  * Copyright 2011-2016 Twitter, Inc.

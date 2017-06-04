@@ -21,6 +21,7 @@
     "express": "~4.13.1",
     "express-jwt": "^5.1.0",
     "express-session": "~1.13.0",
+    "grunt-bower": "^0.21.4",
     "jade": "~1.11.0",
     "jwt-simple": "^0.4.1",
     "method-override": "~2.3.5",
@@ -34,16 +35,19 @@
   },
   "devDependencies": {
     "grunt": "^1.0.1",
+    "grunt-bower-install": "^1.6.0",
+    "grunt-bower-install-simple": "^1.2.4",
+    "grunt-bowercopy": "^1.2.4",
+    "grunt-contrib-copy": "^1.0.0",
     "grunt-contrib-cssmin": "^1.0.2",
     "grunt-contrib-jshint": "^1.0.0",
     "grunt-contrib-less": "^1.4.0",
     "grunt-contrib-sass": "^1.0.0",
     "grunt-contrib-watch": "^1.0.0",
+    "grunt-wiredep": "^3.0.1",
     "jasmine-core": "^2.5.2",
-    "karma": "^1.5.0",
     "karma-chrome-launcher": "^2.0.0",
     "karma-firefox-launcher": "^1.0.1",
-    "karma-jasmine": "^1.1.0",
     "stylelint": "^7.7.1"
   }
 }

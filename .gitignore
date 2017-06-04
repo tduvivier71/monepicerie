@@ -1,5 +1,4 @@
-working/
-client/bower_components/
-node_modules/
 .sass-cache/
 .idea/
+node_modules/
+bower_components/

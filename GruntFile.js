@@ -12,21 +12,19 @@
          */
         grunt.config.init({
 
-            copyFiles: {
-                options: {
-                    workingDirectory: 'working',
-                manifest: [
-                    'client/index.html' ,
-                    'client/assets/' ,
-                    'client/app/',
-                    'client/fonts/'
-                //   , 'client/bower_components/'
-                ]}
+            copy: {
+                "dev": {
+                    expand: true,
+                    src: ['**/*'],
+                    cwd: 'client',
+                    dest: 'www-dev/client'
+                },
             },
 
             jshint: {
                 dist: {
-                    src: ['client/assets/*.js' , 'client/app/**/*.js']
+                    src: ['client/assets/*.js' ,
+                          'client/app/**/*.js']
                 }
             },
 
@@ -47,6 +45,43 @@
                     files: {                         // Dictionary of files
                                                      // dest : source
                      "working/client/assets/style/style.css": "client/assets/style/app.scss"
+                    }
+                }
+            },
+
+            bowerInstall: {
+                dist: {
+                    src: ['client/index.html'],
+                    dependencies: true,
+                    devDependencies: true,
+                    exclude: ["material-design-icons"]
+                }
+            },
+
+            bower: {
+                dest: 'www/client/public/',
+                js_dest: 'public/js/',
+                css_dest: 'public/css/',
+                fonts_dest: 'public/fonts/', //covers font types ['svg','eot', 'ttf', 'woff', 'woff2', 'otf']
+                images_dest: 'public/images/', //covers image types ['jpeg', 'jpg', 'gif', 'png']
+                options: {
+                    expand: true
+                }
+            },
+
+            "bower-install-simple": {
+                options: {
+                    color: true,
+                    directory: "lib"
+                },
+                "prod": {
+                    options: {
+                        production: true
+                    }
+                },
+                "dev": {
+                    options: {
+                        production: false
                     }
                 }
             }
@@ -75,15 +110,14 @@
 
         });
 
-        /**
-         * sass
-         */
         grunt.loadNpmTasks('grunt-contrib-sass');
-
-        /**
-         * cssmin
-         */
         grunt.loadNpmTasks('grunt-contrib-cssmin');
+        grunt.loadNpmTasks('grunt-contrib-copy');
+        grunt.loadNpmTasks('grunt-bower-install');
+        // grunt.loadNpmTasks("grunt-bower-install-simple");
+        grunt.loadNpmTasks('grunt-contrib-jshint');
+        grunt.loadNpmTasks('grunt-bower');
+        grunt.loadNpmTasks('grunt-bowercopy');
 
 
         grunt.registerTask( 'createFolder' , 'Create the working folder' , function(){
@@ -113,8 +147,10 @@
             });
         });
 
-        grunt.loadNpmTasks('grunt-contrib-jshint');
+     //   grunt.registerTask("bower-install", [ "bower-install-simple" ]);
 
+        grunt.registerTask('default',
+            ['bowerInstall', 'bower']);
 
         grunt.registerTask(
             'dev', 'Dev task',
