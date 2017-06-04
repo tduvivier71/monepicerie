@@ -5,12 +5,23 @@
 
     'use strict';
 
+    var pkgjson = require('./package.json');
+
+    var config = {
+        pkg: pkgjson,
+        app: 'client',
+        dist: 'www-dev'
+    }
+
     module.exports = function(grunt) {
 
         /**
          * Initialisation de grunt
          */
         grunt.config.init({
+
+            config: config,
+            pkg: config.pkg,
 
             copy: {
                 "dev": {
