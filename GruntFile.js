@@ -26,7 +26,7 @@
 
             copy: {
                 "www-dev": {
-                    src: ['index.html','**/app/*', '**/app/assets'],
+                    src: ['index.html','**/app/*', '**/assets'],
                     expand: true,
                     cwd: 'client',
                     dest: 'www-dev/client'
