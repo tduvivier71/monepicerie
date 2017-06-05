@@ -10,8 +10,9 @@
     var config = {
         pkg: pkgjson,
         app: 'client',
-        dist: 'www-dev'
-    }
+        dist: 'www-dev',
+        bower: 'bower_components'
+    };
 
     module.exports = function(grunt) {
 
@@ -24,9 +25,9 @@
             pkg: config.pkg,
 
             copy: {
-                "dev": {
+                "www-dev": {
+                    src: ['index.html','**/app/*', '**/app/assets'],
                     expand: true,
-                    src: ['**/*'],
                     cwd: 'client',
                     dest: 'www-dev/client'
                 },
@@ -55,7 +56,7 @@
                     },
                     files: {                         // Dictionary of files
                                                      // dest : source
-                     "working/client/assets/style/style.css": "client/assets/style/app.scss"
+                      "working/client/assets/style/style.css": "client/assets/style/app.scss"
                     }
                 }
             },
@@ -70,13 +71,11 @@
             },
 
             bower: {
-                dest: 'www/client/public/',
-                js_dest: 'public/js/',
-                css_dest: 'public/css/',
-                fonts_dest: 'public/fonts/', //covers font types ['svg','eot', 'ttf', 'woff', 'woff2', 'otf']
-                images_dest: 'public/images/', //covers image types ['jpeg', 'jpg', 'gif', 'png']
-                options: {
-                    expand: true
+                dev: {
+                    dest: 'www-dev/bower_components/',
+                    options: {
+                        expand: true
+                    }
                 }
             },
 
