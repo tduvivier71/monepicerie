@@ -36,8 +36,8 @@ module.exports = function(db) {
 
 	app.use(methodOverride());
 	app.use(flash());
-	app.use(express.static('./client'));
-	app.use(express.static('./client/asset'));
+	app.use(express.static('./www-dev/client'));
+	app.use(express.static('./www-dev/client/asset'));
 	app.use(session({
 		saveUninitialized: true,
 		resave: true,

@@ -71,6 +71,22 @@
                 }
             },
 
+
+            bowercopy: {
+                libs: {
+                    options: {
+                        destPrefix: 'client/vendors/js'
+                    },
+                    files: {
+                        'angular.js': 'angular/angular.js',
+                        'angular-animate.js': 'angular-animate/angular-animate.js',
+                        'angular-boostrap.js': 'angular-boostrap/angular-boostrap.js',
+                        'angular-boostrap-toggle.js': 'angular-boostrap-toogle/angular-boostrap-toogle.js',
+                        'jquery.js': 'jquery/dist/jquery.js'
+                    },
+                },
+            },
+
             bower: {
                 "www-dev": {
                     dest: 'www-dev/client/vendors/',
@@ -132,7 +148,7 @@
 
         // grunt.loadNpmTasks("grunt-bower-install-simple");
         // grunt.loadNpmTasks('grunt-bower-install');
-        // grunt.loadNpmTasks('grunt-bowercopy');
+         grunt.loadNpmTasks('grunt-bowercopy');
 
         grunt.loadNpmTasks('grunt-bower');
 
