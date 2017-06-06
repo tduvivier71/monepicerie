@@ -10,7 +10,8 @@
     var config = {
         pkg: pkgjson,
         app: 'client',
-        dist: 'www-dev',
+        dev: 'www-dev',
+        prod: 'www-prod',
         bower: 'bower_components'
     };
 
@@ -26,7 +27,7 @@
 
             copy: {
                 "www-dev": {
-                    src: ['index.html','**/app/*', '**/assets'],
+                    src: ['index.html','app/**', 'assets/**'],
                     expand: true,
                     cwd: 'client',
                     dest: 'www-dev/client'
@@ -71,10 +72,14 @@
             },
 
             bower: {
-                dev: {
-                    dest: 'www-dev/bower_components/',
+                "www-dev": {
+                    dest: 'www-dev/client/vendors/',
+                    js_dest: 'www-dev/client/vendors/js/',
+                    css_dest: 'www-dev/client/vendors/styles/',
+                    fonts_dest: 'www-dev/client/vendors/fonts/',
                     options: {
-                        expand: true
+                        keepExpandedHierarchy: false,
+                        expand: false
                     }
                 }
             },
@@ -123,11 +128,13 @@
         grunt.loadNpmTasks('grunt-contrib-sass');
         grunt.loadNpmTasks('grunt-contrib-cssmin');
         grunt.loadNpmTasks('grunt-contrib-copy');
-        grunt.loadNpmTasks('grunt-bower-install');
-        // grunt.loadNpmTasks("grunt-bower-install-simple");
         grunt.loadNpmTasks('grunt-contrib-jshint');
+
+        // grunt.loadNpmTasks("grunt-bower-install-simple");
+        // grunt.loadNpmTasks('grunt-bower-install');
+        // grunt.loadNpmTasks('grunt-bowercopy');
+
         grunt.loadNpmTasks('grunt-bower');
-        grunt.loadNpmTasks('grunt-bowercopy');
 
 
         grunt.registerTask( 'createFolder' , 'Create the working folder' , function(){
