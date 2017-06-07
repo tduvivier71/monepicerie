@@ -104,7 +104,9 @@
                         destPrefix: 'client/vendors/css'
                     },
                     files: {
-                        'material-icons.css': 'material-design-icons/iconfont/material-icons.css'
+                        'material-icons.css': 'material-design-icons/iconfont/material-icons.css',
+                        'bootstrap-sass.scss': 'bootstrap-sass/assets/stylesheets/_bootstrap.scss',
+                        'roboto-fontface.scss': 'roboto-fontface/css/roboto/sass/roboto-fontface.scss',
                     },
                 },
                 fonts: {

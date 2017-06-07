@@ -1,5 +1,5 @@
 /*
-Error: File to import not found or unreadable: ../bower_components/roboto-fontface/css/roboto/sass/roboto-fontface-regular.
+Error: File to import not found or unreadable: ../vendors/css/roboto-fontface.
         on line 1 of vendors/_roboto.scss
         from line 3 of app.scss
 
@@ -68,4 +68,4 @@ C:/Ruby23-x64/bin/scss:22:in `<main>'
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: File to import not found or unreadable: ../bower_components/roboto-fontface/css/roboto/sass/roboto-fontface-regular.\A         on line 1 of vendors/_roboto.scss\A         from line 3 of app.scss\A \A 1: // Third-party\A 2: @import \"vendors/material\";\A 3: @import \"vendors/roboto\";\A 4: @import \"vendors/kendo\";\A 5: @import \"vendors/bootstrap\";\A 6: @import \"vendors/bootstrap-toogle\";"; }
+  content: "Error: File to import not found or unreadable: ../vendors/css/roboto-fontface.\A         on line 1 of vendors/_roboto.scss\A         from line 3 of app.scss\A \A 1: // Third-party\A 2: @import \"vendors/material\";\A 3: @import \"vendors/roboto\";\A 4: @import \"vendors/kendo\";\A 5: @import \"vendors/bootstrap\";\A 6: @import \"vendors/bootstrap-toogle\";"; }
