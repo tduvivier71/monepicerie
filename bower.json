@@ -14,7 +14,6 @@
     "bootstrap": "3.3.7",
     "bootstrap-sass": "bootstrap-sass-official#^3.3.7",
     "jquery": "2.1.4",
-    "bootstrap-material-design": "^0.5.10",
     "moment": "^2.13.0",
     "angular-moment": "^0.10.3",
     "kendo-ui": "2016.3.914+Official",

@@ -73,16 +73,46 @@
 
 
             bowercopy: {
-                libs: {
+                js: {
                     options: {
                         destPrefix: 'client/vendors/js'
                     },
                     files: {
                         'angular.js': 'angular/angular.js',
                         'angular-animate.js': 'angular-animate/angular-animate.js',
-                        'angular-boostrap.js': 'angular-boostrap/angular-boostrap.js',
-                        'angular-boostrap-toggle.js': 'angular-boostrap-toogle/angular-boostrap-toogle.js',
-                        'jquery.js': 'jquery/dist/jquery.js'
+                        'angular-bootstrap.js': 'angular-bootstrap/ui-bootstrap.js',
+                        'angular-bootstrap-toggle.js': 'angular-bootstrap-toggle/dist/angular-bootstrap-toggle.js',
+                        'angular-messages.js': 'angular-messages/angular-messages.js',
+                        'angular-moment.js': 'angular-moment/angular-moment.js',
+                        'angular-resource.js': 'angular-resource/angular-resource.js',
+                        'angular-route.js': 'angular-route/angular-route.js',
+                        'angular-sanitize.js': 'angular-sanitize/angular-sanitize.js',
+                        'angular-translate.js': 'angular-translate/angular-translate.js',
+                        'angular-translate-loader-partial.js': 'angular-translate-loader-partial/angular-translate-loader-partial.js',
+                        'sortable.js': 'angular-ui-sortable/sortable.js',
+                        'bootstrap.js': 'bootstrap/dist/js/bootstrap.js',
+                        'jquery.js': 'jquery/dist/jquery.js',
+                        'kendo-ui.js': 'kendo-ui/js/kendo.ui.core.min.js',
+                        'moment.js': 'moment/moment.js',
+                        'ng-map.js': 'ngmap/build/scripts/ng-map.js',
+                        'ngToast.js': 'ngToast/dist/ngToast.js',
+                        'satellizer.js': 'satellizer/dist/satellizer.js'
+                    },
+                },
+                css: {
+                    options: {
+                        destPrefix: 'client/vendors/css'
+                    },
+                    files: {
+                        'material-icons.css': 'material-design-icons/iconfont/material-icons.css'
+                    },
+                },
+                fonts: {
+                    options: {
+                        destPrefix: 'client/vendors/fonts'
+                    },
+                    files: {
+                        'roboto-fontface': 'roboto-fontface/fonts/roboto/Roboto-R*.*'
                     },
                 },
             },
