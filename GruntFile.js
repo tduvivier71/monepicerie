@@ -99,16 +99,34 @@
                         'satellizer.js': 'satellizer/dist/satellizer.js'
                     },
                 },
+
+                sass: {
+                    options: {
+                        destPrefix: 'client/vendors/sass'
+                    },
+                    files: {
+
+                        'bootstrap-sass': 'bootstrap-sass/',
+                        'roboto-fontface': 'roboto-fontface/'
+                    },
+                },
                 css: {
                     options: {
                         destPrefix: 'client/vendors/css'
                     },
                     files: {
+
+                        'bootstrap-sass': 'bootstrap-sass/',
+                        'roboto-fontface': 'roboto-fontface/',
                         'material-icons.css': 'material-design-icons/iconfont/material-icons.css',
-                        'bootstrap-sass.scss': 'bootstrap-sass/assets/stylesheets/_bootstrap.scss',
-                        'roboto-fontface.scss': 'roboto-fontface/css/roboto/sass/roboto-fontface.scss',
+                        'angular-bootstrap-toggle.css': 'angular-bootstrap-toggle/dist/angular-bootstrap-toggle.css',
+                        'kendo.common-bootstrap.min.css':'kendo-ui/styles/kendo.common-bootstrap.min.css',
+                        'kendo.bootstrap.min.css':'kendo-ui/styles/kendo.bootstrap.min.css',
+                        'ngToast.css': 'ngToast/dist/ngToast.css',
+                        'ngToast-animations.css' : 'ngToast/dist/ngToast-animations.css'
                     },
                 },
+
                 fonts: {
                     options: {
                         destPrefix: 'client/vendors/fonts'
