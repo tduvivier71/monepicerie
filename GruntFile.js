@@ -81,6 +81,7 @@
                         'angular.js': 'angular/angular.js',
                         'angular-animate.js': 'angular-animate/angular-animate.js',
                         'angular-bootstrap.js': 'angular-bootstrap/ui-bootstrap.js',
+                        'ui-bootstrap-tpls.js': 'angular-bootstrap/ui-bootstrap-tpls.js',
                         'angular-bootstrap-toggle.js': 'angular-bootstrap-toggle/dist/angular-bootstrap-toggle.js',
                         'angular-messages.js': 'angular-messages/angular-messages.js',
                         'angular-moment.js': 'angular-moment/angular-moment.js',
@@ -92,7 +93,8 @@
                         'sortable.js': 'angular-ui-sortable/sortable.js',
                         'bootstrap.js': 'bootstrap/dist/js/bootstrap.js',
                         'jquery.js': 'jquery/dist/jquery.js',
-                        'kendo-ui.js': 'kendo-ui/js/kendo.ui.core.min.js',
+                        'jquery-ui.js': 'jquery-ui/jquery-ui.js',
+                        'kendo.ui.core.min.js': 'kendo-ui/js/kendo.ui.core.min.js',
                         'moment.js': 'moment/moment.js',
                         'ng-map.js': 'ngmap/build/scripts/ng-map.js',
                         'ngToast.js': 'ngToast/dist/ngToast.js',
@@ -105,7 +107,6 @@
                         destPrefix: 'client/vendors/sass'
                     },
                     files: {
-
                         'bootstrap-sass': 'bootstrap-sass/',
                         'roboto-fontface': 'roboto-fontface/'
                     },
