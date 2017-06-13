@@ -27,7 +27,15 @@
 
             copy: {
                 "www-dev": {
-                    src: ['index.html','app/**', 'assets/**'],
+                    app : {
+                        src: ['index.html','app/**', 'assets/**'],
+                        expand: true,
+                        cwd: 'client',
+                        dest: 'www-dev/client'
+                        }
+                },
+                "www-dev-vendors": {
+                    src: ['vendors/**'],
                     expand: true,
                     cwd: 'client',
                     dest: 'www-dev/client'
@@ -119,7 +127,25 @@
 
                         'bootstrap-sass': 'bootstrap-sass/',
                         'roboto-fontface': 'roboto-fontface/',
-                        'material-icons.css': 'material-design-icons/iconfont/material-icons.css',
+                        'material-design-icons/action/1x_web': 'material-design-icons/action/1x_web/',
+                        'material-design-icons/alert/1x_web': 'material-design-icons/alert/1x_web/',
+                        //  'material-design-icons/av/1x_web': 'material-design-icons/av/1x_web/',
+                        //  'material-design-icons/communication/1x_web': 'material-design-icons/communication/1x_web/',
+                        'material-design-icons/content/1x_web': 'material-design-icons/content/1x_web/',
+                        // 'material-design-icons/device/1x_web': 'material-design-icons/device/1x_web/',
+                        'material-design-icons/editor/1x_web': 'material-design-icons/editor/1x_web/',
+                        // 'material-design-icons/file/1x_web': 'material-design-icons/file/1x_web/',
+                        'material-design-icons/hardware/1x_web': 'material-design-icons/hardware/1x_web/',
+                        'material-design-icons/iconfont': 'material-design-icons/iconfont/',
+                        'material-design-icons/image/1x_web': 'material-design-icons/image/1x_web/',
+                        'material-design-icons/maps/1x_web': 'material-design-icons/maps/1x_web/',
+                        'material-design-icons/navigation/1x_web': 'material-design-icons/navigation/1x_web/',
+                        'material-design-icons/notification/1x_web': 'material-design-icons/notification/1x_web/',
+                        'material-design-icons/places/1x_web': 'material-design-icons/places/1x_web/',
+                        'material-design-icons/social/1x_web': 'material-design-icons/social/1x_web/',
+                        'material-design-icons/sprites': 'material-design-icons/sprites/',
+                        'material-design-icons/toggle/1x_web': 'material-design-icons/toggle/1x_web/',
+
                         'angular-bootstrap-toggle.css': 'angular-bootstrap-toggle/dist/angular-bootstrap-toggle.css',
                         'kendo.common-bootstrap.min.css':'kendo-ui/styles/kendo.common-bootstrap.min.css',
                         'kendo.bootstrap.min.css':'kendo-ui/styles/kendo.bootstrap.min.css',
@@ -136,6 +162,12 @@
                         'roboto-fontface': 'roboto-fontface/fonts/roboto/Roboto-R*.*'
                     },
                 },
+            },
+
+            clean: {
+
+                    vendors: ['client/vendors']
+
             },
 
             bower: {
@@ -196,6 +228,7 @@
         grunt.loadNpmTasks('grunt-contrib-cssmin');
         grunt.loadNpmTasks('grunt-contrib-copy');
         grunt.loadNpmTasks('grunt-contrib-jshint');
+        grunt.loadNpmTasks('grunt-contrib-clean');
 
         // grunt.loadNpmTasks("grunt-bower-install-simple");
         // grunt.loadNpmTasks('grunt-bower-install');
@@ -209,11 +242,11 @@
             grunt.file.mkdir(grunt.config.get( 'copyFiles.options.workingDirectory' ));
         });
 
-        grunt.registerTask( 'clean',
-            'Deletes the working folder and its contents' , function(){
-                grunt.config.requires( 'copyFiles.options.workingDirectory' );
-                grunt.file.delete(grunt.config.get( 'copyFiles.options.workingDirectory' ));
-        });
+        // grunt.registerTask( 'clean',
+        //     'Deletes the working folder and its contents' , function(){
+        //         grunt.config.requires( 'copyFiles.options.workingDirectory' );
+        //         grunt.file.delete(grunt.config.get( 'copyFiles.options.workingDirectory' ));
+        // });
 
         grunt.registerTask( 'copyFiles' , function(){
             var files, workingDirectory;
