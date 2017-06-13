@@ -25,61 +25,6 @@
             config: config,
             pkg: config.pkg,
 
-            copy: {
-                "www-dev": {
-                    app : {
-                        src: ['index.html','app/**', 'assets/**'],
-                        expand: true,
-                        cwd: 'client',
-                        dest: 'www-dev/client'
-                        }
-                },
-                "www-dev-vendors": {
-                    src: ['vendors/**'],
-                    expand: true,
-                    cwd: 'client',
-                    dest: 'www-dev/client'
-                },
-            },
-
-            jshint: {
-                dist: {
-                    src: ['client/assets/*.js' ,
-                          'client/app/**/*.js']
-                }
-            },
-
-            cssmin: {
-                target: {
-                    files: {
-                        //target file : source file
-                        'working/client/assets/style/style.min.css': 'client/assets/style/app.css'
-                    }
-                }
-            },
-
-            sass: {                              // Task
-                dist: {                            // Target
-                    options: {                       // Target options
-                        style: 'expanded'
-                    },
-                    files: {                         // Dictionary of files
-                                                     // dest : source
-                      "working/client/assets/style/style.css": "client/assets/style/app.scss"
-                    }
-                }
-            },
-
-            bowerInstall: {
-                dist: {
-                    src: ['client/index.html'],
-                    dependencies: true,
-                    devDependencies: true,
-                    exclude: ["material-design-icons"]
-                }
-            },
-
-
             bowercopy: {
                 js: {
                     options: {
@@ -119,6 +64,7 @@
                         'roboto-fontface': 'roboto-fontface/'
                     },
                 },
+
                 css: {
                     options: {
                         destPrefix: 'client/vendors/css'
@@ -164,40 +110,57 @@
                 },
             },
 
+            copy: {
+                "www-dev": {
+
+                        src: ['index.html','app/**', 'assets/**'],
+                        expand: true,
+                        cwd: 'client',
+                        dest: 'www-dev/client'
+
+                },
+                "www-dev-vendors": {
+                    src: ['vendors/**'],
+                    expand: true,
+                    cwd: 'client',
+                    dest: 'www-dev/client'
+                },
+            },
+
+            jshint: {
+                dist: {
+                    src: ['client/assets/*.js' ,
+                          'client/app/**/*.js']
+                }
+            },
+
+            cssmin: {
+                target: {
+                    files: {
+                        //target file : source file
+                        'working/client/assets/style/style.min.css': 'client/assets/style/app.css'
+                    }
+                }
+            },
+
+            sass: {                              // Task
+                dist: {                            // Target
+                    options: {                       // Target options
+                        style: 'expanded'
+                    },
+                    files: {                         // Dictionary of files
+                                                     // dest : source
+                      "working/client/assets/style/style.css": "client/assets/style/app.scss"
+                    }
+                }
+            },
+
+
+
             clean: {
 
                     vendors: ['client/vendors']
 
-            },
-
-            bower: {
-                "www-dev": {
-                    dest: 'www-dev/client/vendors/',
-                    js_dest: 'www-dev/client/vendors/js/',
-                    css_dest: 'www-dev/client/vendors/styles/',
-                    fonts_dest: 'www-dev/client/vendors/fonts/',
-                    options: {
-                        keepExpandedHierarchy: false,
-                        expand: false
-                    }
-                }
-            },
-
-            "bower-install-simple": {
-                options: {
-                    color: true,
-                    directory: "lib"
-                },
-                "prod": {
-                    options: {
-                        production: true
-                    }
-                },
-                "dev": {
-                    options: {
-                        production: false
-                    }
-                }
             }
 
         });
@@ -205,7 +168,7 @@
         /**
          * watch
          */
-        grunt.loadNpmTasks( 'grunt-contrib-watch' );
+
         grunt.config( 'watch' , {
             scripts: {
                 files: [  'client/index.html' , 'client/assets/*.js' , 'client/app/**/*.js' ],
@@ -229,13 +192,8 @@
         grunt.loadNpmTasks('grunt-contrib-copy');
         grunt.loadNpmTasks('grunt-contrib-jshint');
         grunt.loadNpmTasks('grunt-contrib-clean');
-
-        // grunt.loadNpmTasks("grunt-bower-install-simple");
-        // grunt.loadNpmTasks('grunt-bower-install');
-         grunt.loadNpmTasks('grunt-bowercopy');
-
-        grunt.loadNpmTasks('grunt-bower');
-
+        grunt.loadNpmTasks('grunt-bowercopy');
+        grunt.loadNpmTasks( 'grunt-contrib-watch' );
 
         grunt.registerTask( 'createFolder' , 'Create the working folder' , function(){
             grunt.config.requires( 'copyFiles.options.workingDirectory' );
@@ -263,11 +221,6 @@
                 grunt.file.copy(file, destination);
             });
         });
-
-     //   grunt.registerTask("bower-install", [ "bower-install-simple" ]);
-
-        grunt.registerTask('default',
-            ['bowerInstall', 'bower']);
 
         grunt.registerTask(
             'dev', 'Dev task',

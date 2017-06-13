@@ -1,6 +1,11 @@
 .sass-cache/
 .idea/
 node_modules/
+bower_components/
 /bower_components/
-/client/vendors/
+client/assets/style/app.css.map
+client/vendors/
+package-lock.json
+working/
+www-dev/
 /www-dev/
