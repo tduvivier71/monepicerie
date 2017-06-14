@@ -111,15 +111,19 @@
             },
 
             copy: {
-                "www-dev": {
-
-                        src: ['index.html','app/**', 'assets/**'],
-                        expand: true,
-                        cwd: 'client',
-                        dest: 'www-dev/client'
-
+                "dev-app": {
+                    src: ['index.html','app/**'],
+                    expand: true,
+                    cwd: 'client',
+                    dest: 'www-dev/client'
                 },
-                "www-dev-vendors": {
+                "dev-assets": {
+                    src: ['assets/**'],
+                    expand: true,
+                    cwd: 'client',
+                    dest: 'www-dev/client'
+                },
+                "dev-vendors": {
                     src: ['vendors/**'],
                     expand: true,
                     cwd: 'client',
@@ -127,15 +131,23 @@
                 },
             },
 
+            clean: {
+                bower: ['client/vendors'],
+                "dev-client": ['www-dev/client'],
+                "dev-app": ['www-dev/client/app'],
+                "dev-assets": ['www-dev/client/assets'],
+                "dev-vendors": ['www-dev/client/vendors']
+
+            },
+
             jshint: {
-                dist: {
-                    src: ['client/assets/*.js' ,
-                          'client/app/**/*.js']
+                "dev-app": {
+                    src: ['client/app/**/*.js']
                 }
             },
 
             cssmin: {
-                target: {
+                prod: {
                     files: {
                         //target file : source file
                         'working/client/assets/style/style.min.css': 'client/assets/style/app.css'
@@ -143,25 +155,20 @@
                 }
             },
 
-            sass: {                              // Task
-                dist: {                            // Target
-                    options: {                       // Target options
+            sass: {
+                dev: {
+                    options: {
                         style: 'expanded'
                     },
-                    files: {                         // Dictionary of files
-                                                     // dest : source
-                      "working/client/assets/style/style.css": "client/assets/style/app.scss"
+                    files: {   //dest < Source
+                      "www-dev/client/assets/style/app.css": "client/assets/style/app.scss"
                     }
                 }
             },
 
 
 
-            clean: {
 
-                    vendors: ['client/vendors']
-
-            }
 
         });
 
@@ -187,13 +194,13 @@
 
         });
 
-        grunt.loadNpmTasks('grunt-contrib-sass');
-        grunt.loadNpmTasks('grunt-contrib-cssmin');
-        grunt.loadNpmTasks('grunt-contrib-copy');
-        grunt.loadNpmTasks('grunt-contrib-jshint');
-        grunt.loadNpmTasks('grunt-contrib-clean');
         grunt.loadNpmTasks('grunt-bowercopy');
-        grunt.loadNpmTasks( 'grunt-contrib-watch' );
+        grunt.loadNpmTasks('grunt-contrib-copy');
+        grunt.loadNpmTasks('grunt-contrib-clean');
+        grunt.loadNpmTasks('grunt-contrib-cssmin');
+        grunt.loadNpmTasks('grunt-contrib-jshint');
+        grunt.loadNpmTasks('grunt-contrib-sass');
+        grunt.loadNpmTasks( 'grunt-contrib-watch');
 
         grunt.registerTask( 'createFolder' , 'Create the working folder' , function(){
             grunt.config.requires( 'copyFiles.options.workingDirectory' );
