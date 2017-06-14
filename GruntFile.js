@@ -166,10 +166,6 @@
                 }
             },
 
-
-
-
-
         });
 
         /**
@@ -177,21 +173,20 @@
          */
 
         grunt.config( 'watch' , {
-            scripts: {
-                files: [  'client/index.html' , 'client/assets/*.js' , 'client/app/**/*.js' ],
-                tasks: [ 'jshint' ], // deploy
-                options: {
-                    spawn: false
-                }
+            js: {
+                files: [  'client/app/**/*.js' ],
+                tasks: [ 'jshint:dev-app', 'copy:dev-app' ]
             },
-
-            interface: {
-                files: [ 'client/index.html' ]
+            css: {
+                files: '**/*.sass',
+                tasks: ['sass'],
+                options: {
+                    livereload: true,
+                },
             },
             options: {
                 livereload: true
             }
-
         });
 
         grunt.loadNpmTasks('grunt-bowercopy');
@@ -202,10 +197,10 @@
         grunt.loadNpmTasks('grunt-contrib-sass');
         grunt.loadNpmTasks( 'grunt-contrib-watch');
 
-        grunt.registerTask( 'createFolder' , 'Create the working folder' , function(){
+     /*   grunt.registerTask( 'createFolder' , 'Create the working folder' , function(){
             grunt.config.requires( 'copyFiles.options.workingDirectory' );
             grunt.file.mkdir(grunt.config.get( 'copyFiles.options.workingDirectory' ));
-        });
+        });  */
 
         // grunt.registerTask( 'clean',
         //     'Deletes the working folder and its contents' , function(){
@@ -213,41 +208,24 @@
         //         grunt.file.delete(grunt.config.get( 'copyFiles.options.workingDirectory' ));
         // });
 
-        grunt.registerTask( 'copyFiles' , function(){
-            var files, workingDirectory;
-
-            grunt.config.requires( 'copyFiles.options.manifest' );
-            grunt.config.requires( 'copyFiles.options.workingDirectory' );
-
-            files = grunt.config.get( 'copyFiles.options.manifest' );
-            workingDirectory = grunt.config.get( 'copyFiles.options.workingDirectory' );
-
-            files.forEach( function(file) {
-                var destination = workingDirectory + '/' + file;
-                grunt.log.writeln( 'Copying ' + file + ' to ' + destination);
-                grunt.file.copy(file, destination);
-            });
-        });
-
         grunt.registerTask(
-            'dev', 'Dev task',
-            [ 'jshint',
-              'clean' ,
-              'createFolder' ,
-              'copyFiles',
-              'sass:dist',
-              'cssmin:css'
+            'init-dev', 'Dev. env. initialization',
+            [ 'clean:bower',
+              'bowercopy',
+              'clean:dev-client' ,
+              'copy' ,
+              'sass:dev'
             ]);
 
         grunt.registerTask(
-            'deploy', 'Deploys files' ,
-                [ 'jshint',
-                  'clean' ,
-                  'createFolder' ,
-                  'copyFiles',
-                  'sass:dist',
-                  'cssmin:css'
-                ]);
+            'dev-deploy', 'Dev. deploy',
+            [ 'jshint',
+              'clean:dev-app',
+              'clean:dev-assets',
+              'copy:dev-app',
+              'copy:dev-assets',
+              'sass:dev'
+            ]);
 
     };
 }());
