@@ -48,6 +48,8 @@
                         'jquery.js': 'jquery/dist/jquery.js',
                         'jquery-ui.js': 'jquery-ui/jquery-ui.js',
                         'kendo.ui.core.min.js': 'kendo-ui/js/kendo.ui.core.min.js',
+                        'kendo.culture.fr-CA.min.js': 'kendo-ui/js/cultures/kendo.culture.fr-CA.min.js',
+                        'kendo.message.fr-CA.min.js': 'kendo-ui/js/messages/kendo.messages.fr-CA.min.js',
                         'moment.js': 'moment/moment.js',
                         'ng-map.js': 'ngmap/build/scripts/ng-map.js',
                         'ngToast.js': 'ngToast/dist/ngToast.js',
@@ -70,7 +72,7 @@
                         destPrefix: 'client/vendors/css'
                     },
                     files: {
-
+                        'Bootstrap':'kendo-ui/styles/Bootstrap',
                         'bootstrap-sass': 'bootstrap-sass/',
                         'roboto-fontface': 'roboto-fontface/',
                         'material-design-icons/action/1x_web': 'material-design-icons/action/1x_web/',
@@ -174,21 +176,17 @@
 
         grunt.config( 'watch' , {
             js: {
-                files: [  'client/app/**/*.js' ],
+                files: [ 'client/app/**/*.js' ],
                 tasks: [ 'jshint:dev-app', 'copy:dev-app' ]
             },
             css: {
-                files: '**/*.sass',
+                files: ['client/app/**/*.scss'],
                 tasks: ['sass'],
-                options: {
-                    livereload: true,
-                },
             },
             options: {
                 livereload: true
             }
         });
-
 
         grunt.loadNpmTasks('grunt-bowercopy');
         grunt.loadNpmTasks('grunt-contrib-copy');
@@ -196,7 +194,7 @@
         grunt.loadNpmTasks('grunt-contrib-cssmin');
         grunt.loadNpmTasks('grunt-contrib-jshint');
         grunt.loadNpmTasks('grunt-contrib-sass');
-        grunt.loadNpmTasks( 'grunt-contrib-watch');
+        grunt.loadNpmTasks('grunt-contrib-watch');
 
      /*   grunt.registerTask( 'createFolder' , 'Create the working folder' , function(){
             grunt.config.requires( 'copyFiles.options.workingDirectory' );
