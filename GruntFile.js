@@ -168,6 +168,21 @@
                 }
             },
 
+            htmlmin: {
+                prod: {
+                    options: {
+                        removeComments: true,
+                        collapseWhitespace: true
+                    },
+                    files: [{
+                        expand: true,
+                        cwd: 'client',
+                        src: ['app/**/*.html', '*.html'],
+                        dest: 'www-prod'
+                    }]
+                }
+            }
+
         });
 
         /**
@@ -195,6 +210,7 @@
         grunt.loadNpmTasks('grunt-contrib-jshint');
         grunt.loadNpmTasks('grunt-contrib-sass');
         grunt.loadNpmTasks('grunt-contrib-watch');
+        grunt.loadNpmTasks('grunt-contrib-htmlmin');
 
      /*   grunt.registerTask( 'createFolder' , 'Create the working folder' , function(){
             grunt.config.requires( 'copyFiles.options.workingDirectory' );
