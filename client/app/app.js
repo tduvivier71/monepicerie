@@ -31,6 +31,7 @@
 			$authProvider) {
 
 			moment().locale('fr_ca');
+            kendo.culture('fr-CA');
 
 			$authProvider.httpInterceptor = function() { return true; };
 			$authProvider.withCredentials = false;
