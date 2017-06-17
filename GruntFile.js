@@ -9,7 +9,9 @@
 
     var config = {
         pkg: pkgjson,
-        app: 'client',
+        client: 'client',
+        server: 'server',
+        sources: 'sources',
         dev: 'www-dev',
         prod: 'www-prod',
         bower: 'bower_components'
@@ -116,20 +118,32 @@
                 "dev-app": {
                     src: ['index.html','app/**'],
                     expand: true,
-                    cwd: 'client',
-                    dest: 'www-dev/client'
+                    cwd: config.client,
+                    dest: config.dev + '/' + config.client
                 },
                 "dev-assets": {
                     src: ['assets/**'],
                     expand: true,
-                    cwd: 'client',
-                    dest: 'www-dev/client'
+                    cwd: config.client,
+                    dest: config.dev + '/' + config.client
                 },
                 "dev-vendors": {
                     src: ['vendors/**'],
                     expand: true,
-                    cwd: 'client',
+                    cwd: config.client,
                     dest: 'www-dev/client'
+                },
+                "dev-server": {
+                    src: ['**'],
+                    expand: true,
+                    cwd: config.server,
+                    dest: config.dev + '/' + config.server
+                },
+                "prod-server": {
+                    src: ['**'],
+                    expand: true,
+                    cwd: config.server,
+                    dest: config.prod + '/' + config.server
                 },
             },
 
@@ -138,21 +152,26 @@
                 "dev-client": ['www-dev/client'],
                 "dev-app": ['www-dev/client/app'],
                 "dev-assets": ['www-dev/client/assets'],
-                "dev-vendors": ['www-dev/client/vendors']
-
+                "dev-vendors": ['www-dev/client/vendors'],
+                "prod": ['www-prod'],
+                "prod-client": ['www-prod/client'],
+                "prod-app": ['www-prod/app']
             },
 
             jshint: {
                 "dev-app": {
                     src: ['client/app/**/*.js']
                 }
+                //,
+                //"dev-server": {
+                //    src: ['server/**/*.js']
+                //}
             },
 
             cssmin: {
                 prod: {
                     files: {
-                        //target file : source file
-                        'working/client/assets/style/style.min.css': 'client/assets/style/app.css'
+                        'www-prod/client/assets/style/app.min.css': 'client/assets/style/app.css'
                     }
                 }
             },
@@ -168,7 +187,7 @@
                 }
             },
 
-            htmlmin: {
+            minifyHtml: {
                 prod: {
                     options: {
                         removeComments: true,
@@ -178,8 +197,29 @@
                         expand: true,
                         cwd: 'client',
                         src: ['app/**/*.html', '*.html'],
-                        dest: 'www-prod'
+                        dest: 'www-prod/client'
                     }]
+                }
+            },
+
+            uglify: {
+                options: {
+                    beautify: {
+                        beautify: false,
+                        width: 80
+                    }
+                },
+                prod: {
+                    files: {
+                        'www-prod/client/app.min.js': ['client/app/**/*.js']
+                    }
+
+                    //files: [{
+                    //    expand: true,
+                    //    cwd: 'client/app',
+                    //    src: '**/*.js',
+                    //    dest: 'www-prod/app'
+                    //}]
                 }
             }
 
@@ -208,9 +248,11 @@
         grunt.loadNpmTasks('grunt-contrib-clean');
         grunt.loadNpmTasks('grunt-contrib-cssmin');
         grunt.loadNpmTasks('grunt-contrib-jshint');
+        grunt.loadNpmTasks('grunt-minify-html');
         grunt.loadNpmTasks('grunt-contrib-sass');
+        grunt.loadNpmTasks('grunt-contrib-uglify');
         grunt.loadNpmTasks('grunt-contrib-watch');
-        grunt.loadNpmTasks('grunt-contrib-htmlmin');
+
 
      /*   grunt.registerTask( 'createFolder' , 'Create the working folder' , function(){
             grunt.config.requires( 'copyFiles.options.workingDirectory' );
@@ -239,8 +281,17 @@
               'clean:dev-assets',
               'copy:dev-app',
               'copy:dev-assets',
+              'copy:dev-server',
               'sass:dev'
             ]);
+
+        grunt.registerTask(
+            'prod-deploy', 'Prod. deploy',
+            [ 'clean:prod',
+              'copy:prod-server',
+              'uglify',
+              'minifyHtml',
+              'cssmin']);
 
     };
 }());
