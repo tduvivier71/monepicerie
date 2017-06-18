@@ -171,7 +171,7 @@
             cssmin: {
                 prod: {
                     files: {
-                        'www-prod/client/assets/style/app.min.css': 'client/assets/style/app.css'
+                        'www-prod/client/assets/style/app.min.css': 'www-dev/client/assets/style/app.css'
                     }
                 }
             },
@@ -179,10 +179,19 @@
             sass: {
                 dev: {
                     options: {
-                        style: 'expanded'
+                        style: 'expanded',
+                        lineNumbers: true
                     },
                     files: {   //dest < Source
                       "www-dev/client/assets/style/app.css": "client/assets/style/app.scss"
+                    }
+                },
+                prod: {
+                    options: {
+                        style: 'compressed'
+                    },
+                    files: {   //dest < Source
+                        "www-prod/client/assets/style/app.css": "www-dev/client/assets/style/app.css"
                     }
                 }
             },

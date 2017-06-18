@@ -6,6 +6,7 @@
 
 	'use strict';
 
+
 	angular
 		.module('app', ['ngRoute', 'ngResource', 'ngMessages', 'ngSanitize', 'ngAnimate', 'ngToast', 'ui.sortable',
 			'ui.bootstrap', 'pascalprecht.translate', 'angularMoment', 'kendo.directives',
@@ -32,6 +33,7 @@
 
 			moment().locale('fr_ca');
             kendo.culture('fr-CA');
+
 
 			$authProvider.httpInterceptor = function() { return true; };
 			$authProvider.withCredentials = false;
