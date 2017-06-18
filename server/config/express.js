@@ -34,6 +34,7 @@ module.exports = function(db) {
 	app.use(bodyParser.urlencoded({extended: true}));
 	app.use(bodyParser.json());
 
+
 	app.use(methodOverride());
 	app.use(flash());
 	app.use(express.static('./client'));
@@ -45,15 +46,6 @@ module.exports = function(db) {
 		store: mongoStore
 	}));
 
-
-
-
-	//*******
-
-
-
-
-	//*******
 
 	// development error handler
     // will print stacktrace

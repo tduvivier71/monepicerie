@@ -197,20 +197,20 @@
                 }
             },
 
-            minifyHtml: {
-                prod: {
-                    options: {
-                        removeComments: true,
-                        collapseWhitespace: true
-                    },
-                    files: [{
-                        expand: true,
-                        cwd: 'client',
-                        src: ['app/**/*.html', '*.html'],
-                        dest: 'www-prod/client'
-                    }]
-                }
-            },
+            // minifyHtml: {
+            //     prod: {
+            //         options: {
+            //             removeComments: true,
+            //             collapseWhitespace: true
+            //         },
+            //         files: [{
+            //             expand: true,
+            //             cwd: 'client',
+            //             src: ['app/**/*.html', '*.html'],
+            //             dest: 'www-prod/client'
+            //         }]
+            //     }
+            // },
 
             uglify: {
                 options: {
@@ -231,7 +231,36 @@
                     //    dest: 'www-prod/app'
                     //}]
                 }
-            }
+            },
+
+            processhtml: {
+                dev: {
+
+                    options: {
+                        process: true,
+                        data: {
+                            title: 'My app dev',
+                            message: 'This is dev distribution'
+                        }
+                    },
+                    files: {
+                        'www-dev/client/index.html': ['client/index.html']
+                    }
+                },
+
+                prod: {
+                    options: {
+                        process: true,
+                        data: {
+                            title: 'My app prod',
+                            message: 'This is production distribution'
+                        }
+                    },
+                    files: {
+                        'www-prod/client/index.html': ['www-dev/client/index.html']
+                    }
+                }
+            },
 
         });
 
@@ -240,9 +269,13 @@
          */
 
         grunt.config( 'watch' , {
-            js: {
+            "client-js": {
                 files: [ 'client/app/**/*.js' ],
                 tasks: [ 'jshint:dev-app', 'copy:dev-app' ]
+            },
+            "server-js": {
+                files: [ 'server/**/*.js' ],
+                tasks: [ 'copy:dev-server' ]
             },
             css: {
                 files: ['client/app/**/*.scss'],
@@ -258,7 +291,7 @@
         grunt.loadNpmTasks('grunt-contrib-clean');
         grunt.loadNpmTasks('grunt-contrib-cssmin');
         grunt.loadNpmTasks('grunt-contrib-jshint');
-        grunt.loadNpmTasks('grunt-minify-html');
+      //  grunt.loadNpmTasks('grunt-minify-html');
         grunt.loadNpmTasks('grunt-processhtml');
         grunt.loadNpmTasks('grunt-contrib-sass');
         grunt.loadNpmTasks('grunt-contrib-uglify');
