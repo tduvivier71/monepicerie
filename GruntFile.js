@@ -188,10 +188,11 @@
                 },
                 prod: {
                     options: {
-                        style: 'compressed'
+                        style: 'compressed',
+                        sourcemap: 'none'
                     },
                     files: {   //dest < Source
-                        "www-prod/client/assets/style/app.css": "www-dev/client/assets/style/app.css"
+                        "www-prod/client/assets/style/app.min.css": "www-dev/client/assets/style/app.css"
                     }
                 }
             },
@@ -258,6 +259,7 @@
         grunt.loadNpmTasks('grunt-contrib-cssmin');
         grunt.loadNpmTasks('grunt-contrib-jshint');
         grunt.loadNpmTasks('grunt-minify-html');
+        grunt.loadNpmTasks('grunt-processhtml');
         grunt.loadNpmTasks('grunt-contrib-sass');
         grunt.loadNpmTasks('grunt-contrib-uglify');
         grunt.loadNpmTasks('grunt-contrib-watch');
