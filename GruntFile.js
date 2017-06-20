@@ -9,12 +9,15 @@
 
     var config = {
         pkg: pkgjson,
-        client: 'client',
-        server: 'server',
-        sources: 'sources',
-        dev: 'www-dev',
-        prod: 'www-prod',
-        bower: 'bower_components'
+        app: 'app',
+        client: 'client/',
+        server: 'server/',
+        dev: 'www-dev/',
+        prod: 'www-prod/',
+        bower: 'bower_components/',
+        vendors: 'vendors/',
+        sass: 'sass/',
+        assets: 'assets/'
     };
 
     module.exports = function(grunt) {
@@ -30,7 +33,7 @@
             bowercopy: {
                 js: {
                     options: {
-                        destPrefix: 'client/vendors/js'
+                        destPrefix: config.dev + config.client + config.vendors + 'js/'
                     },
                     files: {
                         'angular.js': 'angular/angular.js',
@@ -61,7 +64,7 @@
 
                 sass: {
                     options: {
-                        destPrefix: 'client/vendors/sass'
+                        destPrefix: config.dev + config.client + config.vendors + 'sass/'
                     },
                     files: {
                         'bootstrap-sass': 'bootstrap-sass/',
@@ -71,7 +74,7 @@
 
                 css: {
                     options: {
-                        destPrefix: 'client/vendors/css'
+                        destPrefix: config.dev + config.client + config.vendors + 'css/'
                     },
                     files: {
                         'Bootstrap':'kendo-ui/styles/Bootstrap',
@@ -79,12 +82,8 @@
                         'roboto-fontface': 'roboto-fontface/',
                         'material-design-icons/action/1x_web': 'material-design-icons/action/1x_web/',
                         'material-design-icons/alert/1x_web': 'material-design-icons/alert/1x_web/',
-                        //  'material-design-icons/av/1x_web': 'material-design-icons/av/1x_web/',
-                        //  'material-design-icons/communication/1x_web': 'material-design-icons/communication/1x_web/',
                         'material-design-icons/content/1x_web': 'material-design-icons/content/1x_web/',
-                        // 'material-design-icons/device/1x_web': 'material-design-icons/device/1x_web/',
                         'material-design-icons/editor/1x_web': 'material-design-icons/editor/1x_web/',
-                        // 'material-design-icons/file/1x_web': 'material-design-icons/file/1x_web/',
                         'material-design-icons/hardware/1x_web': 'material-design-icons/hardware/1x_web/',
                         'material-design-icons/iconfont': 'material-design-icons/iconfont/',
                         'material-design-icons/image/1x_web': 'material-design-icons/image/1x_web/',
@@ -106,7 +105,7 @@
 
                 fonts: {
                     options: {
-                        destPrefix: 'client/vendors/fonts'
+                        destPrefix: config.dev + config.client + config.vendors + 'fonts/'
                     },
                     files: {
                         'roboto-fontface': 'roboto-fontface/fonts/roboto/Roboto-R*.*'
@@ -115,65 +114,30 @@
             },
 
             copy: {
-                "dev-app": {
-                    src: ['index.html','app/**'],
-                    expand: true,
-                    cwd: config.client,
-                    dest: config.dev + '/' + config.client
-                },
-                "dev-assets": {
-                    src: ['assets/**'],
-                    expand: true,
-                    cwd: config.client,
-                    dest: config.dev + '/' + config.client
-                },
-                "dev-vendors": {
-                    src: ['vendors/**'],
-                    expand: true,
-                    cwd: config.client,
-                    dest: 'www-dev/client'
-                },
-                "dev-server": {
-                    src: ['**'],
-                    expand: true,
-                    cwd: config.server,
-                    dest: config.dev + '/' + config.server
-                },
                 "prod-server": {
                     src: ['**'],
                     expand: true,
-                    cwd: config.server,
-                    dest: config.prod + '/' + config.server
+                    cwd: config.dev + config.server,
+                    dest: config.prod + config.server
                 },
             },
 
             clean: {
-                bower: ['client/vendors'],
-                "dev-client": ['www-dev/client'],
-                "dev-app": ['www-dev/client/app'],
-                "dev-assets": ['www-dev/client/assets'],
-                "dev-vendors": ['www-dev/client/vendors'],
-                "prod": ['www-prod'],
-                "prod-client": ['www-prod/client'],
-                "prod-app": ['www-prod/app']
+                "dev-vendors" : [config.dev + config.client + config.vendors],
+                "prod": ['.sass-cache', config.prod],
+                "prod-client": [config.prod + config.client],
+                "prod-server": [config.prod + config.server],
+
             },
 
             jshint: {
                 "dev-app": {
-                    src: ['client/app/**/*.js']
+                    src: [config.dev + config.client + config.app + '**/*.js']
                 }
                 //,
                 //"dev-server": {
                 //    src: ['server/**/*.js']
                 //}
-            },
-
-            cssmin: {
-                prod: {
-                    files: {
-                        'www-prod/client/assets/style/app.min.css': 'www-dev/client/assets/style/app.css'
-                    }
-                }
             },
 
             sass: {
@@ -182,8 +146,9 @@
                         style: 'expanded',
                         lineNumbers: true
                     },
-                    files: {   //dest < Source
-                      "www-dev/client/assets/style/app.css": "client/assets/style/app.scss"
+                    files: {
+                      // config.dev + config.client + "assets/style/app.css" : config.dev + config.client + "assets/style/app.scss"
+                      "www-dev/client/assets/style/app.css": "www-dev/client/assets/style/app.scss"
                     }
                 },
                 prod: {
@@ -192,25 +157,10 @@
                         sourcemap: 'none'
                     },
                     files: {   //dest < Source
-                        "www-prod/client/assets/style/app.min.css": "www-dev/client/assets/style/app.css"
+                        "www-prod/client/app.min.css": "www-dev/client/assets/style/app.css"
                     }
                 }
             },
-
-            // minifyHtml: {
-            //     prod: {
-            //         options: {
-            //             removeComments: true,
-            //             collapseWhitespace: true
-            //         },
-            //         files: [{
-            //             expand: true,
-            //             cwd: 'client',
-            //             src: ['app/**/*.html', '*.html'],
-            //             dest: 'www-prod/client'
-            //         }]
-            //     }
-            // },
 
             uglify: {
                 options: {
@@ -219,23 +169,36 @@
                         width: 80
                     }
                 },
-                prod: {
+                "prod-app": {
                     files: {
-                        'www-prod/client/app.min.js': ['client/app/**/*.js']
+                        'www-prod/client/app.min.js': config.dev + config.client + config.app + '**/*.js'
                     }
+                },
+                "prod-vendors": {
+                    files: {
+                        'www-prod/client/vendors.min.js': [config.dev + config.client + config.vendors + '**/*.js',
+                            !config.dev + config.client + config.vendors + '**/*.min.js']
+                    }
+                }
+            },
 
-                    //files: [{
-                    //    expand: true,
-                    //    cwd: 'client/app',
-                    //    src: '**/*.js',
-                    //    dest: 'www-prod/app'
-                    //}]
+            minifyHtml: {
+                prod: {
+                    options: {
+                        removeComments: true,
+                        collapseWhitespace: true
+                    },
+                    files: [{
+                        expand: true,
+                        cwd: 'www-dev',
+                        src: ['app/**/*.html', '*.html'],
+                        dest: 'www-prod/client'
+                    }]
                 }
             },
 
             processhtml: {
                 dev: {
-
                     options: {
                         process: true,
                         data: {
@@ -244,7 +207,7 @@
                         }
                     },
                     files: {
-                        'www-dev/client/index.html': ['client/index.html']
+                        'www-dev/client/index.html': ['www-dev/client/index.html']
                     }
                 },
 
@@ -269,16 +232,12 @@
          */
 
         grunt.config( 'watch' , {
-            "client-js": {
-                files: [ 'client/app/**/*.js' ],
+            "dev-js": {
+                files: [ config.dev + config.client + config.app +  '**/*.js' ],
                 tasks: [ 'jshint:dev-app', 'copy:dev-app' ]
             },
-            "server-js": {
-                files: [ 'server/**/*.js' ],
-                tasks: [ 'copy:dev-server' ]
-            },
-            css: {
-                files: ['client/app/**/*.scss'],
+            "dev-css": {
+                files: [ config.dev + config.client + config.assets +  '**/*.scss' ],
                 tasks: ['sass'],
             },
             options: {
@@ -289,53 +248,35 @@
         grunt.loadNpmTasks('grunt-bowercopy');
         grunt.loadNpmTasks('grunt-contrib-copy');
         grunt.loadNpmTasks('grunt-contrib-clean');
-        grunt.loadNpmTasks('grunt-contrib-cssmin');
         grunt.loadNpmTasks('grunt-contrib-jshint');
-      //  grunt.loadNpmTasks('grunt-minify-html');
+        grunt.loadNpmTasks('grunt-minify-html');
         grunt.loadNpmTasks('grunt-processhtml');
         grunt.loadNpmTasks('grunt-contrib-sass');
         grunt.loadNpmTasks('grunt-contrib-uglify');
         grunt.loadNpmTasks('grunt-contrib-watch');
 
-
-     /*   grunt.registerTask( 'createFolder' , 'Create the working folder' , function(){
-            grunt.config.requires( 'copyFiles.options.workingDirectory' );
-            grunt.file.mkdir(grunt.config.get( 'copyFiles.options.workingDirectory' ));
-        });  */
-
-        // grunt.registerTask( 'clean',
-        //     'Deletes the working folder and its contents' , function(){
-        //         grunt.config.requires( 'copyFiles.options.workingDirectory' );
-        //         grunt.file.delete(grunt.config.get( 'copyFiles.options.workingDirectory' ));
-        // });
-
         grunt.registerTask(
-            'init-dev', 'Dev. env. initialization',
-            [ 'clean:bower',
-              'bowercopy',
-              'clean:dev-client' ,
-              'copy' ,
-              'sass:dev'
+            'init-dev', 'Dev. vendors initialization',
+            [ 'clean:dev-vendors',
+              'bowercopy'
             ]);
 
         grunt.registerTask(
             'dev-deploy', 'Dev. deploy',
-            [ 'jshint',
-              'clean:dev-app',
-              'clean:dev-assets',
-              'copy:dev-app',
-              'copy:dev-assets',
-              'copy:dev-server',
-              'sass:dev'
+            [ 'processhtml:dev'
             ]);
 
         grunt.registerTask(
             'prod-deploy', 'Prod. deploy',
-            [ 'clean:prod',
-              'copy:prod-server',
-              'uglify',
-              'minifyHtml',
-              'cssmin']);
+            [ 'copy:prod-server',
+              'uglify:app',
+              'minifyHtml:prod',
+              'processhtml:prod',
+              'sass:prod']);
+
+        grunt.registerTask(
+            'prod-deploy-vendors', 'Prod. deploy vendors',
+            [ 'uglify:vendors']);
 
     };
 }());
