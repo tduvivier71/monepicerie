@@ -7,3 +7,4 @@ client/vendors/
 package-lock.json
 working/
 /www-prod/
+/www-dev/client/web/vendors/
