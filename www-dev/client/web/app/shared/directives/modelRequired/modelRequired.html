@@ -1,0 +1,22 @@
+function modelRequiredDirective() {
+return {
+require: 'ngModel',
+link: function (scope, element, attrs, ctrl) {
+scope.$on("kendoWidgetCreated", function (event, widget) {
+if (widget !== element.getKendoComboBox()
+|| widget !== element.getKendoAutocomplete())
+return;
+
+ctrl.$validators.modelRequired = function () {
+if (!widget.text())
+return true;
+
+if (widget.dataItem())
+return true;
+
+return false;
+};
+});
+}
+};
+}

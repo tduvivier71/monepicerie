@@ -1,0 +1,62 @@
+@import "../variables";
+
+$pagination-color : white;
+$pagination-bg : white;
+$pagination-border : white;
+$pagination-hover-color : red;
+$pagination-hover-bg : red;
+$pagination-hover-border : red;
+$pagination-active-color : $primary-color-text;
+$pagination-active-bg : $primary-color;
+$pagination-active-border : $primary-color;
+$pagination-disabled-color: $primary-color-text;
+$pagination-disabled-bg : $disabled-color;
+$pagination-disabled-border : $disabled-color;
+
+.pagination {
+
+  > li {
+    > a,
+    > span {
+      color: $pagination-color;
+      background-color: $pagination-bg;
+      border: 1px solid $pagination-border;
+    }
+  }
+
+  > li > a,
+  > li > span {
+    &:hover,
+    &:focus {
+      color: $pagination-hover-color;
+      background-color: $pagination-hover-bg;
+      border-color: $pagination-hover-border;
+    }
+  }
+
+  > .active > a,
+  > .active > span {
+    &,
+    &:hover,
+    &:focus {
+      z-index: 3;
+      color: $pagination-active-color;
+      background-color: $pagination-active-bg;
+      border-color: $pagination-active-border;
+    }
+  }
+
+  > .disabled {
+    > span,
+    > span:hover,
+    > span:focus,
+    > a,
+    > a:hover,
+    > a:focus {
+      color: $pagination-disabled-color;
+      background-color: $pagination-disabled-bg;
+      border-color: $pagination-disabled-border;
+    }
+  }
+
+}

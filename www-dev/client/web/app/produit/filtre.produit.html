@@ -1,0 +1,24 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{"FILTRES" | translate}}</h3>
+    </div>
+    <div class="panel-body">
+        <div class=form-group">
+            <label for="categories_input_id">
+                {{"CATEGORIES" | translate}}
+            </label>
+            <select data-kendo-multi-select
+                    data-k-options="vm.selectOptionsMultiCategories"
+                    data-k-ng-model="vm.selectedCategories"
+                    id="categories_input_id">
+            </select>
+        </div>
+        <br>
+        <a href="#">
+            <span class="glyphicon glyphicon-print"></span> Print
+        </a>
+        <button type="button" class="pull-right btn btn-primary btn-inverse" ng-click="vm.filterCategorie()">{{"APPLIQUER" | translate}}</button>
+    </div>
+</div>
+
+

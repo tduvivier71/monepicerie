@@ -1,0 +1,44 @@
+// No border on panel
+// Only a border-bottom
+.panel.noborder {
+  border: none;
+  box-shadow: none;
+
+  & > .panel-heading {
+ //   box-shadow: none;
+    background-color:  white;
+    border-bottom: 2px solid #1976D2;
+  }
+
+}
+
+/*@mixin panel-variant($border, $heading-text-color, $heading-bg-color, $heading-border) {
+  border-color: $border;
+
+  & > .panel-heading {
+    color: $heading-text-color;
+    background-color: $heading-bg-color;
+    border-color: $heading-border;
+
+    + .panel-collapse > .panel-body {
+      border-top-color: $border;
+    }
+    .badge {
+      color: $heading-bg-color;
+      background-color: $heading-text-color;
+    }
+  }
+  & > .panel-footer {
+    + .panel-collapse > .panel-body {
+      border-bottom-color: $border;
+    }
+  }
+}
+
+.panelrow {
+  @include panel-variant(#d01919, #1cf21c, #000000, #bad017);
+} */
+
+
+
+

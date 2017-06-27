@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang= "fr-ca" data-ng-app='app'>
+  <head>
+
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <title>@@DEV</title>
+
+    <!-- build:css assets/style/app.min.css -->
+    <link rel="stylesheet" href="assets/style/app.css">
+    <!-- /buid -->
+
+  </head>
+
+  <body data-ng-controller="indexCtrl"
+        data-ng-class="{'caddy-bg' : !isAuthentified}">
+
+    <data-navigation></data-navigation>
+
+    <toast></toast>
+
+    <div style="margin-top: 120px;"></div>
+
+    <div class="container"
+         data-ng-cloak>
+
+      <ng-view ></ng-view>
+
+    </div>
+
+    <page-footer></page-footer>
+
+    <base href="/">
+
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyABE67zQOFZrbXJIow-5-kLVD4FpWf52KQ&libraries=places,visualization,drawing,geometry"></script>
+
+
+    <script type="text/javascript" src="./vendors/js/jquery.min.js"></script>
+    <script type="text/javascript" src="./vendors/js/angular.min.js"></script>
+    <script type="text/javascript" src="./vendors/js/ui-bootstrap-tpls.min.js"></script>
+    <script type="text/javascript" src="./vendors/js/angular-route.min.js"></script>
+    <script type="text/javascript" src="./vendors/js/angular-resource.min.js"></script>
+    <script type="text/javascript" src="./vendors/js/angular-animate.min.js"></script>
+    <script type="text/javascript" src="./vendors/js/angular-messages.min.js"></script>
+    <script type="text/javascript" src="./vendors/js/angular-sanitize.min.js"></script>
+    <script type="text/javascript" src="./vendors/js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="./vendors/js/sortable.min.js"></script>
+    <script type="text/javascript" src="./vendors/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="./vendors/js/angular-bootstrap-toggle.min.js"></script>
+    <script type="text/javascript" src="./vendors/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="./vendors/js/moment.min.js"></script>
+    <script type="text/javascript" src="./vendors/js/angular-moment.min.js"></script>
+    <script type="text/javascript" src="./vendors/js/satellizer.min.js"></script>
+    <script type="text/javascript" src="./vendors/js/ng-map.min.js"></script>
+    <script type="text/javascript" src="./vendors/js/ngToast.min.js"></script>
+    <script type="text/javascript" src="./vendors/js/angular-translate.min.js"></script>
+    <script type="text/javascript" src="./vendors/js/angular-translate-loader-partial.min.js"></script>
+    <script type="text/javascript" src="./vendors/js/kendo.ui.core.min.js"></script>
+    <script type="text/javascript" src="./vendors/js/kendo.culture.fr-CA.min.js"></script>
+    <script type="text/javascript" src="./vendors/js/kendo.message.fr-CA.min.js"></script>
+
+
+    <!-- build:js app.min.js -->
+
+    <script src="app/app.js"></script>
+
+    <script src="./app/shared/directives/equals/equals.directive.js"></script>
+    <script src="./app/shared/directives/navigation/navigation.directive.js"></script>
+    <script src="./app/shared/directives/menuPilotage/menuPilotage.directive.js"></script>
+    <script src="./app/shared/directives/navBarPilotage/navBarPilotage.directive.js"></script>
+    <script src="./app/shared/directives/pageHeader/pageHeader.directive.js"></script>
+    <script src="./app/shared/directives/focusOn/focusOn.directive.js"></script>
+    <script src="./app/shared/directives/autoFocus/autoFocus.directive.js"></script>
+    <script src="./app/shared/directives/pagination/pagination.directive.js"></script>
+    <script src="./app/shared/directives/searchItem/searchItem.directive.js"></script>
+    <script src="./app/shared/directives/selectItem/selectItem.directive.js"></script>
+    <script src="./app/shared/directives/validateInput/validateInput.directive.js"></script>
+    <script src="./app/shared/directives/unique/unique.directive.js"></script>
+    <script src="./app/shared/directives/starRating/starRating.directive.js"></script>
+
+    <script src="./app/shared/services/helper/helper.service.js"></script>
+    <script src="./app/shared/services/toaster/toaster.service.js"></script>
+    <script src="./app/shared/services/authentification/authentification.service.js"></script>
+
+    <script src="./app/shared/factories/bearerAuthInterceptor/bearerAuthInterceptor.factory.js"></script>
+    <script src="./app/shared/factories/focus/focus.factory.js"></script>
+    <script src="./app/shared/factories/findUnique/findUnique.factory.js"></script>
+
+    <script src="./app/home/app.module.js"></script>
+    <script src="./app/listerapide/liste-rapide.client.service.js"></script>
+    <script src="./app/home/home.client.routes.js"></script>
+    <script src="./app/home/home.client.controller.js"></script>
+
+    <script src="./app/sign/app.module.js"></script>
+    <script src="./app/sign/sign.client.routes.js"></script>
+    <script src="./app/sign/sign.client.controller.js"></script>
+
+    <script src="./app/liste/app.module.js"></script>
+    <script src="./app/liste/liste.client.routes.js"></script>
+    <script src="./app/liste/liste.client.service.js"></script>
+    <script src="./app/liste/liste.client.service.detail.js"></script>
+    <script src="./app/liste/liste.client.controller.js"></script>
+
+    <script src="./app/listebase/app.module.js"></script>
+    <script src="./app/listebase/liste-base.client.routes.js"></script>
+    <script src="./app/listebase/liste-base.client.service.js"></script>
+    <script src="./app/listebase/liste-base.client.service.detail.js"></script>
+    <script src="./app/listebase/liste-base.client.controller.js"></script>
+
+    <script src="./app/produit/app.module.js"></script>
+    <script src="./app/produit/produit.client.routes.js"></script>
+    <script src="./app/produit/produit.client.service.js"></script>
+    <script src="./app/produit/produit.client.controller.js"></script>
+
+    <script src="./app/categorie/app.module.js"></script>
+    <script src="./app/categorie/categorie.client.routes.js"></script>
+    <script src="./app/categorie/categorie.client.service.js"></script>
+    <script src="./app/categorie/categorie.client.controller.js"></script>
+
+    <script src="./app/comparatif/app.module.js"></script>
+    <script src="./app/comparatif/comparatif.client.routes.js"></script>
+    <script src="./app/comparatif/comparatif.client.service.js"></script>
+    <script src="./app/comparatif/comparatif.client.controller.js"></script>
+
+    <script src="./app/epicerie/app.module.js"></script>
+    <script src="./app/epicerie/epicerie.client.routes.js"></script>
+    <script src="./app/epicerie/epicerie.client.service.js"></script>
+    <script src="./app/epicerie/epicerie.client.controller.js"></script>
+    <script src="./app/epicerie/includeReplace.directive.js"></script>
+
+    <script src="./app/format/app.module.js"></script>
+    <script src="./app/format/format.client.routes.js"></script>
+    <script src="./app/format/format.client.service.js"></script>
+    <script src="./app/format/format.client.controller.js"></script>
+
+    <script src="./app/marque/app.module.js"></script>
+    <script src="./app/marque/marque.client.routes.js"></script>
+    <script src="./app/marque/marque.client.service.js"></script>
+    <script src="./app/marque/marque.client.controller.js"></script>
+
+    <script src="./app/unite/app.module.js"></script>
+    <script src="./app/unite/unite.client.routes.js"></script>
+    <script src="./app/unite/unite.client.service.js"></script>
+    <script src="./app/unite/unite.client.controller.js"></script>
+
+    <script src="./app/utilisateur/app.module.js"></script>
+    <script src="./app/utilisateur/utilisateur.client.routes.js"></script>
+    <script src="./app/utilisateur/utilisateur.client.service.js"></script>
+    <script src="./app/utilisateur/utilisateur.client.controller.js"></script>
+    <!-- /build -->
+
+  </body>
+</html>

@@ -1,0 +1,142 @@
+/*
+*, :before, :after
+{
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+}
+*/
+
+/*
+
+.form-control,
+.container,
+.container-fluid,
+.row,
+.col-xs-1, .col-sm-1, .col-md-1, .col-lg-1,
+.col-xs-2, .col-sm-2, .col-md-2, .col-lg-2,
+.col-xs-3, .col-sm-3, .col-md-3, .col-lg-3,
+.col-xs-4, .col-sm-4, .col-md-4, .col-lg-4,
+.col-xs-5, .col-sm-5, .col-md-5, .col-lg-5,
+.col-xs-6, .col-sm-6, .col-md-6, .col-lg-6,
+.col-xs-7, .col-sm-7, .col-md-7, .col-lg-7,
+.col-xs-8, .col-sm-8, .col-md-8, .col-lg-8,
+.col-xs-9, .col-sm-9, .col-md-9, .col-lg-9,
+.col-xs-10, .col-sm-10, .col-md-10, .col-lg-10,
+.col-xs-11, .col-sm-11, .col-md-11, .col-lg-11,
+.col-xs-12, .col-sm-12, .col-md-12, .col-lg-12
+
+{
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.form-control.k-widget {
+    padding: 0;
+    width: 100%;
+    height: auto;
+}
+
+.form-control.k-widget:not(.k-autocomplete)
+{
+    border-width: 0;
+}
+
+.table#tablewithouttop > tbody > tr > td {
+    border-top: none; !important;
+}
+
+.height100 {
+    height: 100px;
+}
+
+.padding0 {
+    padding-left: 0px; !important;
+    padding-right: 0px; !important
+}
+
+.paddingleft0 {
+    padding-left: 0px; !important;
+}
+
+.paddingright0 {
+    padding-right: 0px; !important;
+    text-align: right;
+}
+
+
+.top5 { margin-top:5px; }
+.top7 { margin-top:7px; }
+.top10 { margin-top:10px; }
+.top15 { margin-top:15px; }
+.top17 { margin-top:17px; }
+.top30 { margin-top:30px; }
+
+*/
+
+
+/***  Extra ***/
+
+/*
+
+body {
+    font-family: Verdana, 'Trebuchet ms', Tahoma;
+}
+
+.logList {
+    margin-top: 20px;
+    width: 250px;
+    min-height: 300px;
+    padding: 5px 15px;
+    border: 5px solid #000;
+    border-radius: 15px;
+}
+
+.logItem {
+    margin-bottom: 10px;
+}
+
+.logList:before {
+    content: 'log';
+    padding: 0 5px;
+    position: relative;
+    top: -1.1em;
+    background-color: #FFF;
+}
+
+.floatleft {
+    float: left;
+}
+
+.floatright {
+    float: right;
+}
+
+.clear {
+    clear: both;
+}
+
+.tab-container {
+    border-style: solid;
+}
+
+
+.alignleft {
+    float: left;
+}
+.alignright {
+    float: right;
+}
+
+.bodycenter {
+    padding: 50px;
+}
+
+*/
+
+/*
+form.ng-submitted .ng-invalid {
+    border-color: #ff4b3f;
+    border-width: 1px;
+} */

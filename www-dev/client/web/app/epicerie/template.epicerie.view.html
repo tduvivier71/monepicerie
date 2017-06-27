@@ -1,0 +1,21 @@
+<div class="row">
+    <nav-bar-pilotage></nav-bar-pilotage>
+</div>
+<div class="row" ng-show="vm.state == 'dsBrowse'" >
+    <search-item
+            search-item="vm.searchItem">
+    </search-item>
+</div>
+
+<div class="row">
+    <div ng-switch on=" (vm.state=='dsInsert') || (vm.state=='dsEdit')" >
+        <div ng-switch-when=true>
+            <div static-include="app/epicerie/epicerie.edit.html"></div>
+        </div>
+        <div ng-switch-when=false>
+            <div static-include="app/epicerie/epicerie.list.html"></div>
+        </div>
+    </div>
+</div>
+
+

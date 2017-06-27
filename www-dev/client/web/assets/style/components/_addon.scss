@@ -1,0 +1,16 @@
+.inner-addon {
+  position: relative;
+}
+
+
+.inner-addon .material-icons {
+  position: absolute;
+  padding: 10px;
+  pointer-events: none;
+}
+
+.left-addon .material-icons  { left:  0px;}
+.right-addon .material-icons { right: 0px;}
+
+.left-addon input  { padding-left:  30px; }
+.right-addon input { padding-right: 30px; }

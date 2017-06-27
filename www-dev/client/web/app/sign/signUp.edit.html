@@ -1,0 +1,118 @@
+<!-- écran d'inscription -->
+<div class="row">
+    <div class="col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 well" style="opacity: 0.95">
+        <legend>Inscription</legend>
+        <div style="float:right; position: relative; top:-10px; font-size: 85%;">
+            <a href="/#signin" style="text-decoration: none;">{{"DEJAINSCRIPT"|translate}}</a>
+        </div>
+        <br>
+        <form novalidate id="vm.form" name="vm.form"  ng-submit="vm.signUp(vm.item)" role="form">
+
+            <div class="col-md-12 form-group">
+                <label for="courriel_input_id"
+                       class="col-md-4 control-label">
+                    Courriel<span style="color: red;" uib-tooltip={{"VALEUR_OBLIGATOIRE"|translate}}>*</span>
+                </label>
+                <div class="col-md-8" ng-class="{'has-error': vm.form.$submitted && vm.form.courriel_input.$invalid}">
+                    <input auto-focus
+                           required
+                           class="form-control input k-textbox"
+                           focus-on="courriel_input_focus"
+                           id="courriel_input_id"
+                           name="courriel_input"
+                           data-ng-model="vm.item.courriel"
+                           type="email"
+                           placeholder={{"VOTREADRESSECOURRIEL"|translate}}>
+                     <validate-input form="vm.form" field="vm.form.courriel_input"></validate-input>
+                </div>
+             </div>
+
+            <div class="col-md-12 form-group">
+                <label for="prenom_input_id"
+                       class="col-md-4 control-label">
+                    Prénom<span style="color: red;" uib-tooltip={{"VALEUR_OBLIGATOIRE"|translate}}>*</span>
+                </label>
+                <div class="col-md-8" ng-class="{'has-error': vm.form.$submitted && vm.form.prenom_input.$invalid}">
+                    <input required
+                           class="form-control input k-textbox"
+                           focus-on="prenom_input_focus"
+                           data-ng-model="vm.item.prenom"
+                           id="prenom_input_id"
+                           name="prenom_input"
+                           placeholder={{"VOTREPRENOM"|translate}}
+                           type="text">
+                    <validate-input form="vm.form" field="vm.form.prenom_input"></validate-input>
+                </div>
+            </div>
+
+            <div class="col-md-12 form-group">
+                <label for="nom_input_id"
+                       class="col-md-4 control-label">
+                    Nom<span style="color: red;" uib-tooltip={{"VALEUR_OBLIGATOIRE"|translate}}>*</span>
+                </label>
+                <div class="col-md-8" ng-class="{'has-error': vm.form.$submitted && vm.form.nom_input.$invalid}">
+                    <input required
+                           class="form-control input k-textbox"
+                           data-ng-model="vm.item.nom"
+                           focus-on="nom_input_focus"
+                           id="nom_input_id"
+                           name="nom_input"
+                           placeholder={{"VOTRENOM"|translate}}
+                           type="text">
+                     <validate-input form="vm.form" field="vm.form.nom_input"></validate-input>
+                </div>
+            </div>
+
+            <div class="col-md-12 form-group">
+                <label for="motdepasse_input_id"
+                       class="col-md-4 control-label">
+                       Mot de passe<span style="color: red;" uib-tooltip={{"VALEUR_OBLIGATOIRE"|translate}}>*</span>
+                </label>
+                <div class="col-md-8" ng-class="{'has-error': vm.form.$submitted && vm.form.motdepasse_input.$invalid}">
+                    <input required
+                           class="form-control input k-textbox"
+                           data-ng-model="vm.item.motDePasse"
+                           data-ng-minlength ="5"
+                           id="motdepasse_input_id"
+                           focus-on="motdepasse_input_focus"
+                           equals="{{vm.item.motDePasse2}}"
+                           name="motdepasse_input"
+                           placeholder={{"MOTDEPASSE"|translate}}
+                           type="password">
+                    <validate-input form="vm.form" field="vm.form.motdepasse_input"></validate-input>
+                </div>
+            </div>
+            <div class="col-md-12 form-group">
+                <label for="motdepasse2_input_id"
+                       class="col-md-4 control-label">
+                       Validation du mot de passe<span style="color: red;" uib-tooltip={{"VALEUR_OBLIGATOIRE"|translate}}>*</span>
+                </label>
+                <div class="col-md-8" ng-class="{'has-error': vm.form.$submitted && vm.form.motdepasse2_input.$invalid}">
+                    <input required
+                           class="form-control input k-textbox"
+                           id="motdepasse2_input_id"
+                           data-ng-model="vm.item.motDePasse2"
+                           data-ng-minlength ="5"
+                           equals="{{vm.item.motDePasse}}"
+                           focus-on="motdepasse2_input_focus"
+                           name="motdepasse2_input"
+                           placeholder={{"SAISIRANOUVEAUMOTDEPASSE"|translate}}
+                           type="password">
+                    <validate-input form="vm.form" field="vm.form.motdepasse2_input"></validate-input>
+                </div>
+            </div>
+
+            <div class="col-md-12 form-group" style="padding-top: 25px;">
+                <div class="col-md-offset-4 col-md-8">
+                    <button id="btn-signup"
+                            class="btn btn-info"
+                            type="submit">
+                            {{"SINSCRIRE"|translate}}
+                    </button>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+</div>

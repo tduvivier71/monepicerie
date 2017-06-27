@@ -1,0 +1,106 @@
+@import "../../../vendors/css/material-design-icons/iconfont/material-icons.css";
+
+
+@import "../variables";
+
+/*
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url(../bower_components/material-design-icons/iconfont/MaterialIcons-Regular.eot);
+  src: local('Material Icons'),
+  local('MaterialIcons-Regular'),
+  url(../bower_components/material-design-icons/iconfont/MaterialIcons-Regular.woff2) format('woff2'),
+  url(../bower_components/material-design-icons/iconfont/MaterialIcons-Regular.woff) format('woff'),
+  url(../bower_components/material-design-icons/iconfont/MaterialIcons-Regular.ttf) format('truetype');
+} */
+
+.material-icons {
+  font-family: 'Material Icons', arial, sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 14px;  /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+
+  font-size: 14px;  /* Preferred icon size */
+  vertical-align: middle;
+  padding-bottom: 3px;
+
+//  display: inline-flex;
+//  align-items: center;
+//  justify-content: center;
+//  vertical-align: middle;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: 'liga';
+
+  /* Rules for sizing the icon. */
+  &.md-12 { font-size: 12px; }
+  &.md-14 { font-size: 14px;
+    vertical-align: middle;
+    padding-bottom: 3px;
+  }
+  &.md-16 { font-size: 16px;
+    vertical-align: middle;
+    padding-bottom: 3px;}
+  &.md-18 { font-size: 18px; }
+  &.md-20 { font-size: 20px; }
+  &.md-22 { font-size: 22px; }
+  &.md-24 { font-size: 24px; }
+  &.md-30 { font-size: 30px; }
+  &.md-32 { font-size: 32px; }
+  &.md-34 { font-size: 34px; }
+  &.md-36 { font-size: 36px; }
+  &.md-48 { font-size: 48px; }
+
+
+  /* Rules for using icons as black on a light background. */
+  &.md-dark { color: rgba(0, 0, 0, 0.54); }
+  &.md-dark.md-inactive { color: rgba(0, 0, 0, 0.26); }
+
+  /* Rules for using icons as white on a dark background. */
+  &.md-light { color: rgb(234, 227, 229); }
+  &.md-light.md-inactive { color: rgba(255, 255, 255, 0.3); }
+
+  &.md-white {
+    color: rgba(255, 255, 255, 1);
+  }
+
+  &.md-yellow {
+    color: rgba(241, 192, 18, 0.89);
+  }
+
+  &.md-success {
+    color: $success-color !important;
+  }
+
+  &.md-hover-16:hover {
+    font-size: 16px !important;
+    font-weight: bold !important;
+  }
+
+
+
+  &.cursor {
+    cursor: pointer;
+  }
+
+}
+
+
+

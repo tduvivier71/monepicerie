@@ -1,0 +1,58 @@
+<!-- Search box -->
+
+<div class="input-group">
+
+    <input autocomplete="off"
+           auto-focus
+           class="k-textbox"
+           focus-on="searchItem_input_focus"
+           id="searchItem_input_id"
+           name="searchItem_input"
+           ng-keyup="cancelEsc($event)"
+           ng-model="searchItem"
+           placeholder={{"RECHERCHE"|translate}}
+           type="text"
+           style="height: 39px !important;">
+
+    <span class="input-group-btn">
+         <button type="button"
+                 class="btn btn-primary"
+                 style="margin-left:0px !important; padding-top:9px !important; padding-bottom:9px !important;"
+                 ng-click="clearSearch()"
+                 uib-tooltip-html="tips">
+                 <i class="material-icons">close</i>
+         </button>
+    </span>
+
+</div>
+
+
+<!--<div class="input-group input-group-md" style="padding-top: 10px; padding-bottom: 20px;">
+    <input autocomplete="off"
+           class="form-control"
+           focus-on="searchItem_focus"
+           id="searchItem_input_id"
+           name="searchItem_input"
+           ng-keyup="cancelEsc($event)"
+           ng-model="searchItem"
+           placeholder="Recherche..."
+           type="text">
+    <div class="input-group-btn">
+        <button class="btn btn-default"
+                title="Initialiser la recherche"
+                type="button"
+                ng-click="clearSearchItem()">
+                <i class="material-icons md-16">close</i>
+        </button>
+    </div>
+</div> -->
+
+<!--
+<span class="k-textbox k-space-right"
+      style="width: 100%;">
+      <input class="k-textbox" type="text" id="icon-right"/>
+      <a href="#" class="k-icon"></i></a>
+</span> -->
+
+
+<br>

@@ -1,0 +1,88 @@
+<nav data-ng-show="!isAuthentified" class="navbar navbar-custom-login  navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a href="/#signin" class="navbar-brand">
+                <i class="material-icons md-48">shopping_cart</i> Mon épicerie
+            </a>
+        </div>
+    </div>
+</nav>
+
+<nav data-ng-show="isAuthentified" class="navbar navbar-custom navbar-fixed-top"  role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button data-ng-show="isAuthentified" type="button" data-toggle="collapse" data-target="#navbar-main" class="navbar-toggle">
+                <i class="material-icons md-light">menu</i>
+            </button>
+
+            <a href="#/accueil" class="navbar-brand">
+                <i class="material-icons md-48">shopping_cart</i>
+            </a>
+
+        </div>
+
+        <div id="navbar-main" class="navbar-collapse collapse">
+
+            <ul data-ng-show="isAuthentified" class="nav navbar-nav">
+
+                <li  ng-class="{active:isActive('#/liste')}" class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false"><i class="material-icons md-14">dashboard</i> {{"MALISTE_UPPER"|translate}}
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/#liste">Listes d'épicerie</a></li>
+                        <li><a href="/#liste?state=insert">Créer une liste d'épicerie</a></li>
+                        <li class="divider"></li>
+                        <li><a href="/#listebase">Modèles</a></li>
+                        <li><a href="/#listebase?state=insert">Créer un modèle</a></li>
+                    </ul>
+                </li>
+
+                <li ng-class="{active:isActive('#/produit')}" class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false"><i class="material-icons md-14">shopping_basket</i> {{"PRODUITS_UPPER"|translate}}
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/#produit">Listes des produits</a></li>
+                        <li><a href="/#produit?state=insert">Ajouter un produit</a></li>
+                    </ul>
+
+                </li>
+
+
+                <li ng-class="{active:isActive('#/comparatif')}"><a href="/#comparatif"><i class="material-icons md-14">compare</i> {{"COMPARATIF_UPPER"|translate}}  </a></li>
+
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false"><i class="material-icons md-14">settings_applications</i> {{"CONFIGURATION_UPPER"|translate}}
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/#categorie">Catégories</a></li>
+                        <li><a href="/#epicerie">Épiceries</a></li>
+                        <li><a href="/#format">Formats</a></li>
+                        <li><a href="/#marque">Marques</a></li>
+                        <li><a href="/#unite">Unités</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false"><i class="material-icons md-14">person</i> {{fullNom}}
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/#utilisateur"><i class="material-icons md-14">person</i> Utilisateur </a></li>
+                        <li role="separator" class="divider"></li>
+                        <li ng-show="!isAuthentified"><a href="/#signup"><i class="fa fa-square" aria-hidden="true"></i> Inscription</a></li>
+                        <li ng-show="!isAuthentified"><a href="/#signin"><i class="fa fa-sign-in" aria-hidden="true"></i> Connection</a></li>
+                        <li ng-show="isAuthentified"><a href="/#signout"><i class="material-icons md-14">exit_to_app</i></i> Déconnection</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+        </div>
+
+    </div>
+
+</nav>
