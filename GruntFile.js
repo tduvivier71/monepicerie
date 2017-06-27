@@ -127,7 +127,7 @@
                 "prod-html-tmp2": {
                     src: ['index.html', 'app/**/*.html'],
                     expand: true,
-                    cwd: config.dev + config.client + config.web,
+                    cwd: config.tmp + config.web,
                     dest: config.prod + config.client + config.web
                 },
                 "prod-web": {
@@ -142,11 +142,17 @@
                     cwd: config.dev + config.client + config.web + config.vendors + 'js',
                     dest: config.prod + config.client + config.web + config.vendors + 'js'
                 },
-                "prod-assets": {
+                "prod-assets-i18n": {
                     src: ['**/*.*'],
                     expand: true,
-                    cwd: config.dev + config.client + config.web + config.assets,
-                    dest: config.prod + config.client + config.web + config.assets
+                    cwd: config.dev + config.client + config.web + config.assets + 'i18n',
+                    dest: config.prod + config.client + config.web + config.assets + 'i18n'
+                },
+                "prod-assets-images": {
+                    src: ['**/*.*'],
+                    expand: true,
+                    cwd: config.dev + config.client + config.web + config.assets + 'images',
+                    dest: config.prod + config.client + config.web + config.assets + 'images'
                 },
                 "prod-vendors": {
                     src: ['**/*.*'],
@@ -198,7 +204,7 @@
                         sourcemap: 'none'
                     },
                     files: {   //dest < Source
-                        "www-prod/client/web/app.min.css": "www-dev/client/web/assets/style/app.css"
+                        "www-prod/client/web/assets/style/app.min.css": "www-dev/client/web/assets/style/app.css"
                     }
                 }
             },
@@ -302,7 +308,7 @@
                         expand: true,
                         cwd: '.tmp/web',
                         src: ['app/**/*.html', '*.html'],
-                        dest: 'www-prod/client/web/'
+                        dest: '.tmp/web'
                     }]
                 }
             },
@@ -405,12 +411,13 @@
             [ 'clean:prod',
               'copy:prod-html-tmp',
               'copy:prod-vendors',
-              'copy:prod-assets',
+              'copy:prod-assets-i18n',
+              'copy:prod-assets-images',
               'copy:prod-server',
               'replace:prod-html-tmp',
               'processhtml:prod-html-tmp',
               'minifyHtml:prod-html-tmp',
-            //  'copy:prod-html-tmp2',
+              'copy:prod-html-tmp2',
               'uglify:prod-app',
               'sass:prod']);
 
