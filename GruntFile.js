@@ -123,6 +123,12 @@
                     cwd: config.dev + config.client + config.web,
                     dest: config.tmp + config.web
                 },
+                "prod-html-tmp2": {
+                    src: ['index.html', 'app/**/*.html'],
+                    expand: true,
+                    cwd: config.dev + config.client + config.web,
+                    dest: config.prod + config.client + config.web
+                },
                 "prod-web": {
                     src: ['**/*.*'],
                     expand: true,
@@ -201,7 +207,7 @@
                     banner: '/*! <%= pkg.name %> <%=grunt.template.today("yyyy-mm-dd") %> */\n',
                     mangle: false,
                     beautify: {
-                        beautify: true,
+                        beautify: false,
                         width: 80
                     }
                 },
@@ -403,6 +409,7 @@
               'replace:prod-html-tmp',
               'processhtml:prod-html-tmp',
               'minifyHtml:prod-html-tmp',
+            //  'copy:prod-html-tmp2',
               'uglify:prod-app',
               'sass:prod']);
 
