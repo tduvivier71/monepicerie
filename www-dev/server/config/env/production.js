@@ -2,9 +2,9 @@
 
 // Set the 'development' environment configuration object
 module.exports = {
-	db: 'mongodb://127.0.0.1/monepicerie',
-    sessionSecret: 'developmentSessionSecret',
-    TOKEN_SECRET: 'thisIsSecret',
+	db: 'mongodb://127.0.0.1/monepicerie-prod',
+    sessionSecret: 'prodSessionSecret',
+    TOKEN_SECRET: 'thisIsProdSecret',
 	FACEBOOK: {
 		clientID: '1844382665797269',
 		CLIENT_SECRET: '487b6a214da0ce28362a3d5c09906a4c'

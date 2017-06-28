@@ -221,7 +221,7 @@
 
                  "prod-app": {
                      files: {
-                         'www-prod/client/web/app.min.js': [
+                         'www-prod/client/web/app/app.min.js': [
                              'www-dev/client/web/app/app.js',
                              '!www-dev/client/web/app/*.js',
                              'www-dev/client/web/app/**/*.js'
@@ -244,9 +244,9 @@
                     }
                 },
 
-                 "prod-app-full": {
+                 "prod-app-vendors": {
                      files: {
-                         'www-prod/client/web/app.min.js': [
+                         'www-prod/client/web/vendors/js/vendors.min.js': [
                              'www-dev/client/web/vendors/js/jquery.min.js',
                              'www-dev/client/web/vendors/js/angular.min.js',
                              'www-dev/client/web/vendors/js/ui-bootstrap-tpls.min.js',
@@ -269,9 +269,8 @@
                              'www-dev/client/web/vendors/js/angular-translate-loader-partial.min.js',
                              'www-dev/client/web/vendors/js/kendo.ui.core.min.js',
                              'www-dev/client/web/vendors/js/kendo.culture.fr-CA.min.js',
-                             'www-dev/client/web/vendors/js/kendo.message.fr-CA.min.js',
-                             'www-dev/client/web/app/app.annotated.js',
-                             'www-dev/client/web/app/**/*.annotated.js']
+                             'www-dev/client/web/vendors/js/kendo.message.fr-CA.min.js'
+                        ]
                      }
                  }
             },
@@ -419,6 +418,7 @@
               'minifyHtml:prod-html-tmp',
               'copy:prod-html-tmp2',
               'uglify:prod-app',
+            //  'uglify:prod-app-vendors',
               'sass:prod']);
 
         grunt.registerTask(
