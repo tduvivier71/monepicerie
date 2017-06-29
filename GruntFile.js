@@ -155,9 +155,9 @@
                     dest: config.prod + config.client + config.web + config.assets + 'images'
                 },
                 "prod-vendors": {
-                    src: ['**/*.*'],
+                    src: ['vendors/**/*.*', '!vendors/css/bootstrap-sass'],
                     expand: true,
-                    cwd: config.dev + config.client + config.web + config.vendors,
+                    cwd: config.dev + config.client + config.web,
                     dest: config.prod + config.client + config.web + config.vendors
                 },
                 "prod-app": {
@@ -424,7 +424,7 @@
               'minifyHtml:prod-html-tmp',
               'copy:prod-html-tmp2',
               'uglify:prod-app',
-            //  'uglify:prod-app-vendors',
+              'uglify:prod-app-vendors',
               'sass:prod']);
 
         grunt.registerTask(
