@@ -142,6 +142,7 @@
                     cwd: config.dev + config.client + config.web + config.vendors + 'js',
                     dest: config.prod + config.client + config.web + config.vendors + 'js'
                 },
+
                 "prod-assets-i18n": {
                     src: ['**/*.*'],
                     expand: true,
