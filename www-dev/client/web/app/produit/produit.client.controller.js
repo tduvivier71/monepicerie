@@ -534,6 +534,8 @@
 
         function _init() {
 
+            _setBrowse();
+
             var state = $routeParams.state;
 
             produitService.query('', function (result) {

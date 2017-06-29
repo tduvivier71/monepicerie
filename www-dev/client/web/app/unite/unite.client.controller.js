@@ -179,9 +179,11 @@
         }
 
         function _init() {
+
+            _setBrowse();
+
             uniteService.query('', function (result) {
                 vm.items = result;
-                _setBrowse();
             });
 
         }

@@ -160,6 +160,12 @@
                     cwd: config.dev + config.client + config.web + config.vendors,
                     dest: config.prod + config.client + config.web + config.vendors
                 },
+                "prod-app": {
+                    src: ['**/*.*'],
+                    expand: true,
+                    cwd: config.dev + config.client + config.web + config.app,
+                    dest: config.prod + config.client + config.web + config.app
+                },
                 "prod-server": {
                     src: ['**'],
                     expand: true,

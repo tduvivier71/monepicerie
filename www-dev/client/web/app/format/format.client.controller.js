@@ -119,9 +119,11 @@
         }
 
         function _init() {
+
+            _setBrowse();
+
             formatService.query('', function (result) {
                 vm.items = result;
-                _setBrowse();
             });
         }
 

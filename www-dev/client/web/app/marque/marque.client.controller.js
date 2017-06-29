@@ -117,9 +117,11 @@
         }
 
         function _init() {
+
+            _setBrowse();
+
             marqueService.query('', function (result) {
                 vm.items = result;
-                _setBrowse();
             });
         }
 

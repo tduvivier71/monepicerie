@@ -499,6 +499,8 @@
 
         function _init() {
 
+            _setBrowse();
+
             var state = $routeParams.state;
 
             listeService.query('', function (result) {

@@ -4,6 +4,7 @@ var express = require('express');
 var router = express.Router();
 var jwt = require('jwt-simple');
 var moment = require('moment');
+var config = require('./config/config');
 
 var categorie = require('./api/categorie/categorie.server.controller.js');
 var epicerie = require('./api/epicerie/epicerie.server.controller.js');
@@ -30,7 +31,7 @@ function ensureAuthenticated(req, res, next) {
 
     var payload = null;
     try {
-        payload = jwt.decode(token, 'thisIsSecret'); // config.TOKEN_SECRET);
+        payload = jwt.decode(token, config.TOKEN_SECRET);
     }
     catch (err) {
         return res.status(401).send({ message: err.message });

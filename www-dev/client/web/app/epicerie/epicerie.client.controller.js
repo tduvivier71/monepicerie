@@ -199,6 +199,8 @@
 
         function _init() {
 
+            _setBrowse();
+
             NgMap.getMap().then(function(map) {
                 vm.map = map;
             });
@@ -206,7 +208,6 @@
             epicerieService.query('', function (result) {
                 vm.items = result;
                 focus(vm.focusPlace);
-                _setBrowse();
             });
         }
 

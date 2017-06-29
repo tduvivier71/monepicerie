@@ -377,6 +377,8 @@
 
         function _init() {
 
+            _setBrowse();
+
             var state = $routeParams.state;
 
             listeBaseService.query('', function (result) {

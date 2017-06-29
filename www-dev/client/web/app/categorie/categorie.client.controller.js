@@ -125,9 +125,9 @@
         }
 
         function _init() {
+            _setBrowse();
             categorieService.query('', function (result) {
                 vm.items = result;
-                _setBrowse();
             });
         }
 
