@@ -5,3 +5,4 @@ bower_components/
 package-lock.json
 /www-prod/
 /www-dev/client/web/vendors/
+/www-prod-heroku/

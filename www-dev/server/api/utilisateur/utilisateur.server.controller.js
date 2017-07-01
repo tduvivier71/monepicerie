@@ -173,7 +173,7 @@ module.exports.facebookLogin = function(req, res) {
                         }
                         user.provider = 'facebook';
                         user.facebook = profile.id;
-                        user.picture = user.picture || 'https://graph.facebook.com/v2.3/' + profile.id + '/picture?type=large';
+                        user.picture = user.picture || 'https://graph.facebook.com/v2.8/' + profile.id + '/picture?type=large';
                         user.courriel = profile.email;
                         user.prenom = profile.first_name;
                         user.nom = profile.last_name;

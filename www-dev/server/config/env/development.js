@@ -4,6 +4,7 @@
 module.exports = {
     db: 'mongodb://127.0.0.1/monepicerie-dev',
     sessionSecret: 'developmentSessionSecret',
+    port: 3000,
     TOKEN_SECRET: 'thisIsSecret',
 	FACEBOOK: {
 		clientID: '1844382665797269',

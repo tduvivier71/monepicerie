@@ -1,69 +1,95 @@
-'use strict';
+    /**
+     * Created by Thierry on 2017/07/01.
+     */
+    // Invoke 'strict' JavaScript mode
+    'use strict';
 
-process.env.NODE_ENV = process.env.NODE_ENV || 'development';
-process.env.NODE_PORT = process.env.NODE_PORT || '9000';
+    var express = require('express');
 
-var mongoose = require('./config/mongoose');
-var express = require('./config/express');
+    process.env.ENV = process.env.ENV || 'development';
+    var config = require('./config/config');
 
-var debug = require('debug')('Express4');
-var url = require('url') ;
-var http = require('http');
+    var mongoose = require('./config/mongoose');
 
-var db = mongoose();
-var ex = express(db);
+    var path = require('path');
+    var morgan = require('morgan');
+    var compress = require('compression');
+    var bodyParser = require('body-parser');
+    var methodOverride = require('method-override');
+    var session = require('express-session');
+    var MongoStore = require('connect-mongo')(session);
+    var flash = require('connect-flash');
+    var cors = require('cors');
 
-var server = http.createServer(ex);
+    // Create a new Express application instance
+    var app = express();
+
+    var db = mongoose();
+
+    // Configure the MongoDB session storage
+    var mongoStore = new MongoStore({
+        mongooseConnection: db.connection,
+        collection: config.sessionCollection});
+
+    config.port = process.env.PORT || config.port;
+
+    app.set('env',  process.env.ENV);
+    app.set('port', config.port);
+
+    app.use(cors());
+
+    app.use(bodyParser.urlencoded({extended: true}));
+    app.use(bodyParser.json());
 
 
-// server.listen(ex.get('port'), function() {
-//     console.log('Express server listening on port ' + server.address().port);
-// });
+    app.use(methodOverride());
+    app.use(flash());
 
- server.listen(process.env.NODE_PORT, function() {
-    console.log('Express server listening on port ' + server.address().port);
- });
-
-server.on('error', onError);
-server.on('listening', onListening);
-
-// Use the module.exports property to expose our Express application instance for external usage
-module.exports = server;
-
-/**
- * Event listener for HTTP server "error" event.
- */
-
-function onError(error) {
-    if (error.syscall !== 'listen') {
-        throw error;
+    if (app.get('env') === 'development') {
+        app.use(express.static(path.join(__dirname, '../client/web')));
+        app.use(express.static(path.join(__dirname, '../client/web/asset')));
+    } else {
+        app.use(express.static(path.join(__dirname, './public')));
     }
 
-    var port;
+    app.use(session({
+        saveUninitialized: true,
+        resave: true,
+        secret: config.sessionSecret,
+        store: mongoStore
+    }));
 
-    var bind = typeof port === 'string' ? 'Pipe ' + port : 'Port ' + port;
-
-    // handle specific listen errors with friendly messages
-    switch (error.code) {
-        case 'EACCES':
-            console.error(bind + ' requires elevated privileges');
-            process.exit(1);
-            break;
-        case 'EADDRINUSE':
-            console.error(bind + ' is already in use');
-            process.exit(1);
-            break;
-        default:
-            throw error;
+    // development error handler
+    // will print stacktrace
+    if (app.get('env') === 'development') {
+        app.use(morgan('dev'));
+        app.use(function(err, req, res, next) {
+            res.status(err.status || 500);
+            res.render('error', {
+                message: err.message,
+                error: err
+            });
+        });
     }
-}
 
-/**
- * Event listener for HTTP server "listening" event.
- */
+    // production error handler
+    // no stacktraces leaked to user
+    app.use(function(err, req, res, next) {
+        app.use(compress());
+        res.status(err.status || 500);
+        res.render('error', {
+            message: err.message,
+            error: {}
+        });
+    });
 
-function onListening() {
-    var addr = server.address();
-    var bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr.port;
-    debug('Listening on ' + bind);
-}
+
+    var routes = require('./routes.js');
+    app.use('/', routes);
+
+    app.listen(app.get('port'), function() {
+        console.log("Node app is running at localhost:" + app.get('port'));
+    })
+
+
+

@@ -2,9 +2,9 @@
 
 // Set the 'development' environment configuration object
 module.exports = {
-	db: 'mongodb://127.0.0.1/monepicerie-prod',
+	db: 'mongodb://mystisoft:mystisoft@ds143892.mlab.com:43892/heroku_g8bv8hfp',
     sessionSecret: 'Nam sed mi posuere mi maximus efficitur sit amet a magna',
-    port: 4000,
+    port: 5000,
     TOKEN_SECRET: 'Vestibulum pretium lobortis odio, vitae dignissim est consequat ac',
 	FACEBOOK: {
 		clientID: '1844382665797269',
