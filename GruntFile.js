@@ -66,15 +66,15 @@
                     },
                 },
 
-                sass: {
-                    options: {
-                        destPrefix: config.dev + config.client + config.web + config.vendors + 'sass/'
-                    },
-                    files: {
-                        'bootstrap-sass': 'bootstrap-sass/',
-                        'roboto-fontface': 'roboto-fontface/'
-                    },
-                },
+                // sass: {
+                //     options: {
+                //         destPrefix: config.dev + config.client + config.web + config.vendors + 'sass/'
+                //     },
+                //     files: {
+                //         'bootstrap-sass': 'bootstrap-sass/',
+                //         'roboto-fontface': 'roboto-fontface/'
+                //     },
+                // },
 
                 css: {
                     options: {
@@ -85,19 +85,19 @@
                         'bootstrap-sass': 'bootstrap-sass/',
                         'roboto-fontface': 'roboto-fontface/',
                         'material-design-icons/action/1x_web': 'material-design-icons/action/1x_web/',
-                        'material-design-icons/alert/1x_web': 'material-design-icons/alert/1x_web/',
-                        'material-design-icons/content/1x_web': 'material-design-icons/content/1x_web/',
-                        'material-design-icons/editor/1x_web': 'material-design-icons/editor/1x_web/',
-                        'material-design-icons/hardware/1x_web': 'material-design-icons/hardware/1x_web/',
-                        'material-design-icons/iconfont': 'material-design-icons/iconfont/',
-                        'material-design-icons/image/1x_web': 'material-design-icons/image/1x_web/',
-                        'material-design-icons/maps/1x_web': 'material-design-icons/maps/1x_web/',
-                        'material-design-icons/navigation/1x_web': 'material-design-icons/navigation/1x_web/',
-                        'material-design-icons/notification/1x_web': 'material-design-icons/notification/1x_web/',
-                        'material-design-icons/places/1x_web': 'material-design-icons/places/1x_web/',
-                        'material-design-icons/social/1x_web': 'material-design-icons/social/1x_web/',
-                        'material-design-icons/sprites': 'material-design-icons/sprites/',
-                        'material-design-icons/toggle/1x_web': 'material-design-icons/toggle/1x_web/',
+                     'material-design-icons/alert/1x_web': 'material-design-icons/alert/1x_web/',
+                         'material-design-icons/content/1x_web': 'material-design-icons/content/1x_web/',
+                     'material-design-icons/editor/1x_web': 'material-design-icons/editor/1x_web/',
+                       'material-design-icons/hardware/1x_web': 'material-design-icons/hardware/1x_web/',
+                     'material-design-icons/iconfont': 'material-design-icons/iconfont/',
+                         'material-design-icons/image/1x_web': 'material-design-icons/image/1x_web/',
+                  //   'material-design-icons/maps/1x_web': 'material-design-icons/maps/1x_web/',
+                         'material-design-icons/navigation/1x_web': 'material-design-icons/navigation/1x_web/',
+                     'material-design-icons/notification/1x_web': 'material-design-icons/notification/1x_web/',
+                  //   'material-design-icons/places/1x_web': 'material-design-icons/places/1x_web/',
+                         'material-design-icons/social/1x_web': 'material-design-icons/social/1x_web/',
+                     'material-design-icons/sprites': 'material-design-icons/sprites/',
+                     'material-design-icons/toggle/1x_web': 'material-design-icons/toggle/1x_web/',
 
                         'angular-bootstrap-toggle.css': 'angular-bootstrap-toggle/dist/angular-bootstrap-toggle.css',
                         'kendo.common-bootstrap.min.css':'kendo-ui/styles/kendo.common-bootstrap.min.css',
@@ -142,6 +142,18 @@
                     cwd: config.dev + config.client + config.web + config.vendors + 'js',
                     dest: config.prod + config.client + config.web + config.vendors + 'js'
                 },
+                "prod-vendors-css": {
+                    src: ['css/**/*.*', '!css/bootstrap-sass/**/*.*'],
+                    expand: true,
+                    cwd: config.dev + config.client + config.web + config.vendors,
+                    dest: config.prod + config.client + config.web + config.vendors
+                },
+                "prod-vendors-fonts": {
+                    src: ['**/*.*'],
+                    expand: true,
+                    cwd: config.dev + config.client + config.web + config.vendors + 'fonts',
+                    dest: config.prod + config.client + config.web + config.vendors + 'fonts'
+                },
 
                 "prod-assets-i18n": {
                     src: ['**/*.*'],
@@ -156,10 +168,10 @@
                     dest: config.prod + config.client + config.web + config.assets + 'images'
                 },
                 "prod-vendors": {
-                    src: ['vendors/**/*.*', '!vendors/css/bootstrap-sass'],
+                    src: ['vendors/**/*.*', '!vendors/css/bootstrap-sass/**/*.*'],
                     expand: true,
                     cwd: config.dev + config.client + config.web,
-                    dest: config.prod + config.client + config.web + config.vendors
+                    dest: config.prod + config.client + config.web
                 },
                 "prod-app": {
                     src: ['**/*.*'],
@@ -215,6 +227,39 @@
                     }
                 }
             },
+
+            concat: {
+                "prod-vendors": {
+                    src: [
+                        'www-dev/client/web/vendors/js/jquery.min.js',
+                        'www-dev/client/web/vendors/js/angular.min.js',
+                        'www-dev/client/web/vendors/js/ui-bootstrap-tpls.min.js',
+                        'www-dev/client/web/vendors/js/angular-route.min.js',
+                        'www-dev/client/web/vendors/js/angular-resource.min.js',
+                        'www-dev/client/web/vendors/js/angular-animate.min.js',
+                        'www-dev/client/web/vendors/js/angular-messages.min.js',
+                        'www-dev/client/web/vendors/js/angular-sanitize.min.js',
+                        'www-dev/client/web/vendors/js/jquery-ui.min.js',
+                        'www-dev/client/web/vendors/js/sortable.min.js',
+                        'www-dev/client/web/vendors/js/bootstrap.min.js',
+                        'www-dev/client/web/vendors/js/angular-bootstrap-toggle.min.js',
+                        'www-dev/client/web/vendors/js/bootstrap.min.js',
+                        'www-dev/client/web/vendors/js/moment.min.js',
+                        'www-dev/client/web/vendors/js/angular-moment.min.js',
+                        'www-dev/client/web/vendors/js/satellizer.min.js',
+                        'www-dev/client/web/vendors/js/ng-map.min.js',
+                        'www-dev/client/web/vendors/js/ngToast.min.js',
+                        'www-dev/client/web/vendors/js/angular-translate.min.js',
+                        'www-dev/client/web/vendors/js/angular-translate-loader-partial.min.js',
+                        'www-dev/client/web/vendors/js/kendo.ui.core.min.js',
+                        'www-dev/client/web/vendors/js/kendo.culture.fr-CA.min.js',
+                        'www-dev/client/web/vendors/js/kendo.message.fr-CA.min.js'
+                    ],
+                    dest: 'www-prod/client/web/vendors/js/vendors.min.js'
+                },
+            },
+
+
 
             uglify: {
                 options: {
@@ -395,6 +440,7 @@
         });
 
         grunt.loadNpmTasks('grunt-bowercopy');
+        grunt.loadNpmTasks('grunt-contrib-concat');
         grunt.loadNpmTasks('grunt-contrib-copy');
         grunt.loadNpmTasks('grunt-contrib-clean');
         grunt.loadNpmTasks('grunt-contrib-jshint');
@@ -415,17 +461,18 @@
         grunt.registerTask(
             'prod-deploy', 'Prod. deploy',
             [ 'clean:prod',
+              'copy:prod-server',
               'copy:prod-html-tmp',
-              'copy:prod-vendors',
+              'copy:prod-vendors-css',
+              'copy:prod-vendors-fonts',
               'copy:prod-assets-i18n',
               'copy:prod-assets-images',
-              'copy:prod-server',
+
               'replace:prod-html-tmp',
               'processhtml:prod-html-tmp',
-              'minifyHtml:prod-html-tmp',
               'copy:prod-html-tmp2',
               'uglify:prod-app',
-              'uglify:prod-app-vendors',
+              'concat:prod-vendors',
               'sass:prod']);
 
         grunt.registerTask(

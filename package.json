@@ -1,9 +1,13 @@
 {
-  "name": "monepicerie",
-  "version": "0.0.0",
+  "name": "epicerierusee",
+  "description": "La plate-forme collaborative de comparaison de produits",
+  "version": "0.0.1",
   "private": true,
+  "engines": {
+    "node": "6.10.3"
+  },
   "scripts": {
-    "start": "node server"
+    "start": "node server/server.js"
   },
   "dependencies": {
     "async": "^1.5.2",
@@ -38,6 +42,7 @@
     "grunt": "^1.0.1",
     "grunt-bowercopy": "^1.2.4",
     "grunt-contrib-clean": "^1.1.0",
+    "grunt-contrib-concat": "^1.0.1",
     "grunt-contrib-copy": "^1.0.0",
     "grunt-contrib-cssmin": "^1.0.2",
     "grunt-contrib-jshint": "^1.1.0",

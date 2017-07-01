@@ -2,9 +2,6 @@
 .idea/
 node_modules/
 bower_components/
-client/assets/style/app.css.map
-client/vendors/
 package-lock.json
-working/
 /www-prod/
 /www-dev/client/web/vendors/
