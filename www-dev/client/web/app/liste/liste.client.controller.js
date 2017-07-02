@@ -118,7 +118,9 @@
         };
 
         vm.datePickerOptions = {
+            dateInput: true,
             format: "yyyy-MM-dd",
+            timeFormat: "HH:mm",
             parseFormats: ["yyyy-MM-ddTHH:mm:sszzz"]
         };
 

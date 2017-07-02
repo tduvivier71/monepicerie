@@ -41,8 +41,6 @@ body{
   text-decoration: none;
 }
 
-
-
 /*:focus {
   @include state-focused;
 }*/
@@ -57,12 +55,9 @@ body{
 
 a:hover, a:visited, a:link, a:active
 {
+  cursor: pointer;
   text-decoration:  none !important;
 }
-
-
-
-
 
 //textarea, input, button { outline: none; }
 

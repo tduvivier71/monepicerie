@@ -5,6 +5,9 @@
         <div ng-show="vm.state==='dsEdit' || vm.state==='dsInsert'" class="panel-heading">
             <span class="panel-title with-font-xlarge pull-left">
                 {{vm.item.date | date:'yyyy-MM-dd HH:mm'}}
+                <span ng-show="vm.item.epicerieId.epicerie">
+                    ( {{vm.item.epicerieId.epicerie}} )
+                </span>
             </span>
             <div class="pull-right">
                 <button class="btn btn-link"
@@ -27,7 +30,7 @@
                             </label>
                             <input auto-focus
                                    required
-                                   data-kendo-date-picker
+                                   data-kendo-date-time-picker
                                    data-k-options="vm.datePickerOptions"
                                    data-k-ng-model="vm.item.date"
                                    focus-on="date_input_focus"
