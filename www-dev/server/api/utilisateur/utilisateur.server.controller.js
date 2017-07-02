@@ -263,15 +263,15 @@ module.exports.googleLogin = function(req, res) {
                 // Step 3b. Create a new user account or return an existing one.
                 Model.findOne({ google: profile.sub }, function(err, existingUser) {
                     if (existingUser) {
-                        return res.send({ token: createJWT(existingUser) });
-                    }
+                         return res.send({ token: createJWT(existingUser) });
+                     }
                     var user = new Model();
                     user.provider = 'google';
                     user.google = profile.sub;
                     user.picture = profile.picture.replace('sz=50', 'sz=200');
                     user.courriel = profile.email;
-                    user.prenom = profile.first_name;
-                    user.nom = profile.last_name;
+                    user.prenom = profile.given_name;
+                    user.nom = profile.family_name;
                     user.save(function() {
                         var token = createJWT(user);
                         res.send({ token: token });

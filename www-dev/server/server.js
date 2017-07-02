@@ -13,7 +13,7 @@
 
     var path = require('path');
     var morgan = require('morgan');
-    var compress = require('compression');
+    var compression = require('compression');
     var bodyParser = require('body-parser');
     var methodOverride = require('method-override');
     var session = require('express-session');
@@ -75,14 +75,13 @@
     // production error handler
     // no stacktraces leaked to user
     app.use(function(err, req, res, next) {
-        app.use(compress());
+        app.use(compression());
         res.status(err.status || 500);
         res.render('error', {
             message: err.message,
             error: {}
         });
     });
-
 
     var routes = require('./routes.js');
     app.use('/', routes);

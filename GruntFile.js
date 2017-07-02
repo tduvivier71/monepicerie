@@ -312,6 +312,16 @@
                      }
                  },
 
+                "prod-server": {
+                    files: [{
+                        expand: true,
+                        src: '**/*.js',
+                        cwd: config.dev + config.server,
+                        dest: config.prod,
+                        ext: '.min.js'
+                    }]
+                }
+
                  // "prod-app-vendors": {
                  //     files: {
                  //         'www-prod/client/web/vendors/js/vendors.min.js': [
@@ -457,6 +467,7 @@
             'prod-deploy', 'Prod. deploy',
             [ 'clean:prod',
               'copy:prod-server',
+            //  'uglify:prod-server',
               'copy:prod-html-to-tmp',
               'replace:prod-html-tmp',
               'processhtml:prod-html-tmp',
@@ -470,7 +481,6 @@
               'uglify:prod-app',
               'concat:prod-vendors',
               'sass:prod'
-
             ]);
 
         grunt.registerTask(
