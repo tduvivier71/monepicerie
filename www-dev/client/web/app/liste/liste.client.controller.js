@@ -40,6 +40,8 @@
 
         vm.toggle = true;
 
+        vm.dateFormat = 'yyyy-MM-dd';
+
         /* Fonctions */
         vm.cancel = cancel;
         vm.remove = remove;
@@ -118,10 +120,7 @@
         };
 
         vm.datePickerOptions = {
-            dateInput: true,
-            format: "yyyy-MM-dd",
-            timeFormat: "HH:mm",
-            parseFormats: ["yyyy-MM-ddTHH:mm:sszzz"]
+            format: "yyyy-MM-dd"
         };
 
         vm.selectOptionsEpicerie = {
@@ -349,7 +348,7 @@
                         vm.items.splice(i, 1);
                     }
                 }
-                toasterService.remove($filter('date')(_item.date, 'yyyy-MM-dd HH:mm:ss'));
+                toasterService.remove($filter('date')(_item.date, vm.dateFormat));
             }, function (e) {
                 toasterService.error(e.data);
             });
@@ -431,8 +430,8 @@
             $http.get('/api/epicerie/favori')
                 .then(function success(response) {
                     vm.item = {
-                        date :  moment().toDate(),
-                        epicerieId: response.data ? response.data.id : null
+                        date :   moment().toDate(),
+                        epicerieId: response.data ? response.data._id : null
                     };
 
                     if (response.data) {
@@ -449,9 +448,6 @@
             _resetForm('dsInsert');
 
             vm.isCollapsed = false;
-
-
-
 
         }
 
@@ -479,7 +475,7 @@
                     vm.item = result;
                     vm.isCollapsed = true;
                     vm.items.push(item);
-                    toasterService.save($filter('date')(_item.date, 'yyyy-MM-dd HH:mm:ss'));
+                    toasterService.save($filter('date')(_item.date, vm.dateFormat));
                     vm.state = 'dsEdit';
 
                     var ids = [];
@@ -522,7 +518,7 @@
         function _update(_item) {
             _item.$update(
                 function () {
-                    toasterService.update($filter('date')(_item.date, 'yyyy-MM-dd HH:mm:ss'));
+                    toasterService.update($filter('date')(_item.date, vm.dateFormat));
                     _setBrowse();
                 }, function (e) {
                     toasterService.error(e.data.message);

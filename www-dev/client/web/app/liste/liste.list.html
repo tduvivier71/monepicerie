@@ -29,7 +29,7 @@
         ((vm.pagination.currentPage)*vm.pagination.itemsPerPage))  | orderBy : vm.sorting.type:vm.sorting.reverse">
             <td class="col-md-5 col-sm-4 col-xs-5">
                 <a ng-click="vm.setEdit(item)">
-                    {{item.date | date:'yyyy-MM-dd HH:mm'}}
+                    {{item.date | date:'yyyy-MM-dd'}}
                 </a>
             </td>
             <td class="col-md-5 col-sm-4 col-xs-5">
