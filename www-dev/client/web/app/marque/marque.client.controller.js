@@ -13,7 +13,7 @@
         var vm = this;
 
         vm.focusSearch = 'searchItem_input_focus';
-        vm.focusItem = 'categorie_input_focus';
+        vm.focusItem = 'marque_input_focus';
         vm.sortingItem = 'marque';
 
         /* Variables */
