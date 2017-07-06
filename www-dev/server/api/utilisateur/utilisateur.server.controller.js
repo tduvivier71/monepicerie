@@ -7,6 +7,7 @@ var jwt = require('jwt-simple');
 var moment = require('moment');
 var request = require('request');
 var config = require('../../config/config');
+var categorieModel = mongoose.model('Categorie');
 
 /*
  |--------------------------------------------------------------------------
@@ -21,6 +22,17 @@ function createJWT(user) {
         exp: moment().add(14, 'days').unix()
     };
     return jwt.encode(payload, config.TOKEN_SECRET);
+}
+
+function addUserEnv(id) {
+
+    var categorie = new categorieModel ({
+        categorie : 'boîte',
+        utilisateurId: id
+    });
+
+   categorie.save();
+
 }
 
 /*
@@ -126,6 +138,9 @@ module.exports.localSignUp =  function(req, res) {
             if (err) {
                 res.status(500).send({ message: err.message });
             }
+
+            addUserEnv(result._id);
+
             res.status(200).json({token: createJWT(user)});
         });
     });
