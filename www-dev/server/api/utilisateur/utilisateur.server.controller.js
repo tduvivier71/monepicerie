@@ -8,6 +8,9 @@ var moment = require('moment');
 var request = require('request');
 var config = require('../../config/config');
 var categorieModel = mongoose.model('Categorie');
+var formatModel = mongoose.model('Format');
+var marqueModel = mongoose.model('Marque');
+var uniteModel = mongoose.model('Unite');
 
 /*
  |--------------------------------------------------------------------------
@@ -26,12 +29,182 @@ function createJWT(user) {
 
 function addUserEnv(id) {
 
-    var categorie = new categorieModel ({
-        categorie : 'boîte',
+
+
+    var rawDocuments = [{
+        categorie : 'Produits laitiers',
         utilisateurId: id
+    }, {
+        categorie : 'Viandes et charcuteries',
+        utilisateurId: id
+    }];
+
+    categorieModel.insertMany(rawDocuments, function(error, docs) {
+        console.log(error);
     });
 
-   categorie.save();
+    var format = [{
+        format : 'Sac',
+        utilisateurId: id
+    }, {
+        format : 'Boîte',
+        utilisateurId: id
+    }, {
+        format : 'Bouteille',
+        utilisateurId: id
+    },  {
+        format : 'Cannette',
+        utilisateurId: id
+    }, {
+        format : 'Paquet',
+        utilisateurId: id
+    }, {
+        format : 'Filet',
+        utilisateurId: id
+    }, {
+        format : 'Conserve',
+        utilisateurId: id
+    }];
+
+    formatModel.insertMany(format, function(error, docs) {
+        console.log(error);
+    });
+
+    var marque = [{
+        marque : 'Heinz',
+        utilisateurId: id
+    }, {
+        marque : 'Québon',
+        utilisateurId: id
+    }, {
+        marque : 'Compliments',
+        utilisateurId: id
+    },  {
+        marque : 'Saint-Hubert',
+        utilisateurId: id
+    }, {
+        marque : 'Nestlé',
+        utilisateurId: id
+    }, {
+        marque : 'Yoplait',
+        utilisateurId: id
+    }, {
+        marque : 'Danone',
+        utilisateurId: id
+    }];
+
+    marqueModel.insertMany(marque, function(error, docs) {
+        console.log(error);
+    });
+
+
+    var uniteCl = new uniteModel({
+        unite : 'millilitre(s)',
+        abreviation: 'ml',
+        utilisateurId: id,
+        operation: 'aucune',
+        nombre: 0
+    });
+
+    uniteCl.save(function (err, data) {
+
+        var coutParId = data._id;
+
+        var unite = [ {
+            unite : 'centilitre(s)',
+            abreviation: 'cl',
+            utilisateurId: id,
+            operation: 'division',
+            nombre: 10,
+            coutParId: coutParId
+        }, {
+            unite : 'décilitre(s)',
+            abreviation: 'dl',
+            utilisateurId: id,
+            operation: 'division',
+            nombre: 100,
+            coutParId: coutParId
+        },  {
+            unite : 'litre(s)',
+            abreviation: 'l',
+            utilisateurId: id,
+            operation: 'division',
+            nombre: 1000,
+            coutParId: coutParId
+        }];
+
+        uniteModel.insertMany(unite, function(err, docs) {
+            console.log(err);
+        });
+
+        uniteModel.findOne({
+            utilisateurId: id,
+            _id: coutParId,
+        }, function (err, data) {
+            data.coutParId = coutParId;
+            data.save(function (err, data) {
+                console.log(err);
+            });
+        });
+
+    });
+
+    var uniteMg = new uniteModel({
+        unite : 'milligramme(s)',
+        abreviation: 'mg',
+        utilisateurId: id,
+        operation: 'aucune',
+        nombre: 0
+    });
+
+    uniteMg.save(function (err, data) {
+
+        var coutParId = data._id;
+
+        var unite = [ {
+            unite : 'centigramme(s) ',
+            abreviation: 'cg',
+            utilisateurId: id,
+            operation: 'division',
+            nombre: 10,
+            coutParId: coutParId
+        }, {
+            unite : 'gramme(s) ',
+            abreviation: 'gr',
+            utilisateurId: id,
+            operation: 'division',
+            nombre: 100,
+            coutParId: coutParId
+        }, {
+            unite : 'kilo(s) ',
+            abreviation: 'kg',
+            utilisateurId: id,
+            operation: 'division',
+            nombre: 1000,
+            coutParId: coutParId
+        }];
+
+        uniteModel.insertMany(unite, function(error, docs) {
+            console.log(error);
+        });
+
+        uniteModel.findOne({
+            utilisateurId: id,
+            _id: coutParId,
+        }, function (err, data) {
+            data.coutParId = coutParId;
+
+            data.save(function (err, data) {
+                console.log(err);
+            });
+        });
+
+    });
+
+
+
+
+
 
 }
 

@@ -270,8 +270,13 @@
                     }
                 }
             },
-            clearButton: true,
-            delay: 50
+            clearButton: false,
+            delay: 50,
+            change : function(e) {
+                if (this.select() < 0) {
+                    this.value("");
+                }
+            }
         };
 
         vm.selectOptionsEpicerie = {
@@ -325,10 +330,10 @@
             }
         }
 
-        function remove(_item, _i) {
+        function remove(_item) {
             _item.$remove(function () {
                 toasterService.remove(_item.produit);
-                vm.items.splice(_i, 1);
+                vm.items.splice(vm.items.indexOf(_item), 1);
             }, function (e) {
                 toasterService.error(e.data.message);
             });
@@ -365,6 +370,10 @@
             _resetForm('dsInsert');
             _setEpicerieFavorite();
             _setCategorieFavorite();
+            vm.item.conditionnement = {
+                quantite : 1
+                //,  nombre :  1
+            };
         }
 
         function createHisto() {

@@ -54,10 +54,10 @@
             }
         }
 
-        function remove(_item, _i) {
+        function remove(_item) {
             _item.$remove(function () {
                 toasterService.remove(_item.format);
-                vm.items.splice(_i, 1);
+                vm.items.splice(vm.items.indexOf(_item), 1);
             }, function (e) {
                 toasterService.error(e.data);
             });

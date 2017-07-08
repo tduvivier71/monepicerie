@@ -158,6 +158,7 @@
                 }
             }
 
+
             var arrayCatId = [];
             vm.categoriesSel.forEach(function(el) {
                 arrayCatId.push(el._id);
@@ -222,12 +223,8 @@
 
         function remove(_item) {
             _item.$remove(function () {
+                vm.items.splice(vm.items.indexOf(_item), 1);
                 toasterService.remove(_item.nom);
-                for (var i in vm.items) {
-                    if (vm.items[i] === _item) {
-                        vm.items.splice(i, 1);
-                    }
-                }
             }, function (e) {
                 toasterService.error(e.data);
             });

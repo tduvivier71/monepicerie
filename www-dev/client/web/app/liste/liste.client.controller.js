@@ -343,11 +343,7 @@
          */
         function remove(_item) {
             _item.$remove(function () {
-                for (var i in vm.items) {
-                    if (vm.items[i] === _item) {
-                        vm.items.splice(i, 1);
-                    }
-                }
+                vm.items.splice(vm.items.indexOf(_item), 1);
                 toasterService.remove($filter('date')(_item.date, vm.dateFormat));
             }, function (e) {
                 toasterService.error(e.data);

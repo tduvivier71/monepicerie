@@ -32,6 +32,7 @@
         <tbody>
         <tr data-ng-repeat="item in (vm.items | filter: vm.searchItem).slice(((vm.pagination.currentPage-1)*vm.pagination.itemsPerPage),
                 ((vm.pagination.currentPage)*vm.pagination.itemsPerPage)) | orderBy : vm.sorting.type:vm.sorting.reverse">
+
             <td class="col-md-2 col-sm-2 col-xs-2">
                 {{item.produit}}
             </td>
@@ -63,7 +64,7 @@
                 </button>
                 <button class="btn btn-danger btn-sm"
                         data-toggle="tooltip"
-                        data-ng-click="vm.remove(item, $index)"
+                        data-ng-click="vm.remove(item)"
                         data-uib-tooltip={{"HINT_DETRUIRE_PRODUIT"|translate}}>
                         <i class="material-icons md-16">delete</i>
                 </button>
