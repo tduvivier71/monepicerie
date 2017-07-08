@@ -26,6 +26,7 @@
                         id="prix_input_id"
                         name="prix_input"
                         data-ng-model="vm.item.prix"
+                        data-ng-required='!vm.item.prix && vm.item.epicerieId'
                         type="number"
                         style="width: 100%"/>
                 </div>
@@ -40,6 +41,7 @@
                             data-k-options="vm.selectOptionsEpicerie"
                             data-k-ng-model="vm.item.epicerieId"
                             id="epicerieId_select_edit_id"
+                            data-ng-required='vm.item.prix && !vm.item.epicerieId'
                             name="epicerieId_select"
                             style="width: 100%">
                     </select>
