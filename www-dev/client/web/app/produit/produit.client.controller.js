@@ -16,7 +16,7 @@
     function coupPar() {
         return function(price, qtt, nb, operation, nombre, abr) {
 
-            var x = 0;
+            var x = '';
 
             if (isNaN(price) || isNaN(qtt) || isNaN(nb) || operation==='' || qtt <= 0 || nb <= 0) {
                 return x;
@@ -401,6 +401,9 @@
                         statut: 'I'
                     }
                 );
+
+                vm.insertHisto = {};
+
             }
         }
 
