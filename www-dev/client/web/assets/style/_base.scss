@@ -59,6 +59,21 @@ a:hover, a:visited, a:link, a:active
   text-decoration:  none !important;
 }
 
+
+//@media (min-width: 768px){
+
+//}
+
+
+@media (max-width: 40em) {
+  .row {
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+  }
+}
+
+
+
 //textarea, input, button { outline: none; }
 
 

@@ -24675,4 +24675,9 @@ a:hover, a:visited, a:link, a:active {
   cursor: pointer;
   text-decoration: none !important; }
 
+@media (max-width: 40em) {
+  .row {
+    margin-right: 0 !important;
+    margin-left: 0 !important; } }
+
 /*# sourceMappingURL=app.css.map */
