@@ -1,6 +1,6 @@
 <form novalidate name="vm.form" role="form">
     <div class="row">
-        <div class="col-md-1 col-sm-1 col-xs-2">
+        <div class="col-md-1 col-sm-1 col-xs-12">
             <div class="form-group">
                 <label>
                     {{"FAVORI"|translate}}
@@ -12,7 +12,7 @@
                    data-ng-class="vm.item.favori ? 'md-yellow' : 'md-light'">star</i>
             </div>
         </div>
-        <div class="col-md-11 col-sm-11 col-xs-10">
+        <div class="col-md-11 col-sm-11 col-xs-12">
             <div class="form-group" data-ng-class="{'has-error': vm.form.$submitted && vm.form.categorie_input.$invalid}">
                 <label for="categorie_input_id">
                     {{"CATEGORIE"|translate}}<span style="color: red;" data-uib-tooltip={{"VALEUR_OBLIGATOIRE"|translate}}>*</span>
