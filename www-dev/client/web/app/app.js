@@ -2,6 +2,15 @@
 // https://github.com/angular-ui/angular-google-maps/blob/master/example/search-box-ngmodel.html
 // https://github.com/angular-ui/angular-google-maps/blob/master/example/assets/scripts/controllers/search-box-ngmodel.js
 
+// todo Mettre liste en row
+// todo Probleme avec le drag and drop de liste
+// todo ngmap pour offline
+// todo faire fichier a part pour les key de angular en front
+// todo versionning des fichiers a deployer
+// todo angular ui grid
+// todo produit en mode partageé et non partagé
+// todo faire footer
+
 (function () {
 
 	'use strict';
