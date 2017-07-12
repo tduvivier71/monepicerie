@@ -4,8 +4,7 @@
     <div class="row" style="padding-top: 15px;">
 
         <div class="col-md-4 col-sm-12 col-xs-12 form-group">
-
-            <div class="form-group" ng-class="{'has-error': vm.form.$submitted && vm.form.produit_input.$invalid}">
+            <div ng-class="{'has-error': vm.form.$submitted && vm.form.produit_input.$invalid}">
                 <label for="produit_input_id">
                     {{"PRODUIT"|translate}}<span style="color: red;" uib-tooltip={{"VALEUR_OBLIGATOIRE"|translate}}>*</span>
                 </label>
@@ -56,7 +55,6 @@
                 </select>
                 <validate-input form="vm.form" field="vm.form.categorieId_select"></validate-input>
             </div>
-
         </div>
 
         <div class="col-md-1 col-sm-1 col-xs-1" style="height: 66px; padding-top:27px">
@@ -90,13 +88,14 @@
         </div>
     </div>
 
+
     <div class="panel panel-default noborder" style="padding-left: 0px; padding-right: 0px; padding-bottom: 0">
 
         <div class="panel-heading"><b> {{"COUTPAR"|translate}}</b>
             <i class="material-icons md-18">help_outline</i>
         </div>
 
-        <div class="panel-body" style="padding-bottom: 0">
+        <div class="panel-body" style="padding-left: 0px; padding-right: 0px; padding-bottom: 0">
 
             <div class="row">
 
@@ -157,6 +156,8 @@
         </div>
 
     </div>
+
+
 
     <div>
         <div data-ng-cloak data-ng-show="vm.state == 'dsBrowse' || vm.state == 'dsEdit' " static-include="app/produit/produit-histo.edit.html"></div>
