@@ -4,11 +4,14 @@
 
 // http://www.alsacreations.com/astuce/lire/1216-arriere-plan-background-extensible.html
 
+html, body {
+  height: 100%;
+}
+
 html {
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
-  min-height:100%;
 }
 
 body{
