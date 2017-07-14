@@ -18,7 +18,7 @@
 
 	angular
 		.module('app', ['ngRoute', 'ngResource', 'ngMessages', 'ngSanitize', 'ngAnimate', 'ngToast', 'ui.sortable',
-			'ui.bootstrap', 'pascalprecht.translate', 'angularMoment', 'kendo.directives',
+			'ui.bootstrap', 'pascalprecht.translate', 'angularMoment', 'kendo.directives','ui.grid',
 			'app.categorie','app.epicerie','app.unite','app.format','app.produit', 'app.marque','app.liste',
 			'app.listeBase', 'app.comparatif','app.home', 'app.information',
             'app.utilisateur','app.sign','satellizer', 'ui.toggle', 'ngMap']); //ngMap

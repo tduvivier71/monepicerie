@@ -10,7 +10,7 @@ var mongoose = require('mongoose'),
 
 exports.find = function(req, res) {
 
-	var filter = {};
+	var filter = { utilisateurId: req.user };
 
 	if(req.query) {
 

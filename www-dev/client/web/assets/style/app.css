@@ -41,6 +41,7 @@ $td-divider-color:        #BDBDBD;
 @import url(../../../vendors/css/angular-bootstrap-toggle.css);
 @import url(../../../vendors/css/ngToast.css);
 @import url(../../../vendors/css/ngToast-animations.css);
+@import url(../../../vendors/css/ui-grid.css);
 .material-icons {
   font-family: 'Material Icons', arial, sans-serif;
   font-weight: normal;

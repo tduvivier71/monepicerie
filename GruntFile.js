@@ -64,7 +64,8 @@
                         'moment.min.js': 'moment/min/moment.min.js',
                         'ng-map.min.js': 'ngmap/build/scripts/ng-map.min.js',
                         'ngToast.min.js': 'ngToast/dist/ngToast.min.js',
-                        'satellizer.min.js': 'satellizer/dist/satellizer.min.js'
+                        'satellizer.min.js': 'satellizer/dist/satellizer.min.js',
+                        'ui-grid.min.js': 'angular-ui-grid/ui-grid.min.js'
                     },
                 },
 
@@ -105,7 +106,8 @@
                         'kendo.common-bootstrap.min.css':'kendo-ui/styles/kendo.common-bootstrap.min.css',
                         'kendo.bootstrap.min.css':'kendo-ui/styles/kendo.bootstrap.min.css',
                         'ngToast.css': 'ngToast/dist/ngToast.css',
-                        'ngToast-animations.css' : 'ngToast/dist/ngToast-animations.css'
+                        'ngToast-animations.css' : 'ngToast/dist/ngToast-animations.css',
+                        'ui-grid.css': 'angular-ui-grid/ui-grid.css'
                     },
                 },
 

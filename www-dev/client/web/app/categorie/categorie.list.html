@@ -35,7 +35,9 @@
                 </i>
             </td>
             <td class="col-md-9 col-sm-9 col-xs-9">
-                {{item.categorie}}
+                <a ng-click="vm.setEdit(item)">
+                    {{item.categorie}}
+                </a>
             </td>
             <td class="col-md-2 col-sm-2 col-xs-2" style="text-align: right;">
                 <button class="btn btn-primary btn-sm"

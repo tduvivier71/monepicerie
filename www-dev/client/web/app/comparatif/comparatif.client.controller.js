@@ -26,6 +26,12 @@
         vm.items = [];          // List of object
         vm.form = {};           // Object
 
+        vm.myData = [{
+            "firstName": "Cox",
+            "lastName": "Carney"
+        }];
+
+
     }
 
 })();
