@@ -1,3 +1,29 @@
+<div class="row subnav">
+    <div class="col-md-6 col-sm-6 col-xs-6 padding1">
+        <p class="title">{{"COMPARATIF"|translate}}</p>
+    </div>
+</div>
+
+<div class="row"  style="padding-top: 10px; padding-bottom: 25px;">
+    <div class="col-md-6 col-sm-12 col-xs12">
+        <search-item
+                search-item="vm.searchItem">
+        </search-item>
+    </div>
+
+    <div class="col-md-6 col-sm-12 col-xs12">
+        <div>
+            <select
+                    data-kendo-multi-select
+                    data-k-options="vm.selectOptionsMultiCategories"
+                    data-k-ng-model="vm.selectedCategories"
+                    style="width: 100%;"
+                    id="categories_input_id">
+            </select>
+        </div>
+    </div>
+</div>
+
 <div class="row">
     <div ui-grid="{ data: vm.myData }" style="width: 500px;height: 250px"></div>
 </div>
