@@ -13,7 +13,6 @@ exports.find = function(req, res) {
 	var filter = { utilisateurId: req.user };
 
 	if(req.query) {
-
 		if (req.query.hasOwnProperty('catId')) {
 			filter = { categorieId : { $in: req.query.catId},
                        utilisateurId: req.user};
@@ -21,14 +20,13 @@ exports.find = function(req, res) {
 
 		if (req.query.hasOwnProperty('prodId')) {
 			filter = { _id : { $in: req.query.prodId},
-                        utilisateurId: req.user};
+                      utilisateurId: req.user};
 		}
 
         if (req.query.hasOwnProperty('listeIds')) {
             filter = { _id : { $nin: req.query.listeIds} };
-               // utilisateurId: req.user};
+                       // utilisateurId: req.user};
         }
-
 	}
 
 	Model.find( filter )

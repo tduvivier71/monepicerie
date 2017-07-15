@@ -37077,5 +37077,10 @@ a:hover, a:visited, a:link, a:active {
     margin-left: 0 !important;
   }
 }
+/* line 77, _base.scss */
+.nopadding {
+  padding: 0 !important;
+  margin: 0 !important;
+}
 
 /*# sourceMappingURL=app.css.map */

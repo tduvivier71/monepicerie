@@ -6,10 +6,10 @@
         .module('app.comparatif')
         .controller('ComparatifController', ComparatifController);
 
-    ComparatifController.$inject = ['$log', '$auth',
+    ComparatifController.$inject = ['$log', '$auth', 'produitService',
                                    'comparatifService', 'toasterService','focus'];
 
-    function ComparatifController($log, $auth,
+    function ComparatifController($log, $auth, produitService,
                                  comparatifService, toasterService, focus) {
 
         var vm = this;
@@ -31,6 +31,32 @@
             "lastName": "Carney"
         }];
 
+
+
+
+        // ************************************************************************************************************/
+        // Entry point function
+        // ************************************************************************************************************/
+
+        _init();
+
+        function _init() {
+
+            produitService.query('', function (result) {
+              //  vm.items = result;
+
+                vm.gridOptions = {
+                    enableSorting: true,
+                    columnDefs: [
+                        { name:'produit', field: 'produit' }
+                    ],
+                    data :  result
+                };
+
+
+            });
+
+        }
 
     }
 

@@ -88,27 +88,30 @@
                         'bootstrap-sass': 'bootstrap-sass/',
                         'roboto-fontface': 'roboto-fontface/',
                         'material-design-icons/action/1x_web': 'material-design-icons/action/1x_web/',
-                     'material-design-icons/alert/1x_web': 'material-design-icons/alert/1x_web/',
-                         'material-design-icons/content/1x_web': 'material-design-icons/content/1x_web/',
-                     'material-design-icons/editor/1x_web': 'material-design-icons/editor/1x_web/',
-                       'material-design-icons/hardware/1x_web': 'material-design-icons/hardware/1x_web/',
-                     'material-design-icons/iconfont': 'material-design-icons/iconfont/',
-                         'material-design-icons/image/1x_web': 'material-design-icons/image/1x_web/',
-                  //   'material-design-icons/maps/1x_web': 'material-design-icons/maps/1x_web/',
-                         'material-design-icons/navigation/1x_web': 'material-design-icons/navigation/1x_web/',
-                     'material-design-icons/notification/1x_web': 'material-design-icons/notification/1x_web/',
-                  //   'material-design-icons/places/1x_web': 'material-design-icons/places/1x_web/',
-                         'material-design-icons/social/1x_web': 'material-design-icons/social/1x_web/',
-                     'material-design-icons/sprites': 'material-design-icons/sprites/',
-                     'material-design-icons/toggle/1x_web': 'material-design-icons/toggle/1x_web/',
-
+                        'material-design-icons/alert/1x_web': 'material-design-icons/alert/1x_web/',
+                        'material-design-icons/content/1x_web': 'material-design-icons/content/1x_web/',
+                        'material-design-icons/editor/1x_web': 'material-design-icons/editor/1x_web/',
+                        'material-design-icons/hardware/1x_web': 'material-design-icons/hardware/1x_web/',
+                        'material-design-icons/iconfont': 'material-design-icons/iconfont/',
+                        'material-design-icons/image/1x_web': 'material-design-icons/image/1x_web/',
+                        // 'material-design-icons/maps/1x_web': 'material-design-icons/maps/1x_web/',
+                        'material-design-icons/navigation/1x_web': 'material-design-icons/navigation/1x_web/',
+                        'material-design-icons/notification/1x_web': 'material-design-icons/notification/1x_web/',
+                        // 'material-design-icons/places/1x_web': 'material-design-icons/places/1x_web/',
+                        'material-design-icons/social/1x_web': 'material-design-icons/social/1x_web/',
+                        'material-design-icons/sprites': 'material-design-icons/sprites/',
+                        'material-design-icons/toggle/1x_web': 'material-design-icons/toggle/1x_web/',
                         'angular-bootstrap-toggle.css': 'angular-bootstrap-toggle/dist/angular-bootstrap-toggle.css',
                         'kendo.common-bootstrap.min.css':'kendo-ui/styles/kendo.common-bootstrap.min.css',
                         'kendo.bootstrap.min.css':'kendo-ui/styles/kendo.bootstrap.min.css',
                         'ngToast.css': 'ngToast/dist/ngToast.css',
                         'ngToast-animations.css' : 'ngToast/dist/ngToast-animations.css',
-                        'ui-grid.css': 'angular-ui-grid/ui-grid.css'
-                    },
+                        'ui-grid.css': 'angular-ui-grid/ui-grid.css',
+                        'ui-grid.eot': 'angular-ui-grid/ui-grid.eot',
+                        'ui-grid.svg': 'angular-ui-grid/ui-grid.svg',
+                        'ui-grid.ttf': 'angular-ui-grid/ui-grid.ttf',
+                        'ui-grid.woff': 'angular-ui-grid/ui-grid.woff'
+                    }
                 },
 
                 fonts: {
@@ -216,6 +219,12 @@
                     expand: true,
                     cwd: config.dev + config.client + config.web + config.vendors + 'js',
                     dest: config.prod + config.client + config.web + config.vendors + 'js'
+                },
+                "ui-grid-paper": {
+                    expand: true,
+                    src: 'ui-grid.css',
+                    cwd: 'bower_custom/',
+                    dest: config.dev + config.client + config.web + config.vendors + 'css'
                 },
 
 
