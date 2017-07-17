@@ -6,10 +6,10 @@
         .module('app.comparatif')
         .controller('ComparatifController', ComparatifController);
 
-    ComparatifController.$inject = ['$log', '$auth', 'produitService',
+    ComparatifController.$inject = ['$log', '$auth', 'produitService', '$http',
                                    'comparatifService', 'toasterService','focus'];
 
-    function ComparatifController($log, $auth, produitService,
+    function ComparatifController($log, $auth, produitService, $http,
                                  comparatifService, toasterService, focus) {
 
         var vm = this;
@@ -44,6 +44,36 @@
             "prenom": "Cox",
             "nom": "Carney"
         }];
+
+
+        /** MULTI CATÉGORIE !!!! **/
+        vm.selectOptionsMultiCategories = {
+            placeholder: "Sélection de catégorie(s)...",
+            dataTextField: "categorie",
+            dataValueField: "_id",
+            valuePrimitive: true, // TRUE EST OBLIGATOIRE
+            autoBind: false,
+            delay: 50,
+            clearButton: true,
+            noDataTemplate: 'Aucune correspondance...',
+            suggest: true,
+            dataSource: {
+                transport: {
+                    read: function (e) {
+                        $http.get('/api/categorie')
+                            .then(function success(response) {
+                                e.success(response.data);
+                            }, function error(response) {
+                                alert('something went wrong');
+                                console.log(response);
+                            });
+                    }
+                }
+            },
+            change: function () {
+                vm.filterCategorie();
+            }
+        };
 
 
 
