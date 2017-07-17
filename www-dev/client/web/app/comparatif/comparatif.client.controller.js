@@ -30,7 +30,11 @@
 
         vm.gridOptions = {
             enableSorting: true,
-            enableFiltering: true
+            enableFiltering: true,
+            enableColumnMenu: false,
+            enableColumnResizing: true,
+            paginationPageSizes: [25, 50, 75],
+            paginationPageSize: 25,
         };
 
 
@@ -77,11 +81,14 @@
                 vm.gridOptions = {
                     enableSorting: true,
                     enableFiltering: true,
+                    enableColumnResizing: true,
+                    paginationPageSizes: [25, 50, 75],
+                    paginationPageSize: 25,
                     onRegisterApi: function(gridApi){
                         vm.gridApi = gridApi;
                     },
                     columnDefs: [
-                        { name:'Produit', field: 'produit', headerCellClass: vm.highlightFilteredHeader },
+                        { name:'Produit', field: 'produit',   enableColumnMenu: false, headerCellClass: vm.highlightFilteredHeader },
                         { name:'Marque', field: 'marqueId.marque'},
                         { name:'Catégorie', field: 'categorieId.categorie'},
                         { name:'Conditionnement', field: 'fullConditionnement'},
