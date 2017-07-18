@@ -22,6 +22,13 @@
          */
 
         /* Variables */
+        vm.temp = {
+            produit : String,
+            marque : String,
+            categorie : String,
+            conditionnement : String
+        };
+
         vm.item = {};           // Object
         vm.items = [];          // List of object
         vm.form = {};           // Object
@@ -89,7 +96,22 @@
             vm.produits = produitService.query();
 
             produitService.query('', function (result) {
-                vm.items = result;
+
+                var i = 0;
+                while (i < result.length) {
+
+                    vm.temp.produit = result[i].produit;
+                 //   vm.temp.marque = result[i].marqueId.marque;
+                    vm.temp.categorie = result[i].categorieId.categorie;
+                    vm.temp.conditionnement = result[i].fullConditionnement;
+
+                    vm.items.push(vm.temp);
+                    i++;
+
+
+                }
+
+
             });
 
         }
@@ -119,9 +141,9 @@
                     },
                     columnDefs: [
                         { name:'Produit', field: 'produit',   enableColumnMenu: false, headerCellClass: vm.highlightFilteredHeader },
-                        { name:'Marque', field: 'marqueId.marque'},
-                        { name:'Catégorie', field: 'categorieId.categorie'},
-                        { name:'Conditionnement', field: 'fullConditionnement'},
+                        { name:'Marque', field: 'marque'},
+                        { name:'Catégorie', field: 'categorie'},
+                        { name:'Conditionnement', field: 'conditionnement'},
                     ],
 
                     data : vm.items
