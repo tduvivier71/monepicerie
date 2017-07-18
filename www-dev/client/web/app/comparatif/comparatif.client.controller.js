@@ -100,12 +100,17 @@
                 var i = 0;
                 while (i < result.length) {
 
-                    vm.temp.produit = result[i].produit;
-                 //   vm.temp.marque = result[i].marqueId.marque;
-                    vm.temp.categorie = result[i].categorieId.categorie;
-                    vm.temp.conditionnement = result[i].fullConditionnement;
+                 //    vm.temp.produit = result[i].produit;
+                 // //   vm.temp.marque = result[i].marqueId.marque;
+                 //    vm.temp.categorie = result[i].categorieId.categorie;
+                 //    vm.temp.conditionnement = result[i].fullConditionnement;
 
-                    vm.items.push(vm.temp);
+                    vm.items.push({
+                        produit : result[i].produit,
+                        categorie : result[i].categorieId.categorie,
+                        conditionnement : result[i].fullConditionnement
+                        // ,  //marque : result[i].marqueId === '' ?  '' : result[i].marqueId.marque
+                    });
                     i++;
 
 
