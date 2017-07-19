@@ -35,24 +35,37 @@
         vm.start = false;
 
 
-        vm.gridOptions = {
+       vm.gridOptions = {
             enableSorting: true,
             enableFiltering: true,
             enableColumnMenu: true,
             enableRowSelection: true,
             enableColumnResizing: true,
-            treeRowHeaderAlwaysVisible: true,
             paginationPageSizes: [25, 50, 75],
             paginationPageSize: 25,
         };
 
+        // vm.myData = [{
+        //     "prenom": "Cox",
+        //     "nom": "Carney"
+        // },
+        //     {
+        //         "prenom": "larry",
+        //         "nom": "Carney"
+        //     }];
+        //
+        // vm.gridOptions = {
+        //     treeRowHeaderAlwaysVisible: false,
+        //     columnDefs: [
+        //       { name:'nom', field: 'nom',  grouping: { groupPriority: 0 }},
+        //         { name:'prenom', field: 'prenom'}
+        //     ],
+        //     data : vm.myData
+        // };
+
 
         vm.loadGrid = loadGrid;
 
-        vm.myData = [{
-            "prenom": "Cox",
-            "nom": "Carney"
-        }];
 
 
         /** MULTI CATÉGORIE !!!! **/
@@ -167,11 +180,19 @@
 
                 vm.gridOptions = {
 
+                    enableSorting: true,
+                    enableFiltering: true,
+                    enableColumnMenu: true,
+                    enableRowSelection: true,
+                    enableColumnResizing: true,
+                    paginationPageSizes: [25, 50, 75],
+                    paginationPageSize: 25,
+
                     onRegisterApi: function(gridApi){
                         vm.gridApi = gridApi;
                     },
                     columnDefs: [
-                        { name:'Produit', field: 'produit', grouping: { groupPriority: 0 },  enableColumnMenu: false, headerCellClass: vm.highlightFilteredHeader },
+                        { name:'Produit', field: 'produit', grouping: { groupPriority: 0 }, headerCellClass: vm.highlightFilteredHeader },
                         { name:'Marque', field: 'marque'},
                         { name:'Catégorie', field: 'categorie'},
                         { name:'Conditionnement', field: 'conditionnement'},
