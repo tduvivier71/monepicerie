@@ -6,10 +6,10 @@
         .module('app.comparatif')
         .controller('ComparatifController', ComparatifController);
 
-    ComparatifController.$inject = ['$log', '$auth', 'produitService', '$http',
+    ComparatifController.$inject = ['$log', '$auth', 'produitService', '$http', 'uiGridGroupingConstants',
                                    'comparatifService', 'toasterService','focus'];
 
-    function ComparatifController($log, $auth, produitService, $http,
+    function ComparatifController($log, $auth, produitService, $http, uiGridGroupingConstants,
                                  comparatifService, toasterService, focus) {
 
         var vm = this;
@@ -38,8 +38,10 @@
         vm.gridOptions = {
             enableSorting: true,
             enableFiltering: true,
-            enableColumnMenu: false,
+            enableColumnMenu: true,
+            enableRowSelection: true,
             enableColumnResizing: true,
+            treeRowHeaderAlwaysVisible: true,
             paginationPageSizes: [25, 50, 75],
             paginationPageSize: 25,
         };
@@ -164,19 +166,17 @@
             if (vm.start) {
 
                 vm.gridOptions = {
-                    enableSorting: true,
-                    enableFiltering: true,
-                    enableColumnResizing: true,
-                    paginationPageSizes: [25, 50, 75],
-                    paginationPageSize: 25,
+
                     onRegisterApi: function(gridApi){
                         vm.gridApi = gridApi;
                     },
                     columnDefs: [
-                        { name:'Produit', field: 'produit',   enableColumnMenu: false, headerCellClass: vm.highlightFilteredHeader },
+                        { name:'Produit', field: 'produit', grouping: { groupPriority: 0 },  enableColumnMenu: false, headerCellClass: vm.highlightFilteredHeader },
                         { name:'Marque', field: 'marque'},
                         { name:'Catégorie', field: 'categorie'},
                         { name:'Conditionnement', field: 'conditionnement'},
+                        { name:'Épicerie', field: 'epicerie'},
+                        { name:'Prix', field: 'prix'},
                     ],
 
                     data : vm.items
