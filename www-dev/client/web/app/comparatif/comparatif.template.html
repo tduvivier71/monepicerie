@@ -6,23 +6,12 @@
 
 <div class="row"  style="padding-top: 10px; padding-bottom: 25px;">
 
-    <div class="col-md-11 col-sm-12 col-xs12">
-        <search-item
-                search-item="vm.searchItem">
-        </search-item>
-    </div>
 
-    <div class="col-md-1 col-sm-12 col-xs12  ">
-        <button class="btn btn-primary"
-                data-toggle="tooltip"
-                data-ng-click="vm.start=true; vm.loadGrid()">Rechercher
-        </button>
-    </div>
 
 </div>
 
 <div class="row">
-    <div ui-grid="vm.gridOptions"  ui-grid-grouping ui-grid-pagination ui-grid-resize-columns></div>
+    <div ui-grid="vm.gridOptions" ui-grid-grouping ></div>
 </div>
 
 

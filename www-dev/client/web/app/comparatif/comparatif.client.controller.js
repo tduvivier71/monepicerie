@@ -35,14 +35,28 @@
         vm.start = false;
 
 
-       vm.gridOptions = {
+        vm.gridOptions = {
+
             enableSorting: true,
             enableFiltering: true,
             enableColumnMenu: true,
-            enableRowSelection: true,
             enableColumnResizing: true,
             paginationPageSizes: [25, 50, 75],
             paginationPageSize: 25,
+
+            onRegisterApi: function(gridApi){
+                vm.gridApi = gridApi;
+            },
+            columnDefs: [
+                { name:'Produit', field: 'produit', grouping: { groupPriority: 0 }, headerCellClass: vm.highlightFilteredHeader },
+                { name:'Marque', field: 'marque'},
+                { name:'Catégorie', field: 'categorie'},
+                { name:'Conditionnement', field: 'conditionnement'},
+                { name:'Épicerie', field: 'epicerie'},
+                { name:'Prix', field: 'prix'}
+            ],
+
+            data : vm.items
         };
 
         // vm.myData = [{
@@ -122,6 +136,8 @@
                      vm.temp.categorie = result[i].categorieId.categorie;
                      vm.temp.conditionnement = result[i].fullConditionnement;
 
+                    // vm.items.push(vm.temp);
+
                      if (result[i].historiques.length > 0) {
 
                          var j = 0;
@@ -183,7 +199,6 @@
                     enableSorting: true,
                     enableFiltering: true,
                     enableColumnMenu: true,
-                    enableRowSelection: true,
                     enableColumnResizing: true,
                     paginationPageSizes: [25, 50, 75],
                     paginationPageSize: 25,
@@ -197,7 +212,7 @@
                         { name:'Catégorie', field: 'categorie'},
                         { name:'Conditionnement', field: 'conditionnement'},
                         { name:'Épicerie', field: 'epicerie'},
-                        { name:'Prix', field: 'prix'},
+                        { name:'Prix', field: 'prix'}
                     ],
 
                     data : vm.items

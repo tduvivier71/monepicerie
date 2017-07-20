@@ -21,7 +21,7 @@
 			'ui.bootstrap', 'pascalprecht.translate', 'angularMoment', 'kendo.directives','ui.grid',
 			'app.categorie','app.epicerie','app.unite','app.format','app.produit', 'app.marque','app.liste',
 			'app.listeBase', 'app.comparatif','app.home', 'app.information', 'ui.grid.resizeColumns', 'ui.grid.pagination',
-            'app.utilisateur','app.sign','satellizer', 'ui.toggle', 'ngMap', 'ui.grid.treeView', 'ui.grid.grouping']); //ngMap
+            'app.utilisateur','app.sign','satellizer', 'ui.toggle', 'ngMap', 'ui.grid.grouping']); //ngMap
 
 	angular
 		.module('app')
