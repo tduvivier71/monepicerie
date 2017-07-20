@@ -272,6 +272,8 @@
                 }
             },
 
+            // todo recuperer les JS automatiquement
+
             concat: {
                 "prod-vendors": {
                     src: [
@@ -293,6 +295,7 @@
                         'www-dev/client/web/vendors/js/satellizer.min.js',
                         'www-dev/client/web/vendors/js/ng-map.min.js',
                         'www-dev/client/web/vendors/js/ngToast.min.js',
+                        'www-dev/client/web/vendors/js/ui-grid.min.js',
                         'www-dev/client/web/vendors/js/angular-translate.min.js',
                         'www-dev/client/web/vendors/js/angular-translate-loader-partial.min.js',
                         'www-dev/client/web/vendors/js/kendo.ui.core.min.js',
