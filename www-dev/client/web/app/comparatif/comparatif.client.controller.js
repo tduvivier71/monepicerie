@@ -53,7 +53,8 @@
                 { name:'Catégorie', field: 'categorie'},
                 { name:'Conditionnement', field: 'conditionnement'},
                 { name:'Épicerie', field: 'epicerie'},
-                { name:'Prix', field: 'prix'}
+                { name:'Prix', field: 'prix'},
+                { name:'Coût par', field: 'coutPar'}
             ],
 
             data : vm.items
@@ -150,7 +151,13 @@
                              vm.temp2.categorie = vm.temp.categorie;
                              vm.temp2.conditionnement = vm.temp.conditionnement;
                              vm.temp2.epicerie = result[i].historiques[j].epicerieId.epicerie;
-                             vm.temp2.prix = result[i].historiques[j].prix;
+                             vm.temp2.prix = kendo.toString(result[i].historiques[j].prix, "c2");
+                             vm.temp2.coutPar = coupPar(result[i].historiques[j].prix,
+                                                        result[i].conditionnement.quantite,
+                                                        result[i].conditionnement.nombre,
+                                                        result[i].uniteId.operation,
+                                                        result[i].uniteId.nombre,
+                                                        result[i].uniteId.coutParId.abreviation);
 
                              vm.items.push(vm.temp2);
 
@@ -178,6 +185,36 @@
 
             });
 
+        }
+
+        function coupPar(price, qtt, nb, operation, nombre, abr) {
+
+            var x = '';
+
+            if (isNaN(price) || isNaN(qtt) || isNaN(nb) || operation==='' || qtt <= 0 || nb <= 0) {
+                return x;
+            }
+
+            if (operation==='aucune') {
+                x = price / (nb * qtt);
+                return x.toFixed(7)  + '/' + abr;
+            }
+
+            if (isNaN(nombre) || nombre <= 0) {
+                return x;
+            }
+
+            if (operation==='division') {
+                x = price / (nb * qtt);
+                x = x / nombre;
+            }
+
+            if (operation==='multiplication') {
+                x = price / (nb * qtt);
+                x = x * nombre;
+            }
+
+            return x.toFixed(7) + '/' + abr;
         }
 
 
