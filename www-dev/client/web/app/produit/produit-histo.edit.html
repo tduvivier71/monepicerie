@@ -22,15 +22,16 @@
                     <input
                         autocomplete="off"
                         data-kendo-numeric-text-box
-                        data-k-min="0.00"
+                        data-decimals="2"
                         id="prix_input_id"
                         name="prix_input"
                         data-ng-model="vm.insertHisto.prix"
                         data-ng-required='!vm.insertHisto.prix && vm.insertHisto.epicerieId'
                         type="number"
                         style="width: 100%"/>
+                        <validate-input form="vm.form" field="vm.form.prix_input"></validate-input>
                 </div>
-                <validate-input form="vm.form" field="vm.form.prix_input"></validate-input>
+
             </div>
 
             <div class="col-md-4 col-sm-12 col-xs-12">

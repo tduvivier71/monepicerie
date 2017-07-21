@@ -23,6 +23,8 @@
                         autocomplete="off"
                         data-kendo-numeric-text-box
                         data-k-min="0.00"
+                        data-decimals="2"
+                        data-restrict-decimals="true"
                         id="prix_input_id"
                         name="prix_input"
                         data-ng-model="vm.item.prix"
@@ -32,6 +34,8 @@
                         <validate-input form="vm.form" field="vm.form.prix_input"></validate-input>
                 </div>
             </div>
+
+            <!-- <validate-input form="vm.form" field="vm.form.prix_input"></validate-input> -->
 
             <div class="col-md-4 col-sm-12 col-xs-12">
                 <div class="form-group">

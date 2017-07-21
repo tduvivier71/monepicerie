@@ -41,7 +41,8 @@
 			$authProvider) {
 
 			moment().locale('fr_ca');
-            kendo.culture('fr-CA');
+		// todo prob aves types numeriques et les points
+        //    kendo.culture('fr-CA');
 
 
 			$authProvider.httpInterceptor = function() { return true; };
