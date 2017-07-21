@@ -53,8 +53,8 @@
                 { name:'Catégorie', field: 'categorie'},
                 { name:'Conditionnement', field: 'conditionnement'},
                 { name:'Épicerie', field: 'epicerie'},
-                { name:'Prix', field: 'prix'},
-                { name:'Coût par', field: 'coutPar'}
+                { name:'Prix', field: 'prix', cellClass: 'grid-align'},
+                { name:'Coût par', field: 'coutPar', cellClass: 'grid-align'}
             ],
 
             data : vm.items
