@@ -89,6 +89,7 @@
             $translatePartialLoaderProvider.addPart('accueil');
             $translatePartialLoaderProvider.addPart('defaut');
 			$translatePartialLoaderProvider.addPart('categorie');
+            $translatePartialLoaderProvider.addPart('comparatif');
             $translatePartialLoaderProvider.addPart('format');
             $translatePartialLoaderProvider.addPart('epicerie');
             $translatePartialLoaderProvider.addPart('marque');

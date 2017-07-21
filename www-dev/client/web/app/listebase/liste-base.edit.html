@@ -71,48 +71,17 @@
                     <div class="well" style="height: 60px;padding-right: 8px;
                           margin-bottom:0px;">
                         Liste de produits
-                        <div style="position: absolute; top: 12px; right: 20px"
-                             ng-mouseover="vm.openSearch1"
-                             ng-click="vm.search1Open=!vm.search1Open">
-                            <i class="material-icons md-36 cursor">search</i>
-                        </div>
-                        <div class="clearfix"></div>
                     </div>
-                    <div class="input-group input-group-md" ng-show="vm.search1Open">
-                        <input autocomplete="off"
-                               class="k-textbox"
-                               focus-on="search1Item_focus"
-                               id="searchItem_input_id"
-                               name="searchItem_input"
-                               ng-keyup="cancelEsc($event)"
-                               ng-model="searchItem"
-                               placeholder={{"RECHERCHE"|translate}}
-                               type="text"
-                               style="height: 39px !important;">
-                               <span class="input-group-btn">
-                                   <button type="button"
-                                            class="btn btn-primary"
-                                            style="margin-left:0px !important; padding-top:9px !important; padding-bottom:9px !important;"
-                                            ng-click="vm.search1Open = false; clearSearch()"
-                                            uib-tooltip-html="tips">
-                                            <i class="material-icons">close</i>
-                                   </button>
-                               </span>
-                    </div>
+
                 </div>
 
                 <div class="col-md-6 col-sm-6 col-xm-6 form-group">
                     <div class="well" style="height: 60px;padding-right: 8px;
                          margin-bottom:0px;">Produits
-                        <div style="position: absolute; top: 12px; right: 60px"
+                        <div style="position: absolute; top: 12px; right: 20px"
                              ng-hide="vm.item.listeBaseDetail.length===0"
                              ng-click="vm.deleteAllDetail()">
                             <i class="material-icons md-36 cursor">delete</i>
-                        </div>
-                        <div style="position: absolute; top: 12px; right: 25px"
-                             ng-hide="vm.item.listeBaseDetail.length===0"
-                             ng-click="vm.deleteAllDetail()">
-                            <i class="material-icons md-36 cursor">add</i>
                         </div>
                         <div class="clearfix"></div>
                     </div>
@@ -126,12 +95,11 @@
 
                     <div class="col-md-3 col-sm-3 col-xm-3  well" style="font-size: 14px; padding: 15px;">
 
-                        <div ng-hide="vm.categoriesSel.length===0">Filtre(s)
+                        <div class="conntainer" ng-hide="vm.categoriesSel.length===0">Filtre(s)
                             <ul class="nobullet">
                                 <div ng-repeat="categorieSel in vm.categoriesSel">
                                     <li style="margin-right:-15px; color: black;">
-                                        {{categorieSel.categorie}}
-                                        <i ng-click="vm.categorieRemove(categorieSel)" class="material-icons md-hover-16 cursor">clear</i>
+                                    <span class="badge"><i ng-click="vm.categorieRemove(categorieSel)" class="material-icons md-hover-16 cursor">clear</i>{{categorieSel.categorie}}</span>
                                     </li>
                                 </div>
                             </ul>
