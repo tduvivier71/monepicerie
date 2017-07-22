@@ -11,6 +11,7 @@ var categorieModel = mongoose.model('Categorie');
 var formatModel = mongoose.model('Format');
 var marqueModel = mongoose.model('Marque');
 var uniteModel = mongoose.model('Unite');
+var epicerieModel = mongoose.model('Epicerie');
 
 /*
  |--------------------------------------------------------------------------
@@ -29,9 +30,13 @@ function createJWT(user) {
 
 function addUserEnv(id) {
 
-
-
-    var rawDocuments = [{
+    var rawCategories = [{
+        categorie : 'Boulangeries',
+        utilisateurId: id
+    },{
+        categorie : 'Fruits et légumes',
+        utilisateurId: id
+    },{
         categorie : 'Produits laitiers',
         utilisateurId: id
     }, {
@@ -39,9 +44,37 @@ function addUserEnv(id) {
         utilisateurId: id
     }];
 
-    categorieModel.insertMany(rawDocuments, function(error, docs) {
+    categorieModel.insertMany(rawCategories, function(error, docs) {
         console.log(error);
     });
+
+
+    var rawEpiceries = [{
+        epicerie : 'IGA Chambly',
+        utilisateurId: id,
+        favori: true,
+        adresse: '3500 Boulevard Fréchette, Chambly, QC J3L 6Z6, Canada',
+        location: {
+            lat: 45.4303782,
+            lng: -73.30651169999999
+        }
+    }, {
+        epicerie : 'Maxi St Hubert',
+        utilisateurId: id,
+        favori: false,
+        adresse: '7900 Boulevard Cousineau, Saint-Hubert, QC QC J3Z 1H2, Canada',
+        location: {
+            lat: 45.481574,
+            lng: -73.38608699999997
+        }
+    }];
+
+    epicerieModel.insertMany(rawEpiceries, function(error, docs) {
+        console.log(error);
+    });
+
+
+
 
     var format = [{
         format : 'Sac',
@@ -385,7 +418,12 @@ module.exports.facebookLogin = function(req, res) {
                     user.courriel = profile.email;
                     user.prenom = profile.first_name;
                     user.nom = profile.last_name;
-                    user.save(function () {
+
+                    user.save(function (err, result) {
+                        if (err) {
+                            res.status(500).send({ message: err.message });
+                        }
+                        addUserEnv(result._id);
                         var token = createJWT(user);
                         res.send({token: token, user: user});
                     });
@@ -460,10 +498,23 @@ module.exports.googleLogin = function(req, res) {
                     user.courriel = profile.email;
                     user.prenom = profile.given_name;
                     user.nom = profile.family_name;
-                    user.save(function() {
+
+                    user.save(function (err, result) {
+                        if (err) {
+                            res.status(500).send({ message: err.message });
+                        }
+                        addUserEnv(result._id);
                         var token = createJWT(user);
-                        res.send({ token: token });
+                        res.send({token: token, user: user});
                     });
+
+
+                    // user.save(function() {
+                    //     var token = createJWT(user);
+                    //     res.send({ token: token });
+                    // });
+
+
                 });
             }
         });
