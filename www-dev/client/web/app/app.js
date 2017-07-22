@@ -18,10 +18,11 @@
 
 	angular
 		.module('app', ['ngRoute', 'ngResource', 'ngMessages', 'ngSanitize', 'ngAnimate', 'ngToast', 'ui.sortable',
-			'ui.bootstrap', 'pascalprecht.translate', 'angularMoment', 'kendo.directives','ui.grid',
+			'ui.bootstrap', 'pascalprecht.translate', 'angularMoment', 'kendo.directives',
 			'app.categorie','app.epicerie','app.unite','app.format','app.produit', 'app.marque','app.liste',
-			'app.listeBase', 'app.comparatif','app.home', 'app.information', 'ui.grid.resizeColumns', 'ui.grid.pagination',
-            'app.utilisateur','app.sign','satellizer', 'ui.toggle', 'ngMap', 'ui.grid.grouping']); //ngMap
+			'app.listeBase', 'app.comparatif','app.home', 'app.information',
+            'ui.grid', 'ui.grid.resizeColumns', 'ui.grid.pagination', 'ui.grid.grouping', 'ui.grid.moveColumns',
+            'app.utilisateur','app.sign','satellizer', 'ui.toggle', 'ngMap']);
 
 	angular
 		.module('app')
