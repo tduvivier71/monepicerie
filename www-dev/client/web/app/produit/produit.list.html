@@ -34,7 +34,9 @@
                 ((vm.pagination.currentPage)*vm.pagination.itemsPerPage)) | orderBy : vm.sorting.type:vm.sorting.reverse">
 
             <td class="col-md-2 col-sm-2 col-xs-2">
-                {{item.produit}}
+                <a ng-click="vm.setEdit(item)">
+                    {{item.produit}}
+                </a>
             </td>
             <td class="col-md-2 col-sm-2 col-xs-2">
                 {{item.categorieId.categorie}}
