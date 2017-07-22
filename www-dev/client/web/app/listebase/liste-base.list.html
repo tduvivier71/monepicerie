@@ -28,7 +28,9 @@
         <tr data-ng-repeat="item in (vm.items | filter: vm.searchItem).slice(((vm.pagination.currentPage-1)*vm.pagination.itemsPerPage),
         ((vm.pagination.currentPage)*vm.pagination.itemsPerPage))  | orderBy : vm.sorting.type:vm.sorting.reverse">
             <td class="col-md-5 col-sm-5 col-xs-5">
-                {{item.nom}}
+                <a ng-click="vm.setEdit(item)">
+                    {{item.nom}}
+                </a>
             </td>
             <td class="col-md-5 col-sm-5 col-xs-5">
                 {{item.epicerieId.epicerie}}

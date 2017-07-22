@@ -31,6 +31,7 @@ function createJWT(user) {
 function addUserEnv(id) {
 
     var rawCategories = [{
+        favori: true,
         categorie : 'Boulangeries',
         utilisateurId: id
     },{

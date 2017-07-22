@@ -376,7 +376,25 @@
             };
         }
 
-        function createHisto() {
+        function createHisto(_item) {
+
+            if (!vm.insertHisto.prix) {
+                toasterService.error('Un prix est obligatoire');
+                focus('prix_input_focus');
+                // vm.form.$setSubmitted();
+                // vm.form.prix_input.$valid = false;
+                // vm.form.prix_input.$required = true;
+            } else
+            if (!vm.insertHisto.epicerieId) {
+                toasterService.error("La sélection d'une épicerie est obligatoire");
+                focus('epicerie_select_focus');
+                // focus(vm.focusItem);
+                // vm.form.$setSubmitted();
+                // vm.form.epicerieId_select.$valid = false;
+                // vm.form.epicerieId_select.$required = true;
+            }
+
+
 
             if (vm.insertHisto.prix &&  vm.insertHisto.epicerieId) {
 
@@ -394,7 +412,7 @@
                 vm.item.historiques.push(
                     {
                         epicerieId: vm.insertHisto.epicerieId,
-                        epicerie: vm.insertHisto.epicerie,
+                        epicerie: vm.insertHisto.epicerieId.epicerie,
                         date: vm.insertHisto.date,
                         prix: vm.insertHisto.prix,
                         enPromotion: vm.insertHisto.enPromotion,
@@ -402,13 +420,36 @@
                     }
                 );
 
-                vm.insertHisto = {};
+                _item.$update(
+                    function (result) {
+                        toasterService.save(kendo.toString(vm.insertHisto.prix, "C2") + "/" +  vm.insertHisto.epicerieId.epicerie);
+                        vm.insertHisto.prix = null;
+                    },
+                    function (e) {
+                        toasterService.error(e.data);
+                        focus(vm.focusItem);
+                    }
+                );
 
             }
+
+
         }
 
-        function deleteHisto(histo, $index) {
+        function deleteHisto(histo, _item) {
             histo.statut = 'D';
+
+            _item.$update(
+                function (result) {
+                    toasterService.remove(kendo.toString(histo.prix, "C2") + "/" +  histo.epicerieId.epicerie);
+                },
+                function (e) {
+                    toasterService.error(e.data);
+                    focus(vm.focusItem);
+                }
+            );
+
+
         }
 
         function getCategories() {

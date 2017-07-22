@@ -9,7 +9,7 @@
         <div class="row">
 
             <div class="col-md-2 col-sm-12 col-xs-12">
-                <div class="form-group" ng-class="{'has-error': vm.form.$submitted && vm.form.prix_input.$invalid}">
+                <div class="form-group" ng-class="{'has-error': vm.form.prix_input.$invalid}">
                     <label for="prix_input_id">
                         <a href="javascript:void(0)" style="text-decoration:none; color:black;"
                            tabIndex="-1"
@@ -25,11 +25,10 @@
                         data-decimals="2"
                         id="prix_input_id"
                         name="prix_input"
+                        focus-on="prix_input_focus"
                         data-ng-model="vm.insertHisto.prix"
-                        data-ng-required='!vm.insertHisto.prix && vm.insertHisto.epicerieId'
                         type="number"
                         style="width: 100%"/>
-                        <validate-input form="vm.form" field="vm.form.prix_input"></validate-input>
                 </div>
 
             </div>
@@ -43,13 +42,13 @@
                             data-k-options="vm.selectOptionsEpicerie"
                             data-k-ng-model="vm.insertHisto.epicerieId"
                             data-ng-model="vm.insertHisto.epicerieId"
-                            data-ng-required='vm.insertHisto.prix && !vm.insertHisto.epicerieId'
                             id="epicerieId_select_edit_id"
+                            focus-on="epicerie_select_focus"
                             name="epicerieId_select"
-                            ng-class="{'has-error': vm.form.$submitted && vm.form.epicerieId_select.$invalid}"
+                            ng-class="{'has-error': vm.form.epicerieId_select.$invalid}"
                             style="width: 100%">
                     </select>
-                    <validate-input form="vm.form" field="vm.form.epicerieId_select"></validate-input>
+
                 </div>
             </div>
 
@@ -80,7 +79,7 @@
                 <button class="btn btn-primary"
                         style="height: 37px;"
                         data-toggle="tooltip"
-                        data-ng-click="vm.createHisto()">
+                        data-ng-click="vm.createHisto(vm.item)">
                     <i class="material-icons">add</i>
                     Ajouter
                 </button>
@@ -114,7 +113,7 @@
                 <div class="col-md-1 col-sm-1 col-xs-1" style="text-align: right;">
                     <button class="btn btn-danger btn-sm"
                             data-toggle="tooltip"
-                            data-ng-click="vm.deleteHisto(histo)"
+                            data-ng-click="vm.deleteHisto(histo, vm.item)"
                             uib-tooltip={{DETRUIRE_HISTORIQUE|translate}}>
                         <i class="material-icons md-16">delete</i>
                     </button>
