@@ -49,6 +49,7 @@
         vm.categorieRemove = categorieRemove;
         vm.deleteAllDetail = deleteAllDetail;
         vm.chooseProduit = chooseProduit;
+        vm.filterCategorieL = filterCategorieL;
 
         // ************************************************************************************************************/
         // Object configuration
@@ -123,6 +124,35 @@
             }
         };
 
+        /** MULTI CATÉGORIE !!!! **/
+        vm.selectOptionsMultiCategoriesL = {
+            placeholder: "Sélection de catégorie(s)...",
+            dataTextField: "categorie",
+            dataValueField: "_id",
+            valuePrimitive: true, // TRUE EST OBLIGATOIRE
+            autoBind: false,
+            delay: 50,
+            clearButton: true,
+            noDataTemplate: 'Aucune correspondance...',
+            suggest: true,
+            dataSource: {
+                transport: {
+                    read: function (e) {
+                        $http.get('/api/categorie')
+                            .then(function success(response) {
+                                e.success(response.data);
+                            }, function error(response) {
+                                alert('something went wrong');
+                                console.log(response);
+                            });
+                    }
+                }
+            },
+            change: function () {
+                vm.filterCategorieL();
+            }
+        };
+
         // ************************************************************************************************************/
         // Entry point function
         // ************************************************************************************************************/
@@ -132,6 +162,11 @@
         // ************************************************************************************************************/
         // Public function
         // ************************************************************************************************************/
+
+        function filterCategorieL() {
+            var queryParam = {catId: vm.selectedCategoriesL};
+            vm.produits = produitService.query(queryParam);
+        }
 
         function addCategorie(categorie) {
 

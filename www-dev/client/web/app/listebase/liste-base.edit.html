@@ -94,68 +94,52 @@
             <div class="row">
                 <div class="col-md-6 col-sm-6 col-xm-6">
 
-                    <div class="col-md-3 col-sm-3 col-xm-3  well" style="font-size: 14px; padding: 15px;">
+                    <select
+                            data-kendo-multi-select
+                            data-k-options="vm.selectOptionsMultiCategoriesL"
+                            data-k-ng-model="vm.selectedCategoriesL"
+                            style="width: 100%;"
+                            id="categories_input_id">
+                    </select>
 
-                        <div class="container" ng-hide="vm.categoriesSel.length===0" style="overflow-x:hidden; white-space:nowrap;height: auto;width: 100%;">
-                            <ul class="nobullet">
-                                <div ng-repeat="categorieSel in vm.categoriesSel">
-                                    <li style="padding-bottom: 3px ;display: block; float: left; color: black;margin-left:-30px">
-                                    <span class="badge"><i ng-click="vm.categorieRemove(categorieSel)" class="material-icons md-hover-16 cursor">clear</i>{{categorieSel.categorie}}</span>
-                                    </li>
-                                </div>
-                            </ul>
-                            <br>
-                        </div>
+                    </br>
 
-                        Catégories
-                        <ul class="square">
-                            <div ng-repeat="categorie in vm.categories">
-                                <li ng-click="vm.addCategorie(categorie)" style="text-decoration: none; color: black; cursor:pointer">
-                                    {{categorie.categorie}}
-                                </li>
+
+                    <div ui-sortable="vm.sortableProduitsOptions" class="apps-container screen"  ng-model="vm.produits" >
+                        <div class="app"
+                             data-produit_id="{{produit._id}}"
+                             data-produit="{{produit.produit}}"
+                             data-marque="{{ produit.marqueId.marque }}"
+                             data-categorie="{{ produit.categorieId.categorie }}"
+                             data-conditionnenent="{{produit.fullConditionnement}}"
+                             data-note="{{produit.description}}"
+                             ng-repeat="produit in vm.produits">
+
+                            <div>
+                                {{ produit.produit }}
+                                <span ng-show="produit.marqueId.marque"> {{ produit.marqueId.marque }} </span>
+
+                                <span style="float:right;">
+                                  <i class="material-icons md-hover-16 cursor"
+                                   aria-hidden="true" ng-click="vm.chooseProduit(produit, vm.item, vm.produits, $index)">chevron_right</i>
+                                </span>
+
+                                <span style="float:right; font-size: 0.7em; padding: 3px;">
+                                    {{ produit.categorieId.categorie | uppercase}}
+                                </span>
+                                <br>
+                                <span style=" font-size: 0.7em;" ng-show="produit.fullConditionnement">
+                                    {{produit.fullConditionnement}}
+                                </span>
+                                <span style="float:right;" ng-show="produit.description">
+                                    <i class="material-icons" uib-tooltip={{produit.description}} style="cursor: pointer;" aria-hidden="true">note</i>
+                                </span>
                             </div>
-                        </ul>
+
+                        </div>
                     </div>
 
-                    <div class="col-md-9 col-sm-9 col-xm-9" style="padding-right: 0;">
 
-
-                        <div ui-sortable="vm.sortableProduitsOptions" class="apps-container screen"  ng-model="vm.produits" >
-                            <div class="app"
-                                 data-produit_id="{{produit._id}}"
-                                 data-produit="{{produit.produit}}"
-                                 data-marque="{{ produit.marqueId.marque }}"
-                                 data-categorie="{{ produit.categorieId.categorie }}"
-                                 data-conditionnenent="{{produit.fullConditionnement}}"
-                                 data-note="{{produit.description}}"
-                                 ng-repeat="produit in vm.produits">
-
-                                <div>
-                                    {{ produit.produit }}
-                                    <span ng-show="produit.marqueId.marque"> {{ produit.marqueId.marque }} </span>
-
-                                    <span style="float:right;">
-                                      <i class="material-icons md-hover-16 cursor"
-                                       aria-hidden="true" ng-click="vm.chooseProduit(produit, vm.item, vm.produits, $index)">chevron_right</i>
-                                    </span>
-
-                                    <span style="float:right; font-size: 0.7em; padding: 3px;">
-                                        {{ produit.categorieId.categorie | uppercase}}
-                                    </span>
-                                    <br>
-                                    <span style=" font-size: 0.7em;" ng-show="produit.fullConditionnement">
-                                        {{produit.fullConditionnement}}
-                                    </span>
-                                    <span style="float:right;" ng-show="produit.description">
-                                        <i class="material-icons" uib-tooltip={{produit.description}} style="cursor: pointer;" aria-hidden="true">note</i>
-                                    </span>
-                                </div>
-
-                            </div>
-                        </div>
-
-
-                    </div>
 
                 </div>
 
