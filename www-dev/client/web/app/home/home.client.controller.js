@@ -6,15 +6,17 @@
         .module('app.home')
         .controller('AccueilController', AccueilController);
 
-    AccueilController.$inject = ['$http', 'toasterService', 'listeRapideService'];
+    AccueilController.$inject = ['$http', 'toasterService', 'listeRapideService', 'produitService'];
 
-        function AccueilController($http, toasterService, listeRapideService) {
+        function AccueilController($http, toasterService, listeRapideService, produitService) {
 
             var vm = this;
 
             vm.item = {};
             vm.form = {};           // Object
             vm.items = [];          // List of object
+
+            vm.showFirstTime = false;
 
             vm.deleteListeRapide = deleteListeRapide;
             vm.addListeRapide = addListerapide;
@@ -128,6 +130,11 @@
                 listeRapideService.query('', function (result) {
                     vm.items = result;
                 });
+
+                produitService.query('', function (result) {
+                      vm.showFirstTime = result.length === 0 ? true : false;
+                });
+
             }
 
         }
